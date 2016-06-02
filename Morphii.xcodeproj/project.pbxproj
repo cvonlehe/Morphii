@@ -16,6 +16,9 @@
 		438162681D00A25F00C5BB5B /* MorphiiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438162671D00A25F00C5BB5B /* MorphiiTests.swift */; };
 		438162731D00A25F00C5BB5B /* MorphiiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438162721D00A25F00C5BB5B /* MorphiiUITests.swift */; };
 		438162841D00B29400C5BB5B /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 438162831D00B29400C5BB5B /* README.md */; };
+		438162881D00B46800C5BB5B /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 438162861D00B46800C5BB5B /* Fabric.framework */; };
+		438162891D00B46900C5BB5B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 438162871D00B46800C5BB5B /* Crashlytics.framework */; };
+		E2028270E2024C4DAF5A2E0E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBC7A0C4715E6A76731D0AA6 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,11 @@
 		438162721D00A25F00C5BB5B /* MorphiiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorphiiUITests.swift; sourceTree = "<group>"; };
 		438162741D00A25F00C5BB5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		438162831D00B29400C5BB5B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		438162861D00B46800C5BB5B /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		438162871D00B46800C5BB5B /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		712DD6D41A4401561A531F12 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		8A37285CB4FA1A3FD4D5BDF3 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		FBC7A0C4715E6A76731D0AA6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +66,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2028270E2024C4DAF5A2E0E /* Pods.framework in Frameworks */,
+				438162891D00B46900C5BB5B /* Crashlytics.framework in Frameworks */,
+				438162881D00B46800C5BB5B /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +89,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E28AE6B8133FE77F7FC132B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				438162861D00B46800C5BB5B /* Fabric.framework */,
+				438162871D00B46800C5BB5B /* Crashlytics.framework */,
+				FBC7A0C4715E6A76731D0AA6 /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		438162431D00A25E00C5BB5B = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +107,8 @@
 				438162661D00A25F00C5BB5B /* MorphiiTests */,
 				438162711D00A25F00C5BB5B /* MorphiiUITests */,
 				4381624D1D00A25E00C5BB5B /* Products */,
+				657271EE37B5787F608F6C5B /* Pods */,
+				1E28AE6B8133FE77F7FC132B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -131,6 +154,15 @@
 			path = MorphiiUITests;
 			sourceTree = "<group>";
 		};
+		657271EE37B5787F608F6C5B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8A37285CB4FA1A3FD4D5BDF3 /* Pods.debug.xcconfig */,
+				712DD6D41A4401561A531F12 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -138,9 +170,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 438162771D00A25F00C5BB5B /* Build configuration list for PBXNativeTarget "Morphii" */;
 			buildPhases = (
+				0F013EDF572051F05B350AAA /* Check Pods Manifest.lock */,
 				438162481D00A25E00C5BB5B /* Sources */,
 				438162491D00A25E00C5BB5B /* Frameworks */,
 				4381624A1D00A25E00C5BB5B /* Resources */,
+				7E5CBC4F84A1FF804826857E /* Embed Pods Frameworks */,
+				DA237CC8D97E13D2B35B07ED /* Copy Pods Resources */,
+				438162851D00B3EF00C5BB5B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -256,6 +292,67 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0F013EDF572051F05B350AAA /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		438162851D00B3EF00C5BB5B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 41b3ac5c5379fdb6e73d65a11b15f9ff75fb422c 9089586a809ffe509b0a62a4665c66f1d5d2c05d97dbfd8eace397292a0b9a14";
+		};
+		7E5CBC4F84A1FF804826857E /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DA237CC8D97E13D2B35B07ED /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		438162481D00A25E00C5BB5B /* Sources */ = {
@@ -407,8 +504,13 @@
 		};
 		438162781D00A25F00C5BB5B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A37285CB4FA1A3FD4D5BDF3 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Morphii/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.netgalaxystudios.Morphii;
@@ -418,8 +520,13 @@
 		};
 		438162791D00A25F00C5BB5B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 712DD6D41A4401561A531F12 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Morphii/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.netgalaxystudios.Morphii;
