@@ -15,6 +15,7 @@
 		4381625D1D00A25E00C5BB5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4381625B1D00A25E00C5BB5B /* LaunchScreen.storyboard */; };
 		438162681D00A25F00C5BB5B /* MorphiiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438162671D00A25F00C5BB5B /* MorphiiTests.swift */; };
 		438162731D00A25F00C5BB5B /* MorphiiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438162721D00A25F00C5BB5B /* MorphiiUITests.swift */; };
+		438162841D00B29400C5BB5B /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 438162831D00B29400C5BB5B /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		4381626E1D00A25F00C5BB5B /* MorphiiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MorphiiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		438162721D00A25F00C5BB5B /* MorphiiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorphiiUITests.swift; sourceTree = "<group>"; };
 		438162741D00A25F00C5BB5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		438162831D00B29400C5BB5B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 		438162431D00A25E00C5BB5B = {
 			isa = PBXGroup;
 			children = (
+				438162831D00B29400C5BB5B /* README.md */,
 				4381624E1D00A25E00C5BB5B /* Morphii */,
 				438162661D00A25F00C5BB5B /* MorphiiTests */,
 				438162711D00A25F00C5BB5B /* MorphiiUITests */,
@@ -261,6 +264,7 @@
 			files = (
 				438162521D00A25E00C5BB5B /* ViewController.swift in Sources */,
 				438162501D00A25E00C5BB5B /* AppDelegate.swift in Sources */,
+				438162841D00B29400C5BB5B /* README.md in Sources */,
 				438162581D00A25E00C5BB5B /* Morphii.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -488,6 +492,7 @@
 				438162791D00A25F00C5BB5B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4381627A1D00A25F00C5BB5B /* Build configuration list for PBXNativeTarget "MorphiiTests" */ = {
 			isa = XCConfigurationList;
@@ -496,6 +501,7 @@
 				4381627C1D00A25F00C5BB5B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4381627D1D00A25F00C5BB5B /* Build configuration list for PBXNativeTarget "MorphiiUITests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +510,7 @@
 				4381627F1D00A25F00C5BB5B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
