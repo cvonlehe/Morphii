@@ -16,11 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
+    func application(application: UIApplication, willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
+        displayMainView()
+        return true
+    }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         Fabric.with([Crashlytics.self])
-
         return true
     }
 
@@ -109,6 +112,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 abort()
             }
         }
+    }
+    
+    //MARK: - SETUP Main View
+    
+    func displayMainView () {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let centerView = mainStoryboard.instantiateViewControllerWithIdentifier(ViewControllerIDs.TabBarController) as! UITabBarController
+        
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        appDelegate.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        appDelegate.window?.rootViewController = centerView
+        appDelegate.window?.makeKeyAndVisible()
     }
 
 }

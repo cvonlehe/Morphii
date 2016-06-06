@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Morphii Mobile Keyboard.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 		<key>Morphii.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -23,6 +28,11 @@
 			<true/>
 		</dict>
 		<key>4381626D1D00A25F00C5BB5B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4398CBBB1D05FDB800074BC7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
