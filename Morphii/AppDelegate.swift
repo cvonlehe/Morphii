@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import Fabric
 import Crashlytics
+import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         displayMainView()
+        Parse.initializeWithConfiguration(ParseClientConfiguration { (config:ParseMutableClientConfiguration) -> Void in
+            config.applicationId = "morphiiappid9587983476t3"
+            config.clientKey = "abc123"
+            config.server = "http://162.243.251.100:1337/parse"
+            })
+        Config.getCurrentConfig()
+
         return true
     }
     

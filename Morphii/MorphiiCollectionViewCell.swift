@@ -9,16 +9,12 @@
 import UIKit
 
 class MorphiiCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var morphiiImageView: UIImageView!
     @IBOutlet weak var morphiiNameLabel: UILabel!
+    @IBOutlet weak var morphiiView: MorphiiView!
     
     func populateCellForMorphii (morphii:Morphii) {
         morphiiNameLabel.text = morphii.name
-        morphii.getImage { (imageO) in
-            if let image = imageO {
-                self.morphiiImageView.image = image
-            }
-        }
+        morphiiView.setUpMorphii(morphii)
     }
     
     

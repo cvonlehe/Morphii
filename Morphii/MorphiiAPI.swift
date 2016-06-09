@@ -10,16 +10,19 @@ import UIKit
 import Alamofire
 
 class MorphiiAPI {
-    static let morphiisUrl = "https://api-staging.morphii.com/morphii/v1/morphiis?&accountId=2016-01-93180370&includePngData=true&includeMetadata=true&groupName=Core%20Morphiis"
-    
+    static let morphiisUrl = "\(Config.getCurrentConfig().MORPHII_API_BASE_URL)/kbapp/v1/morphiis?lastDate=2016-05-15"
     static let headers = [
-        "x-api-key": "qjgTRFht4r9c6GZ81MYc92yQJPDnPLEb6nnV2jL4"
+        "x-api-key": Config.getCurrentConfig().MORPHII_API_KEY
     ]
     
     class func fetchAllMorphiis(completion: (morphiisArray: [ Morphii ]) -> Void ) -> Void {
-        
+        guard let _ = NSURL(string: morphiisUrl) else {
+            print("INVALID_URL:",morphiisUrl)
+            return
+        }
         Alamofire.request(.GET, morphiisUrl, headers: headers)
             .response { request, response, data, error in
+                //print("REQUEST:",request,"RESPONSE:",response,"DATA:",data,"ERROR:",error)
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
                     let morphiis = processJSON(data)
                     dispatch_async(dispatch_get_main_queue(), { 
@@ -40,6 +43,7 @@ class MorphiiAPI {
         }
         guard let JSONDict = jsonDict else {return []}
         guard let records = JSONDict.objectForKey(MorphiiAPIKeys.records) as? [NSDictionary] else {return []}
+
         return processMorphiiDataArray(records)
     }
     
@@ -47,16 +51,17 @@ class MorphiiAPI {
         var morphiis:[Morphii] = []
         for record in morphiiRecords {
             if let data = record.valueForKey(MorphiiAPIKeys.data) as? NSDictionary,
-                let _ = data.valueForKey(MorphiiAPIKeys.metaData),
+                let metaData = data.valueForKey(MorphiiAPIKeys.metaData),
                 let _ = record.valueForKey(MorphiiAPIKeys.scaleType),
                 let _ = record.valueForKey(MorphiiAPIKeys.id),
                 let _ = record.valueForKey(MorphiiAPIKeys.name),
-                let _ = record.valueForKey(MorphiiAPIKeys.staticUrl),
-                let _ = record.valueForKey(MorphiiAPIKeys.dataUrl),
-                let _ = record.valueForKey(MorphiiAPIKeys.changedDateUTC),
-                let _ = record.valueForKey(MorphiiAPIKeys.sequence),
-                let _ = data.valueForKey(MorphiiAPIKeys.png)
+                let _ = record.valueForKey(MorphiiAPIKeys.sequence)
+//                let _ = record.valueForKey(MorphiiAPIKeys.staticUrl)
+//                let _ = record.valueForKey(MorphiiAPIKeys.dataUrl)
+//                let _ = record.valueForKey(MorphiiAPIKeys.changedDateUTC)
+//                let _ = data.valueForKey(MorphiiAPIKeys.png)
             {
+                print("GOT_MORPHII:",metaData)
                 morphiis.append(Morphii(morphiiRecord: record))
             }
         }

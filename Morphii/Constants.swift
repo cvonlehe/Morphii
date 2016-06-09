@@ -37,11 +37,15 @@ class MorphiiAPIKeys {
     static let scaleType = "scaleType"
     static let id = "id"
     static let name = "name"
-    static let staticUrl = "staticUrl"
-    static let dataUrl = "dataUrl"
-    static let changedDateUTC = "changedDateUTC"
     static let sequence = "sequence"
-    static let png = "png"
     static let category = "category"
     static let keywords = "keywords"
+}
+
+class PFConfigValues {
+    static let MORPHII_API_KEY = "MORPHII_API_KEY"
+    static let MORPHII_API_BASE_URL = "MORPHII_API_BASE_URL"
+    static let MORPHII_API_ACCOUNT_ID = "MORPHII_API_ACCOUNT_ID"
+    static let MORPHII_API_USER_NAME = "MORPHII_API_USER_NAME"
+    static let MORPHII_API_PASSWORD = "MORPHII_API_PASSWORD"
 }

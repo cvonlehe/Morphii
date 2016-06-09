@@ -22,7 +22,7 @@ protocol MorphiiProtocol{
     func smileForMorphiiView(sender:MorphiiView) -> Double
 }
 
-class MorphiiView: UIView {
+class MorphiiView: UIView, MorphiiProtocol {
     
     var dataSource:MorphiiProtocol?
     
@@ -33,7 +33,6 @@ class MorphiiView: UIView {
     override init(frame: CGRect){
         super.init(frame: frame)
         // Initialization code
-        
     }
     
     required init?(coder aDecoder: NSCoder){
@@ -42,9 +41,16 @@ class MorphiiView: UIView {
     
     func setUpMorphii(morphii:Morphii){
         self.morphii = morphii
+        setUpMorphiiGestures()
+        emoodl = 45.0
     }
     
-    
+    var emoodl: Double = 50.0 {
+        didSet(newValue){
+            newValue
+            self.setNeedsDisplay()
+        }
+    }
     
     struct Point{
         var x : NSNumber! = 0
@@ -235,15 +241,12 @@ class MorphiiView: UIView {
                 let color = morphiiSeg.color
                 let st = morphiiSeg.st
                 let curvs = morphiiSeg.curvs!
-                let curvsLength = curvs.count
                 
                 color.setFill()
                 CGContextBeginPath(context)
                 CGContextMoveToPoint(context, CGFloat(st.x), CGFloat(st.y))
                 
-                for (var i = 0; i < curvsLength; i++){
-                    
-                    let curv = curvs[i]
+                for curv in curvs {
                     
                     let curvx1 = curv.x1
                     let curvy1 = curv.y1
@@ -269,7 +272,113 @@ class MorphiiView: UIView {
         
     }
     
+    func setUpMorphiiGestures(){
+        dataSource = self
+        let panNizer = UIPanGestureRecognizer()
+        panNizer.addTarget(self, action: #selector(MorphiiView.showGestureForPanRecognizer(_:)))
+        addGestureRecognizer(panNizer)
+    }
     
+    func showGestureForPanRecognizer(recognizer: UIPanGestureRecognizer) {
+        if recognizer.state == UIGestureRecognizerState.Changed || recognizer.state == UIGestureRecognizerState.Ended {
+            let translation:CGPoint = recognizer.translationInView(self)
+            if (self.morphii.scaleType == 1){
+                //for "positive" emotions use this translation:SCALE TYPE 1
+                self.emoodl -= (Double(translation.y)) / 2.5
+            } else  if (self.morphii.scaleType == 2){
+                //for "positive" emotions use this translation:SCALE TYPE 2
+                self.emoodl -= (Double(translation.y)) / 2.5
+            } else {
+                //for "negative" emotions use this translation:SCALE TYPE 3
+                self.emoodl -= (Double(translation.y)) / 2.5
+            }
+            recognizer.setTranslation(CGPointZero, inView: self)
+        }
+    }
+    
+    func smileForMorphiiView(sender:MorphiiView) -> Double{
+        return (Double((self.emoodl - 0) / 83))
+        
+    }
+    
+    func shareMorphii(viewController:UIViewController) {
+        let shareText = "sent via Morphii for iOS"
+        let pasteData = copyMorphyToClipboard()
+        let vc = UIActivityViewController(activityItems: [shareText, pasteData], applicationActivities: [])
+        viewController.presentViewController(vc, animated: true, completion: nil)
+        vc.completionWithItemsHandler = {(activityType, completed:Bool, returnedItems:[AnyObject]?, error: NSError?) in
+            
+            // Return if cancelled
+            if (!completed) {
+
+            } else {
+            }
+            
+            //activity complete
+            //some code here
+            
+            
+        }
+        
+    }
+    
+    private func copyMorphyToClipboard() -> NSData{
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        var clipMorphySize = CGSize(width: screenSize.width, height: screenSize.height)
+        UIGraphicsBeginImageContextWithOptions(clipMorphySize, false, 0.0)
+        var context:CGContextRef = UIGraphicsGetCurrentContext()!
+        layer.renderInContext(context)
+        var snapShotImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        //crop the snapshot image of the context to be 300x300
+        //the cropping function
+        func croppedImage(bounds:CGRect) -> UIImage{
+            let imageRef:CGImageRef = CGImageCreateWithImageInRect(snapShotImage.CGImage, bounds)!
+            let croppedImage:UIImage = UIImage(CGImage: imageRef)
+            
+            return croppedImage
+        }
+        
+        //bounding rectangle for cropping morphy's image
+        //must be in pixels because of the conversion from UIImage to CGImageRef
+        //width is longer so morphii will fit in text bubble
+        let cropRect:CGRect = CGRectMake(0, 0, 600, 600)
+        //let cropRect:CGRect = CGRectMake(-10, 0, 545, 525)
+        
+        //crop the snapshot with the bounding rectangle
+        let morphyPic = croppedImage(cropRect)
+        
+        //image insets
+        let morphiiInsets = UIEdgeInsetsMake(10, 20, 10, 20)
+        let morphiiPic = morphyPic.imageWithInsets(morphiiInsets)
+        
+        
+        //end the graphics context
+        UIGraphicsEndImageContext()
+        
+        //copy that image to the pasteboard
+        let pasteBoard:UIPasteboard = UIPasteboard(name: UIPasteboardNameGeneral, create: false)!
+        pasteBoard.persistent = true
+        let pbData:NSData = UIImagePNGRepresentation(morphiiPic)!
+        pasteBoard.setValue(pbData, forPasteboardType:"public.png")
+        
+        return pbData
+    }
+}
+
+extension UIImage {
+    func imageWithInsets(insets: UIEdgeInsets) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(
+            CGSizeMake(self.size.width + insets.left + insets.right,
+                self.size.height + insets.top + insets.bottom), false, self.scale)
+        let context = UIGraphicsGetCurrentContext()
+        let origin = CGPoint(x: insets.left, y: insets.top)
+        self.drawAtPoint(origin)
+        let imageWithInsets = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return imageWithInsets
+    }
 }
 
 

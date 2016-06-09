@@ -13,7 +13,7 @@ protocol OverlayViewControllerDelegate {
     
 }
 
-class OverlayViewController: UIViewController, MorphiiProtocol {
+class OverlayViewController: UIViewController {
 
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var morphiiView: MorphiiView!
@@ -45,58 +45,23 @@ class OverlayViewController: UIViewController, MorphiiProtocol {
     func setMorphii() {
         self.morphiiView.setUpMorphii(self.morphiiO!)
         self.morphiiNameLabel.text = self.morphiiO!.name
-        self.emoodl = 45.0
-        setUpMorphiiGestures()
     }
     
     @IBAction func closeButtonPressed(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    var emoodl: Double = 50.0 {
-        didSet(newValue){
-            newValue
-            self.morphiiView.setNeedsDisplay()
-        }
-    }
+
     
-    func setUpMorphiiGestures(){
-        if let _ = self.morphiiView {
-            self.morphiiView.dataSource = self
-            let panNizer = UIPanGestureRecognizer()
-            panNizer.addTarget(self, action: #selector(OverlayViewController.showGestureForPanRecognizer(_:)))
-            self.morphiiView.addGestureRecognizer(panNizer)
-        }else{
-            //fail because self.morphyView is nil
-            print("morphy view is nil")
-        }
-    }
+
     
-    func showGestureForPanRecognizer(recognizer: UIPanGestureRecognizer) {
-        if recognizer.state == UIGestureRecognizerState.Changed || recognizer.state == UIGestureRecognizerState.Ended {
-            let translation:CGPoint = recognizer.translationInView(self.morphiiView)
-            if (self.morphiiView.morphii.scaleType == 1){
-                //for "positive" emotions use this translation:SCALE TYPE 1
-                self.emoodl -= (Double(translation.y)) / 2.5
-            } else  if (self.morphiiView.morphii.scaleType == 2){
-                //for "positive" emotions use this translation:SCALE TYPE 2
-                self.emoodl -= (Double(translation.y)) / 2.5
-            } else {
-                //for "negative" emotions use this translation:SCALE TYPE 3
-                self.emoodl -= (Double(translation.y)) / 2.5
-            }
-            recognizer.setTranslation(CGPointZero, inView: self.morphiiView)
-        }
-    }
+
     
     @IBAction func shareButtonPressed(sender: UIButton) {
-        
+        morphiiView.shareMorphii(self)
     }
     
-    func smileForMorphiiView(sender:MorphiiView) -> Double{
-        return (Double((self.emoodl - 0) / 83))
-        
-    }
+
 
 
 
