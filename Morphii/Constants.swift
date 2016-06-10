@@ -50,3 +50,7 @@ class PFConfigValues {
     static let MORPHII_API_USER_NAME = "MORPHII_API_USER_NAME"
     static let MORPHII_API_PASSWORD = "MORPHII_API_PASSWORD"
 }
+
+class EntityNames {
+    static let Morphii = "Morphii"
+}

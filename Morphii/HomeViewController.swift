@@ -19,6 +19,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             self.morphiis = morphiisArray
             self.collectionView.reloadData()
         }
+
     }
 
     override func didReceiveMemoryWarning() {

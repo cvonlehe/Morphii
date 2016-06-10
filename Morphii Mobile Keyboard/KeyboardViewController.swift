@@ -48,7 +48,8 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func coreDataButtonPressed (sender:UIButton) {
-        
+        //print("PEOPLE:",Person.fetchPeople())
+
     }
 
     override func didReceiveMemoryWarning() {

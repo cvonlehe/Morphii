@@ -74,7 +74,7 @@ class MorphiiAPI {
     }
     
     class func processMorphiiDataArray (morphiiRecords:[NSDictionary]) -> [Morphii] {
-        var morphiis:[Morphii] = []
+        
         for record in morphiiRecords {
             if let data = record.valueForKey(MorphiiAPIKeys.data) as? NSDictionary,
                 let metaData = data.valueForKey(MorphiiAPIKeys.metaData),
@@ -88,9 +88,11 @@ class MorphiiAPI {
 //                let _ = data.valueForKey(MorphiiAPIKeys.png)
             {
                 print("GOT_MORPHII:",metaData)
-                morphiis.append(Morphii(morphiiRecord: record))
+                Morphii.createNewMorphii(record)
+                //morphiis.append(Morphii(morphiiRecord: record))
             }
         }
+        let morphiis = Morphii.fetchAllMorphiis()
         return morphiis
     }
 }
