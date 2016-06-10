@@ -17,7 +17,6 @@
 		431A75DD1D0896EE0079F9BD /* MorphiiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431A75DC1D0896EE0079F9BD /* MorphiiView.swift */; };
 		438162501D00A25E00C5BB5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4381624F1D00A25E00C5BB5B /* AppDelegate.swift */; };
 		438162551D00A25E00C5BB5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 438162531D00A25E00C5BB5B /* Main.storyboard */; };
-		438162581D00A25E00C5BB5B /* Morphii.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 438162561D00A25E00C5BB5B /* Morphii.xcdatamodeld */; };
 		4381625A1D00A25E00C5BB5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 438162591D00A25E00C5BB5B /* Assets.xcassets */; };
 		4381625D1D00A25E00C5BB5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4381625B1D00A25E00C5BB5B /* LaunchScreen.storyboard */; };
 		438162681D00A25F00C5BB5B /* MorphiiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438162671D00A25F00C5BB5B /* MorphiiTests.swift */; };
@@ -32,6 +31,10 @@
 		4398CBBF1D05FDB900074BC7 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4398CBBE1D05FDB900074BC7 /* KeyboardViewController.swift */; };
 		4398CBC31D05FDB900074BC7 /* Morphii Mobile Keyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4398CBBC1D05FDB800074BC7 /* Morphii Mobile Keyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		43A9A60F1D0A15D400AB90E4 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A9A60E1D0A15D400AB90E4 /* Config.swift */; };
+		43A9A6381D0B17FF00AB90E4 /* CDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A9A6371D0B17FF00AB90E4 /* CDHelper.swift */; };
+		43A9A63B1D0B184300AB90E4 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 43A9A6391D0B184300AB90E4 /* Model.xcdatamodeld */; };
+		43A9A6461D0B1D1500AB90E4 /* CDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A9A6371D0B17FF00AB90E4 /* CDHelper.swift */; };
+		43A9A6471D0B1D4200AB90E4 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 43A9A6391D0B184300AB90E4 /* Model.xcdatamodeld */; };
 		E2028270E2024C4DAF5A2E0E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBC7A0C4715E6A76731D0AA6 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -85,7 +88,6 @@
 		4381624C1D00A25E00C5BB5B /* Morphii.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Morphii.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4381624F1D00A25E00C5BB5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		438162541D00A25E00C5BB5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		438162571D00A25E00C5BB5B /* Morphii.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Morphii.xcdatamodel; sourceTree = "<group>"; };
 		438162591D00A25E00C5BB5B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4381625C1D00A25E00C5BB5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4381625E1D00A25E00C5BB5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -106,6 +108,10 @@
 		4398CBBE1D05FDB900074BC7 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		4398CBC01D05FDB900074BC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43A9A60E1D0A15D400AB90E4 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		43A9A6371D0B17FF00AB90E4 /* CDHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDHelper.swift; path = Morphii/CDHelper.swift; sourceTree = "<group>"; };
+		43A9A63A1D0B184300AB90E4 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		43A9A6441D0B1B2E00AB90E4 /* Morphii.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Morphii.entitlements; sourceTree = "<group>"; };
+		43A9A6451D0B1B3C00AB90E4 /* Morphii Mobile Keyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Morphii Mobile Keyboard.entitlements"; sourceTree = "<group>"; };
 		712DD6D41A4401561A531F12 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		8A37285CB4FA1A3FD4D5BDF3 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FBC7A0C4715E6A76731D0AA6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,6 +166,8 @@
 			isa = PBXGroup;
 			children = (
 				438162831D00B29400C5BB5B /* README.md */,
+				43A9A6371D0B17FF00AB90E4 /* CDHelper.swift */,
+				43A9A6391D0B184300AB90E4 /* Model.xcdatamodeld */,
 				4381624E1D00A25E00C5BB5B /* Morphii */,
 				438162661D00A25F00C5BB5B /* MorphiiTests */,
 				438162711D00A25F00C5BB5B /* MorphiiUITests */,
@@ -184,6 +192,7 @@
 		4381624E1D00A25E00C5BB5B /* Morphii */ = {
 			isa = PBXGroup;
 			children = (
+				43A9A6441D0B1B2E00AB90E4 /* Morphii.entitlements */,
 				4300E87C1D0854C000930766 /* grey_morphii.png */,
 				4398CBAC1D05BF7000074BC7 /* Initialization */,
 				4398CBAE1D05BF8100074BC7 /* View Controllers */,
@@ -232,7 +241,6 @@
 		4398CBAD1D05BF7A00074BC7 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				438162561D00A25E00C5BB5B /* Morphii.xcdatamodeld */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
@@ -252,6 +260,7 @@
 		4398CBBD1D05FDB900074BC7 /* Morphii Mobile Keyboard */ = {
 			isa = PBXGroup;
 			children = (
+				43A9A6451D0B1B3C00AB90E4 /* Morphii Mobile Keyboard.entitlements */,
 				4398CBBE1D05FDB900074BC7 /* KeyboardViewController.swift */,
 				4398CBC01D05FDB900074BC7 /* Info.plist */,
 			);
@@ -358,6 +367,12 @@
 				TargetAttributes = {
 					4381624B1D00A25E00C5BB5B = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 8T862YEXBF;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					438162621D00A25F00C5BB5B = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -369,6 +384,12 @@
 					};
 					4398CBBB1D05FDB800074BC7 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 8T862YEXBF;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -501,11 +522,12 @@
 				4300E8751D0746F600930766 /* SearchViewController.swift in Sources */,
 				4300E8731D0746C300930766 /* HomeViewController.swift in Sources */,
 				438162841D00B29400C5BB5B /* README.md in Sources */,
-				438162581D00A25E00C5BB5B /* Morphii.xcdatamodeld in Sources */,
 				4300E8791D074F5C00930766 /* Morphii.swift in Sources */,
 				4300E8771D074F0000930766 /* MorphiiAPI.swift in Sources */,
 				431A75DD1D0896EE0079F9BD /* MorphiiView.swift in Sources */,
 				431A75DB1D0870980079F9BD /* OverlayViewController.swift in Sources */,
+				43A9A63B1D0B184300AB90E4 /* Model.xcdatamodeld in Sources */,
+				43A9A6381D0B17FF00AB90E4 /* CDHelper.swift in Sources */,
 				4300E87B1D07739100930766 /* MorphiiCollectionViewCell.swift in Sources */,
 				4398CBB21D05C06B00074BC7 /* Constants.swift in Sources */,
 				4398CBB51D05F1B700074BC7 /* SettingsViewController.swift in Sources */,
@@ -532,7 +554,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43A9A6461D0B1D1500AB90E4 /* CDHelper.swift in Sources */,
 				4398CBBF1D05FDB900074BC7 /* KeyboardViewController.swift in Sources */,
+				43A9A6471D0B1D4200AB90E4 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -666,6 +690,8 @@
 			baseConfigurationReference = 8A37285CB4FA1A3FD4D5BDF3 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Morphii/Morphii.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -683,6 +709,8 @@
 			baseConfigurationReference = 712DD6D41A4401561A531F12 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Morphii/Morphii.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -744,6 +772,7 @@
 		4398CBC51D05FDB900074BC7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Morphii Mobile Keyboard/Morphii Mobile Keyboard.entitlements";
 				INFOPLIST_FILE = "Morphii Mobile Keyboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.netgalaxystudios.Morphii.Morphii-Mobile-Keyboard";
@@ -755,6 +784,7 @@
 		4398CBC61D05FDB900074BC7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Morphii Mobile Keyboard/Morphii Mobile Keyboard.entitlements";
 				INFOPLIST_FILE = "Morphii Mobile Keyboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.netgalaxystudios.Morphii.Morphii-Mobile-Keyboard";
@@ -814,13 +844,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		438162561D00A25E00C5BB5B /* Morphii.xcdatamodeld */ = {
+		43A9A6391D0B184300AB90E4 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				438162571D00A25E00C5BB5B /* Morphii.xcdatamodel */,
+				43A9A63A1D0B184300AB90E4 /* Model.xcdatamodel */,
 			);
-			currentVersion = 438162571D00A25E00C5BB5B /* Morphii.xcdatamodel */;
-			path = Morphii.xcdatamodeld;
+			currentVersion = 43A9A63A1D0B184300AB90E4 /* Model.xcdatamodel */;
+			name = Model.xcdatamodeld;
+			path = Morphii/Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

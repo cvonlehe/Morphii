@@ -34,6 +34,21 @@ class KeyboardViewController: UIInputViewController {
     
         self.nextKeyboardButton.leftAnchor.constraintEqualToAnchor(self.view.leftAnchor).active = true
         self.nextKeyboardButton.bottomAnchor.constraintEqualToAnchor(self.view.bottomAnchor).active = true
+        
+        let coreDataButton = UIButton(type: .System)
+        coreDataButton.setTitle("Core Data", forState: .Normal)
+        coreDataButton.sizeToFit()
+        coreDataButton.translatesAutoresizingMaskIntoConstraints = false
+        coreDataButton.addTarget(self, action: #selector(KeyboardViewController.coreDataButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        view.addSubview(coreDataButton)
+        coreDataButton.widthAnchor.constraintEqualToConstant(coreDataButton.frame.size.width).active = true
+        coreDataButton.heightAnchor.constraintEqualToConstant(coreDataButton.frame.size.height).active = true
+        coreDataButton.rightAnchor.constraintEqualToAnchor(view.rightAnchor).active = true
+        coreDataButton.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor).active = true
+    }
+    
+    func coreDataButtonPressed (sender:UIButton) {
+        
     }
 
     override func didReceiveMemoryWarning() {
