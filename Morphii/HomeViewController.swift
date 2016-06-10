@@ -15,7 +15,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        MorphiiAPI.fetchAllMorphiis { (morphiisArray) in
+        MorphiiAPI.fetchNewMorphiis { (morphiisArray) in
             self.morphiis = morphiisArray
             self.collectionView.reloadData()
         }
@@ -60,6 +60,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         OverlayViewController.createOverlay(self, morphiiO: morphii)
     }
     
+
 
     /*
     // MARK: - Navigation

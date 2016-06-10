@@ -10,12 +10,20 @@ import UIKit
 import Alamofire
 
 class MorphiiAPI {
-    static let morphiisUrl = "\(Config.getCurrentConfig().MORPHII_API_BASE_URL)/kbapp/v1/morphiis?lastDate=2016-05-15"
+    static var lastDate = "2015-05-15"
+    static let morphiisUrl = "\(Config.getCurrentConfig().MORPHII_API_BASE_URL)/kbapp/v1/morphiis?lastDate=\(lastDate)"
     static let headers = [
         "x-api-key": Config.getCurrentConfig().MORPHII_API_KEY
     ]
     
-    class func fetchAllMorphiis(completion: (morphiisArray: [ Morphii ]) -> Void ) -> Void {
+    class func fetchNewMorphiis(completion: (morphiisArray: [ Morphii ]) -> Void ) -> Void {
+        if alreadyCheckedForMorphiisToday() {
+            completion(morphiisArray: [])
+            return
+        }
+        if let last = NSUserDefaults.standardUserDefaults().stringForKey(NSUserDefaultKeys.lastDate) {
+            lastDate = last
+        }
         guard let _ = NSURL(string: morphiisUrl) else {
             print("INVALID_URL:",morphiisUrl)
             return
@@ -38,6 +46,7 @@ class MorphiiAPI {
         var jsonDict:NSDictionary?
         do {
             try jsonDict = NSJSONSerialization.JSONObjectWithData(JSON, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary
+            setLastDateToCurrentDate()
         }catch {
             print("Handle \(error) here")
         }
@@ -45,6 +54,23 @@ class MorphiiAPI {
         guard let records = JSONDict.objectForKey(MorphiiAPIKeys.records) as? [NSDictionary] else {return []}
 
         return processMorphiiDataArray(records)
+    }
+    
+    private class func setLastDateToCurrentDate () {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        NSUserDefaults.standardUserDefaults().setObject(dateFormatter.stringFromDate(NSDate()), forKey: NSUserDefaultKeys.lastDate)
+        NSUserDefaults.standardUserDefaults().synchronize()
+    }
+    
+    private class func alreadyCheckedForMorphiisToday () -> Bool {
+        guard let last = NSUserDefaults.standardUserDefaults().stringForKey(NSUserDefaultKeys.lastDate) else {
+            return false
+        }
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        print("ALREADY_CHECKED_TODAY")
+        return last == dateFormatter.stringFromDate(NSDate())
     }
     
     class func processMorphiiDataArray (morphiiRecords:[NSDictionary]) -> [Morphii] {

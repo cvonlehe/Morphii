@@ -24,6 +24,7 @@ class CollectionViewCellIDs {
 class NSUserDefaultKeys {
     static let returningUser = "returningUser"
     static let shouldNotAddURLToMessages = "shouldNotAddURLToMessages"
+    static let lastDate = "lastDate"
 }
 
 class URLs {
