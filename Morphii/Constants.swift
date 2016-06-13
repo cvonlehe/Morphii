@@ -15,6 +15,8 @@ class ViewControllerIDs {
     static let HomeViewController = "HomeViewController"
     static let SearchViewController = "SearchViewController"
     static let OverlayViewController = "OverlayViewController"
+    static let TutorialViewController = "TutorialViewController"
+    static let TutorialContainerViewController = "TutorialContainerViewController"
 }
 
 class CollectionViewCellIDs {

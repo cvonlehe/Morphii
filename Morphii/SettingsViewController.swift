@@ -68,7 +68,7 @@ class SettingsViewController: UIViewController {
     }
     
     func setupKeyboardContainerViewTapped (tap:UITapGestureRecognizer) {
-        
+        TutorialViewController.presenTutorialViewController(self)
     }
     
     override func viewDidLayoutSubviews() {

@@ -29,6 +29,7 @@ class MorphiiView: UIView, MorphiiProtocol {
     //var morphy:MorphyObj?
     //var morphii:MorphiiClass.MorphiiFile!
     var morphii:Morphii!
+    private var completion:((success:Bool)->Void)?
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -302,9 +303,17 @@ class MorphiiView: UIView, MorphiiProtocol {
     }
     
     func shareMorphii(viewController:UIViewController) {
-        let shareText = "sent via Morphii for iOS"
-        let pasteData = copyMorphyToClipboard()
-        let vc = UIActivityViewController(activityItems: [shareText, pasteData], applicationActivities: [])
+        //let pasteData = copyMorphyToClipboard()
+        //        if !MethodHelper.shouldNotAddURLToMessages() {
+        //            let string = "Check out Morphii Keyboard: "+URLs.appStoreURL
+        //            shareObjects.append(string)
+        //        }
+        var shareText = ""
+        if !MethodHelper.shouldNotAddURLToMessages() {
+            let string = "Sent Morphii Keyboard: "+URLs.appStoreURL
+            shareText = string
+        }
+        let vc = UIActivityViewController(activityItems: [shareText, getMorphiiImage()], applicationActivities: [])
         viewController.presentViewController(vc, animated: true, completion: nil)
         vc.completionWithItemsHandler = {(activityType, completed:Bool, returnedItems:[AnyObject]?, error: NSError?) in
             
@@ -324,46 +333,69 @@ class MorphiiView: UIView, MorphiiProtocol {
     
     private func copyMorphyToClipboard() -> NSData{
         
-        let screenSize: CGRect = UIScreen.mainScreen().bounds
-        var clipMorphySize = CGSize(width: screenSize.width, height: screenSize.height)
-        UIGraphicsBeginImageContextWithOptions(clipMorphySize, false, 0.0)
-        var context:CGContextRef = UIGraphicsGetCurrentContext()!
-        layer.renderInContext(context)
-        var snapShotImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()
-        
-        //crop the snapshot image of the context to be 300x300
-        //the cropping function
-        func croppedImage(bounds:CGRect) -> UIImage{
-            let imageRef:CGImageRef = CGImageCreateWithImageInRect(snapShotImage.CGImage, bounds)!
-            let croppedImage:UIImage = UIImage(CGImage: imageRef)
-            
-            return croppedImage
-        }
-        
-        //bounding rectangle for cropping morphy's image
-        //must be in pixels because of the conversion from UIImage to CGImageRef
-        //width is longer so morphii will fit in text bubble
-        let cropRect:CGRect = CGRectMake(0, 0, 600, 600)
-        //let cropRect:CGRect = CGRectMake(-10, 0, 545, 525)
-        
-        //crop the snapshot with the bounding rectangle
-        let morphyPic = croppedImage(cropRect)
-        
-        //image insets
-        let morphiiInsets = UIEdgeInsetsMake(10, 20, 10, 20)
-        let morphiiPic = morphyPic.imageWithInsets(morphiiInsets)
-        
-        
-        //end the graphics context
-        UIGraphicsEndImageContext()
+
         
         //copy that image to the pasteboard
         let pasteBoard:UIPasteboard = UIPasteboard(name: UIPasteboardNameGeneral, create: false)!
         pasteBoard.persistent = true
-        let pbData:NSData = UIImagePNGRepresentation(morphiiPic)!
+        let pbData:NSData = UIImagePNGRepresentation(getMorphiiImage())!
         pasteBoard.setValue(pbData, forPasteboardType:"public.png")
         
         return pbData
+    }
+    
+    func saveMorphiiToSavedPhotos (completion:((success:Bool)->Void)?) {
+        self.completion = completion
+        UIImageWriteToSavedPhotosAlbum(getMorphiiImage(), self, #selector(MorphiiView.image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafePointer<Void>) {
+        if let com = completion {
+            com(success: error == nil)
+        }
+    }
+    
+    func getMorphiiImage () -> UIImage {
+//        let screenSize: CGRect = UIScreen.mainScreen().bounds
+//        var clipMorphySize = CGSize(width: screenSize.width, height: screenSize.height)
+//        UIGraphicsBeginImageContextWithOptions(clipMorphySize, false, 0.0)
+//        var context:CGContextRef = UIGraphicsGetCurrentContext()!
+//        layer.renderInContext(context)
+//        var snapShotImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()
+//        
+//        //crop the snapshot image of the context to be 300x300
+//        //the cropping function
+//        func croppedImage(bounds:CGRect) -> UIImage{
+//            let imageRef:CGImageRef = CGImageCreateWithImageInRect(snapShotImage.CGImage, bounds)!
+//            let croppedImage:UIImage = UIImage(CGImage: imageRef)
+//            
+//            return croppedImage
+//        }
+//        
+//        //bounding rectangle for cropping morphy's image
+//        //must be in pixels because of the conversion from UIImage to CGImageRef
+//        //width is longer so morphii will fit in text bubble
+//        let cropRect:CGRect = CGRectMake(0, 0, 600, 600)
+//        //let cropRect:CGRect = CGRectMake(-10, 0, 545, 525)
+//        
+//        //crop the snapshot with the bounding rectangle
+//        let morphyPic = croppedImage(cropRect)
+//        
+//        //image insets
+//        let morphiiInsets = UIEdgeInsetsMake(10, 20, 10, 20)
+//        let morphiiPic = morphyPic.imageWithInsets(morphiiInsets)
+//        
+//        
+//        //end the graphics context
+//        UIGraphicsEndImageContext()
+        
+        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
+        layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        var morphiiPic = UIGraphicsGetImageFromCurrentImageContext()
+        morphiiPic.drawInRect(CGRect(x: 0, y: 0, width: 600, height: 600))
+        morphiiPic = morphiiPic.imageWithInsets(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+        UIGraphicsEndImageContext()
+        return morphiiPic
     }
 }
 

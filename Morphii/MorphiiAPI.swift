@@ -18,7 +18,8 @@ class MorphiiAPI {
     
     class func fetchNewMorphiis(completion: (morphiisArray: [ Morphii ]) -> Void ) -> Void {
         if alreadyCheckedForMorphiisToday() {
-            completion(morphiisArray: [])
+            let morphiis = Morphii.fetchAllMorphiis()
+            completion(morphiisArray: morphiis)
             return
         }
         if let last = NSUserDefaults.standardUserDefaults().stringForKey(NSUserDefaultKeys.lastDate) {

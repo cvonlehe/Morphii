@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DynamicBlurView
 
 protocol OverlayViewControllerDelegate {
     
@@ -51,13 +50,23 @@ class OverlayViewController: UIViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+    @IBAction func saveMorphiiButtonPressed(sender: UIButton) {
+        morphiiView.saveMorphiiToSavedPhotos { (success) in
+            if success {
+                MethodHelper.showSuccessErrorHUD(true, message: "Saved to Camera Roll", inView: self.view)
+            }else {
+                print("FAILURE")
+            }
+        }
+    }
 
     
+    @IBAction func favoriteMorphiiButtonPressed(sender: UIButton) {
+        
+    }
 
-    
-
-    
     @IBAction func shareButtonPressed(sender: UIButton) {
+
         morphiiView.shareMorphii(self)
     }
     

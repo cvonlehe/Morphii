@@ -1,0 +1,6 @@
+framework module AOTutorial {
+  umbrella header "AOTutorial-umbrella.h"
+
+  export *
+  module * { export * }
+}

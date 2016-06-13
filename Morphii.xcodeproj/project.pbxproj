@@ -39,6 +39,11 @@
 		43A9A63B1D0B184300AB90E4 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 43A9A6391D0B184300AB90E4 /* Model.xcdatamodeld */; };
 		43A9A6461D0B1D1500AB90E4 /* CDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A9A6371D0B17FF00AB90E4 /* CDHelper.swift */; };
 		43A9A6471D0B1D4200AB90E4 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 43A9A6391D0B184300AB90E4 /* Model.xcdatamodeld */; };
+		43AB60601D0F2DB900D2D185 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AB605F1D0F2DB900D2D185 /* TutorialViewController.swift */; };
+		43AB60641D0F2F9500D2D185 /* walkthrough-B.png in Resources */ = {isa = PBXBuildFile; fileRef = 43AB60611D0F2F9500D2D185 /* walkthrough-B.png */; };
+		43AB60651D0F2F9500D2D185 /* walkthrough-C.png in Resources */ = {isa = PBXBuildFile; fileRef = 43AB60621D0F2F9500D2D185 /* walkthrough-C.png */; };
+		43AB60661D0F2F9500D2D185 /* walkthrough-A.png in Resources */ = {isa = PBXBuildFile; fileRef = 43AB60631D0F2F9500D2D185 /* walkthrough-A.png */; };
+		43AB60681D0F308100D2D185 /* AOTutorialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43AB60671D0F308100D2D185 /* AOTutorialViewController.xib */; };
 		E2028270E2024C4DAF5A2E0E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBC7A0C4715E6A76731D0AA6 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -117,6 +122,11 @@
 		43A9A63A1D0B184300AB90E4 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		43A9A6441D0B1B2E00AB90E4 /* Morphii.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Morphii.entitlements; sourceTree = "<group>"; };
 		43A9A6451D0B1B3C00AB90E4 /* Morphii Mobile Keyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Morphii Mobile Keyboard.entitlements"; sourceTree = "<group>"; };
+		43AB605F1D0F2DB900D2D185 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
+		43AB60611D0F2F9500D2D185 /* walkthrough-B.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "walkthrough-B.png"; sourceTree = "<group>"; };
+		43AB60621D0F2F9500D2D185 /* walkthrough-C.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "walkthrough-C.png"; sourceTree = "<group>"; };
+		43AB60631D0F2F9500D2D185 /* walkthrough-A.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "walkthrough-A.png"; sourceTree = "<group>"; };
+		43AB60671D0F308100D2D185 /* AOTutorialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AOTutorialViewController.xib; sourceTree = "<group>"; };
 		712DD6D41A4401561A531F12 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		8A37285CB4FA1A3FD4D5BDF3 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FBC7A0C4715E6A76731D0AA6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -197,6 +207,10 @@
 		4381624E1D00A25E00C5BB5B /* Morphii */ = {
 			isa = PBXGroup;
 			children = (
+				43AB60671D0F308100D2D185 /* AOTutorialViewController.xib */,
+				43AB60611D0F2F9500D2D185 /* walkthrough-B.png */,
+				43AB60621D0F2F9500D2D185 /* walkthrough-C.png */,
+				43AB60631D0F2F9500D2D185 /* walkthrough-A.png */,
 				43A9A6441D0B1B2E00AB90E4 /* Morphii.entitlements */,
 				4300E87C1D0854C000930766 /* grey_morphii.png */,
 				4398CBAC1D05BF7000074BC7 /* Initialization */,
@@ -259,6 +273,7 @@
 				4300E8721D0746C300930766 /* HomeViewController.swift */,
 				4300E8741D0746F600930766 /* SearchViewController.swift */,
 				431A75DA1D0870980079F9BD /* OverlayViewController.swift */,
+				43AB605F1D0F2DB900D2D185 /* TutorialViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -425,9 +440,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43AB60681D0F308100D2D185 /* AOTutorialViewController.xib in Resources */,
 				4381625D1D00A25E00C5BB5B /* LaunchScreen.storyboard in Resources */,
 				4300E87D1D0854C000930766 /* grey_morphii.png in Resources */,
 				4381625A1D00A25E00C5BB5B /* Assets.xcassets in Resources */,
+				43AB60661D0F2F9500D2D185 /* walkthrough-A.png in Resources */,
+				43AB60641D0F2F9500D2D185 /* walkthrough-B.png in Resources */,
+				43AB60651D0F2F9500D2D185 /* walkthrough-C.png in Resources */,
 				438162551D00A25E00C5BB5B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -531,6 +550,7 @@
 				438162841D00B29400C5BB5B /* README.md in Sources */,
 				4300E8771D074F0000930766 /* MorphiiAPI.swift in Sources */,
 				431A75DD1D0896EE0079F9BD /* MorphiiView.swift in Sources */,
+				43AB60601D0F2DB900D2D185 /* TutorialViewController.swift in Sources */,
 				431A75DB1D0870980079F9BD /* OverlayViewController.swift in Sources */,
 				43A9A63B1D0B184300AB90E4 /* Model.xcdatamodeld in Sources */,
 				43A9A6381D0B17FF00AB90E4 /* CDHelper.swift in Sources */,

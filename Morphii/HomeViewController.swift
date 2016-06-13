@@ -21,6 +21,13 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
 
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if !MethodHelper.isReturningUser() {
+            TutorialViewController.presenTutorialViewController(self)
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
