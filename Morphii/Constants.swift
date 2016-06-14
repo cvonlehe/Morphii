@@ -30,7 +30,7 @@ class NSUserDefaultKeys {
 }
 
 class URLs {
-    static let appStoreURL = "https://itunes.apple.com/us/app/netgalaxy-studios/id1114136380?ls=1&mt=8"
+   
 }
 
 class MorphiiAPIKeys {
@@ -51,6 +51,7 @@ class PFConfigValues {
     static let MORPHII_API_ACCOUNT_ID = "MORPHII_API_ACCOUNT_ID"
     static let MORPHII_API_USER_NAME = "MORPHII_API_USER_NAME"
     static let MORPHII_API_PASSWORD = "MORPHII_API_PASSWORD"
+    static let appStoreUrl = "appStoreUrl"
 }
 
 class EntityNames {

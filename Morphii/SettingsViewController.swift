@@ -58,13 +58,13 @@ class SettingsViewController: UIViewController {
     }
     
     func inviteFriendsContainerViewTapped (tap:UITapGestureRecognizer) {
-        let string = "Check out Morphii Keyboard: \(URLs.appStoreURL)"
+        let string = "Check out Morphii Keyboard: \(Config.getCurrentConfig().appStoreUrl)"
         let activityViewController = UIActivityViewController(activityItems: [string], applicationActivities: nil)
         presentViewController(activityViewController, animated: true, completion: nil)
     }
     
     func rateThisAppContainerViewTapped (tap:UITapGestureRecognizer) {
-        MethodHelper.openURLInDefaultBrowser(URLs.appStoreURL)
+        MethodHelper.openURLInDefaultBrowser(Config.getCurrentConfig().appStoreUrl)
     }
     
     func setupKeyboardContainerViewTapped (tap:UITapGestureRecognizer) {

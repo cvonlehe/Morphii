@@ -310,7 +310,7 @@ class MorphiiView: UIView, MorphiiProtocol {
         //        }
         var shareText = ""
         if !MethodHelper.shouldNotAddURLToMessages() {
-            let string = "Sent Morphii Keyboard: "+URLs.appStoreURL
+            let string = "Sent Morphii Keyboard: "+Config.getCurrentConfig().appStoreUrl
             shareText = string
         }
         let vc = UIActivityViewController(activityItems: [shareText, getMorphiiImage()], applicationActivities: [])

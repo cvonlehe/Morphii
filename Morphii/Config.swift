@@ -17,6 +17,7 @@ class Config: NSObject {
     var MORPHII_API_ACCOUNT_ID = ""
     var MORPHII_API_USER_NAME = ""
     var MORPHII_API_PASSWORD = ""
+    var appStoreUrl = "https://itunes.apple.com/us/app/netgalaxy-studios/id1114136380?ls=1&mt=8"
 
     init(pfConfig:PFConfig) {
         super.init()
@@ -34,6 +35,9 @@ class Config: NSObject {
         }
         if let password = pfConfig.objectForKey(PFConfigValues.MORPHII_API_PASSWORD) as? String {
             MORPHII_API_PASSWORD = password
+        }
+        if let url = pfConfig.objectForKey(PFConfigValues.appStoreUrl) as? String {
+            self.appStoreUrl = url
         }
     }
     
