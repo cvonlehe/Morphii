@@ -14,17 +14,27 @@ protocol OverlayViewControllerDelegate {
 
 class OverlayViewController: UIViewController {
 
+    @IBOutlet weak var collectionNameLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var morphiiView: MorphiiView!
     var morphiiO:Morphii?
-    
+    @IBOutlet weak var morphiiScrollView: UIScrollView!
     @IBOutlet weak var morphiiNameLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         containerView.layer.cornerRadius = 8
         containerView.clipsToBounds = true
+        var x = CGFloat(0)
+        for morphii in Morphii.fetchAllMorphiis() {
+            let rect = CGRect(x: x, y: 0, width: morphiiScrollView.frame.size.height, height: morphiiScrollView.frame.size.height)
+            morphiiScrollView.addSubview(MorphiiSelectionView(frame: rect, morphii: morphii, delegate: self))
+            x += morphiiScrollView.frame.size.height
+        }
+        morphiiScrollView.contentSize = CGSize(width: x, height: morphiiScrollView.frame.size.height)
+        morphiiScrollView.scrollEnabled = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,6 +54,9 @@ class OverlayViewController: UIViewController {
     func setMorphii() {
         self.morphiiView.setUpMorphii(self.morphiiO!)
         self.morphiiNameLabel.text = self.morphiiO!.name
+        if let collectionName = morphiiO?.groupName?.uppercaseString {
+            collectionNameLabel.text = collectionName
+        }
         print("MORPHII_GROUP:",self.morphiiO!.groupName)
     }
     
@@ -71,8 +84,11 @@ class OverlayViewController: UIViewController {
         morphiiView.shareMorphii(self)
     }
     
+}
 
-
-
-
+extension OverlayViewController:MorphiiSelectionViewDelegate {
+    func selectedMorphii(morphii: Morphii) {
+        self.morphiiO = morphii
+        setMorphii()
+    }
 }

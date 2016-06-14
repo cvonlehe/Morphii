@@ -314,13 +314,42 @@
                                                                 </mask>
                                                             </variation>
                                                         </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B0P-hf-1r8">
+                                                            <rect key="frame" x="0.0" y="251" width="304" height="30"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COLLECTION NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdt-k9-5Kj">
+                                                                    <rect key="frame" x="8" y="0.0" width="288" height="30"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" red="0.91372549020000005" green="0.91372549020000005" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <constraints>
+                                                                <constraint firstItem="fdt-k9-5Kj" firstAttribute="top" secondItem="B0P-hf-1r8" secondAttribute="top" id="E7T-9G-Oay"/>
+                                                                <constraint firstAttribute="bottom" secondItem="fdt-k9-5Kj" secondAttribute="bottom" id="IPf-H1-vgM"/>
+                                                                <constraint firstAttribute="trailing" secondItem="fdt-k9-5Kj" secondAttribute="trailing" constant="8" id="ecj-9D-mRg"/>
+                                                                <constraint firstItem="fdt-k9-5Kj" firstAttribute="leading" secondItem="B0P-hf-1r8" secondAttribute="leading" constant="8" id="fXb-Th-wrP"/>
+                                                                <constraint firstAttribute="height" constant="30" id="pcP-Rs-C0P"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ph6-lN-gk8">
+                                                            <rect key="frame" x="0.0" y="281" width="304" height="72"/>
+                                                        </scrollView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="YcQ-tN-0EW" firstAttribute="leading" secondItem="jQ4-iG-2DL" secondAttribute="leading" id="0TU-Lo-jd8"/>
+                                                        <constraint firstAttribute="bottom" secondItem="ph6-lN-gk8" secondAttribute="bottom" id="0g5-ce-eBF"/>
+                                                        <constraint firstItem="B0P-hf-1r8" firstAttribute="top" secondItem="YcQ-tN-0EW" secondAttribute="bottom" constant="8" id="26W-ni-cn3"/>
+                                                        <constraint firstItem="ph6-lN-gk8" firstAttribute="leading" secondItem="jQ4-iG-2DL" secondAttribute="leading" id="4i4-x4-mjl"/>
                                                         <constraint firstItem="mVu-H8-G7m" firstAttribute="top" secondItem="jQ4-iG-2DL" secondAttribute="top" id="4iQ-B2-7MS"/>
+                                                        <constraint firstAttribute="trailing" secondItem="B0P-hf-1r8" secondAttribute="trailing" id="6lM-M4-xbX"/>
+                                                        <constraint firstItem="B0P-hf-1r8" firstAttribute="leading" secondItem="jQ4-iG-2DL" secondAttribute="leading" id="Ifw-n5-NdL"/>
                                                         <constraint firstAttribute="trailing" secondItem="YcQ-tN-0EW" secondAttribute="trailing" id="Ng4-Xd-C58"/>
+                                                        <constraint firstAttribute="trailing" secondItem="ph6-lN-gk8" secondAttribute="trailing" id="XBL-aL-cdx"/>
                                                         <constraint firstAttribute="width" constant="304" id="iuy-Mf-Ezx"/>
+                                                        <constraint firstItem="ph6-lN-gk8" firstAttribute="top" secondItem="B0P-hf-1r8" secondAttribute="bottom" id="rR1-jF-LaK"/>
                                                         <constraint firstItem="YcQ-tN-0EW" firstAttribute="top" secondItem="mVu-H8-G7m" secondAttribute="bottom" constant="8" id="rUA-zN-Weq"/>
                                                         <constraint firstItem="mVu-H8-G7m" firstAttribute="centerX" secondItem="jQ4-iG-2DL" secondAttribute="centerX" id="xwZ-CU-ITq"/>
                                                     </constraints>
@@ -363,8 +392,10 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="collectionNameLabel" destination="fdt-k9-5Kj" id="j89-yI-Fgn"/>
                         <outlet property="containerView" destination="ts5-Ot-tdM" id="NgD-Eg-S9g"/>
                         <outlet property="morphiiNameLabel" destination="EQk-SB-40c" id="ssM-Ue-FTG"/>
+                        <outlet property="morphiiScrollView" destination="ph6-lN-gk8" id="4aV-fM-Brd"/>
                         <outlet property="morphiiView" destination="mVu-H8-G7m" id="JAS-eA-7Lh"/>
                     </connections>
                 </viewController>

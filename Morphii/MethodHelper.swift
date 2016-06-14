@@ -14,8 +14,8 @@ class MethodHelper {
     private static var hud = JGProgressHUD(style: JGProgressHUDStyle.Dark)
     
     class func showAlert (title:String, message:String) {
-        let alertView = UIAlertView(title: title, message: message, delegate: nil, cancelButtonTitle: "Ok")
-        alertView.show()
+//        let alertView = UIAlertView(title: title, message: message, delegate: nil, cancelButtonTitle: "Ok")
+//        alertView.show()
     }
     
     class func showHudWithMessage (message:String, view:UIView) {
@@ -48,9 +48,7 @@ class MethodHelper {
         return returningUser
     }
     
-    class func openURLInDefaultBrowser (url:String) {
-        UIApplication.sharedApplication().openURL(NSURL(string: url)!)
-    }
+
     
     class func shouldNotAddURLToMessages () -> Bool {
         return NSUserDefaults.standardUserDefaults().boolForKey(NSUserDefaultKeys.shouldNotAddURLToMessages)

@@ -64,7 +64,7 @@ class SettingsViewController: UIViewController {
     }
     
     func rateThisAppContainerViewTapped (tap:UITapGestureRecognizer) {
-        MethodHelper.openURLInDefaultBrowser(Config.getCurrentConfig().appStoreUrl)
+        openURLInDefaultBrowser(Config.getCurrentConfig().appStoreUrl)
     }
     
     func setupKeyboardContainerViewTapped (tap:UITapGestureRecognizer) {
@@ -84,6 +84,10 @@ class SettingsViewController: UIViewController {
     
     @IBAction func switchFlipped(sender: UISwitch) {
         MethodHelper.setShouldNotAddURLToMessages(!sender.on)
+    }
+    
+    func openURLInDefaultBrowser (url:String) {
+        UIApplication.sharedApplication().openURL(NSURL(string: url)!)
     }
 
     /*

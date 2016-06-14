@@ -41,6 +41,12 @@
 		43A9DFA11D105CCF001F3A1B /* Morphii+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A9DF9E1D105CCF001F3A1B /* Morphii+CoreDataProperties.swift */; };
 		43A9DFA51D107915001F3A1B /* HeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A9DFA41D107915001F3A1B /* HeaderCollectionReusableView.swift */; };
 		43A9DFA61D107915001F3A1B /* HeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A9DFA41D107915001F3A1B /* HeaderCollectionReusableView.swift */; };
+		43A9DFF41D10888F001F3A1B /* FetchedDelegateDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A9DFF31D10888F001F3A1B /* FetchedDelegateDataSource.swift */; };
+		43A9DFF71D10ACE4001F3A1B /* MorphiiSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A9DFF61D10ACE4001F3A1B /* MorphiiSelectionView.swift */; };
+		43A9DFF81D10ACE4001F3A1B /* MorphiiSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A9DFF61D10ACE4001F3A1B /* MorphiiSelectionView.swift */; };
+		43A9DFF91D10B406001F3A1B /* MorphiiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431A75DC1D0896EE0079F9BD /* MorphiiView.swift */; };
+		43A9DFFB1D10B6AA001F3A1B /* MethodHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4398CBAF1D05BFE500074BC7 /* MethodHelper.swift */; };
+		43A9DFFC1D10B735001F3A1B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A9A60E1D0A15D400AB90E4 /* Config.swift */; };
 		43AB60601D0F2DB900D2D185 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AB605F1D0F2DB900D2D185 /* TutorialViewController.swift */; };
 		43AB60641D0F2F9500D2D185 /* walkthrough-B.png in Resources */ = {isa = PBXBuildFile; fileRef = 43AB60611D0F2F9500D2D185 /* walkthrough-B.png */; };
 		43AB60651D0F2F9500D2D185 /* walkthrough-C.png in Resources */ = {isa = PBXBuildFile; fileRef = 43AB60621D0F2F9500D2D185 /* walkthrough-C.png */; };
@@ -125,6 +131,8 @@
 		43A9A6451D0B1B3C00AB90E4 /* Morphii Mobile Keyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Morphii Mobile Keyboard.entitlements"; sourceTree = "<group>"; };
 		43A9DF9E1D105CCF001F3A1B /* Morphii+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Morphii+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		43A9DFA41D107915001F3A1B /* HeaderCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		43A9DFF31D10888F001F3A1B /* FetchedDelegateDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedDelegateDataSource.swift; sourceTree = "<group>"; };
+		43A9DFF61D10ACE4001F3A1B /* MorphiiSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorphiiSelectionView.swift; sourceTree = "<group>"; };
 		43AB605F1D0F2DB900D2D185 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		43AB60611D0F2F9500D2D185 /* walkthrough-B.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "walkthrough-B.png"; sourceTree = "<group>"; };
 		43AB60621D0F2F9500D2D185 /* walkthrough-C.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "walkthrough-C.png"; sourceTree = "<group>"; };
@@ -224,6 +232,8 @@
 				431A75DC1D0896EE0079F9BD /* MorphiiView.swift */,
 				43A9A60E1D0A15D400AB90E4 /* Config.swift */,
 				43A9DFA41D107915001F3A1B /* HeaderCollectionReusableView.swift */,
+				43A9DFF31D10888F001F3A1B /* FetchedDelegateDataSource.swift */,
+				43A9DFF61D10ACE4001F3A1B /* MorphiiSelectionView.swift */,
 			);
 			path = Morphii;
 			sourceTree = "<group>";
@@ -555,12 +565,14 @@
 				4300E8771D074F0000930766 /* MorphiiAPI.swift in Sources */,
 				431A75DD1D0896EE0079F9BD /* MorphiiView.swift in Sources */,
 				43AB60601D0F2DB900D2D185 /* TutorialViewController.swift in Sources */,
+				43A9DFF41D10888F001F3A1B /* FetchedDelegateDataSource.swift in Sources */,
 				431A75DB1D0870980079F9BD /* OverlayViewController.swift in Sources */,
 				43A9DFA51D107915001F3A1B /* HeaderCollectionReusableView.swift in Sources */,
 				43A9A63B1D0B184300AB90E4 /* Model.xcdatamodeld in Sources */,
 				43A9A6381D0B17FF00AB90E4 /* CDHelper.swift in Sources */,
 				4300E87B1D07739100930766 /* MorphiiCollectionViewCell.swift in Sources */,
 				4398CBB21D05C06B00074BC7 /* Constants.swift in Sources */,
+				43A9DFF71D10ACE4001F3A1B /* MorphiiSelectionView.swift in Sources */,
 				43A9DFA01D105CCF001F3A1B /* Morphii+CoreDataProperties.swift in Sources */,
 				4398CBB51D05F1B700074BC7 /* SettingsViewController.swift in Sources */,
 			);
@@ -590,9 +602,13 @@
 				43843ACA1D0B4CDF00B34D5E /* Morphii.swift in Sources */,
 				43A9A6461D0B1D1500AB90E4 /* CDHelper.swift in Sources */,
 				4398CBBF1D05FDB900074BC7 /* KeyboardViewController.swift in Sources */,
+				43A9DFFC1D10B735001F3A1B /* Config.swift in Sources */,
 				43A9DFA11D105CCF001F3A1B /* Morphii+CoreDataProperties.swift in Sources */,
 				43A9A6471D0B1D4200AB90E4 /* Model.xcdatamodeld in Sources */,
+				43A9DFFB1D10B6AA001F3A1B /* MethodHelper.swift in Sources */,
+				43A9DFF81D10ACE4001F3A1B /* MorphiiSelectionView.swift in Sources */,
 				43843ACB1D0B4FFB00B34D5E /* Constants.swift in Sources */,
+				43A9DFF91D10B406001F3A1B /* MorphiiView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
