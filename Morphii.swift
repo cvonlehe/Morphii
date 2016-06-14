@@ -11,12 +11,16 @@ import CoreData
 
 
 class Morphii: NSManagedObject {
+    
+    static let EntityName = "Morphii"
 
 // Insert code here to add functionality to your managed object subclass
 //    init(id: String, name: String, scaleType: Int, /*category: String, keywords: [ String ],*/ sequence: Int, metaData: NSDictionary) {
 //        super.init()
 //        setData(id, name: name, scaleType: scaleType, sequence: sequence, metaData: metaData)
 //    }
+    
+    
 //    
     class func createNewMorphii (morphiiRecord:NSDictionary) -> Morphii? {
         
@@ -28,10 +32,11 @@ class Morphii: NSManagedObject {
         //let recCategory = morphiiRecords[i].valueForKey("category") as! String
         //let recKeywords = morphiiRecords[i].valueForKey("keywords") as! [ String ]
         let recSequence = morphiiRecord.valueForKey(MorphiiAPIKeys.sequence) as! Int
-        return setData(recId, name: recName, scaleType: scaleType, sequence: recSequence, metaData: metaData)
+        let groupName = morphiiRecord.valueForKey(MorphiiAPIKeys.groupName) as! String
+        return setData(recId, name: recName, scaleType: scaleType, sequence: recSequence, groupName:groupName, metaData: metaData)
     }
     
-    private class func setData(id: String, name: String, scaleType: Int, /*category: String, keywords: [ String ],*/ sequence: Int, metaData: NSDictionary) -> Morphii? {
+    private class func setData(id: String, name: String, scaleType: Int, /*category: String, keywords: [ String ],*/ sequence: Int, groupName:String, metaData: NSDictionary) -> Morphii? {
         guard let morphii = NSEntityDescription.insertNewObjectForEntityForName(EntityNames.Morphii, inManagedObjectContext: CDHelper.sharedInstance.managedObjectContext) as? Morphii else {
             return nil
         }
@@ -40,6 +45,7 @@ class Morphii: NSManagedObject {
         morphii.scaleType = scaleType
         //self.category = category
         //self.keywords = keywords
+        morphii.groupName = groupName
         morphii.sequence = sequence
         morphii.metaData =  metaData
         

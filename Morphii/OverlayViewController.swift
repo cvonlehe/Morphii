@@ -44,6 +44,7 @@ class OverlayViewController: UIViewController {
     func setMorphii() {
         self.morphiiView.setUpMorphii(self.morphiiO!)
         self.morphiiNameLabel.text = self.morphiiO!.name
+        print("MORPHII_GROUP:",self.morphiiO!.groupName)
     }
     
     @IBAction func closeButtonPressed(sender: UIButton) {

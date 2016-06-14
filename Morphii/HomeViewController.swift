@@ -7,19 +7,31 @@
 //
 
 import UIKit
+import CoreData
 
-class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, OverlayViewControllerDelegate {
+class HomeViewController: UIViewController, OverlayViewControllerDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
-    var morphiis:[Morphii] = []
-    
+    var fetchedResultsController:NSFetchedResultsController?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         MorphiiAPI.fetchNewMorphiis { (morphiisArray) in
-            self.morphiis = morphiisArray
-            self.collectionView.reloadData()
+            self.createFetchedResultsController()
         }
 
+    }
+    
+    func createFetchedResultsController () {
+        let request = NSFetchRequest(entityName: Morphii.EntityName)
+        let sort = NSSortDescriptor(key: "name", ascending: true)
+        request.sortDescriptors = [sort]
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CDHelper.sharedInstance.managedObjectContext, sectionNameKeyPath: MorphiiAPIKeys.groupName, cacheName: CacheNames.AllMorphiiFetchedResultsCollectionView)
+        do {
+            try fetchedResultsController?.performFetch()
+        }catch {
+            
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -39,14 +51,25 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         navigationController?.pushViewController(nextView, animated: true)
         
     }
-    
+
+}
+
+extension HomeViewController:UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return morphiis.count
+        guard let sections = fetchedResultsController?.sections else {return 0}
+        let currentSection = sections[section]
+        return currentSection.numberOfObjects
+    }
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return fetchedResultsController?.sections?.count ?? 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CollectionViewCellIDs.MorphiiCollectionViewCell, forIndexPath: indexPath) as! MorphiiCollectionViewCell
-        cell.populateCellForMorphii(morphiis[indexPath.row])
+        if let morphii = fetchedResultsController?.objectAtIndexPath(indexPath) as? Morphii {
+            cell.populateCellForMorphii(morphii)
+        }
         return cell
     }
     
@@ -64,20 +87,22 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let morphii = morphiis[indexPath.row]
-        OverlayViewController.createOverlay(self, morphiiO: morphii)
+        if let morphii = fetchedResultsController?.objectAtIndexPath(indexPath) as? Morphii {
+            OverlayViewController.createOverlay(self, morphiiO: morphii)
+        }
     }
     
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: CollectionReusableViewIds.HeaderCollectionReusableView, forIndexPath: indexPath) as! HeaderCollectionReusableView
+        if let sections = fetchedResultsController?.sections {
+            let currentSection = sections[indexPath.section]
+            header.titleLabel.text = currentSection.name.uppercaseString
+        }
+        
+        return header
     }
-    */
-
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: UIScreen.mainScreen().bounds.size.width, height: CGFloat(30))
+    }
 }

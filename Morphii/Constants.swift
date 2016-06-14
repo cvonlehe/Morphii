@@ -43,6 +43,7 @@ class MorphiiAPIKeys {
     static let sequence = "sequence"
     static let category = "category"
     static let keywords = "keywords"
+    static let groupName = "groupName"
 }
 
 class PFConfigValues {
@@ -56,4 +57,12 @@ class PFConfigValues {
 
 class EntityNames {
     static let Morphii = "Morphii"
+}
+
+class CacheNames {
+    static let AllMorphiiFetchedResultsCollectionView = "AllMorphiiFetchedResultsCollectionView"
+}
+
+class CollectionReusableViewIds {
+    static let HeaderCollectionReusableView = "HeaderCollectionReusableView"
 }

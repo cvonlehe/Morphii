@@ -78,17 +78,18 @@ class MorphiiAPI {
         
         for record in morphiiRecords {
             if let data = record.valueForKey(MorphiiAPIKeys.data) as? NSDictionary,
-                let metaData = data.valueForKey(MorphiiAPIKeys.metaData),
+                let _ = data.valueForKey(MorphiiAPIKeys.metaData),
                 let _ = record.valueForKey(MorphiiAPIKeys.scaleType),
                 let _ = record.valueForKey(MorphiiAPIKeys.id),
                 let _ = record.valueForKey(MorphiiAPIKeys.name),
-                let _ = record.valueForKey(MorphiiAPIKeys.sequence)
+                let _ = record.valueForKey(MorphiiAPIKeys.sequence),
+                let groupName = record.valueForKey(MorphiiAPIKeys.groupName)
 //                let _ = record.valueForKey(MorphiiAPIKeys.staticUrl)
 //                let _ = record.valueForKey(MorphiiAPIKeys.dataUrl)
 //                let _ = record.valueForKey(MorphiiAPIKeys.changedDateUTC)
 //                let _ = data.valueForKey(MorphiiAPIKeys.png)
             {
-                print("GOT_MORPHII:",metaData)
+                print("GOT_MORPHII:",groupName)
                 Morphii.createNewMorphii(record)
                 //morphiis.append(Morphii(morphiiRecord: record))
             }
