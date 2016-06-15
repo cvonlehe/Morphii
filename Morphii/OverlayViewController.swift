@@ -14,6 +14,9 @@ protocol OverlayViewControllerDelegate {
 
 class OverlayViewController: UIViewController {
 
+    @IBOutlet weak var morphiiContainerView: UIView!
+    @IBOutlet weak var morphiiContainerLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var collectionNameContainerView: UIView!
     @IBOutlet weak var collectionNameLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var morphiiView: MorphiiView!
@@ -35,6 +38,14 @@ class OverlayViewController: UIViewController {
         }
         morphiiScrollView.contentSize = CGSize(width: x, height: morphiiScrollView.frame.size.height)
         morphiiScrollView.scrollEnabled = true
+        collectionNameContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(OverlayViewController.collectionNameContainerViewTapped(_:))))
+    }
+    
+    func collectionNameContainerViewTapped (tap:UITapGestureRecognizer) {
+        morphiiContainerLeadingConstraint.constant = -morphiiContainerView.frame.size.width
+        UIView.animateWithDuration(0.5) {
+            self.view.layoutIfNeeded()
+        }
     }
 
     override func didReceiveMemoryWarning() {
