@@ -40,10 +40,15 @@ class MorphiiView: UIView, MorphiiProtocol {
         super.init(coder: aDecoder)
     }
     
-    func setUpMorphii(morphii:Morphii){
+    func setUpMorphii(morphii:Morphii, emoodl:Double?){
         self.morphii = morphii
         setUpMorphiiGestures()
-        emoodl = 45.0
+        if let e = emoodl {
+            self.emoodl = e
+        }else if let number = morphii.emoodl {
+            self.emoodl = number.doubleValue
+        }
+//        emoodl = 45.0
     }
     
     var emoodl: Double = 50.0 {

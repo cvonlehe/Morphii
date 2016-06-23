@@ -1,0 +1,6 @@
+framework module Pods_Morphii {
+  umbrella header "Pods-Morphii-umbrella.h"
+
+  export *
+  module * { export * }
+}

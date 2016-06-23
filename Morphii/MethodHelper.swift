@@ -59,5 +59,4 @@ class MethodHelper {
         NSUserDefaults.standardUserDefaults().synchronize()
     }
     
-    
 }

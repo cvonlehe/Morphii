@@ -18,9 +18,11 @@ class HomeViewController: UIViewController, OverlayViewControllerDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.createFetchedResultsController()
+        print("CURRENT_USER:",User.getCurrentUser()?.objectID)
 
 
     }
+    
     
     func createFetchedResultsController () {
         let request = NSFetchRequest(entityName: Morphii.EntityName)
@@ -40,7 +42,13 @@ class HomeViewController: UIViewController, OverlayViewControllerDelegate {
         super.viewDidAppear(animated)
         if !MethodHelper.isReturningUser() {
             TutorialViewController.presenTutorialViewController(self)
+        }else {
+            MorphiiAPI.fetchNewMorphiis { (morphiisArray) in
+                self.fetcher.refreshFetchResults()
+                self.collectionView.reloadData()
+            }
         }
+        
     }
 
     override func didReceiveMemoryWarning() {

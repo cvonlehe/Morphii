@@ -90,7 +90,7 @@ class MorphiiAPI {
 //                let _ = data.valueForKey(MorphiiAPIKeys.png)
             {
                 print("GOT_MORPHII:",groupName)
-                Morphii.createNewMorphii(record)
+                Morphii.createNewMorphii(record, emoodl: nil)
                 //morphiis.append(Morphii(morphiiRecord: record))
             }
         }

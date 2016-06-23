@@ -14,7 +14,7 @@ class MorphiiCollectionViewCell: UICollectionViewCell {
     
     func populateCellForMorphii (morphii:Morphii) {
         morphiiNameLabel.text = morphii.name
-        morphiiView.setUpMorphii(morphii)
+        morphiiView.setUpMorphii(morphii, emoodl: morphii.emoodl?.doubleValue)
     }
     
     

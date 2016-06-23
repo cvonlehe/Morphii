@@ -21,6 +21,11 @@ class ViewControllerIDs {
 
 class CollectionViewCellIDs {
     static let MorphiiCollectionViewCell = "MorphiiCollectionViewCell"
+    static let CollectionTableViewCell = "CollectionTableViewCell"
+}
+
+class TableViewCellIDs {
+    static let CollectionTableViewCell = "CollectionTableViewCell"
 }
 
 class NSUserDefaultKeys {
@@ -57,6 +62,7 @@ class PFConfigValues {
 
 class EntityNames {
     static let Morphii = "Morphii"
+    static let User =  "User"
 }
 
 class CacheNames {

@@ -2,7 +2,7 @@
 //  Morphii.swift
 //  Morphii
 //
-//  Created by netGALAXY Studios on 6/10/16.
+//  Created by netGALAXY Studios on 6/23/16.
 //  Copyright © 2016 netGALAXY Studios. All rights reserved.
 //
 
@@ -11,18 +11,19 @@ import CoreData
 
 
 class Morphii: NSManagedObject {
-    
-    static let EntityName = "Morphii"
 
 // Insert code here to add functionality to your managed object subclass
-//    init(id: String, name: String, scaleType: Int, /*category: String, keywords: [ String ],*/ sequence: Int, metaData: NSDictionary) {
-//        super.init()
-//        setData(id, name: name, scaleType: scaleType, sequence: sequence, metaData: metaData)
-//    }
+    static let EntityName = "Morphii"
+    
+    // Insert code here to add functionality to your managed object subclass
+    //    init(id: String, name: String, scaleType: Int, /*category: String, keywords: [ String ],*/ sequence: Int, metaData: NSDictionary) {
+    //        super.init()
+    //        setData(id, name: name, scaleType: scaleType, sequence: sequence, metaData: metaData)
+    //    }
     
     
-//    
-    class func createNewMorphii (morphiiRecord:NSDictionary) -> Morphii? {
+    //
+    class func createNewMorphii (morphiiRecord:NSDictionary, emoodl:Double?) -> Morphii? {
         
         let data = morphiiRecord.valueForKey(MorphiiAPIKeys.data) as! NSDictionary
         let metaData = data.valueForKey(MorphiiAPIKeys.metaData) as! NSDictionary
@@ -33,10 +34,10 @@ class Morphii: NSManagedObject {
         //let recKeywords = morphiiRecords[i].valueForKey("keywords") as! [ String ]
         let recSequence = morphiiRecord.valueForKey(MorphiiAPIKeys.sequence) as! Int
         let groupName = morphiiRecord.valueForKey(MorphiiAPIKeys.groupName) as! String
-        return setData(recId, name: recName, scaleType: scaleType, sequence: recSequence, groupName:groupName, metaData: metaData)
+        return setData(recId, name: recName, scaleType: scaleType, sequence: recSequence, groupName:groupName, metaData: metaData, emoodl: emoodl)
     }
     
-    private class func setData(id: String, name: String, scaleType: Int, /*category: String, keywords: [ String ],*/ sequence: Int, groupName:String, metaData: NSDictionary) -> Morphii? {
+    private class func setData(id: String, name: String, scaleType: Int, /*category: String, keywords: [ String ],*/ sequence: Int, groupName:String, metaData: NSDictionary, emoodl:Double?) -> Morphii? {
         guard let morphii = NSEntityDescription.insertNewObjectForEntityForName(EntityNames.Morphii, inManagedObjectContext: CDHelper.sharedInstance.managedObjectContext) as? Morphii else {
             return nil
         }
@@ -48,7 +49,10 @@ class Morphii: NSManagedObject {
         morphii.groupName = groupName
         morphii.sequence = sequence
         morphii.metaData =  metaData
-        
+        morphii.emoodl = 50.0
+        if let newEmoodl = emoodl {
+            morphii.emoodl = newEmoodl
+        }
         do {
             try CDHelper.sharedInstance.managedObjectContext.save()
             return morphii
@@ -61,6 +65,33 @@ class Morphii: NSManagedObject {
     class func fetchAllMorphiis () -> [Morphii] {
         var morphiis:[Morphii] = []
         let request = NSFetchRequest(entityName: EntityNames.Morphii)
+        do {
+            guard let m = try CDHelper.sharedInstance.managedObjectContext.executeFetchRequest(request) as? [Morphii] else {
+                return []
+            }
+            morphiis.appendContentsOf(m)
+        }catch {
+            return []
+        }
+        return morphiis
+    }
+    
+    class func getCollectionTitles () -> [String] {
+        var collections:[String] = []
+        for morphii in fetchAllMorphiis() {
+            guard let collection = morphii.groupName else {continue}
+            if !collections.contains(collection) {
+                collections.append(collection)
+            }
+        }
+        return collections.sort()
+    }
+    
+    class func getMorphiisForCollectionTitle (collectionTitle:String) -> [Morphii] {
+        var morphiis:[Morphii] = []
+        let request = NSFetchRequest(entityName: EntityNames.Morphii)
+        let predicate = NSPredicate(format: "groupName == %@", collectionTitle)
+        request.predicate = predicate
         do {
             guard let m = try CDHelper.sharedInstance.managedObjectContext.executeFetchRequest(request) as? [Morphii] else {
                 return []

@@ -55,7 +55,7 @@ class CDHelper {
         return managedObjectContext
     }()
     
-    func saveContext () {
+    func saveContext (completion:((success:Bool)->Void)?) {
         if managedObjectContext.hasChanges {
             do {
                 try managedObjectContext.save()
@@ -64,8 +64,14 @@ class CDHelper {
                 // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nserror = error as NSError
                 NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-                abort()
+                if let comp = completion {
+                    comp(success: false)
+                    return
+                }
             }
+        }
+        if let comp = completion {
+            comp(success: true)
         }
     }
 }

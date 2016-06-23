@@ -29,6 +29,14 @@ class FetchedDelegateDataSource: NSObject{
         collectionView.delegate = self
         collectionView.dataSource = self
     }
+    
+    func refreshFetchResults () {
+        do {
+            try fetchedResultsController?.performFetch()
+        }catch{
+            
+        }
+    }
 }
 
 extension FetchedDelegateDataSource:UICollectionViewDataSource {
