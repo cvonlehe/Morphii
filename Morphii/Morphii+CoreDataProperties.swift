@@ -20,7 +20,7 @@ extension Morphii {
     @NSManaged var name: String?
     @NSManaged var scaleType: NSNumber?
     @NSManaged var sequence: NSNumber?
-    @NSManaged var groupName: String?
     @NSManaged var isFavorite: NSNumber?
+    @NSManaged var emoodl: NSNumber?
 
 }
