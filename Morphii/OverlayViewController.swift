@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TPKeyboardAvoiding
 
 protocol OverlayViewControllerDelegate {
     
@@ -14,10 +15,15 @@ protocol OverlayViewControllerDelegate {
 
 class OverlayViewController: UIViewController {
     
-    @IBOutlet weak var favoriteMorphiiContainerView: UIView!
-    @IBOutlet weak var checkmarkImageView: UIImageView!
+    @IBOutlet weak var favoriteContainerView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var morphiiContainerView: UIView!
+
+    @IBOutlet weak var tagImageView: UIImageView!
+    @IBOutlet weak var favoriteTagsTextField: UITextField!
+    @IBOutlet weak var favoriteNameTextField: UITextField!
+    @IBOutlet weak var scrollView: TPKeyboardAvoidingScrollView!
+    @IBOutlet weak var favoriteMorphiiContainerView: UIView!
     @IBOutlet weak var morphiiContainerLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var collectionNameContainerView: UIView!
     @IBOutlet weak var collectionNameLabel: UILabel!
@@ -31,19 +37,21 @@ class OverlayViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tagImageView.image = tagImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
+        tagImageView.tintColor = tagImageView.tintColor
         // Do any additional setup after loading the view.
         containerView.layer.cornerRadius = 8
         containerView.clipsToBounds = true
-        checkmarkImageView.image = checkmarkImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
-        checkmarkImageView.tintColor = checkmarkImageView.tintColor
         collectionNameContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(OverlayViewController.collectionNameContainerViewTapped(_:))))
+        
+        favoriteContainerView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(OverlayViewController.favoriteContainerViewSwiped(_:))))
+        tableView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(OverlayViewController.tableViewSwiped(_:))))
     }
     
-    func collectionNameContainerViewTapped (tap:UITapGestureRecognizer) {
-        morphiiNameLabel.text = "Collections"
-        setCenterView(.CollectionTableView)
-    }
+
+    
+
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -59,58 +67,22 @@ class OverlayViewController: UIViewController {
         }
     }
     
-    func setMorphii() {
-        self.morphiiView.setUpMorphii(self.morphiiO!, emoodl: morphiiO!.emoodl?.doubleValue)
-        self.morphiiNameLabel.text = self.morphiiO!.name
-        if let collectionName = morphiiO?.groupName {
-            collectionNameLabel.text = collectionName.uppercaseString
-            morphiiScrollView.setMorphiis(Morphii.getMorphiisForCollectionTitle(collectionName), delegate: self)
-        }
-        print("MORPHII_GROUP:",self.morphiiO!.groupName)
-    }
-    
     @IBAction func closeButtonPressed(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    @IBAction func saveMorphiiButtonPressed(sender: UIButton) {
-        morphiiView.saveMorphiiToSavedPhotos { (success) in
-            if success {
-                MethodHelper.showSuccessErrorHUD(true, message: "Saved to Camera Roll", inView: self.view)
-            }else {
-                print("FAILURE")
-            }
-        }
-    }
-    
-    
-    @IBAction func favoriteMorphiiButtonPressed(sender: UIButton) {
-        if let mView = favoriteMorphiiView {
-            mView.setNewMorphii(morphiiView.morphii, emoodl: morphiiView.emoodl)
-        }else {
-            favoriteMorphiiView = MorphiiSelectionView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: favoriteMorphiiContainerView.frame.size), morphii: morphiiView.morphii, delegate: nil)
-            favoriteMorphiiContainerView.addSubview(favoriteMorphiiView!)
-        }
-        setCenterView(.FavoriteView)
-    }
-    
-    @IBAction func shareButtonPressed(sender: UIButton) {
-        
-        morphiiView.shareMorphii(self)
     }
     
     func setCenterView (containerView:ContainerView) {
         switch containerView {
         case .CollectionTableView:
+            morphiiNameLabel.text = "Collections"
             morphiiContainerLeadingConstraint.constant = -morphiiContainerView.frame.size.width
             break
         case .FavoriteView:
+            morphiiNameLabel.text = "Saved Morphii"
             morphiiContainerLeadingConstraint.constant = morphiiContainerView.frame.size.width
             break
         case .MorphiiModifyView:
             morphiiContainerLeadingConstraint.constant = 0
-            break
-        default:
             break
         }
         UIView.animateWithDuration(0.5) {
@@ -146,5 +118,79 @@ extension OverlayViewController:UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIDs.CollectionTableViewCell) as! CollectionTableViewCell
         cell.populateForCollectionTitle(collections[indexPath.row], delegate: self)
         return cell
+    }
+}
+
+extension OverlayViewController {
+    //FavoriteView
+    
+    @IBAction func addToFavoritesButtonPressed(sender: UIButton) {
+        favoriteNameTextField.resignFirstResponder()
+        favoriteTagsTextField.resignFirstResponder()
+        if let _ = Morphii.createNewMorphii(morphiiO?.id, name: favoriteNameTextField.text, scaleType: Int((morphiiO?.scaleType!)!), sequence: Int((morphiiO?.sequence)!), groupName: "Your Saved Morphiis", metaData: morphiiO?.metaData, emoodl: morphiiView?.emoodl, isFavorite: true) {
+            MethodHelper.showSuccessErrorHUD(true, message: "Saved to Favorites", inView: self.view)
+        }else {
+            MethodHelper.showAlert("Error", message: "There was an error saving this morphii. Please try again")
+        }
+    }
+    
+    func favoriteContainerViewSwiped (pan:UIPanGestureRecognizer) {
+        if pan.velocityInView(tableView).x < -800 {
+            setCenterView(.MorphiiModifyView)
+        }
+    }
+}
+
+extension OverlayViewController {
+    //MorphiiModifyView
+    
+    func collectionNameContainerViewTapped (tap:UITapGestureRecognizer) {
+        setCenterView(.CollectionTableView)
+    }
+    
+    func setMorphii() {
+        self.morphiiView.setUpMorphii(self.morphiiO!, emoodl: morphiiO!.emoodl?.doubleValue)
+        self.morphiiNameLabel.text = self.morphiiO!.name
+        if let collectionName = morphiiO?.groupName {
+            collectionNameLabel.text = collectionName.uppercaseString
+            morphiiScrollView.setMorphiis(Morphii.getMorphiisForCollectionTitle(collectionName), delegate: self)
+        }
+        print("MORPHII_GROUP:",self.morphiiO!.groupName)
+    }
+    
+    @IBAction func saveMorphiiButtonPressed(sender: UIButton) {
+        morphiiView.saveMorphiiToSavedPhotos { (success) in
+            if success {
+                MethodHelper.showSuccessErrorHUD(true, message: "Saved to Camera Roll", inView: self.view)
+            }else {
+                print("FAILURE")
+            }
+        }
+    }
+    
+    @IBAction func shareButtonPressed(sender: UIButton) {
+        
+        morphiiView.shareMorphii(self)
+    }
+    
+    @IBAction func favoriteMorphiiButtonPressed(sender: UIButton) {
+        if let mView = favoriteMorphiiView {
+            mView.setNewMorphii(morphiiView.morphii, emoodl: morphiiView.emoodl)
+        }else {
+            favoriteMorphiiView = MorphiiSelectionView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: favoriteMorphiiContainerView.frame.size), morphii: morphiiView.morphii, delegate: nil)
+            favoriteMorphiiContainerView.addSubview(favoriteMorphiiView!)
+            favoriteMorphiiView?.morphiiView.emoodl = morphiiView.emoodl
+        }
+        setCenterView(.FavoriteView)
+    }
+}
+
+extension OverlayViewController {
+    //CollectionTableView
+    
+    func tableViewSwiped (pan:UIPanGestureRecognizer) {
+        if pan.velocityInView(tableView).x > 800 {
+            setCenterView(.MorphiiModifyView)
+        }
     }
 }

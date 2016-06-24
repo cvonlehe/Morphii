@@ -5,12 +5,14 @@ PODS:
   - JGProgressHUD (1.3.3)
   - Parse (1.13.0):
     - Bolts/Tasks (~> 1.6)
+  - TPKeyboardAvoiding (1.3)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
   - AOTutorial (~> 1.7)
   - JGProgressHUD (~> 1.3)
   - Parse
+  - TPKeyboardAvoiding (~> 1.3)
 
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
@@ -18,5 +20,6 @@ SPEC CHECKSUMS:
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
   JGProgressHUD: c89d1a8369a6253967a2c4194be06661033f83ed
   Parse: f51c24d2feb412e4b2d6cc73d37cb24e8d0089bc
+  TPKeyboardAvoiding: a5138f318c06fb3e151f886e18ce4a72695d9cbe
 
 COCOAPODS: 0.39.0

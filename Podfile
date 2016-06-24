@@ -2,6 +2,7 @@ use_frameworks!
 
 target 'Morphii' do
     pod 'AOTutorial', '~> 1.7'
+    pod 'TPKeyboardAvoiding', '~> 1.3'
 end
 
 link_with 'Morphii', 'Morphii Mobile Keyboard'

@@ -20,7 +20,7 @@ class HomeViewController: UIViewController, OverlayViewControllerDelegate {
         self.createFetchedResultsController()
         print("CURRENT_USER:",User.getCurrentUser()?.objectID)
 
-
+        
     }
     
     
@@ -28,6 +28,7 @@ class HomeViewController: UIViewController, OverlayViewControllerDelegate {
         let request = NSFetchRequest(entityName: Morphii.EntityName)
         let sort = NSSortDescriptor(key: "name", ascending: true)
         request.sortDescriptors = [sort]
+        request.predicate = NSPredicate(format: "isFavorite != %@", NSNumber(bool: true))
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CDHelper.sharedInstance.managedObjectContext, sectionNameKeyPath: MorphiiAPIKeys.groupName, cacheName: CacheNames.AllMorphiiFetchedResultsCollectionView)
         fetcher = FetchedDelegateDataSource(displayer: self, collectionView: collectionView, fetchedResultsController: fetchedResultsController)
 

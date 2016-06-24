@@ -32,9 +32,10 @@ class MorphiiAPI {
         Alamofire.request(.GET, morphiisUrl, headers: headers)
             .response { request, response, data, error in
                 //print("REQUEST:",request,"RESPONSE:",response,"DATA:",data,"ERROR:",error)
+                let morphiis = processJSON(data)
+
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-                    let morphiis = processJSON(data)
-                    dispatch_async(dispatch_get_main_queue(), { 
+                    dispatch_async(dispatch_get_main_queue(), {
                         completion(morphiisArray: morphiis)
 
                     })
@@ -56,6 +57,7 @@ class MorphiiAPI {
 
         return processMorphiiDataArray(records)
     }
+    
     
     private class func setLastDateToCurrentDate () {
         let dateFormatter = NSDateFormatter()
@@ -90,7 +92,7 @@ class MorphiiAPI {
 //                let _ = data.valueForKey(MorphiiAPIKeys.png)
             {
                 print("GOT_MORPHII:",groupName)
-                Morphii.createNewMorphii(record, emoodl: nil)
+                Morphii.createNewMorphii(record, emoodl: nil, isFavorite: false)
                 //morphiis.append(Morphii(morphiiRecord: record))
             }
         }

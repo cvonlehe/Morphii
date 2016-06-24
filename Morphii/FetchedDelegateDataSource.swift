@@ -87,7 +87,7 @@ extension FetchedDelegateDataSource:UICollectionViewDelegateFlowLayout {
         let header = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: CollectionReusableViewIds.HeaderCollectionReusableView, forIndexPath: indexPath) as! HeaderCollectionReusableView
         if let sections = fetchedResultsController?.sections {
             let currentSection = sections[indexPath.section]
-            header.titleLabel.text = currentSection.name.uppercaseString
+            header.titleLabel.text = currentSection.name
         }
         
         return header

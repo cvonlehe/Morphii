@@ -23,7 +23,7 @@ class Morphii: NSManagedObject {
     
     
     //
-    class func createNewMorphii (morphiiRecord:NSDictionary, emoodl:Double?) -> Morphii? {
+    class func createNewMorphii (morphiiRecord:NSDictionary, emoodl:Double?, isFavorite:Bool) -> Morphii? {
         
         let data = morphiiRecord.valueForKey(MorphiiAPIKeys.data) as! NSDictionary
         let metaData = data.valueForKey(MorphiiAPIKeys.metaData) as! NSDictionary
@@ -34,10 +34,16 @@ class Morphii: NSManagedObject {
         //let recKeywords = morphiiRecords[i].valueForKey("keywords") as! [ String ]
         let recSequence = morphiiRecord.valueForKey(MorphiiAPIKeys.sequence) as! Int
         let groupName = morphiiRecord.valueForKey(MorphiiAPIKeys.groupName) as! String
-        return setData(recId, name: recName, scaleType: scaleType, sequence: recSequence, groupName:groupName, metaData: metaData, emoodl: emoodl)
+        return setData(recId, name: recName, scaleType: scaleType, sequence: recSequence, groupName:groupName, metaData: metaData, emoodl: emoodl, isFavorite: isFavorite)
     }
     
-    private class func setData(id: String, name: String, scaleType: Int, /*category: String, keywords: [ String ],*/ sequence: Int, groupName:String, metaData: NSDictionary, emoodl:Double?) -> Morphii? {
+    class func createNewMorphii(id: String?, name: String?, scaleType: Int?, /*category: String, keywords: [ String ],*/ sequence: Int?, groupName:String?, metaData: NSDictionary?, emoodl:Double?, isFavorite:Bool) -> Morphii? {
+        guard let i = id, let n = name, let scale = scaleType, let seq = sequence, let group = groupName, let data = metaData, let em = emoodl else {return nil}
+        return setData(i, name: n, scaleType: scale, sequence: seq, groupName: group, metaData: data, emoodl: em, isFavorite: isFavorite)
+    }
+    
+    private class func setData(id: String, name: String, scaleType: Int, /*category: String, keywords: [ String ],*/ sequence: Int, groupName:String, metaData: NSDictionary, emoodl:Double?, isFavorite:Bool) -> Morphii? {
+        
         guard let morphii = NSEntityDescription.insertNewObjectForEntityForName(EntityNames.Morphii, inManagedObjectContext: CDHelper.sharedInstance.managedObjectContext) as? Morphii else {
             return nil
         }
@@ -49,6 +55,7 @@ class Morphii: NSManagedObject {
         morphii.groupName = groupName
         morphii.sequence = sequence
         morphii.metaData =  metaData
+        morphii.isFavorite = isFavorite
         morphii.emoodl = 50.0
         if let newEmoodl = emoodl {
             morphii.emoodl = newEmoodl
