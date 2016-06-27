@@ -59,6 +59,7 @@ class FavoritesViewController: UIViewController, OverlayViewControllerDelegate {
 extension FavoritesViewController:FetchedResultsDisplayer {
     
     func selectedMorphii (morphii:Morphii) {
+        print("MORPHII_TAGS:",morphii.tags)
         OverlayViewController.createOverlay(self, morphiiO: morphii)
     }
 }
