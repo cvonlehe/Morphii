@@ -297,7 +297,7 @@
                                                                                 <action selector="saveMorphiiButtonPressed:" destination="Aqg-M8-e7q" eventType="touchUpInside" id="1JB-Yy-HoY"/>
                                                                             </connections>
                                                                         </button>
-                                                                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T7E-zs-6v2">
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T7E-zs-6v2">
                                                                             <rect key="frame" x="132" y="0.0" width="40" height="40"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="T7E-zs-6v2" secondAttribute="height" multiplier="1:1" id="vVs-AK-KJu"/>
@@ -495,7 +495,7 @@
                                                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter name here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ILG-qX-9G7">
                                                                             <rect key="frame" x="88" y="0.0" width="208" height="44"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                            <textInputTraits key="textInputTraits"/>
+                                                                            <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                                         </textField>
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -538,10 +538,13 @@
                                                                                 </mask>
                                                                             </variation>
                                                                         </label>
-                                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter name here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tUT-U6-IJu">
+                                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter tags seperated by spaces" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tUT-U6-IJu">
                                                                             <rect key="frame" x="88" y="0.0" width="208" height="44"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                            <textInputTraits key="textInputTraits"/>
+                                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
+                                                                            <connections>
+                                                                                <outlet property="delegate" destination="Aqg-M8-e7q" id="Z9I-Xk-JmL"/>
+                                                                            </connections>
                                                                         </textField>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tag" translatesAutoresizingMaskIntoConstraints="NO" id="saW-Ea-3KH">
                                                                             <rect key="frame" x="29" y="13" width="19" height="17"/>

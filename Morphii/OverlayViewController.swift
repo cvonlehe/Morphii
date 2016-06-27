@@ -195,3 +195,30 @@ extension OverlayViewController {
         }
     }
 }
+
+extension OverlayViewController:UITextFieldDelegate {
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        if favoriteTagsTextField == textField && string == " " {
+            guard let wordsArray = favoriteTagsTextField.text?.componentsSeparatedByString(" ") else {return true}
+            var newWords:[String] = []
+            for var word in wordsArray {
+                if let character = word.characters.first where "\(character)" != "#" {
+                    word = "#\(word)"
+                }
+                newWords.append(word)
+            }
+            favoriteTagsTextField.text = newWords.joinWithSeparator(" ")
+            print("WORDS:",newWords)
+        }
+        return true
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField == favoriteTagsTextField {
+            textField.resignFirstResponder()
+        }else {
+            favoriteTagsTextField.becomeFirstResponder()
+        }
+        return true
+    }
+}
