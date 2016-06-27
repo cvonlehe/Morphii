@@ -82,6 +82,7 @@ class OverlayViewController: UIViewController {
             morphiiContainerLeadingConstraint.constant = morphiiContainerView.frame.size.width
             break
         case .MorphiiModifyView:
+            self.morphiiNameLabel.text = self.morphiiO!.name
             morphiiContainerLeadingConstraint.constant = 0
             break
         }

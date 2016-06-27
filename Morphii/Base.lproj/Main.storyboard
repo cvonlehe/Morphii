@@ -297,7 +297,7 @@
                                                                                 <action selector="saveMorphiiButtonPressed:" destination="Aqg-M8-e7q" eventType="touchUpInside" id="1JB-Yy-HoY"/>
                                                                             </connections>
                                                                         </button>
-                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T7E-zs-6v2">
+                                                                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T7E-zs-6v2">
                                                                             <rect key="frame" x="132" y="0.0" width="40" height="40"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="T7E-zs-6v2" secondAttribute="height" multiplier="1:1" id="vVs-AK-KJu"/>
@@ -408,7 +408,7 @@
                                                                                     <constraint firstItem="VuN-sf-vFp" firstAttribute="top" secondItem="b87-Hg-l6l" secondAttribute="top" id="ptb-cm-Yew"/>
                                                                                 </constraints>
                                                                             </view>
-                                                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FzQ-8v-i0C" customClass="MorphiiScrollView" customModule="Morphii" customModuleProvider="target">
+                                                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FzQ-8v-i0C" customClass="MorphiiScrollView" customModule="Morphii" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="25" width="304" height="91"/>
                                                                             </scrollView>
                                                                         </subviews>
@@ -433,8 +433,8 @@
                                                                 <outlet property="delegate" destination="Aqg-M8-e7q" id="je2-2W-0gC"/>
                                                             </connections>
                                                         </tableView>
-                                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9cL-lq-Ols">
-                                                            <rect key="frame" x="0.0" y="41" width="304" height="353"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9cL-lq-Ols">
+                                                            <rect key="frame" x="-304" y="41" width="304" height="353"/>
                                                             <subviews>
                                                                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IxY-qy-BJO">
                                                                     <rect key="frame" x="57" y="0.0" width="190" height="190"/>
@@ -489,7 +489,7 @@
                                                                                 <constraint firstAttribute="width" constant="42" id="cvN-oB-2xl"/>
                                                                             </constraints>
                                                                             <fontDescription key="fontDescription" name="SFCompactText-Regular" family="SF Compact Text" pointSize="14"/>
-                                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter name here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ILG-qX-9G7">
@@ -530,7 +530,7 @@
                                                                                 <constraint firstAttribute="width" constant="32" id="OqA-0W-e0J"/>
                                                                             </constraints>
                                                                             <fontDescription key="fontDescription" name="SFCompactText-Regular" family="SF Compact Text" pointSize="14"/>
-                                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                             <variation key="default">
                                                                                 <mask key="constraints">
