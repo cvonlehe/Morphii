@@ -27,12 +27,14 @@ class CollectionViewCellIDs {
 
 class TableViewCellIDs {
     static let CollectionTableViewCell = "CollectionTableViewCell"
+    static let MorphiiTableViewCell = "MorphiiTableViewCell"
 }
 
 class NSUserDefaultKeys {
     static let returningUser = "returningUser"
     static let shouldNotAddURLToMessages = "shouldNotAddURLToMessages"
     static let lastDate = "lastDate"
+    static let token = "token"
 }
 
 class URLs {

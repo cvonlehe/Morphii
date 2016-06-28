@@ -13,7 +13,7 @@ class Config: NSObject {
     private static var currentConfig:Config!
     
     var MORPHII_API_KEY = ""
-    var MORPHII_API_BASE_URL = ""
+    var MORPHII_API_BASE_URL = "https://api-dev.morphii.com"
     var MORPHII_API_ACCOUNT_ID = ""
     var MORPHII_API_USER_NAME = ""
     var MORPHII_API_PASSWORD = ""

@@ -10,10 +10,15 @@ import UIKit
 
 class SearchViewController: UIViewController {
 
+    @IBOutlet weak var searchLabel: UILabel!
+    @IBOutlet weak var magnifyingGlassImageView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        magnifyingGlassImageView.layer.cornerRadius = magnifyingGlassImageView.frame.size.width / 2
+        magnifyingGlassImageView.clipsToBounds = true
     }
 
     override func didReceiveMemoryWarning() {
