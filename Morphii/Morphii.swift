@@ -126,4 +126,83 @@ class Morphii: NSManagedObject {
         }
         return components
     }
+    
+    class func getMorphiisForSearchString (searchString:String?) -> [Morphii] {
+        var morphiis:[Morphii] = []
+        guard var string = searchString?.stringByReplacingOccurrencesOfString(" ", withString: "") else {return morphiis}
+        if string == "" {
+            return morphiis
+        }
+        string = string.stringByReplacingOccurrencesOfString("#", withString: "")
+        let request = NSFetchRequest(entityName: Morphii.EntityName)
+        let predicate = NSPredicate(format: "(name contains [cd] %@)", string)
+        request.predicate = predicate
+        let sort = NSSortDescriptor(key: "name", ascending: true)
+        request.sortDescriptors = [sort]
+        do {
+            guard let m = try CDHelper.sharedInstance.managedObjectContext.executeFetchRequest(request) as? [Morphii] else {return []}
+            morphiis.appendContentsOf(m)
+        }catch {
+            return []
+        }
+        return morphiis
+    }
+    
+    class func getTagsForSearchString (searchString:String?) -> [String] {
+        var tags:[String] = []
+        guard let string = searchString?.stringByReplacingOccurrencesOfString(" ", withString: "") else {return []}
+        if string == "" {
+            return []
+        }
+        let request = NSFetchRequest(entityName: Morphii.EntityName)
+        let sort = NSSortDescriptor(key: "name", ascending: true)
+        request.sortDescriptors = [sort]
+        do {
+            guard let morphiis =  try CDHelper.sharedInstance.managedObjectContext.executeFetchRequest(request) as? [Morphii] else {return []}
+            for morphii in morphiis {
+                if let tagArray = morphii.tags {
+                    let array = NSArray(array: tagArray)
+                    if let ts = array as? [String] {
+                        for tag in ts {
+                            if tag.lowercaseString.containsString(string.lowercaseString) && !tags.contains(tag.lowercaseString) {
+                                tags.append(tag.lowercaseString)
+                            }
+                        }
+                    }
+                }
+            }
+        }catch {
+            return []
+        }
+        return tags
+    }
+    
+    class func getCollectionsForSearchString (searchString:String?) -> [Morphii] {
+        var morphiis:[Morphii] = []
+        var groupNames:[String] = []
+        guard let string = searchString?.stringByReplacingOccurrencesOfString(" ", withString: "") else {return []}
+        if string == "" {
+            return []
+        }
+        let request = NSFetchRequest(entityName: Morphii.EntityName)
+        let predicate = NSPredicate(format: "(groupName contains [cd] %@)", string)
+        request.predicate = predicate
+        let sort = NSSortDescriptor(key: "groupName", ascending: true)
+        request.sortDescriptors = [sort]
+        do {
+            guard let m = try CDHelper.sharedInstance.managedObjectContext.executeFetchRequest(request) as? [Morphii] else {return []}
+            for morphii in m {
+                if let groupName = morphii.groupName {
+                    if !groupNames.contains(groupName) {
+                        morphiis.append(morphii)
+                        groupNames.append(groupName)
+                    }
+                }
+            }
+        }catch {
+            return []
+        }
+        return morphiis
+    }
+    
 }
