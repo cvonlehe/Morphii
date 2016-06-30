@@ -10,8 +10,10 @@ import UIKit
 import CoreData
 import Foundation
 
-protocol FetchedResultsDisplayer {
+@objc protocol FetchedResultsDisplayer {
     func selectedMorphii (morphii:Morphii)
+    func beganRearranging ()
+    optional func deletingMorphii (morphii:Morphii)
 }
 
 
@@ -44,6 +46,15 @@ class FetchedDelegateDataSource: NSObject{
             guard let selectedIndexPath = self.collectionView.indexPathForItemAtPoint(gesture.locationInView(self.collectionView)) else {
                 break
             }
+            for cell in collectionView.visibleCells() {
+                let imageView = UIImageView(frame: CGRect(x: 2, y: 2, width: 30, height: 30))
+                imageView.image = UIImage(named: "minus")
+                imageView.tag = 543
+                imageView.userInteractionEnabled = true
+                cell.addSubview(imageView)
+                imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(FetchedDelegateDataSource.minusImageViewTapped(_:))))
+            }
+            displayer.beganRearranging()
             collectionView.beginInteractiveMovementForItemAtIndexPath(selectedIndexPath)
         case UIGestureRecognizerState.Changed:
             collectionView.updateInteractiveMovementTargetPosition(gesture.locationInView(gesture.view!))
@@ -59,6 +70,12 @@ class FetchedDelegateDataSource: NSObject{
             try fetchedResultsController?.performFetch()
         }catch{
             
+        }
+    }
+    
+    func minusImageViewTapped (tap:UITapGestureRecognizer) {
+        if let morphii = (tap.view?.superview as? MorphiiCollectionViewCell)?.morphii {
+            displayer.deletingMorphii?(morphii)
         }
     }
 }
@@ -83,7 +100,7 @@ extension FetchedDelegateDataSource:UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, moveItemAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
-        
+        print("moveItemAtIndexPath")
     }
 }
 

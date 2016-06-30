@@ -70,6 +70,10 @@ extension HomeViewController:FetchedResultsDisplayer {
     func selectedMorphii (morphii:Morphii) {
         OverlayViewController.createOverlay(self, morphiiO: morphii)
     }
+    
+    func beganRearranging() {
+        
+    }
 }
 
 extension HomeViewController:OverlayViewControllerDelegate {

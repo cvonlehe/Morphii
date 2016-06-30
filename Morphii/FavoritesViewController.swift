@@ -11,6 +11,8 @@ import CoreData
 
 class FavoritesViewController: UIViewController {
 
+    @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     var fetchedResultsController:NSFetchedResultsController?
     var fetcher:FetchedDelegateDataSource!
@@ -47,7 +49,21 @@ class FavoritesViewController: UIViewController {
         }
     }
     
+    @IBAction func doneButtonPressed(sender: UIButton) {
+        for cell in collectionView.visibleCells() {
+            for subview in cell.subviews where subview.tag == 543 {
+                subview.removeFromSuperview()
+            }
+        }
+        collectionView.endInteractiveMovement()
+        searchButton.hidden = false
+        doneButton.hidden = true
+    }
     
+    @IBAction func searchButtonPressed(sender: UIButton) {
+        let nextView = self.storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.SearchViewController) as! SearchViewController
+        navigationController?.pushViewController(nextView, animated: true)
+    }
 
     /*
     // MARK: - Navigation
@@ -66,6 +82,22 @@ extension FavoritesViewController:FetchedResultsDisplayer {
     func selectedMorphii (morphii:Morphii) {
         print("MORPHII_TAGS:",morphii.tags)
         OverlayViewController.createOverlay(self, morphiiO: morphii)
+    }
+    
+    func beganRearranging () {
+        searchButton.hidden = true
+        doneButton.hidden = false
+    }
+    
+    func deletingMorphii(morphii: Morphii) {
+        let alertController = UIAlertController(title: "Delete Morphii?", message: "Are you sure you want to delete this morphii?", preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "No", style: .Default, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action) in
+            morphii.deleteMorphii({ (success) in
+                self.createFetchedResultsController()
+            })
+        }))
+        presentViewController(alertController, animated: true, completion: nil)
     }
 }
 

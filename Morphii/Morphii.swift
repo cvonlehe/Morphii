@@ -234,4 +234,9 @@ class Morphii: NSManagedObject {
         return morphiis
     }
     
+    func deleteMorphii (completion:((success:Bool)->Void)?) {
+        CDHelper.sharedInstance.managedObjectContext.deleteObject(self)
+        CDHelper.sharedInstance.saveContext(completion)
+    }
+    
 }
