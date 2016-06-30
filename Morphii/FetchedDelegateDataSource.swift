@@ -88,6 +88,7 @@ class FetchedDelegateDataSource: NSObject{
     
     func stopEditing () {
         for cell in collectionView.visibleCells() {
+            MethodHelper.stopWiggle(cell)
             for subview in cell.subviews where subview.tag == 543 {
                 subview.removeFromSuperview()
             }
