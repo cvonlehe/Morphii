@@ -234,19 +234,4 @@ class Morphii: NSManagedObject {
         return morphiis
     }
     
-    class func getFavoriteMorphiis () -> [Morphii] {
-        var morphiis:[Morphii] = []
-        let request = NSFetchRequest(entityName: Morphii.EntityName)
-        let sort = NSSortDescriptor(key: "name", ascending: true)
-        request.sortDescriptors = [sort]
-        request.predicate = NSPredicate(format: "isFavorite == %@", NSNumber(bool: true))
-        do {
-            guard let m = try CDHelper.sharedInstance.managedObjectContext.executeFetchRequest(request) as? [Morphii] else {return []}
-            morphiis.appendContentsOf(m)
-        }catch {
-            return []
-        }
-        return morphiis
-    }
-    
 }

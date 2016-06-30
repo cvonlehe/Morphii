@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class FavoritesViewController: UIViewController, OverlayViewControllerDelegate {
+class FavoritesViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     var fetchedResultsController:NSFetchedResultsController?
@@ -17,9 +17,14 @@ class FavoritesViewController: UIViewController, OverlayViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.createFetchedResultsController()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        print("VIEWWILLAPPEAR")
+        self.createFetchedResultsController()
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,7 +38,7 @@ class FavoritesViewController: UIViewController, OverlayViewControllerDelegate {
         request.sortDescriptors = [sort]
         request.predicate = NSPredicate(format: "isFavorite == %@", NSNumber(bool: true))
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CDHelper.sharedInstance.managedObjectContext, sectionNameKeyPath: MorphiiAPIKeys.groupName, cacheName: CacheNames.AllMorphiiFetchedResultsCollectionView)
-        fetcher = FetchedDelegateDataSource(displayer: self, collectionView: collectionView, fetchedResultsController: fetchedResultsController)
+        fetcher = FetchedDelegateDataSource(displayer: self, collectionView: collectionView, fetchedResultsController: fetchedResultsController, allowsReordering: true)
         
         do {
             try fetchedResultsController?.performFetch()
@@ -61,5 +66,14 @@ extension FavoritesViewController:FetchedResultsDisplayer {
     func selectedMorphii (morphii:Morphii) {
         print("MORPHII_TAGS:",morphii.tags)
         OverlayViewController.createOverlay(self, morphiiO: morphii)
+    }
+}
+
+extension FavoritesViewController:OverlayViewControllerDelegate {
+    func closedOutOfOverlay() {
+        dismissViewControllerAnimated(true) { 
+            self.createFetchedResultsController()
+
+        }
     }
 }

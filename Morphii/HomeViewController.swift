@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class HomeViewController: UIViewController, OverlayViewControllerDelegate {
+class HomeViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     var fetchedResultsController:NSFetchedResultsController?
     var fetcher:FetchedDelegateDataSource!
@@ -30,7 +30,7 @@ class HomeViewController: UIViewController, OverlayViewControllerDelegate {
         request.sortDescriptors = [sort]
         request.predicate = NSPredicate(format: "isFavorite != %@", NSNumber(bool: true))
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CDHelper.sharedInstance.managedObjectContext, sectionNameKeyPath: MorphiiAPIKeys.groupName, cacheName: CacheNames.AllMorphiiFetchedResultsCollectionView)
-        fetcher = FetchedDelegateDataSource(displayer: self, collectionView: collectionView, fetchedResultsController: fetchedResultsController)
+        fetcher = FetchedDelegateDataSource(displayer: self, collectionView: collectionView, fetchedResultsController: fetchedResultsController, allowsReordering: false)
 
         do {
             try fetchedResultsController?.performFetch()
@@ -69,5 +69,11 @@ extension HomeViewController:FetchedResultsDisplayer {
     
     func selectedMorphii (morphii:Morphii) {
         OverlayViewController.createOverlay(self, morphiiO: morphii)
+    }
+}
+
+extension HomeViewController:OverlayViewControllerDelegate {
+    func closedOutOfOverlay() {
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }

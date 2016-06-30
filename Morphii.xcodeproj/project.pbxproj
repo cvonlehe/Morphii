@@ -379,6 +379,37 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		431749D41D257634007FBB2D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4300E87A1D07739100930766 /* MorphiiCollectionViewCell.swift */,
+				431749D21D255B8D007FBB2D /* NoXFoundTableViewCell.swift */,
+				43F2A30C1D1C6B6900B9AA9C /* CollectionTableViewCell.swift */,
+				4398D94B1D23072100F4D37B /* MorphiiTableViewCell.swift */,
+				431749D01D245E1F007FBB2D /* TagsTableViewCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		431749D51D25764A007FBB2D /* Morphii Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				4300E8761D074F0000930766 /* MorphiiAPI.swift */,
+				431A75DC1D0896EE0079F9BD /* MorphiiView.swift */,
+			);
+			name = "Morphii Helpers";
+			sourceTree = "<group>";
+		};
+		431749D61D257656007FBB2D /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				43A9DFA41D107915001F3A1B /* HeaderCollectionReusableView.swift */,
+				43A9DFF61D10ACE4001F3A1B /* MorphiiSelectionView.swift */,
+				43F2A30F1D1C721100B9AA9C /* MorphiiScrollView.swift */,
+			);
+			name = "Custom Views";
+			sourceTree = "<group>";
+		};
 		438162431D00A25E00C5BB5B = {
 			isa = PBXGroup;
 			children = (
@@ -420,18 +451,11 @@
 				4398CBAC1D05BF7000074BC7 /* Initialization */,
 				4398CBAE1D05BF8100074BC7 /* View Controllers */,
 				4398CBAD1D05BF7A00074BC7 /* Core Data */,
-				4300E8761D074F0000930766 /* MorphiiAPI.swift */,
-				4300E87A1D07739100930766 /* MorphiiCollectionViewCell.swift */,
-				431749D21D255B8D007FBB2D /* NoXFoundTableViewCell.swift */,
-				43F2A30C1D1C6B6900B9AA9C /* CollectionTableViewCell.swift */,
-				4398D94B1D23072100F4D37B /* MorphiiTableViewCell.swift */,
-				431749D01D245E1F007FBB2D /* TagsTableViewCell.swift */,
-				431A75DC1D0896EE0079F9BD /* MorphiiView.swift */,
+				431749D51D25764A007FBB2D /* Morphii Helpers */,
+				431749D41D257634007FBB2D /* Cells */,
 				43A9A60E1D0A15D400AB90E4 /* Config.swift */,
-				43A9DFA41D107915001F3A1B /* HeaderCollectionReusableView.swift */,
+				431749D61D257656007FBB2D /* Custom Views */,
 				43A9DFF31D10888F001F3A1B /* FetchedDelegateDataSource.swift */,
-				43A9DFF61D10ACE4001F3A1B /* MorphiiSelectionView.swift */,
-				43F2A30F1D1C721100B9AA9C /* MorphiiScrollView.swift */,
 				43F2A3041D1C367F00B9AA9C /* CustomTabBarController.swift */,
 			);
 			path = Morphii;

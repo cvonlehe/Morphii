@@ -10,7 +10,7 @@ import UIKit
 import TPKeyboardAvoiding
 
 protocol OverlayViewControllerDelegate {
-    
+    func closedOutOfOverlay ()
 }
 
 class OverlayViewController: UIViewController {
@@ -30,6 +30,7 @@ class OverlayViewController: UIViewController {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var morphiiView: MorphiiView!
     var morphiiO:Morphii?
+    var delegateO:OverlayViewControllerDelegate?
     @IBOutlet weak var morphiiScrollView: MorphiiScrollView!
     @IBOutlet weak var morphiiNameLabel: UILabel!
     var collections = Morphii.getCollectionTitles()
@@ -45,7 +46,7 @@ class OverlayViewController: UIViewController {
         collectionNameContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(OverlayViewController.collectionNameContainerViewTapped(_:))))
         
         favoriteContainerView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(OverlayViewController.favoriteContainerViewSwiped(_:))))
-        tableView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(OverlayViewController.tableViewSwiped(_:))))
+        //tableView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(OverlayViewController.tableViewSwiped(_:))))
     }
     
 
@@ -62,13 +63,15 @@ class OverlayViewController: UIViewController {
         let nextView = viewController.storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.OverlayViewController) as! OverlayViewController
         viewController.presentViewController(nextView, animated: true, completion: nil)
         nextView.morphiiO = morphiiO
+        nextView.delegateO = viewController
         if let _ = nextView.morphiiO {
             nextView.setMorphii()
         }
     }
     
     @IBAction func closeButtonPressed(sender: UIButton) {
-        dismissViewControllerAnimated(true, completion: nil)
+        guard let delegate = delegateO else {return}
+        delegate.closedOutOfOverlay()
     }
     
     func setCenterView (containerView:ContainerView) {

@@ -20,14 +20,38 @@ class FetchedDelegateDataSource: NSObject{
     var displayer:FetchedResultsDisplayer!
     var collectionView:UICollectionView!
     var fetchedResultsController:NSFetchedResultsController?
+    var allowsReordering = false
     
-    init(displayer:FetchedResultsDisplayer, collectionView:UICollectionView, fetchedResultsController:NSFetchedResultsController?) {
+    init(displayer:FetchedResultsDisplayer, collectionView:UICollectionView, fetchedResultsController:NSFetchedResultsController?, allowsReordering:Bool) {
         super.init()
         self.displayer = displayer
         self.collectionView = collectionView
         self.fetchedResultsController = fetchedResultsController
         collectionView.delegate = self
         collectionView.dataSource = self
+        self.allowsReordering = allowsReordering
+        if allowsReordering {
+            let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(FetchedDelegateDataSource.handleLongGesture(_:)))
+            self.collectionView.addGestureRecognizer(longPressGesture)
+        }
+    }
+    
+    func handleLongGesture(gesture: UILongPressGestureRecognizer) {
+        
+        switch(gesture.state) {
+            
+        case UIGestureRecognizerState.Began:
+            guard let selectedIndexPath = self.collectionView.indexPathForItemAtPoint(gesture.locationInView(self.collectionView)) else {
+                break
+            }
+            collectionView.beginInteractiveMovementForItemAtIndexPath(selectedIndexPath)
+        case UIGestureRecognizerState.Changed:
+            collectionView.updateInteractiveMovementTargetPosition(gesture.locationInView(gesture.view!))
+        case UIGestureRecognizerState.Ended:
+            collectionView.endInteractiveMovement()
+        default:
+            collectionView.cancelInteractiveMovement()
+        }
     }
     
     func refreshFetchResults () {
@@ -56,6 +80,10 @@ extension FetchedDelegateDataSource:UICollectionViewDataSource {
             cell.populateCellForMorphii(morphii)
         }
         return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, moveItemAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+        
     }
 }
 

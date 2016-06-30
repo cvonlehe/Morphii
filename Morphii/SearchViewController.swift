@@ -115,7 +115,9 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource {
                 return CGFloat(height)
             }
         }else {
-            if collections.count == 0 {
+            if rowHeight == 0 {
+                return 0
+            }else if collections.count == 0 {
                 return 68
             }
             return CGFloat(rowHeight)
@@ -187,5 +189,7 @@ extension SearchViewController:TagsTableViewCellDelegate {
 }
 
 extension SearchViewController:OverlayViewControllerDelegate {
-    
+    func closedOutOfOverlay() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 }
