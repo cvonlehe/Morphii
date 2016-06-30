@@ -15,6 +15,7 @@
 		4300E87B1D07739100930766 /* MorphiiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4300E87A1D07739100930766 /* MorphiiCollectionViewCell.swift */; };
 		4300E87D1D0854C000930766 /* grey_morphii.png in Resources */ = {isa = PBXBuildFile; fileRef = 4300E87C1D0854C000930766 /* grey_morphii.png */; };
 		431749D11D245E20007FBB2D /* TagsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431749D01D245E1F007FBB2D /* TagsTableViewCell.swift */; };
+		431749D31D255B8D007FBB2D /* NoXFoundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431749D21D255B8D007FBB2D /* NoXFoundTableViewCell.swift */; };
 		431A75DB1D0870980079F9BD /* OverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431A75DA1D0870980079F9BD /* OverlayViewController.swift */; };
 		431A75DD1D0896EE0079F9BD /* MorphiiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431A75DC1D0896EE0079F9BD /* MorphiiView.swift */; };
 		435C8EEA1D1C89FB0036B292 /* Morphii+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435C8EE81D1C89FB0036B292 /* Morphii+CoreDataProperties.swift */; };
@@ -208,6 +209,7 @@
 		4300E87A1D07739100930766 /* MorphiiCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorphiiCollectionViewCell.swift; sourceTree = "<group>"; };
 		4300E87C1D0854C000930766 /* grey_morphii.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grey_morphii.png; sourceTree = "<group>"; };
 		431749D01D245E1F007FBB2D /* TagsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsTableViewCell.swift; sourceTree = "<group>"; };
+		431749D21D255B8D007FBB2D /* NoXFoundTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoXFoundTableViewCell.swift; sourceTree = "<group>"; };
 		431A75DA1D0870980079F9BD /* OverlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayViewController.swift; sourceTree = "<group>"; };
 		431A75DC1D0896EE0079F9BD /* MorphiiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorphiiView.swift; sourceTree = "<group>"; };
 		435C8EE81D1C89FB0036B292 /* Morphii+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Morphii+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 				4398CBAD1D05BF7A00074BC7 /* Core Data */,
 				4300E8761D074F0000930766 /* MorphiiAPI.swift */,
 				4300E87A1D07739100930766 /* MorphiiCollectionViewCell.swift */,
+				431749D21D255B8D007FBB2D /* NoXFoundTableViewCell.swift */,
 				43F2A30C1D1C6B6900B9AA9C /* CollectionTableViewCell.swift */,
 				4398D94B1D23072100F4D37B /* MorphiiTableViewCell.swift */,
 				431749D01D245E1F007FBB2D /* TagsTableViewCell.swift */,
@@ -934,6 +937,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				431749D31D255B8D007FBB2D /* NoXFoundTableViewCell.swift in Sources */,
 				4398CBB71D05F33F00074BC7 /* SettingsWebViewController.swift in Sources */,
 				43C4212F1D1DDBB300A282A0 /* FavoritesViewController.swift in Sources */,
 				4398CBB01D05BFE500074BC7 /* MethodHelper.swift in Sources */,

@@ -133,7 +133,6 @@ class Morphii: NSManagedObject {
         if string == "" {
             return morphiis
         }
-        string = string.stringByReplacingOccurrencesOfString("#", withString: "")
         let request = NSFetchRequest(entityName: Morphii.EntityName)
         let predicate = NSPredicate(format: "(name contains [cd] %@)", string)
         request.predicate = predicate
@@ -199,6 +198,51 @@ class Morphii: NSManagedObject {
                     }
                 }
             }
+        }catch {
+            return []
+        }
+        return morphiis
+    }
+    
+    class func getMorphiisForTag (searchString:String?) -> [Morphii] {
+        var morphiis:[Morphii] = []
+        guard var string = searchString?.stringByReplacingOccurrencesOfString(" ", withString: "") else {return morphiis}
+        if string == "" {
+            return morphiis
+        }
+        string = string.stringByReplacingOccurrencesOfString("#", withString: "")
+        let request = NSFetchRequest(entityName: Morphii.EntityName)
+        let sort = NSSortDescriptor(key: "name", ascending: true)
+        request.sortDescriptors = [sort]
+        do {
+            guard let m = try CDHelper.sharedInstance.managedObjectContext.executeFetchRequest(request) as? [Morphii] else {return []}
+            for morphii in m {
+                if let tagArray = morphii.tags {
+                    let array = NSArray(array: tagArray)
+                    if let ts = array as? [String] {
+                        for tag in ts {
+                            if tag.lowercaseString.containsString(string.lowercaseString) && !morphiis.contains(morphii) {
+                                morphiis.append(morphii)
+                            }
+                        }
+                    }
+                }
+            }
+        }catch {
+            return []
+        }
+        return morphiis
+    }
+    
+    class func getFavoriteMorphiis () -> [Morphii] {
+        var morphiis:[Morphii] = []
+        let request = NSFetchRequest(entityName: Morphii.EntityName)
+        let sort = NSSortDescriptor(key: "name", ascending: true)
+        request.sortDescriptors = [sort]
+        request.predicate = NSPredicate(format: "isFavorite == %@", NSNumber(bool: true))
+        do {
+            guard let m = try CDHelper.sharedInstance.managedObjectContext.executeFetchRequest(request) as? [Morphii] else {return []}
+            morphiis.appendContentsOf(m)
         }catch {
             return []
         }

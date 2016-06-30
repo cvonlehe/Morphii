@@ -29,6 +29,7 @@ class TableViewCellIDs {
     static let CollectionTableViewCell = "CollectionTableViewCell"
     static let MorphiiTableViewCell = "MorphiiTableViewCell"
     static let TagsTableViewCell = "TagsTableViewCell"
+    static let NoXFoundTableViewCell = "NoXFoundTableViewCell"
 }
 
 class NSUserDefaultKeys {
