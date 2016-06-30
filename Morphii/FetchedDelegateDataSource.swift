@@ -23,6 +23,8 @@ class FetchedDelegateDataSource: NSObject{
     var collectionView:UICollectionView!
     var fetchedResultsController:NSFetchedResultsController?
     var allowsReordering = false
+    var morphiiOrderDict:[Morphii:Int] = [:]
+    var longPressGesture:UILongPressGestureRecognizer!
     
     init(displayer:FetchedResultsDisplayer, collectionView:UICollectionView, fetchedResultsController:NSFetchedResultsController?, allowsReordering:Bool) {
         super.init()
@@ -33,7 +35,7 @@ class FetchedDelegateDataSource: NSObject{
         collectionView.dataSource = self
         self.allowsReordering = allowsReordering
         if allowsReordering {
-            let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(FetchedDelegateDataSource.handleLongGesture(_:)))
+            longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(FetchedDelegateDataSource.handleLongGesture(_:)))
             self.collectionView.addGestureRecognizer(longPressGesture)
         }
     }
@@ -43,12 +45,17 @@ class FetchedDelegateDataSource: NSObject{
         switch(gesture.state) {
             
         case UIGestureRecognizerState.Began:
+            gesture.minimumPressDuration = 0.05
             guard let selectedIndexPath = self.collectionView.indexPathForItemAtPoint(gesture.locationInView(self.collectionView)) else {
                 break
             }
             for cell in collectionView.visibleCells() {
-                let imageView = UIImageView(frame: CGRect(x: 2, y: 2, width: 30, height: 30))
-                imageView.image = UIImage(named: "minus")
+                MethodHelper.wiggle(cell)
+                let imageView = UIImageView(frame: CGRect(x: 2, y: 2, width: 25, height: 25))
+                imageView.image = UIImage(named: "smallx")
+                imageView.backgroundColor = UIColor ( red: 0.8297, green: 0.8297, blue: 0.8297, alpha: 1.0 )
+                imageView.layer.cornerRadius = imageView.frame.size.width / 2
+                imageView.clipsToBounds = true
                 imageView.tag = 543
                 imageView.userInteractionEnabled = true
                 cell.addSubview(imageView)
@@ -78,6 +85,16 @@ class FetchedDelegateDataSource: NSObject{
             displayer.deletingMorphii?(morphii)
         }
     }
+    
+    func stopEditing () {
+        for cell in collectionView.visibleCells() {
+            for subview in cell.subviews where subview.tag == 543 {
+                subview.removeFromSuperview()
+            }
+        }
+        longPressGesture.minimumPressDuration = 0.5
+        collectionView.endInteractiveMovement()
+    }
 }
 
 extension FetchedDelegateDataSource:UICollectionViewDataSource {
@@ -95,12 +112,21 @@ extension FetchedDelegateDataSource:UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CollectionViewCellIDs.MorphiiCollectionViewCell, forIndexPath: indexPath) as! MorphiiCollectionViewCell
         if let morphii = fetchedResultsController?.objectAtIndexPath(indexPath) as? Morphii {
             cell.populateCellForMorphii(morphii)
+            morphiiOrderDict[morphii] = indexPath.row + indexPath.section
+            morphii.order = NSNumber(integer: indexPath.row + indexPath.section)
+            CDHelper.sharedInstance.saveContext(nil)
         }
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, moveItemAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
-        print("moveItemAtIndexPath")
+        guard let cells = collectionView.visibleCells() as? [MorphiiCollectionViewCell] else {return}
+        for cell in cells {
+            if let morphii = cell.morphii, let indexPath = collectionView.indexPathForCell(cell) {
+                morphii.order = NSNumber(integer: indexPath.row + indexPath.section)
+            }
+        }
+        CDHelper.sharedInstance.saveContext(nil)
     }
 }
 

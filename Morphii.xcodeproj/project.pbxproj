@@ -16,6 +16,7 @@
 		4300E87D1D0854C000930766 /* grey_morphii.png in Resources */ = {isa = PBXBuildFile; fileRef = 4300E87C1D0854C000930766 /* grey_morphii.png */; };
 		431749D11D245E20007FBB2D /* TagsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431749D01D245E1F007FBB2D /* TagsTableViewCell.swift */; };
 		431749D31D255B8D007FBB2D /* NoXFoundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431749D21D255B8D007FBB2D /* NoXFoundTableViewCell.swift */; };
+		431749D81D25A323007FBB2D /* ModifiedMorphiiOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431749D71D25A323007FBB2D /* ModifiedMorphiiOverlayViewController.swift */; };
 		431A75DB1D0870980079F9BD /* OverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431A75DA1D0870980079F9BD /* OverlayViewController.swift */; };
 		431A75DD1D0896EE0079F9BD /* MorphiiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431A75DC1D0896EE0079F9BD /* MorphiiView.swift */; };
 		435C8EEA1D1C89FB0036B292 /* Morphii+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435C8EE81D1C89FB0036B292 /* Morphii+CoreDataProperties.swift */; };
@@ -210,6 +211,8 @@
 		4300E87C1D0854C000930766 /* grey_morphii.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grey_morphii.png; sourceTree = "<group>"; };
 		431749D01D245E1F007FBB2D /* TagsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsTableViewCell.swift; sourceTree = "<group>"; };
 		431749D21D255B8D007FBB2D /* NoXFoundTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoXFoundTableViewCell.swift; sourceTree = "<group>"; };
+		431749D71D25A323007FBB2D /* ModifiedMorphiiOverlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifiedMorphiiOverlayViewController.swift; sourceTree = "<group>"; };
+		431749DF1D25BF9E007FBB2D /* Morphii-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Morphii-Bridging-Header.h"; sourceTree = "<group>"; };
 		431A75DA1D0870980079F9BD /* OverlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayViewController.swift; sourceTree = "<group>"; };
 		431A75DC1D0896EE0079F9BD /* MorphiiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorphiiView.swift; sourceTree = "<group>"; };
 		435C8EE81D1C89FB0036B292 /* Morphii+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Morphii+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -238,7 +241,7 @@
 		4398CBC01D05FDB900074BC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4398D94B1D23072100F4D37B /* MorphiiTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorphiiTableViewCell.swift; sourceTree = "<group>"; };
 		43A9A60E1D0A15D400AB90E4 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		43A9A6371D0B17FF00AB90E4 /* CDHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDHelper.swift; path = Morphii/CDHelper.swift; sourceTree = "<group>"; };
+		43A9A6371D0B17FF00AB90E4 /* CDHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDHelper.swift; sourceTree = "<group>"; };
 		43A9A63A1D0B184300AB90E4 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		43A9A6441D0B1B2E00AB90E4 /* Morphii.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Morphii.entitlements; sourceTree = "<group>"; };
 		43A9A6451D0B1B3C00AB90E4 /* Morphii Mobile Keyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Morphii Mobile Keyboard.entitlements"; sourceTree = "<group>"; };
@@ -414,7 +417,6 @@
 			isa = PBXGroup;
 			children = (
 				438162831D00B29400C5BB5B /* README.md */,
-				43A9A6371D0B17FF00AB90E4 /* CDHelper.swift */,
 				43A9A6391D0B184300AB90E4 /* Model.xcdatamodeld */,
 				4381624E1D00A25E00C5BB5B /* Morphii */,
 				438162661D00A25F00C5BB5B /* MorphiiTests */,
@@ -441,6 +443,7 @@
 		4381624E1D00A25E00C5BB5B /* Morphii */ = {
 			isa = PBXGroup;
 			children = (
+				431749DF1D25BF9E007FBB2D /* Morphii-Bridging-Header.h */,
 				43A9E0001D11D288001F3A1B /* Fonts */,
 				43AB60671D0F308100D2D185 /* AOTutorialViewController.xib */,
 				43AB60611D0F2F9500D2D185 /* walkthrough-B.png */,
@@ -496,6 +499,7 @@
 		4398CBAD1D05BF7A00074BC7 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				43A9A6371D0B17FF00AB90E4 /* CDHelper.swift */,
 				435C8EE81D1C89FB0036B292 /* Morphii+CoreDataProperties.swift */,
 				435C8EE91D1C89FB0036B292 /* Morphii.swift */,
 				43F2A3061D1C5F7400B9AA9C /* User+CoreDataProperties.swift */,
@@ -514,6 +518,7 @@
 				431A75DA1D0870980079F9BD /* OverlayViewController.swift */,
 				43AB605F1D0F2DB900D2D185 /* TutorialViewController.swift */,
 				43C4212E1D1DDBB300A282A0 /* FavoritesViewController.swift */,
+				431749D71D25A323007FBB2D /* ModifiedMorphiiOverlayViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -984,6 +989,7 @@
 				435C8EEA1D1C89FB0036B292 /* Morphii+CoreDataProperties.swift in Sources */,
 				43F2A3101D1C721100B9AA9C /* MorphiiScrollView.swift in Sources */,
 				4300E87B1D07739100930766 /* MorphiiCollectionViewCell.swift in Sources */,
+				431749D81D25A323007FBB2D /* ModifiedMorphiiOverlayViewController.swift in Sources */,
 				435C8EEC1D1C89FB0036B292 /* Morphii.swift in Sources */,
 				4398CBB21D05C06B00074BC7 /* Constants.swift in Sources */,
 				431749D11D245E20007FBB2D /* TagsTableViewCell.swift in Sources */,
@@ -1113,6 +1119,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1152,6 +1159,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};

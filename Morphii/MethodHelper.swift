@@ -59,4 +59,22 @@ class MethodHelper {
         NSUserDefaults.standardUserDefaults().synchronize()
     }
     
+    class func wiggle (view:UIView) {
+        let animation = CAKeyframeAnimation(keyPath: "transform")
+        let randomNumber = arc4random_uniform(9) + 1
+        
+        let wobbleAngle = CGFloat(Double(randomNumber) / 100.0)
+        let valLeft = NSValue(CATransform3D: CATransform3DMakeRotation(wobbleAngle, 0, 0, 1.0))
+        let valRight = NSValue(CATransform3D: CATransform3DMakeRotation(-wobbleAngle, 0, 0, 1.0))
+        animation.values = [valLeft, valRight]
+        animation.autoreverses = true
+        animation.duration = 0.125
+        animation.repeatCount  = HUGE
+        view.layer.addAnimation(animation, forKey: "")
+    }
+    
+    class func stopWiggle (view:UIView) {
+        view.layer.removeAllAnimations()
+    }
+    
 }

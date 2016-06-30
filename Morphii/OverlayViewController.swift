@@ -131,7 +131,7 @@ extension OverlayViewController {
     @IBAction func addToFavoritesButtonPressed(sender: UIButton) {
         favoriteNameTextField.resignFirstResponder()
         favoriteTagsTextField.resignFirstResponder()
-        if let _ = Morphii.createNewMorphii(morphiiO?.id, name: favoriteNameTextField.text, scaleType: Int((morphiiO?.scaleType!)!), sequence: Int((morphiiO?.sequence)!), groupName: "Your Saved Morphiis", metaData: morphiiO?.metaData, emoodl: morphiiView?.emoodl, isFavorite: true, tags: Morphii.getTagsFromString(favoriteTagsTextField.text)) {
+        if let _ = Morphii.createNewMorphii(morphiiO?.id, name: favoriteNameTextField.text, scaleType: Int((morphiiO?.scaleType!)!), sequence: Int((morphiiO?.sequence)!), groupName: "Your Saved Morphiis", metaData: morphiiO?.metaData, emoodl: morphiiView?.emoodl, isFavorite: true, tags: Morphii.getTagsFromString(favoriteTagsTextField.text), order: 5000) {
             MethodHelper.showSuccessErrorHUD(true, message: "Saved to Favorites", inView: self.view)
         }else {
             MethodHelper.showAlert("Error", message: "There was an error saving this morphii. Please try again")

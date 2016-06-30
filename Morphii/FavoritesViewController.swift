@@ -36,7 +36,7 @@ class FavoritesViewController: UIViewController {
     
     func createFetchedResultsController () {
         let request = NSFetchRequest(entityName: Morphii.EntityName)
-        let sort = NSSortDescriptor(key: "name", ascending: true)
+        let sort = NSSortDescriptor(key: "order", ascending: true)
         request.sortDescriptors = [sort]
         request.predicate = NSPredicate(format: "isFavorite == %@", NSNumber(bool: true))
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CDHelper.sharedInstance.managedObjectContext, sectionNameKeyPath: MorphiiAPIKeys.groupName, cacheName: CacheNames.AllMorphiiFetchedResultsCollectionView)
@@ -50,12 +50,7 @@ class FavoritesViewController: UIViewController {
     }
     
     @IBAction func doneButtonPressed(sender: UIButton) {
-        for cell in collectionView.visibleCells() {
-            for subview in cell.subviews where subview.tag == 543 {
-                subview.removeFromSuperview()
-            }
-        }
-        collectionView.endInteractiveMovement()
+        fetcher.stopEditing()
         searchButton.hidden = false
         doneButton.hidden = true
     }
@@ -81,7 +76,7 @@ extension FavoritesViewController:FetchedResultsDisplayer {
     
     func selectedMorphii (morphii:Morphii) {
         print("MORPHII_TAGS:",morphii.tags)
-        OverlayViewController.createOverlay(self, morphiiO: morphii)
+        ModifiedMorphiiOverlayViewController.createModifiedMorphiiOverlay(self, morphiiO: morphii)
     }
     
     func beganRearranging () {
@@ -101,7 +96,7 @@ extension FavoritesViewController:FetchedResultsDisplayer {
     }
 }
 
-extension FavoritesViewController:OverlayViewControllerDelegate {
+extension FavoritesViewController:ModifiedMorphiiOverlayViewControllerDelegate {
     func closedOutOfOverlay() {
         dismissViewControllerAnimated(true) { 
             self.createFetchedResultsController()
@@ -109,3 +104,4 @@ extension FavoritesViewController:OverlayViewControllerDelegate {
         }
     }
 }
+
