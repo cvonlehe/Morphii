@@ -28,6 +28,13 @@ class FavoritesViewController: UIViewController {
         print("VIEWWILLAPPEAR")
         self.createFetchedResultsController()
     }
+   
+   override func viewWillDisappear(animated: Bool) {
+      super.viewWillDisappear(animated)
+      fetcher.stopEditing()
+      searchButton.hidden = false
+      doneButton.hidden = true
+   }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
