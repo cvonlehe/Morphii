@@ -133,6 +133,7 @@ extension OverlayViewController {
         favoriteTagsTextField.resignFirstResponder()
         if let _ = Morphii.createNewMorphii(morphiiO?.id, name: favoriteNameTextField.text, scaleType: Int((morphiiO?.scaleType!)!), sequence: Int((morphiiO?.sequence)!), groupName: "Your Saved Morphiis", metaData: morphiiO?.metaData, emoodl: morphiiView?.emoodl, isFavorite: true, tags: Morphii.getTagsFromString(favoriteTagsTextField.text), order: 5000) {
             MethodHelper.showSuccessErrorHUD(true, message: "Saved to Favorites", inView: self.view)
+            MorphiiAPI.sendFavoriteData(morphiiO, favoriteNameO: favoriteNameTextField.text)
         }else {
             MethodHelper.showAlert("Error", message: "There was an error saving this morphii. Please try again")
         }

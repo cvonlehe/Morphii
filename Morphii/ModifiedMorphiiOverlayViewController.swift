@@ -39,6 +39,11 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
         }
     }
     
+    @IBAction func closeButtonPressed(sender: UIButton) {
+        guard let delegate = delegateO else {return}
+        delegate.closedOutOfOverlay()
+    }
+    
     func setMorphii() {
 //        self.morphiiView.setUpMorphii(self.morphiiO!, emoodl: morphiiO!.emoodl?.doubleValue)
 //        self.morphiiNameLabel.text = self.morphiiO!.name

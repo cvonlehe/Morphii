@@ -18,6 +18,8 @@ class SearchViewController: UIViewController {
     var tags:[String] = []
     var collections:[Morphii] = []
     var rowHeight = 68
+    var headerHeight:Double = 0
+    var morphiiHeaderHeight:Double = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,7 +130,35 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource {
         if indexPath.section == 0 {
             let morphii = self.morphiis[indexPath.row]
             OverlayViewController.createOverlay(self, morphiiO: morphii)
+        }else if indexPath.section == 2, let cell = tableView.cellForRowAtIndexPath(indexPath) as? MorphiiTableViewCell, let name = cell.nameLabel.text, let nextView = storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.HomeViewController) as?  HomeViewController {
+            nextView.collectionO = name
+            navigationController?.pushViewController(nextView, animated: true)
         }
+    }
+    
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 1 {
+            return CGFloat(morphiiHeaderHeight)
+        }
+        return CGFloat(headerHeight)
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: CGFloat(5), y: CGFloat(0), width: tableView.frame.size.width, height: CGFloat(headerHeight)))
+        view.backgroundColor = UIColor ( red: 0.9059, green: 0.9059, blue: 0.9059, alpha: 1.0 )
+        let label = UILabel(frame: view.frame)
+        label.textColor = UIColor ( red: 0.5225, green: 0.5225, blue: 0.5225, alpha: 1.0 )
+        if section == 0 {
+            label.text = "Morphiis"
+        }else if section == 1 {
+            label.text = "Tags"
+        }else {
+            label.text = "Collections"
+        }
+        label.font = UIFont(name: "SFUIDisplay-Medium" , size: 17)
+        view.addSubview(label)
+        return view
     }
 }
 
@@ -150,13 +180,18 @@ extension SearchViewController:UISearchBarDelegate {
             magnifyingGlassImageView.hidden = false
             tableView.reloadData()
             searchBar.performSelector(#selector(UIResponder.resignFirstResponder), withObject: nil, afterDelay: 0)
+            headerHeight = 0
+            morphiiHeaderHeight = 0
             return
         }
+        morphiiHeaderHeight = 30.0
         if let first = searchText?.characters.first {
             if first == "#" {
                 rowHeight = 0
+                headerHeight = 0
                 morphiis = Morphii.getMorphiisForTag(searchText)
             }else {
+                headerHeight = 30.0
                 rowHeight = 68
                 morphiis = Morphii.getMorphiisForSearchString(searchText)
             }

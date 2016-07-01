@@ -97,10 +97,34 @@
                                             <action selector="searchButtonPressed:" destination="281-c4-Dzc" eventType="touchUpInside" id="dJl-rr-aVA"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Yh-CE-Qxe">
+                                        <rect key="frame" x="8" y="4" width="55" height="55"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="46" id="DEF-ye-idH"/>
+                                            <constraint firstAttribute="height" constant="55" id="O9G-wO-ofZ"/>
+                                            <constraint firstAttribute="height" constant="30" id="Xo9-jl-rlz"/>
+                                            <constraint firstAttribute="width" constant="55" id="ugn-8Z-M1z"/>
+                                        </constraints>
+                                        <inset key="contentEdgeInsets" minX="0.0" minY="32" maxX="32" maxY="0.0"/>
+                                        <state key="normal" image="back">
+                                            <color key="titleColor" red="0.1529411765" green="0.16862745100000001" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="Xo9-jl-rlz"/>
+                                                <exclude reference="DEF-ye-idH"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="backButtonPressed:" destination="281-c4-Dzc" eventType="touchUpInside" id="6as-U4-vfe"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="0Yh-CE-Qxe" firstAttribute="leading" secondItem="iZv-uf-0Iw" secondAttribute="leading" constant="8" id="QYX-tc-WtK"/>
                                     <constraint firstAttribute="bottom" secondItem="GSV-IJ-rR9" secondAttribute="bottom" constant="8" id="Rpl-Sl-3yL"/>
+                                    <constraint firstAttribute="bottom" secondItem="0Yh-CE-Qxe" secondAttribute="bottom" constant="8" id="VFz-Jq-x1E"/>
                                     <constraint firstAttribute="bottom" secondItem="dav-aM-gTz" secondAttribute="bottom" constant="8" id="eTq-hA-4Hk"/>
                                     <constraint firstAttribute="trailing" secondItem="dav-aM-gTz" secondAttribute="trailing" constant="8" id="fxM-O5-Eug"/>
                                     <constraint firstAttribute="height" constant="67" id="l3k-l4-5cE"/>
@@ -212,7 +236,9 @@
                     <navigationItem key="navigationItem" id="nZ5-fx-nAK"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="backButton" destination="0Yh-CE-Qxe" id="Ohr-Eu-E8a"/>
                         <outlet property="collectionView" destination="oqR-mf-Fcw" id="gGc-fx-hpN"/>
+                        <outlet property="searchButton" destination="dav-aM-gTz" id="vib-zC-pwi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jBy-Qy-Ozg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1153,6 +1179,9 @@
                                                     <state key="normal">
                                                         <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="closeButtonPressed:" destination="teh-Lt-pIM" eventType="touchUpInside" id="q8f-Zk-uyO"/>
+                                                    </connections>
                                                 </button>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFa-hs-nnT">
                                                     <rect key="frame" x="8" y="87" width="304" height="394"/>
@@ -1165,6 +1194,9 @@
                                                             </constraints>
                                                             <inset key="contentEdgeInsets" minX="16" minY="16" maxX="0.0" maxY="0.0"/>
                                                             <state key="normal" image="close_icon"/>
+                                                            <connections>
+                                                                <action selector="closeButtonPressed:" destination="teh-Lt-pIM" eventType="touchUpInside" id="WUT-k9-8pY"/>
+                                                            </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scale Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pa-JL-P32">
                                                             <rect key="frame" x="41" y="12" width="221" height="21"/>
@@ -2049,6 +2081,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="back" width="33" height="33"/>
         <image name="close_icon" width="33" height="33"/>
         <image name="disclosure_indicator" width="20" height="32"/>
         <image name="download" width="33" height="33"/>

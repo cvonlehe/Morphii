@@ -13,7 +13,10 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     var fetchedResultsController:NSFetchedResultsController?
     var fetcher:FetchedDelegateDataSource!
-
+    var collectionO:String?
+    @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -23,12 +26,25 @@ class HomeViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        print("VIEWWILLAPPEAR")
+        self.createFetchedResultsController()
+    }
+    
     
     func createFetchedResultsController () {
         let request = NSFetchRequest(entityName: Morphii.EntityName)
-        let sort = NSSortDescriptor(key: "name", ascending: true)
-        request.sortDescriptors = [sort]
-        request.predicate = NSPredicate(format: "isFavorite != %@", NSNumber(bool: true))
+        let sort1 = NSSortDescriptor(key: "groupName", ascending: true)
+        let sort2 = NSSortDescriptor(key: "name", ascending: true)
+        request.sortDescriptors = [sort1, sort2]
+        if let collection = collectionO {
+            searchButton.hidden = true
+            request.predicate = NSPredicate(format: "groupName == %@", collection)
+        }else {
+            backButton.hidden = true
+            request.predicate = NSPredicate(format: "isFavorite != %@", NSNumber(bool: true))
+        }
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CDHelper.sharedInstance.managedObjectContext, sectionNameKeyPath: MorphiiAPIKeys.groupName, cacheName: CacheNames.AllMorphiiFetchedResultsCollectionView)
         fetcher = FetchedDelegateDataSource(displayer: self, collectionView: collectionView, fetchedResultsController: fetchedResultsController, allowsReordering: false)
 
@@ -61,6 +77,9 @@ class HomeViewController: UIViewController {
         let nextView = self.storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.SearchViewController) as! SearchViewController
         navigationController?.pushViewController(nextView, animated: true)
         
+    }
+    @IBAction func backButtonPressed(sender: UIButton) {
+        navigationController?.popViewControllerAnimated(true)
     }
 
 }

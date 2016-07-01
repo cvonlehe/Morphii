@@ -13,6 +13,7 @@ class MorphiiAPI {
     static var lastDate = "2015-05-15"
     static let GETURL = "\(Config.getCurrentConfig().MORPHII_API_BASE_URL)/kbapp/v1/morphiis?lastDate=\(lastDate)"
     static let LOGINURL = "\(Config.getCurrentConfig().MORPHII_API_BASE_URL)/admin/v1/login"
+    static let FAVORITEURL = "\(Config.getCurrentConfig().MORPHII_API_BASE_URL)/kbapp/v1/favorites"
     
     class func fetchNewMorphiis(completion: (morphiisArray: [ Morphii ]) -> Void ) -> Void {
         if alreadyCheckedForMorphiisToday() {
@@ -109,7 +110,7 @@ class MorphiiAPI {
         case .LOGIN:
             return ["Content­-Type": "application/json"]
         case .FAVORITES:
-            return [:]
+            return ["Content­-Type": "application/json", "x-api-key": Config.getCurrentConfig().MORPHII_API_KEY, "Authorization":"Bearer\(getToken())"]
         }
     }
     
@@ -121,23 +122,6 @@ class MorphiiAPI {
     class func login () {
         let parameters = ["username":Config.getCurrentConfig().MORPHII_API_USER_NAME,
                           "password":Config.getCurrentConfig().MORPHII_API_PASSWORD]
-        print("HEADERS:",getHeader(.LOGIN),"PARAMETERS:",parameters)
-        //        Alamofire.request(.POST, LOGINURL)
-        //            .validate()
-        //            .response { request, response, data, error in
-        //                print("REQUEST:",request,"RESPONSE:",response,"DATA:",data,"ERROR:",error)
-        //                guard let d = data else {return}
-        //                var jsonDict:NSDictionary?
-        //                do {
-        //                    try jsonDict = NSJSONSerialization.JSONObjectWithData(d, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary
-        //                    setLastDateToCurrentDate()
-        //                }catch {
-        //                    print("Handle \(error) here")
-        //                }
-        //                guard let JSONDict = jsonDict else {return}
-        //                print("LOGIN_JSON",JSONDict)
-        //
-        //        }
         do {
             let jsonData = try NSJSONSerialization.dataWithJSONObject(parameters, options: NSJSONWritingOptions.PrettyPrinted)
             // here "jsonData" is the dictionary encoded in JSON data
@@ -160,6 +144,61 @@ class MorphiiAPI {
                     NSUserDefaults.standardUserDefaults().synchronize()
 
                 }
+            })
+        } catch let error as NSError {
+            print(error)
+        }
+    }
+    
+    class func sendFavoriteData (morphiiO:Morphii?, favoriteNameO:String?) {
+        guard let favoriteName = favoriteNameO, let morphii = morphiiO, let deviceId = UIDevice.currentDevice().identifierForVendor?.UUIDString, let morphiiId = morphii.id, let morphiiName = morphii.name, let intensity = morphii.emoodl?.doubleValue else {return}
+        
+        let accountId = Config.getCurrentConfig().MORPHII_API_ACCOUNT_ID
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "YYYY-­MM­-dd'T'HH:mm:ss.SSSZ"
+        let dateString = dateFormatter.stringFromDate(NSDate())
+        dateFormatter.dateFormat = "Z"
+        let timeZoneOffsetString = dateFormatter.stringFromDate(NSDate())
+        
+        let parameters = ["account":
+                            ["id":accountId],
+                          "device":
+                            ["id":deviceId],
+                          "timestamp":
+                            ["utc":dateString,
+                             "offset":timeZoneOffsetString],
+                          "morphii":
+                            ["id":morphiiId,
+                             "name":morphiiName,
+                             "intensity":intensity/100],
+                          "favorite":
+                            ["name":favoriteName]
+                          ]
+        print("PARAMETERS:",parameters)
+        print("FAVORITE - devicedId:",deviceId,"favoriteName:",favoriteName,"morphiiId:",morphiiId,"morphiiName:",morphiiName,"intensity:",intensity/100.0,"dateString:",dateString,"timeZoneOffset:",timeZoneOffsetString,"AccountId:",accountId)
+        
+        do {
+            let jsonData = try NSJSONSerialization.dataWithJSONObject(parameters, options: NSJSONWritingOptions.PrettyPrinted)
+            // here "jsonData" is the dictionary encoded in JSON data
+            let request = NSMutableURLRequest(URL: NSURL(string: FAVORITEURL)!)
+            request.HTTPBody = jsonData
+            request.HTTPMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue(Config.getCurrentConfig().MORPHII_API_KEY, forHTTPHeaderField: "x-api-key")
+            request.setValue("Bearer\(getToken())", forHTTPHeaderField: "Authorization")
+            print("APIKEY:",Config.getCurrentConfig().MORPHII_API_KEY,"TOKEN:","Bearer\(getToken())")
+
+            let queue:NSOperationQueue = NSOperationQueue()
+            NSURLConnection.sendAsynchronousRequest(request, queue: queue, completionHandler: { (response, data, error) in
+                guard let d = data else {return}
+                var jsonDict:NSDictionary?
+                do {
+                    try jsonDict = NSJSONSerialization.JSONObjectWithData(d, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary
+                    print("JSONDICT:",jsonDict)
+                }catch {
+                    print("Handle \(error) here")
+                }
+
             })
         } catch let error as NSError {
             print(error)

@@ -34,24 +34,26 @@ class FetchedDelegateDataSource: NSObject{
         collectionView.delegate = self
         collectionView.dataSource = self
         self.allowsReordering = allowsReordering
-        if allowsReordering {
-            longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(FetchedDelegateDataSource.handleLongGesture(_:)))
-            self.collectionView.addGestureRecognizer(longPressGesture)
-        }
+
     }
     
     func handleLongGesture(gesture: UILongPressGestureRecognizer) {
-        
+        print("handleLongGesture")
         switch(gesture.state) {
             
         case UIGestureRecognizerState.Began:
+            
             gesture.minimumPressDuration = 0.05
             guard let selectedIndexPath = self.collectionView.indexPathForItemAtPoint(gesture.locationInView(self.collectionView)) else {
                 break
             }
+            
             for cell in collectionView.visibleCells() {
+                for subview in cell.subviews where subview.tag == 543 {
+                    subview.removeFromSuperview()
+                }
                 MethodHelper.wiggle(cell)
-                let imageView = UIImageView(frame: CGRect(x: 2, y: 2, width: 25, height: 25))
+                let imageView = UIImageView(frame: CGRect(x: 2, y: 2, width: 35, height: 35))
                 imageView.image = UIImage(named: "smallx")
                 imageView.backgroundColor = UIColor ( red: 0.8297, green: 0.8297, blue: 0.8297, alpha: 1.0 )
                 imageView.layer.cornerRadius = imageView.frame.size.width / 2
@@ -81,6 +83,7 @@ class FetchedDelegateDataSource: NSObject{
     }
     
     func minusImageViewTapped (tap:UITapGestureRecognizer) {
+        print("minusImageViewTapped")
         if let morphii = (tap.view?.superview as? MorphiiCollectionViewCell)?.morphii {
             displayer.deletingMorphii?(morphii)
         }
@@ -94,7 +97,6 @@ class FetchedDelegateDataSource: NSObject{
             }
         }
         longPressGesture.minimumPressDuration = 0.5
-        collectionView.endInteractiveMovement()
     }
 }
 

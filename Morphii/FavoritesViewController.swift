@@ -27,6 +27,13 @@ class FavoritesViewController: UIViewController {
         super.viewWillAppear(animated)
         print("VIEWWILLAPPEAR")
         self.createFetchedResultsController()
+
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        fetcher.longPressGesture = UILongPressGestureRecognizer(target: fetcher, action: #selector(FetchedDelegateDataSource.handleLongGesture(_:)))
+        self.collectionView.addGestureRecognizer(fetcher.longPressGesture)
     }
    
    override func viewWillDisappear(animated: Bool) {
@@ -34,6 +41,7 @@ class FavoritesViewController: UIViewController {
       fetcher.stopEditing()
       searchButton.hidden = false
       doneButton.hidden = true
+
    }
 
     override func didReceiveMemoryWarning() {
@@ -48,7 +56,6 @@ class FavoritesViewController: UIViewController {
         request.predicate = NSPredicate(format: "isFavorite == %@", NSNumber(bool: true))
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CDHelper.sharedInstance.managedObjectContext, sectionNameKeyPath: MorphiiAPIKeys.groupName, cacheName: CacheNames.AllMorphiiFetchedResultsCollectionView)
         fetcher = FetchedDelegateDataSource(displayer: self, collectionView: collectionView, fetchedResultsController: fetchedResultsController, allowsReordering: true)
-        
         do {
             try fetchedResultsController?.performFetch()
         }catch {
@@ -92,6 +99,7 @@ extension FavoritesViewController:FetchedResultsDisplayer {
     }
     
     func deletingMorphii(morphii: Morphii) {
+        doneButtonPressed(UIButton())
         let alertController = UIAlertController(title: "Delete Morphii?", message: "Are you sure you want to delete this morphii?", preferredStyle: .Alert)
         alertController.addAction(UIAlertAction(title: "No", style: .Default, handler: nil))
         alertController.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action) in
