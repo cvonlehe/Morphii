@@ -16,14 +16,14 @@ class HomeViewController: UIViewController {
     var collectionO:String?
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
+    var foundMorphiis = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.createFetchedResultsController()
         print("CURRENT_USER:",User.getCurrentUser()?.objectID)
 
-        
+        performSelector(#selector(HomeViewController.createFetchedResultsController), withObject: nil, afterDelay: 3)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -57,15 +57,25 @@ class HomeViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if !MethodHelper.isReturningUser() {
-            TutorialViewController.presenTutorialViewController(self)
-        }else {
-            MorphiiAPI.fetchNewMorphiis { (morphiisArray) in
-                self.fetcher.refreshFetchResults()
-                self.collectionView.reloadData()
+        if !foundMorphiis {
+            if collectionO == nil {
+                MethodHelper.showHudWithMessage("Checking for updates...", view: view)
+            }
+            foundMorphiis = true
+        }
+        performSelector(#selector(HomeViewController.getMorphiis), withObject: nil, afterDelay: 2)
+    }
+    
+    func getMorphiis () {
+        print("getMorphiis")
+        MorphiiAPI.fetchNewMorphiis { (morphiisArray) in
+            MethodHelper.hideHUD()
+            self.fetcher.refreshFetchResults()
+            self.collectionView.reloadData()
+            if !MethodHelper.isReturningUser() {
+                TutorialViewController.presenTutorialViewController(self)
             }
         }
-        
     }
 
     override func didReceiveMemoryWarning() {

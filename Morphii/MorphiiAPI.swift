@@ -15,10 +15,10 @@ class MorphiiAPI {
     static let LOGINURL = "\(Config.getCurrentConfig().MORPHII_API_BASE_URL)/admin/v1/login"
     static let FAVORITEURL = "\(Config.getCurrentConfig().MORPHII_API_BASE_URL)/kbapp/v1/favorites"
     
-    class func fetchNewMorphiis(completion: (morphiisArray: [ Morphii ]) -> Void ) -> Void {
+    class func fetchNewMorphiis(completion: (morphiisArray: [ Morphii ], success:Bool) -> Void ) -> Void {
         if alreadyCheckedForMorphiisToday() {
             let morphiis = Morphii.fetchAllMorphiis()
-            completion(morphiisArray: morphiis)
+            completion(morphiisArray: morphiis, success: true)
             return
         }
         if let last = NSUserDefaults.standardUserDefaults().stringForKey(NSUserDefaultKeys.lastDate) {
@@ -35,7 +35,7 @@ class MorphiiAPI {
                 
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
                     dispatch_async(dispatch_get_main_queue(), {
-                        completion(morphiisArray: morphiis)
+                        completion(morphiisArray: morphiis, success: error == nil)
                         
                     })
                 })

@@ -19,7 +19,11 @@
             <string>SFCompactText-Regular</string>
             <string>SFCompactText-Regular</string>
         </mutableArray>
+        <mutableArray key="SFUIDisplay-Bold.ttf">
+            <string>SFUIDisplay-Bold</string>
+        </mutableArray>
         <mutableArray key="SFUIDisplay-Regular.ttf">
+            <string>SFUIDisplay-Regular</string>
             <string>SFUIDisplay-Regular</string>
         </mutableArray>
         <mutableArray key="SFUIDisplay-Semibold.ttf">
@@ -111,8 +115,8 @@
                                         </state>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="Xo9-jl-rlz"/>
                                                 <exclude reference="DEF-ye-idH"/>
+                                                <exclude reference="Xo9-jl-rlz"/>
                                             </mask>
                                         </variation>
                                         <connections>
@@ -1017,8 +1021,8 @@
                                         </state>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="gBJ-F9-86s"/>
                                                 <exclude reference="6O5-1p-OU5"/>
+                                                <exclude reference="gBJ-F9-86s"/>
                                             </mask>
                                         </variation>
                                         <connections>
@@ -1037,9 +1041,9 @@
                                     <constraint firstAttribute="trailing" secondItem="N8U-HX-WFr" secondAttribute="trailing" constant="8" id="yN0-3Y-flA"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nSh-Rv-lAc">
-                                <rect key="frame" x="2" y="67" width="316" height="455"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nSh-Rv-lAc">
+                                <rect key="frame" x="320" y="67" width="316" height="455"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="6rg-y4-1M8">
                                     <size key="itemSize" width="106" height="106"/>
                                     <size key="headerReferenceSize" width="50" height="24"/>
@@ -1128,6 +1132,35 @@
                                     <outlet property="delegate" destination="mJG-4E-ftL" id="zWD-Y0-o2E"/>
                                 </connections>
                             </collectionView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Vy-9O-4hs">
+                                <rect key="frame" x="58" y="219" width="205" height="170"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="morphii_sad" translatesAutoresizingMaskIntoConstraints="NO" id="HR6-Q9-KOP">
+                                        <rect key="frame" x="45" y="8" width="115" height="115"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="115" id="eGl-R1-5Gm"/>
+                                            <constraint firstAttribute="width" constant="115" id="pTD-j6-cec"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no favorites" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNy-aQ-IY1">
+                                        <rect key="frame" x="8" y="131" width="189" height="39"/>
+                                        <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="17"/>
+                                        <color key="textColor" red="0.72265625" green="0.72265625" blue="0.72265625" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="dNy-aQ-IY1" firstAttribute="leading" secondItem="9Vy-9O-4hs" secondAttribute="leading" constant="8" id="2Ob-z1-7R4"/>
+                                    <constraint firstAttribute="height" constant="170" id="M0H-hy-iKw"/>
+                                    <constraint firstAttribute="bottom" secondItem="dNy-aQ-IY1" secondAttribute="bottom" id="NwE-XY-THr"/>
+                                    <constraint firstItem="HR6-Q9-KOP" firstAttribute="centerX" secondItem="9Vy-9O-4hs" secondAttribute="centerX" id="QXX-kh-8s6"/>
+                                    <constraint firstAttribute="width" constant="205" id="S9H-mT-UZU"/>
+                                    <constraint firstAttribute="trailing" secondItem="dNy-aQ-IY1" secondAttribute="trailing" constant="8" id="b2l-d9-SmP"/>
+                                    <constraint firstItem="HR6-Q9-KOP" firstAttribute="top" secondItem="9Vy-9O-4hs" secondAttribute="top" constant="8" id="mRn-f5-ZTG"/>
+                                    <constraint firstItem="dNy-aQ-IY1" firstAttribute="top" secondItem="HR6-Q9-KOP" secondAttribute="bottom" constant="8" id="pfK-co-CrS"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1135,6 +1168,8 @@
                             <constraint firstItem="nSh-Rv-lAc" firstAttribute="top" secondItem="HFm-DL-eaU" secondAttribute="bottom" id="6QM-ec-OJt"/>
                             <constraint firstItem="nSh-Rv-lAc" firstAttribute="leading" secondItem="bak-7d-rNH" secondAttribute="leading" constant="2" id="Ahc-S7-UW9"/>
                             <constraint firstAttribute="trailing" secondItem="nSh-Rv-lAc" secondAttribute="trailing" constant="2" id="QSM-S5-3nj"/>
+                            <constraint firstItem="9Vy-9O-4hs" firstAttribute="centerY" secondItem="bak-7d-rNH" secondAttribute="centerY" constant="20" id="RAn-DG-0as"/>
+                            <constraint firstItem="9Vy-9O-4hs" firstAttribute="centerX" secondItem="bak-7d-rNH" secondAttribute="centerX" id="avp-8p-8RH"/>
                             <constraint firstAttribute="bottom" secondItem="nSh-Rv-lAc" secondAttribute="bottom" constant="46" id="ehN-LL-AvC"/>
                             <constraint firstItem="HFm-DL-eaU" firstAttribute="leading" secondItem="bak-7d-rNH" secondAttribute="leading" id="hoT-fy-A2V"/>
                             <constraint firstAttribute="trailing" secondItem="HFm-DL-eaU" secondAttribute="trailing" id="nOg-ZH-1Ec"/>
@@ -1145,6 +1180,7 @@
                     <connections>
                         <outlet property="collectionView" destination="nSh-Rv-lAc" id="flZ-Vh-HfA"/>
                         <outlet property="doneButton" destination="N8U-HX-WFr" id="lFk-Kd-RYT"/>
+                        <outlet property="noFavoritesContainerView" destination="9Vy-9O-4hs" id="a96-o2-4bU"/>
                         <outlet property="searchButton" destination="jAA-4d-Ef7" id="bON-xf-O5J"/>
                     </connections>
                 </viewController>
@@ -1209,9 +1245,21 @@
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Q0-Zb-ON1">
                                                             <rect key="frame" x="0.0" y="41" width="304" height="353"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIS IS THE MODIFIIED MORPHII OVERLAY. WORK FOR THIS VIEW IS SCHEDULED FOR JULY 5TH." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oB6-gE-1SD">
+                                                                    <rect key="frame" x="8" y="0.0" width="288" height="345"/>
+                                                                    <fontDescription key="fontDescription" name="SFUIDisplay-Bold" family="SF UI Display" pointSize="14"/>
+                                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
+                                                                <constraint firstItem="oB6-gE-1SD" firstAttribute="leading" secondItem="5Q0-Zb-ON1" secondAttribute="leading" constant="8" id="F4f-fy-JBH"/>
+                                                                <constraint firstAttribute="bottom" secondItem="oB6-gE-1SD" secondAttribute="bottom" constant="8" id="Nz1-zu-xn6"/>
                                                                 <constraint firstAttribute="width" constant="304" id="aWC-j8-BrY"/>
+                                                                <constraint firstItem="oB6-gE-1SD" firstAttribute="top" secondItem="5Q0-Zb-ON1" secondAttribute="top" id="lUU-gX-tcL"/>
+                                                                <constraint firstAttribute="trailing" secondItem="oB6-gE-1SD" secondAttribute="trailing" constant="8" id="qwR-yQ-fGs"/>
                                                             </constraints>
                                                             <variation key="default">
                                                                 <mask key="constraints">
@@ -2092,6 +2140,7 @@
         <image name="home_selected" width="22" height="18"/>
         <image name="magnifying_glass" width="33" height="33"/>
         <image name="morphii_logo_nav_bar" width="123" height="28"/>
+        <image name="morphii_sad" width="386" height="386"/>
         <image name="search" width="33" height="33"/>
         <image name="settings" width="18" height="18"/>
         <image name="settings_selected" width="18" height="18"/>

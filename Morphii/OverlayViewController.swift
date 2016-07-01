@@ -129,11 +129,21 @@ extension OverlayViewController {
     //FavoriteView
     
     @IBAction func addToFavoritesButtonPressed(sender: UIButton) {
+
+        guard let name = favoriteNameTextField.text?.stringByReplacingOccurrencesOfString( " ", withString: "") else {
+            MethodHelper.showAlert("Name Required", message: "A name is required. Please enter a name and try again")
+            return
+        }
+        if name == "" {
+            MethodHelper.showAlert("Name Required", message: "A name is required. Please enter a name and try again")
+            return
+        }
         favoriteNameTextField.resignFirstResponder()
         favoriteTagsTextField.resignFirstResponder()
         if let _ = Morphii.createNewMorphii(morphiiO?.id, name: favoriteNameTextField.text, scaleType: Int((morphiiO?.scaleType!)!), sequence: Int((morphiiO?.sequence)!), groupName: "Your Saved Morphiis", metaData: morphiiO?.metaData, emoodl: morphiiView?.emoodl, isFavorite: true, tags: Morphii.getTagsFromString(favoriteTagsTextField.text), order: 5000) {
             MethodHelper.showSuccessErrorHUD(true, message: "Saved to Favorites", inView: self.view)
             MorphiiAPI.sendFavoriteData(morphiiO, favoriteNameO: favoriteNameTextField.text)
+            setCenterView(.MorphiiModifyView)
         }else {
             MethodHelper.showAlert("Error", message: "There was an error saving this morphii. Please try again")
         }
@@ -174,7 +184,6 @@ extension OverlayViewController {
     }
     
     @IBAction func shareButtonPressed(sender: UIButton) {
-        
         morphiiView.shareMorphii(self)
     }
     

@@ -43,7 +43,7 @@ class FetchedDelegateDataSource: NSObject{
             
         case UIGestureRecognizerState.Began:
             
-            gesture.minimumPressDuration = 0.05
+            gesture.minimumPressDuration = 0.1
             guard let selectedIndexPath = self.collectionView.indexPathForItemAtPoint(gesture.locationInView(self.collectionView)) else {
                 break
             }
@@ -53,15 +53,15 @@ class FetchedDelegateDataSource: NSObject{
                     subview.removeFromSuperview()
                 }
                 MethodHelper.wiggle(cell)
-                let imageView = UIImageView(frame: CGRect(x: 2, y: 2, width: 35, height: 35))
-                imageView.image = UIImage(named: "smallx")
-                imageView.backgroundColor = UIColor ( red: 0.8297, green: 0.8297, blue: 0.8297, alpha: 1.0 )
-                imageView.layer.cornerRadius = imageView.frame.size.width / 2
-                imageView.clipsToBounds = true
-                imageView.tag = 543
-                imageView.userInteractionEnabled = true
-                cell.addSubview(imageView)
-                imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(FetchedDelegateDataSource.minusImageViewTapped(_:))))
+                let button = UIButton(frame: CGRect(x: 2, y: 2, width: 30, height: 30))
+                button.alpha = 0.85
+                button.setImage(UIImage(named: "smallx"), forState: .Normal)
+                button.backgroundColor = UIColor ( red: 0.8297, green: 0.8297, blue: 0.8297, alpha: 1.0 )
+                button.layer.cornerRadius = button.frame.size.width / 2
+                button.clipsToBounds = true
+                button.tag = 543
+                cell.addSubview(button)
+                button.addTarget(self, action: #selector(FetchedDelegateDataSource.minusImageViewTapped(_:)), forControlEvents: .TouchUpInside)
             }
             displayer.beganRearranging()
             collectionView.beginInteractiveMovementForItemAtIndexPath(selectedIndexPath)
@@ -82,9 +82,9 @@ class FetchedDelegateDataSource: NSObject{
         }
     }
     
-    func minusImageViewTapped (tap:UITapGestureRecognizer) {
+    func minusImageViewTapped (sender:UIButton) {
         print("minusImageViewTapped")
-        if let morphii = (tap.view?.superview as? MorphiiCollectionViewCell)?.morphii {
+        if let morphii = (sender.superview as? MorphiiCollectionViewCell)?.morphii {
             displayer.deletingMorphii?(morphii)
         }
     }

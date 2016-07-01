@@ -11,6 +11,7 @@ import CoreData
 
 class FavoritesViewController: UIViewController {
 
+    @IBOutlet weak var noFavoritesContainerView: UIView!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -32,8 +33,7 @@ class FavoritesViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        fetcher.longPressGesture = UILongPressGestureRecognizer(target: fetcher, action: #selector(FetchedDelegateDataSource.handleLongGesture(_:)))
-        self.collectionView.addGestureRecognizer(fetcher.longPressGesture)
+
     }
    
    override func viewWillDisappear(animated: Bool) {
@@ -56,8 +56,21 @@ class FavoritesViewController: UIViewController {
         request.predicate = NSPredicate(format: "isFavorite == %@", NSNumber(bool: true))
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CDHelper.sharedInstance.managedObjectContext, sectionNameKeyPath: MorphiiAPIKeys.groupName, cacheName: CacheNames.AllMorphiiFetchedResultsCollectionView)
         fetcher = FetchedDelegateDataSource(displayer: self, collectionView: collectionView, fetchedResultsController: fetchedResultsController, allowsReordering: true)
+        fetcher.longPressGesture = UILongPressGestureRecognizer(target: fetcher, action: #selector(FetchedDelegateDataSource.handleLongGesture(_:)))
+        self.collectionView.addGestureRecognizer(fetcher.longPressGesture)
         do {
             try fetchedResultsController?.performFetch()
+            if let objects = fetchedResultsController?.fetchedObjects {
+                if objects.count > 0 {
+                    noFavoritesContainerView.hidden = true
+
+                }else {
+                    noFavoritesContainerView.hidden = false
+
+                }
+            }else {
+                noFavoritesContainerView.hidden = false
+            }
         }catch {
             
         }
