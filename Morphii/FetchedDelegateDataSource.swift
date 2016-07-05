@@ -53,12 +53,16 @@ class FetchedDelegateDataSource: NSObject{
                     subview.removeFromSuperview()
                 }
                 MethodHelper.wiggle(cell)
-                let button = UIButton(frame: CGRect(x: 2, y: 2, width: 30, height: 30))
-                button.alpha = 0.85
-                button.setImage(UIImage(named: "smallx"), forState: .Normal)
-                button.backgroundColor = UIColor ( red: 0.8297, green: 0.8297, blue: 0.8297, alpha: 1.0 )
-                button.layer.cornerRadius = button.frame.size.width / 2
-                button.clipsToBounds = true
+                let xImageView = UIImageView(frame: CGRect(x: 2, y: 2, width: 30, height: 30))
+                xImageView.image = UIImage(named: "smallx")
+                xImageView.alpha = 0.85
+                xImageView.backgroundColor = UIColor ( red: 0.8297, green: 0.8297, blue: 0.8297, alpha: 1.0 )
+                xImageView.layer.cornerRadius = xImageView.frame.size.width / 2
+                xImageView.clipsToBounds = true
+                xImageView.tag = 543
+                cell.addSubview(xImageView)
+                
+                let button = UIButton(frame: CGRect(x: 2, y: 2, width: 50, height: 50))
                 button.tag = 543
                 cell.addSubview(button)
                 button.addTarget(self, action: #selector(FetchedDelegateDataSource.minusImageViewTapped(_:)), forControlEvents: .TouchUpInside)
