@@ -75,7 +75,8 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
         morphiiO?.emoodl = morphiiView.emoodl
         CDHelper.sharedInstance.saveContext { (success) in
             if success {
-                MethodHelper.showSuccessErrorHUD(true, message: "Saved to Favorites", inView: self.view)
+                MethodHelper.showSuccessErrorHUD(true, message: "Saved", inView: self.view)
+                MorphiiAPI.sendFavoriteData(self.morphiiO, favoriteNameO: self.favoriteNameTextField.text)
             }else {
                 MethodHelper.showAlert("Error", message: "There was an error saving your morphii. Please try again")
             }
@@ -89,7 +90,9 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
     @IBAction func doneButtonPressed(sender: UIButton) {
         setCenterView(.MorphiiModifyView)
         morhpiiNameLabel.text = favoriteNameTextField.text
-        favoriteMorphiiView.emoodl = (morphiiO?.emoodl?.doubleValue)!
+        morphiiView.emoodl = favoriteMorphiiView.emoodl
+        favoriteNameTextField.resignFirstResponder()
+        favoriteTagsTextField.resignFirstResponder()
     }
     
     @IBAction func editButtonPressed(sender: UIButton) {
@@ -128,4 +131,31 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
     }
     */
 
+}
+
+extension ModifiedMorphiiOverlayViewController:UITextFieldDelegate {
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        if favoriteTagsTextField == textField && string == " " {
+            guard let wordsArray = favoriteTagsTextField.text?.componentsSeparatedByString(" ") else {return true}
+            var newWords:[String] = []
+            for var word in wordsArray {
+                if let character = word.characters.first where "\(character)" != "#" {
+                    word = "#\(word)"
+                }
+                newWords.append(word)
+            }
+            favoriteTagsTextField.text = newWords.joinWithSeparator(" ")
+            print("WORDS:",newWords)
+        }
+        return true
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField == favoriteTagsTextField {
+            textField.resignFirstResponder()
+        }else {
+            favoriteTagsTextField.becomeFirstResponder()
+        }
+        return true
+    }
 }
