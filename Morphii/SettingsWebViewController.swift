@@ -29,8 +29,9 @@ class SettingsWebViewController: UIViewController, UIWebViewDelegate {
     
     struct URLs {
         static let ourBlog = "http://www.morphii.com/blog"
-        static let tosPP = "http://www.morphii.com/kbapp/tos"
+        static let privacyPolicy = "http://www.morphii.com/privacy-policy"
         static let feedback = "http://support.morphii.com"
+        static let termsAndConditions = "http://www.morphii.com/terms-conditions"
     }
     
     @IBAction func doneButtonPressed(sender: UIButton) {

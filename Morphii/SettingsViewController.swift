@@ -11,7 +11,8 @@ import UIKit
 class SettingsViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var tosPpContainerView: UIView!
+    @IBOutlet weak var privacyPolicyContainerView: UIView!
+    @IBOutlet weak var termsContainerView: UIView!
     @IBOutlet weak var ourBlogContainerView: UIView!
     @IBOutlet weak var feedbackContainerView: UIView!
     @IBOutlet weak var inviteFriendsContainerView: UIView!
@@ -29,7 +30,8 @@ class SettingsViewController: UIViewController {
     
     func addGestureRecognizers () {
         ourBlogContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(SettingsViewController.ourBlogContainerViewTapped(_:))))
-        tosPpContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(SettingsViewController.tosPpContainerViewTapped(_:))))
+        privacyPolicyContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(SettingsViewController.privacyPolicyContainerViewTapped(_:))))
+        termsContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(SettingsViewController.termsContainerViewTapped(_:))))
         feedbackContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(SettingsViewController.feedbackContainerViewTapped(_:))))
         inviteFriendsContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(SettingsViewController.inviteFriendsContainerViewTapped(_:))))
         rateThisAppContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(SettingsViewController.rateThisAppContainerViewTapped(_:))))
@@ -45,9 +47,15 @@ class SettingsViewController: UIViewController {
         presentViewController(nextView, animated: true, completion: nil)
     }
     
-    func tosPpContainerViewTapped (tap:UITapGestureRecognizer) {
+    func privacyPolicyContainerViewTapped (tap:UITapGestureRecognizer) {
         let nextView = self.storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.SettingsWebViewController) as! SettingsWebViewController
-        nextView.loadURL = SettingsWebViewController.URLs.tosPP
+        nextView.loadURL = SettingsWebViewController.URLs.privacyPolicy
+        presentViewController(nextView, animated: true, completion: nil)
+    }
+    
+    func termsContainerViewTapped (tap:UITapGestureRecognizer) {
+        let nextView = self.storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.SettingsWebViewController) as! SettingsWebViewController
+        nextView.loadURL = SettingsWebViewController.URLs.termsAndConditions
         presentViewController(nextView, animated: true, completion: nil)
     }
     
@@ -73,7 +81,7 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        scrollView.contentSize = CGSize(width: UIScreen.mainScreen().bounds.size.width, height: tosPpContainerView.frame.origin.y + tosPpContainerView.frame.size.height + 30)
+        scrollView.contentSize = CGSize(width: UIScreen.mainScreen().bounds.size.width, height: termsContainerView.frame.origin.y + termsContainerView.frame.size.height + 30)
         scrollView.scrollEnabled = true
     }
 
