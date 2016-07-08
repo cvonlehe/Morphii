@@ -16,6 +16,7 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
     var morphiiO:Morphii?
     var delegateO:ModifiedMorphiiOverlayViewControllerDelegate?
     @IBOutlet weak var morphiiContainerLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tagImageView: UIImageView!
 
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var morphiiContainerView: UIView!
@@ -32,6 +33,8 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
         containerView.layer.cornerRadius = 8
         containerView.clipsToBounds = true
         morphiiView.userInteractionEnabled = false
+        tagImageView.image = tagImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
+        tagImageView.tintColor = tagImageView.tintColor
     }
 
     override func didReceiveMemoryWarning() {
@@ -88,6 +91,18 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
     }
     
     @IBAction func doneButtonPressed(sender: UIButton) {
+        guard let name = favoriteNameTextField.text?.stringByReplacingOccurrencesOfString( " ", withString: "") else {
+            let alertController = UIAlertController(title: "Name Required", message: "A name is required. Please enter a name and try again", preferredStyle: .Alert)
+            alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+            presentViewController(alertController, animated: true, completion: nil)
+            return
+        }
+        if name == "" {
+            let alertController = UIAlertController(title: "Name Required", message: "A name is required. Please enter a name and try again", preferredStyle: .Alert)
+            alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+            presentViewController(alertController, animated: true, completion: nil)
+            return
+        }
         setCenterView(.MorphiiModifyView)
         morhpiiNameLabel.text = favoriteNameTextField.text
         morphiiView.emoodl = favoriteMorphiiView.emoodl

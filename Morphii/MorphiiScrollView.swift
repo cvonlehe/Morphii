@@ -24,11 +24,11 @@ class MorphiiScrollView: UIScrollView {
         }
         var x = CGFloat(0)
         for morphii in morphiis {
-            let rect = CGRect(x: x, y: 0, width: frame.size.height, height: frame.size.height)
+            let rect = CGRect(x: x, y: 0, width: 75.0, height: 75.0)
             addSubview(MorphiiSelectionView(frame: rect, morphii: morphii, delegate: delegate))
-            x += frame.size.height
+            x += 75.0
         }
-        contentSize = CGSize(width: x, height: frame.size.height)
+        contentSize = CGSize(width: x, height: 0)
         scrollEnabled = true
     }
 

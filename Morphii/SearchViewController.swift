@@ -27,6 +27,7 @@ class SearchViewController: UIViewController {
         // Do any additional setup after loading the view.
         magnifyingGlassImageView.layer.cornerRadius = magnifyingGlassImageView.frame.size.width / 2
         magnifyingGlassImageView.clipsToBounds = true
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 200, right: 0)
     }
 
     override func didReceiveMemoryWarning() {
@@ -129,7 +130,15 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 0 {
             let morphii = self.morphiis[indexPath.row]
-            OverlayViewController.createOverlay(self, morphiiO: morphii)
+            guard let isFavorite  = morphii.isFavorite?.boolValue else {
+                OverlayViewController.createOverlay(self, morphiiO: morphii)
+                return
+            }
+            if isFavorite {
+                ModifiedMorphiiOverlayViewController.createModifiedMorphiiOverlay(self, morphiiO: morphii)
+            }else {
+                OverlayViewController.createOverlay(self, morphiiO: morphii)
+            }
         }else if indexPath.section == 2, let cell = tableView.cellForRowAtIndexPath(indexPath) as? MorphiiTableViewCell, let name = cell.nameLabel.text, let nextView = storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.HomeViewController) as?  HomeViewController {
             nextView.collectionO = name
             navigationController?.pushViewController(nextView, animated: true)
@@ -223,7 +232,7 @@ extension SearchViewController:TagsTableViewCellDelegate {
     }
 }
 
-extension SearchViewController:OverlayViewControllerDelegate {
+extension SearchViewController:OverlayViewControllerDelegate, ModifiedMorphiiOverlayViewControllerDelegate {
     func closedOutOfOverlay() {
         dismissViewControllerAnimated(true, completion: nil)
     }

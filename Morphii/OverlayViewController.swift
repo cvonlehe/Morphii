@@ -131,11 +131,15 @@ extension OverlayViewController {
     @IBAction func addToFavoritesButtonPressed(sender: UIButton) {
 
         guard let name = favoriteNameTextField.text?.stringByReplacingOccurrencesOfString( " ", withString: "") else {
-            MethodHelper.showAlert("Name Required", message: "A name is required. Please enter a name and try again")
+            let alertController = UIAlertController(title: "Name Required", message: "A name is required. Please enter a name and try again", preferredStyle: .Alert)
+            alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+            presentViewController(alertController, animated: true, completion: nil)
             return
         }
         if name == "" {
-            MethodHelper.showAlert("Name Required", message: "A name is required. Please enter a name and try again")
+            let alertController = UIAlertController(title: "Name Required", message: "A name is required. Please enter a name and try again", preferredStyle: .Alert)
+            alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+            presentViewController(alertController, animated: true, completion: nil)
             return
         }
         favoriteNameTextField.resignFirstResponder()
@@ -188,6 +192,7 @@ extension OverlayViewController {
     }
     
     @IBAction func favoriteMorphiiButtonPressed(sender: UIButton) {
+        favoriteNameTextField.text = ""
         if let mView = favoriteMorphiiView {
             mView.setNewMorphii(morphiiView.morphii, emoodl: morphiiView.emoodl)
         }else {

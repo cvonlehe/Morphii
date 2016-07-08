@@ -28,7 +28,12 @@ class FavoritesViewController: UIViewController {
         super.viewWillAppear(animated)
         print("VIEWWILLAPPEAR")
         self.createFetchedResultsController()
-
+        if fetcher != nil && collectionView != nil {
+            if fetcher.longPressGesture != nil {
+                fetcher.longPressGesture.minimumPressDuration = 0.5
+                self.collectionView.addGestureRecognizer(fetcher.longPressGesture)
+            }
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -54,6 +59,11 @@ class FavoritesViewController: UIViewController {
         let sort = NSSortDescriptor(key: "order", ascending: true)
         request.sortDescriptors = [sort]
         request.predicate = NSPredicate(format: "isFavorite == %@", NSNumber(bool: true))
+        if fetcher != nil {
+            if fetcher.longPressGesture != nil {
+                collectionView.removeGestureRecognizer(fetcher.longPressGesture)
+            }
+        }
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CDHelper.sharedInstance.managedObjectContext, sectionNameKeyPath: MorphiiAPIKeys.groupName, cacheName: CacheNames.AllMorphiiFetchedResultsCollectionView)
         fetcher = FetchedDelegateDataSource(displayer: self, collectionView: collectionView, fetchedResultsController: fetchedResultsController, allowsReordering: true)
         fetcher.longPressGesture = UILongPressGestureRecognizer(target: fetcher, action: #selector(FetchedDelegateDataSource.handleLongGesture(_:)))
@@ -63,7 +73,8 @@ class FavoritesViewController: UIViewController {
             if let objects = fetchedResultsController?.fetchedObjects {
                 if objects.count > 0 {
                     noFavoritesContainerView.hidden = true
-
+                    fetcher.longPressGesture.minimumPressDuration = 0.5
+                    self.collectionView.addGestureRecognizer(fetcher.longPressGesture)
                 }else {
                     noFavoritesContainerView.hidden = false
 
@@ -103,7 +114,10 @@ extension FavoritesViewController:FetchedResultsDisplayer {
     
     func selectedMorphii (morphii:Morphii) {
         print("MORPHII_TAGS:",morphii.tags)
-        ModifiedMorphiiOverlayViewController.createModifiedMorphiiOverlay(self, morphiiO: morphii)
+        if fetcher.longPressGesture.minimumPressDuration > 0.3 {
+            ModifiedMorphiiOverlayViewController.createModifiedMorphiiOverlay(self, morphiiO: morphii)
+
+        }
     }
     
     func beganRearranging () {
