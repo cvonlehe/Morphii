@@ -62,7 +62,7 @@ class FetchedDelegateDataSource: NSObject{
                 xImageView.tag = 543
                 cell.addSubview(xImageView)
                 
-                let button = UIButton(frame: CGRect(x: 2, y: 2, width: 100, height: 100))
+                let button = UIButton(frame: CGRect(x: 2, y: 2, width: 200, height: 200))
                 button.tag = 543
                 cell.addSubview(button)
                 button.addTarget(self, action: #selector(FetchedDelegateDataSource.minusImageViewTapped(_:)), forControlEvents: .TouchUpInside)
