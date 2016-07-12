@@ -19,6 +19,7 @@ class ViewControllerIDs {
     static let TutorialContainerViewController = "TutorialContainerViewController"
     static let FavoritesViewController = "FavoritesViewController"
     static let ModifiedMorphiiOverlayViewController = "ModifiedMorphiiOverlayViewController"
+    static let TrendingViewcController = "TrendingViewcController"
 }
 
 class CollectionViewCellIDs {

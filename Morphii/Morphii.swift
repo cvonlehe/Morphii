@@ -116,6 +116,22 @@ class Morphii: NSManagedObject {
         return morphiis
     }
     
+    class func getMorphiisForIds (ids:[String]) -> [Morphii] {
+        var morphiis:[Morphii] = []
+        let request = NSFetchRequest(entityName: EntityNames.Morphii)
+        let predicate = NSPredicate(format: "id IN %@", ids)
+        request.predicate = predicate
+        do {
+            guard let m = try CDHelper.sharedInstance.managedObjectContext.executeFetchRequest(request) as? [Morphii] else {
+                return []
+            }
+            morphiis.appendContentsOf(m)
+        }catch {
+            return []
+        }
+        return morphiis
+    }
+    
     class func getTagsFromString (string:String?) -> [String] {
         guard let _ = string else {return []}
         let newString = string!.stringByReplacingOccurrencesOfString("#", withString: "")

@@ -270,10 +270,14 @@ class MorphiiView: UIView, MorphiiProtocol {
             
         }
         
-        let morphii = buildMorphii(self.morphii.metaData!)
-        //let morphii = buildMorphii(self.morphy!.morphEr!)
-        //let morphii = buildMorphii(self.morphy!.morphiiDict!)
-        renderMorphii(morphii)
+        if self.morphii != nil {
+            if let metaData = morphii.metaData {
+                let morphii = buildMorphii(metaData)
+                //let morphii = buildMorphii(self.morphy!.morphEr!)
+                //let morphii = buildMorphii(self.morphy!.morphiiDict!)
+                renderMorphii(morphii)
+            }
+        }
         
         
     }

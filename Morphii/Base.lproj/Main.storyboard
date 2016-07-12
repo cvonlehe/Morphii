@@ -1595,10 +1595,10 @@
             </objects>
             <point key="canvasLocation" x="647" y="-202"/>
         </scene>
-        <!--View Controller-->
+        <!--Trending Viewc Controller-->
         <scene sceneID="aP9-hh-fJh">
             <objects>
-                <viewController id="PqJ-5d-giQ" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TrendingViewcController" id="PqJ-5d-giQ" customClass="TrendingViewcController" customModule="Morphii" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eQx-YV-U15"/>
                         <viewControllerLayoutGuide type="bottom" id="lfs-gz-adc"/>
@@ -1647,7 +1647,7 @@
                                             <constraint firstAttribute="height" constant="30" id="vnr-JF-5V4"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17 New Morphiis!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CWL-XH-to8">
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17 New Morphiis!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CWL-XH-to8">
                                         <rect key="frame" x="8" y="38" width="304" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Mfe-gN-fWG"/>
@@ -1656,17 +1656,23 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3BY-yI-pWy">
-                                        <rect key="frame" x="8" y="66" width="304" height="49"/>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3BY-yI-pWy">
+                                        <rect key="frame" x="8" y="66" width="304" height="20"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="49" id="S4G-se-cie"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="10" id="S4G-se-cie"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="uVv-jt-yqh"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="S4G-se-cie"/>
+                                            </mask>
+                                        </variation>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UNR-R8-UbJ">
-                                        <rect key="frame" x="0.0" y="123" width="320" height="30"/>
+                                        <rect key="frame" x="0.0" y="94" width="320" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trending Morphiis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ea-eF-MhZ">
                                                 <rect key="frame" x="8" y="0.0" width="304" height="30"/>
@@ -1690,14 +1696,14 @@
                                         </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pAw-Bz-r09" customClass="MorphiiView" customModule="Morphii" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="153" width="80" height="80"/>
+                                        <rect key="frame" x="0.0" y="124" width="80" height="80"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="pAw-Bz-r09" secondAttribute="height" multiplier="1:1" id="qCn-b7-c6K"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iad-3A-2EP" customClass="MorphiiView" customModule="Morphii" customModuleProvider="target">
-                                        <rect key="frame" x="80" y="153" width="80" height="80"/>
+                                        <rect key="frame" x="80" y="124" width="80" height="80"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Iad-3A-2EP" secondAttribute="height" multiplier="1:1" id="BXl-Zu-HFn"/>
@@ -1709,7 +1715,7 @@
                                         </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VGc-PC-xm3" customClass="MorphiiView" customModule="Morphii" customModuleProvider="target">
-                                        <rect key="frame" x="160" y="153" width="80" height="80"/>
+                                        <rect key="frame" x="160" y="124" width="80" height="80"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="VGc-PC-xm3" secondAttribute="height" multiplier="1:1" id="yO9-Qb-sn9"/>
@@ -1721,7 +1727,7 @@
                                         </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y3c-xu-MpD" customClass="MorphiiView" customModule="Morphii" customModuleProvider="target">
-                                        <rect key="frame" x="240" y="153" width="80" height="80"/>
+                                        <rect key="frame" x="240" y="124" width="80" height="80"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Y3c-xu-MpD" secondAttribute="height" multiplier="1:1" id="La0-yT-dY5"/>
@@ -1733,7 +1739,7 @@
                                         </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="04a-yI-yaR" customClass="MorphiiView" customModule="Morphii" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="233" width="80" height="80"/>
+                                        <rect key="frame" x="0.0" y="204" width="80" height="80"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="04a-yI-yaR" secondAttribute="height" multiplier="1:1" id="TRL-Fi-r31"/>
@@ -1745,7 +1751,7 @@
                                         </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yQf-Cx-zrv" customClass="MorphiiView" customModule="Morphii" customModuleProvider="target">
-                                        <rect key="frame" x="80" y="233" width="80" height="80"/>
+                                        <rect key="frame" x="80" y="204" width="80" height="80"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="yQf-Cx-zrv" secondAttribute="height" multiplier="1:1" id="7HU-5X-bml"/>
@@ -1757,7 +1763,7 @@
                                         </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t6m-s6-ldq" customClass="MorphiiView" customModule="Morphii" customModuleProvider="target">
-                                        <rect key="frame" x="160" y="233" width="80" height="80"/>
+                                        <rect key="frame" x="160" y="204" width="80" height="80"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="t6m-s6-ldq" secondAttribute="height" multiplier="1:1" id="uAJ-hA-9OH"/>
@@ -1769,7 +1775,7 @@
                                         </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="080-ph-6m2" customClass="MorphiiView" customModule="Morphii" customModuleProvider="target">
-                                        <rect key="frame" x="240" y="233" width="80" height="80"/>
+                                        <rect key="frame" x="240" y="204" width="80" height="80"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="080-ph-6m2" secondAttribute="height" multiplier="1:1" id="hwi-Fe-nCI"/>
@@ -1781,7 +1787,7 @@
                                         </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fP5-px-4gJ">
-                                        <rect key="frame" x="0.0" y="300" width="320" height="30"/>
+                                        <rect key="frame" x="0.0" y="271" width="320" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trending Hastags" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O98-hD-2Au">
                                                 <rect key="frame" x="8" y="0.0" width="304" height="30"/>
@@ -1805,7 +1811,7 @@
                                         </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DlP-t9-L9S">
-                                        <rect key="frame" x="0.0" y="330" width="320" height="72"/>
+                                        <rect key="frame" x="0.0" y="301" width="320" height="72"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="72" id="dK9-Cb-dII"/>
@@ -1926,6 +1932,20 @@
                     </view>
                     <navigationItem key="navigationItem" id="ClO-eY-lR9"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="morphiiView1" destination="pAw-Bz-r09" id="Vm8-fj-9OG"/>
+                        <outlet property="morphiiView2" destination="Iad-3A-2EP" id="BgR-6j-5SF"/>
+                        <outlet property="morphiiView3" destination="VGc-PC-xm3" id="Fgx-fq-pEW"/>
+                        <outlet property="morphiiView4" destination="Y3c-xu-MpD" id="kw1-gH-hCZ"/>
+                        <outlet property="morphiiView5" destination="04a-yI-yaR" id="dtV-Mn-8IR"/>
+                        <outlet property="morphiiView6" destination="yQf-Cx-zrv" id="9Mn-aS-YW2"/>
+                        <outlet property="morphiiView7" destination="t6m-s6-ldq" id="flj-Vo-b1t"/>
+                        <outlet property="morphiiView8" destination="080-ph-6m2" id="wE5-rh-oCW"/>
+                        <outlet property="newsMessageLabel" destination="3BY-yI-pWy" id="t4U-i9-buV"/>
+                        <outlet property="newsTitleLabel" destination="CWL-XH-to8" id="UAI-YA-CsB"/>
+                        <outlet property="scrollView" destination="vm8-l3-91d" id="7vE-ae-XtX"/>
+                        <outlet property="trendingHastagContainerView" destination="DlP-t9-L9S" id="b9W-mx-gzv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Zi-Uz-S4f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
