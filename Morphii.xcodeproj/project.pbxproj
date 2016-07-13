@@ -143,6 +143,10 @@
 		43AB60681D0F308100D2D185 /* AOTutorialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43AB60671D0F308100D2D185 /* AOTutorialViewController.xib */; };
 		43C4212F1D1DDBB300A282A0 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C4212E1D1DDBB300A282A0 /* FavoritesViewController.swift */; };
 		43CB117C1D3582C900964C38 /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CB117B1D3582C900964C38 /* TrendingViewController.swift */; };
+		43CB117F1D36BFFB00964C38 /* TrendingData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CB117D1D36BFFB00964C38 /* TrendingData+CoreDataProperties.swift */; };
+		43CB11801D36BFFB00964C38 /* TrendingData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CB117D1D36BFFB00964C38 /* TrendingData+CoreDataProperties.swift */; };
+		43CB11811D36BFFB00964C38 /* TrendingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CB117E1D36BFFB00964C38 /* TrendingData.swift */; };
+		43CB11821D36BFFB00964C38 /* TrendingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CB117E1D36BFFB00964C38 /* TrendingData.swift */; };
 		43F2A3031D1C322000B9AA9C /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A9A60E1D0A15D400AB90E4 /* Config.swift */; };
 		43F2A3051D1C367F00B9AA9C /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F2A3041D1C367F00B9AA9C /* CustomTabBarController.swift */; };
 		43F2A3081D1C5F7400B9AA9C /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F2A3061D1C5F7400B9AA9C /* User+CoreDataProperties.swift */; };
@@ -298,6 +302,8 @@
 		43AB60671D0F308100D2D185 /* AOTutorialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AOTutorialViewController.xib; sourceTree = "<group>"; };
 		43C4212E1D1DDBB300A282A0 /* FavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		43CB117B1D3582C900964C38 /* TrendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingViewController.swift; sourceTree = "<group>"; };
+		43CB117D1D36BFFB00964C38 /* TrendingData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TrendingData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		43CB117E1D36BFFB00964C38 /* TrendingData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingData.swift; sourceTree = "<group>"; };
 		43F2A3041D1C367F00B9AA9C /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		43F2A3061D1C5F7400B9AA9C /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		43F2A3071D1C5F7400B9AA9C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -501,6 +507,8 @@
 		4398CBAD1D05BF7A00074BC7 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				43CB117D1D36BFFB00964C38 /* TrendingData+CoreDataProperties.swift */,
+				43CB117E1D36BFFB00964C38 /* TrendingData.swift */,
 				43A9A6371D0B17FF00AB90E4 /* CDHelper.swift */,
 				435C8EE81D1C89FB0036B292 /* Morphii+CoreDataProperties.swift */,
 				435C8EE91D1C89FB0036B292 /* Morphii.swift */,
@@ -980,6 +988,7 @@
 				438162841D00B29400C5BB5B /* README.md in Sources */,
 				4398D94C1D23072100F4D37B /* MorphiiTableViewCell.swift in Sources */,
 				4300E8771D074F0000930766 /* MorphiiAPI.swift in Sources */,
+				43CB117F1D36BFFB00964C38 /* TrendingData+CoreDataProperties.swift in Sources */,
 				431A75DD1D0896EE0079F9BD /* MorphiiView.swift in Sources */,
 				43F2A30D1D1C6B6900B9AA9C /* CollectionTableViewCell.swift in Sources */,
 				43AB60601D0F2DB900D2D185 /* TutorialViewController.swift in Sources */,
@@ -988,6 +997,7 @@
 				43A9DFA51D107915001F3A1B /* HeaderCollectionReusableView.swift in Sources */,
 				43CB117C1D3582C900964C38 /* TrendingViewController.swift in Sources */,
 				43A9A63B1D0B184300AB90E4 /* Model.xcdatamodeld in Sources */,
+				43CB11811D36BFFB00964C38 /* TrendingData.swift in Sources */,
 				43A9A6381D0B17FF00AB90E4 /* CDHelper.swift in Sources */,
 				43F2A3051D1C367F00B9AA9C /* CustomTabBarController.swift in Sources */,
 				435C8EEA1D1C89FB0036B292 /* Morphii+CoreDataProperties.swift in Sources */,
@@ -1024,8 +1034,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43CB11801D36BFFB00964C38 /* TrendingData+CoreDataProperties.swift in Sources */,
 				43F2A30B1D1C5F7400B9AA9C /* User.swift in Sources */,
 				43F2A3031D1C322000B9AA9C /* Config.swift in Sources */,
+				43CB11821D36BFFB00964C38 /* TrendingData.swift in Sources */,
 				43A9DFA61D107915001F3A1B /* HeaderCollectionReusableView.swift in Sources */,
 				43F2A30E1D1C6B6900B9AA9C /* CollectionTableViewCell.swift in Sources */,
 				435C8EEB1D1C89FB0036B292 /* Morphii+CoreDataProperties.swift in Sources */,

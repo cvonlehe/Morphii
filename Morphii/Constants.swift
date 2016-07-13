@@ -70,6 +70,7 @@ class PFConfigValues {
 class EntityNames {
     static let Morphii = "Morphii"
     static let User =  "User"
+    static let TrendingData = "TrendingData"
 }
 
 class CacheNames {

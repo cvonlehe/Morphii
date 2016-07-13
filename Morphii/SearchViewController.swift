@@ -20,14 +20,26 @@ class SearchViewController: UIViewController {
     var rowHeight = 68
     var headerHeight:Double = 0
     var morphiiHeaderHeight:Double = 0
+    var hashtag:String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if let _ = hashtag {
+            searchLabel.hidden = true
+            magnifyingGlassImageView.hidden = true
+        }
         // Do any additional setup after loading the view.
         magnifyingGlassImageView.layer.cornerRadius = magnifyingGlassImageView.frame.size.width / 2
         magnifyingGlassImageView.clipsToBounds = true
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 200, right: 0)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if let hash = hashtag {
+            searchBar.text = hash
+            searchForSearchBarText(hash)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -154,6 +166,9 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if rowHeight == 0 {
+            return UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        }
         let view = UIView(frame: CGRect(x: CGFloat(5), y: CGFloat(0), width: tableView.frame.size.width, height: CGFloat(headerHeight)))
         view.backgroundColor = UIColor ( red: 0.9059, green: 0.9059, blue: 0.9059, alpha: 1.0 )
         let label = UILabel(frame: view.frame)

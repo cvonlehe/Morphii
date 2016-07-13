@@ -213,43 +213,23 @@ class MorphiiAPI {
         case FAVORITES
     }
     
-    class func getTrendingData (completion:(newsMessage:String?, newsURL:String?, morphiis:[Morphii]?, hashtags:[String]?, links:String?)->Void) {
+    class func getTrendingData (completion:(dictO:NSDictionary?)->Void) {
         let request = NSMutableURLRequest(URL: NSURL(string: TRENDINGURL)!)
         request.HTTPMethod = "GET"
         request.setValue(Config.getCurrentConfig().MORPHII_API_KEY, forHTTPHeaderField: "x-api-key")
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue()) { (responseO, dataO, errorO) in
             guard let data = dataO else {
-                completion(newsMessage: nil, newsURL: nil, morphiis: nil, hashtags: nil, links: nil)
+                completion(dictO: nil)
                 return
             }
             var jsonDict:NSDictionary?
             do {
                 try jsonDict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary
-                print("JSONDICT:",jsonDict)
-                var newsMessage:String?, newsURL:String?, morphiis:[Morphii]?, hashtags:[String]?, links:String?
                 
-                if let news = jsonDict?.objectForKey("news") as? NSDictionary {
-                    newsMessage = news.objectForKey("message") as? String
-                    newsURL = news.objectForKey("url") as? String
+                if let json = jsonDict {
+                    TrendingData.saveTrendingData(json)
                 }
-                if let morphiiArray = jsonDict?.objectForKey("morphiis") as? [NSDictionary] {
-                    var ids:[String] = []
-                    for morphiiDict in morphiiArray {
-                        if let id = morphiiDict.objectForKey("id") as? String {
-                            ids.append(id)
-                        }
-                    }
-//                    morphiis = Morphii.getMorphiisForIds(ids)
-                    morphiis = Morphii.getMorphiisForIds(["6132631194195460096", "6132631203339042816"])
-
-                }
-                hashtags = jsonDict?.objectForKey("hashtags") as? [String]
-                if let link = jsonDict?.objectForKey("links") as? NSDictionary {
-                    if let selfs = link.objectForKey("self") as? NSDictionary {
-                        links = selfs.objectForKey("href") as? String
-                    }
-                }
-                completion(newsMessage: newsMessage, newsURL: newsURL, morphiis: morphiis, hashtags: hashtags, links: links)
+                completion(dictO: nil)
             }catch {
                 print("Handle \(error) here")
             }
