@@ -213,7 +213,12 @@ extension SearchViewController:UISearchBarDelegate {
             if first == "#" {
                 rowHeight = 0
                 headerHeight = 0
-                morphiis = Morphii.getMorphiisForTag(searchText)
+                if let _ = hashtag {
+                    hashtag = nil
+                    morphiis = Morphii.getMorphiisForTagMatchingString(searchText)
+                }else {
+                    morphiis = Morphii.getMorphiisForTagContainingString(searchText)
+                }
             }else {
                 headerHeight = 30.0
                 rowHeight = 68

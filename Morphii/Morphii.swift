@@ -221,7 +221,7 @@ class Morphii: NSManagedObject {
         return morphiis
     }
     
-    class func getMorphiisForTag (searchString:String?) -> [Morphii] {
+    class func getMorphiisForTagContainingString (searchString:String?) -> [Morphii] {
         var morphiis:[Morphii] = []
         guard var string = searchString?.stringByReplacingOccurrencesOfString(" ", withString: "") else {return morphiis}
         if string == "" {
@@ -239,6 +239,36 @@ class Morphii: NSManagedObject {
                     if let ts = array as? [String] {
                         for tag in ts {
                             if tag.lowercaseString.containsString(string.lowercaseString) && !morphiis.contains(morphii) {
+                                morphiis.append(morphii)
+                            }
+                        }
+                    }
+                }
+            }
+        }catch {
+            return []
+        }
+        return morphiis
+    }
+    
+    class func getMorphiisForTagMatchingString (searchString:String?) -> [Morphii] {
+        var morphiis:[Morphii] = []
+        guard var string = searchString?.stringByReplacingOccurrencesOfString(" ", withString: "") else {return morphiis}
+        if string == "" {
+            return morphiis
+        }
+        string = string.stringByReplacingOccurrencesOfString("#", withString: "")
+        let request = NSFetchRequest(entityName: Morphii.EntityName)
+        let sort = NSSortDescriptor(key: "name", ascending: true)
+        request.sortDescriptors = [sort]
+        do {
+            guard let m = try CDHelper.sharedInstance.managedObjectContext.executeFetchRequest(request) as? [Morphii] else {return []}
+            for morphii in m {
+                if let tagArray = morphii.tags {
+                    let array = NSArray(array: tagArray)
+                    if let ts = array as? [String] {
+                        for tag in ts {
+                            if tag.lowercaseString == string.lowercaseString && !morphiis.contains(morphii) {
                                 morphiis.append(morphii)
                             }
                         }

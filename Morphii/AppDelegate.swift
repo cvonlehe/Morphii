@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         displayMainView()
         MorphiiAPI.login()
         Config.getCurrentConfig()
+        
 
         return true
     }
@@ -68,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
         let centerView = mainStoryboard.instantiateViewControllerWithIdentifier(ViewControllerIDs.TabBarController) as! UITabBarController
-        
+        centerView.delegate = self
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
@@ -77,5 +78,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appDelegate.window?.makeKeyAndVisible()
     }
 
+}
+
+extension AppDelegate:UITabBarControllerDelegate {
+    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+        guard let currentController = tabBarController.selectedViewController as? UINavigationController else {return true}
+        currentController.popToRootViewControllerAnimated(false)
+        return true
+    }
 }
 

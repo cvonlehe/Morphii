@@ -48,7 +48,7 @@ class TrendingViewcController: UIViewController {
         self.newsMessageLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TrendingViewcController.newsTapped(_:))))
         self.newsTitleLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TrendingViewcController.newsTapped(_:))))
         // Do any additional setup after loading the view.
-        MethodHelper.showHudWithMessage("Loading...", view: view)
+        //MethodHelper.showHudWithMessage("Loading...", view: view)
         for subview in trendingHastagContainerView.subviews {
             subview.hidden = true
         }
