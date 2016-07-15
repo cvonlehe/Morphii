@@ -228,6 +228,10 @@ extension OverlayViewController:UITextFieldDelegate {
             }
             favoriteTagsTextField.text = newWords.joinWithSeparator(" ")
             print("WORDS:",newWords)
+        }else if textField == favoriteTagsTextField {
+            let characterSet = NSCharacterSet(charactersInString: acceptableCharacters)
+            let filtered = string.componentsSeparatedByCharactersInSet(characterSet).joinWithSeparator("")
+            return string == filtered
         }
         return true
     }

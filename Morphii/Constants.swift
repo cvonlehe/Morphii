@@ -80,3 +80,5 @@ class CacheNames {
 class CollectionReusableViewIds {
     static let HeaderCollectionReusableView = "HeaderCollectionReusableView"
 }
+
+let acceptableCharacters = " #0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"

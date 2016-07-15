@@ -883,17 +883,27 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RpK-1V-H0m">
-                                                    <rect key="frame" x="68" y="8" width="244" height="51"/>
+                                                    <rect key="frame" x="68" y="8" width="206" height="51"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="0uW-rR-Ubd">
+                                                    <rect key="frame" x="282" y="19" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="6A4-vp-ghB"/>
+                                                        <constraint firstAttribute="height" constant="30" id="ecc-Y6-9dn"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="0uW-rR-Ubd" firstAttribute="leading" secondItem="RpK-1V-H0m" secondAttribute="trailing" constant="8" id="1je-Mk-Ozq"/>
+                                                <constraint firstAttribute="trailing" secondItem="0uW-rR-Ubd" secondAttribute="trailing" constant="8" id="1xq-cl-eRA"/>
                                                 <constraint firstItem="moS-XS-ud9" firstAttribute="top" secondItem="yDT-r7-0rY" secondAttribute="top" constant="8" id="2g1-Tr-9oR"/>
                                                 <constraint firstItem="moS-XS-ud9" firstAttribute="leading" secondItem="yDT-r7-0rY" secondAttribute="leading" constant="8" id="4qB-d0-dae"/>
                                                 <constraint firstItem="9cW-mw-zA8" firstAttribute="leading" secondItem="yDT-r7-0rY" secondAttribute="leading" constant="72" id="72d-FI-ML9"/>
-                                                <constraint firstAttribute="trailing" secondItem="RpK-1V-H0m" secondAttribute="trailing" constant="8" id="8A2-iU-ADV"/>
+                                                <constraint firstAttribute="trailing" secondItem="RpK-1V-H0m" secondAttribute="trailing" constant="46" id="8A2-iU-ADV"/>
+                                                <constraint firstItem="0uW-rR-Ubd" firstAttribute="centerY" secondItem="yDT-r7-0rY" secondAttribute="centerY" id="NEm-Jl-2Tc"/>
                                                 <constraint firstItem="RpK-1V-H0m" firstAttribute="leading" secondItem="moS-XS-ud9" secondAttribute="trailing" constant="8" id="RE5-Cc-gHD"/>
                                                 <constraint firstItem="9cW-mw-zA8" firstAttribute="top" secondItem="RpK-1V-H0m" secondAttribute="bottom" constant="8" id="a6y-6I-4fV"/>
                                                 <constraint firstItem="RpK-1V-H0m" firstAttribute="top" secondItem="yDT-r7-0rY" secondAttribute="top" constant="8" id="bJz-ag-TH0"/>
@@ -901,8 +911,14 @@
                                                 <constraint firstAttribute="bottom" secondItem="9cW-mw-zA8" secondAttribute="bottom" id="ujc-Fz-hBM"/>
                                                 <constraint firstAttribute="trailing" secondItem="9cW-mw-zA8" secondAttribute="trailing" id="yGh-7b-I6D"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="8A2-iU-ADV"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="favoriteMorphiiImageView" destination="0uW-rR-Ubd" id="PDF-Sj-kOI"/>
                                             <outlet property="morphiiView" destination="moS-XS-ud9" id="Hsh-5x-9vT"/>
                                             <outlet property="nameLabel" destination="RpK-1V-H0m" id="Sjp-1A-Tdk"/>
                                         </connections>
@@ -2825,6 +2841,7 @@
         <image name="settings" width="18" height="18"/>
         <image name="settings_selected" width="18" height="18"/>
         <image name="share" width="33" height="33"/>
+        <image name="star" width="33" height="33"/>
         <image name="tag" width="33" height="33"/>
         <image name="trending" width="13" height="21"/>
         <image name="trending_selected" width="13" height="21"/>
