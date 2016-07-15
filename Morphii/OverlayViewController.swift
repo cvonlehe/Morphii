@@ -38,6 +38,7 @@ class OverlayViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        scrollView.scrollEnabled = false
         tagImageView.image = tagImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
         tagImageView.tintColor = tagImageView.tintColor
         // Do any additional setup after loading the view.
@@ -130,18 +131,18 @@ extension OverlayViewController {
     
     @IBAction func addToFavoritesButtonPressed(sender: UIButton) {
 
-        guard let name = favoriteNameTextField.text?.stringByReplacingOccurrencesOfString( " ", withString: "") else {
-            let alertController = UIAlertController(title: "Name Required", message: "A name is required. Please enter a name and try again", preferredStyle: .Alert)
-            alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-            presentViewController(alertController, animated: true, completion: nil)
-            return
-        }
-        if name == "" {
-            let alertController = UIAlertController(title: "Name Required", message: "A name is required. Please enter a name and try again", preferredStyle: .Alert)
-            alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-            presentViewController(alertController, animated: true, completion: nil)
-            return
-        }
+//        guard let name = favoriteNameTextField.text?.stringByReplacingOccurrencesOfString( " ", withString: "") else {
+//            let alertController = UIAlertController(title: "Name Required", message: "A name is required. Please enter a name and try again", preferredStyle: .Alert)
+//            alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+//            presentViewController(alertController, animated: true, completion: nil)
+//            return
+//        }
+//        if name == "" {
+//            let alertController = UIAlertController(title: "Name Required", message: "A name is required. Please enter a name and try again", preferredStyle: .Alert)
+//            alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+//            presentViewController(alertController, animated: true, completion: nil)
+//            return
+//        }
         favoriteNameTextField.resignFirstResponder()
         favoriteTagsTextField.resignFirstResponder()
         if let _ = Morphii.createNewMorphii(favoriteNameTextField.text, name: favoriteNameTextField.text, scaleType: Int((morphiiO?.scaleType!)!), sequence: Int((morphiiO?.sequence)!), groupName: "Your Saved Morphiis", metaData: morphiiO?.metaData, emoodl: morphiiView?.emoodl, isFavorite: true, tags: Morphii.getTagsFromString(favoriteTagsTextField.text), order: 5000) {

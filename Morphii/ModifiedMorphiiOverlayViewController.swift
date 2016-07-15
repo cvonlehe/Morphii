@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TPKeyboardAvoiding
 
 protocol ModifiedMorphiiOverlayViewControllerDelegate {
     func closedOutOfOverlay ()
@@ -18,6 +19,7 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
     @IBOutlet weak var morphiiContainerLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var tagImageView: UIImageView!
 
+    @IBOutlet weak var scrollView: TPKeyboardAvoidingScrollView!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var morphiiContainerView: UIView!
     @IBOutlet weak var favoriteMorphiiView: MorphiiView!
@@ -28,6 +30,7 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
     @IBOutlet weak var morhpiiNameLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        scrollView.scrollEnabled = false
 
         // Do any additional setup after loading the view.
         containerView.layer.cornerRadius = 8
@@ -91,18 +94,18 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
     }
     
     @IBAction func doneButtonPressed(sender: UIButton) {
-        guard let name = favoriteNameTextField.text?.stringByReplacingOccurrencesOfString( " ", withString: "") else {
-            let alertController = UIAlertController(title: "Name Required", message: "A name is required. Please enter a name and try again", preferredStyle: .Alert)
-            alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-            presentViewController(alertController, animated: true, completion: nil)
-            return
-        }
-        if name == "" {
-            let alertController = UIAlertController(title: "Name Required", message: "A name is required. Please enter a name and try again", preferredStyle: .Alert)
-            alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-            presentViewController(alertController, animated: true, completion: nil)
-            return
-        }
+//        guard let name = favoriteNameTextField.text?.stringByReplacingOccurrencesOfString( " ", withString: "") else {
+//            let alertController = UIAlertController(title: "Name Required", message: "A name is required. Please enter a name and try again", preferredStyle: .Alert)
+//            alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+//            presentViewController(alertController, animated: true, completion: nil)
+//            return
+//        }
+//        if name == "" {
+//            let alertController = UIAlertController(title: "Name Required", message: "A name is required. Please enter a name and try again", preferredStyle: .Alert)
+//            alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+//            presentViewController(alertController, animated: true, completion: nil)
+//            return
+//        }
         setCenterView(.MorphiiModifyView)
         morhpiiNameLabel.text = favoriteNameTextField.text
         morphiiView.emoodl = favoriteMorphiiView.emoodl

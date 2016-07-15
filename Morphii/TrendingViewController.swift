@@ -168,6 +168,10 @@ class TrendingViewcController: UIViewController {
             presentViewController(nextView, animated: true, completion: nil)
         }
     }
+    @IBAction func searchButtonPressed(sender: UIButton) {
+        let nextView = self.storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.SearchViewController) as! SearchViewController
+        navigationController?.pushViewController(nextView, animated: true)
+    }
     
     private func setNewsMessageText(title:String?, text:String?) {
         dispatch_async(dispatch_get_main_queue()) {
