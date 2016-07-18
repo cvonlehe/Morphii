@@ -23,6 +23,25 @@
 		435C8EEB1D1C89FB0036B292 /* Morphii+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435C8EE81D1C89FB0036B292 /* Morphii+CoreDataProperties.swift */; };
 		435C8EEC1D1C89FB0036B292 /* Morphii.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435C8EE91D1C89FB0036B292 /* Morphii.swift */; };
 		435C8EED1D1C89FB0036B292 /* Morphii.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435C8EE91D1C89FB0036B292 /* Morphii.swift */; };
+		436553141D3D33C500DD98B7 /* ForwardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436553101D3D33C500DD98B7 /* ForwardingView.swift */; };
+		436553151D3D33C500DD98B7 /* KeyboardInputTraits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436553111D3D33C500DD98B7 /* KeyboardInputTraits.swift */; };
+		436553161D3D33C500DD98B7 /* KeyboardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436553121D3D33C500DD98B7 /* KeyboardLayout.swift */; };
+		4365531C1D3D33FE00DD98B7 /* DefaultKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436553191D3D33FE00DD98B7 /* DefaultKeyboard.swift */; };
+		4365531D1D3D33FE00DD98B7 /* DirectionEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4365531A1D3D33FE00DD98B7 /* DirectionEnum.swift */; };
+		4365531E1D3D33FE00DD98B7 /* KeyboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4365531B1D3D33FE00DD98B7 /* KeyboardModel.swift */; };
+		436553281D3D342100DD98B7 /* DefaultSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436553201D3D342100DD98B7 /* DefaultSettings.swift */; };
+		436553291D3D342100DD98B7 /* DefaultSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 436553211D3D342100DD98B7 /* DefaultSettings.xib */; };
+		4365532A1D3D342100DD98B7 /* ExtraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436553221D3D342100DD98B7 /* ExtraView.swift */; };
+		4365532B1D3D342100DD98B7 /* ImageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436553231D3D342100DD98B7 /* ImageKey.swift */; };
+		4365532C1D3D342100DD98B7 /* KeyboardConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436553241D3D342100DD98B7 /* KeyboardConnector.swift */; };
+		4365532D1D3D342100DD98B7 /* KeyboardKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436553251D3D342100DD98B7 /* KeyboardKey.swift */; };
+		4365532E1D3D342100DD98B7 /* KeyboardKeyBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436553261D3D342100DD98B7 /* KeyboardKeyBackground.swift */; };
+		4365532F1D3D342100DD98B7 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436553271D3D342100DD98B7 /* Shapes.swift */; };
+		436553321D3D344000DD98B7 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436553311D3D344000DD98B7 /* Utilities.swift */; };
+		436553361D3D346000DD98B7 /* Catboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436553341D3D346000DD98B7 /* Catboard.swift */; };
+		436553371D3D346000DD98B7 /* CatboardBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436553351D3D346000DD98B7 /* CatboardBanner.swift */; };
+		4365533A1D3D347E00DD98B7 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 436553391D3D347E00DD98B7 /* Media.xcassets */; };
+		4365533E1D3D354800DD98B7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4365533C1D3D354800DD98B7 /* Info.plist */; };
 		438162501D00A25E00C5BB5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4381624F1D00A25E00C5BB5B /* AppDelegate.swift */; };
 		438162551D00A25E00C5BB5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 438162531D00A25E00C5BB5B /* Main.storyboard */; };
 		4381625A1D00A25E00C5BB5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 438162591D00A25E00C5BB5B /* Assets.xcassets */; };
@@ -222,6 +241,26 @@
 		431A75DC1D0896EE0079F9BD /* MorphiiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorphiiView.swift; sourceTree = "<group>"; };
 		435C8EE81D1C89FB0036B292 /* Morphii+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Morphii+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		435C8EE91D1C89FB0036B292 /* Morphii.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Morphii.swift; sourceTree = "<group>"; };
+		436553101D3D33C500DD98B7 /* ForwardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardingView.swift; sourceTree = "<group>"; };
+		436553111D3D33C500DD98B7 /* KeyboardInputTraits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardInputTraits.swift; sourceTree = "<group>"; };
+		436553121D3D33C500DD98B7 /* KeyboardLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayout.swift; sourceTree = "<group>"; };
+		436553191D3D33FE00DD98B7 /* DefaultKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultKeyboard.swift; sourceTree = "<group>"; };
+		4365531A1D3D33FE00DD98B7 /* DirectionEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectionEnum.swift; sourceTree = "<group>"; };
+		4365531B1D3D33FE00DD98B7 /* KeyboardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardModel.swift; sourceTree = "<group>"; };
+		436553201D3D342100DD98B7 /* DefaultSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultSettings.swift; sourceTree = "<group>"; };
+		436553211D3D342100DD98B7 /* DefaultSettings.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultSettings.xib; sourceTree = "<group>"; };
+		436553221D3D342100DD98B7 /* ExtraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtraView.swift; sourceTree = "<group>"; };
+		436553231D3D342100DD98B7 /* ImageKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageKey.swift; sourceTree = "<group>"; };
+		436553241D3D342100DD98B7 /* KeyboardConnector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardConnector.swift; sourceTree = "<group>"; };
+		436553251D3D342100DD98B7 /* KeyboardKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardKey.swift; sourceTree = "<group>"; };
+		436553261D3D342100DD98B7 /* KeyboardKeyBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardKeyBackground.swift; sourceTree = "<group>"; };
+		436553271D3D342100DD98B7 /* Shapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
+		436553311D3D344000DD98B7 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		436553341D3D346000DD98B7 /* Catboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Catboard.swift; sourceTree = "<group>"; };
+		436553351D3D346000DD98B7 /* CatboardBanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatboardBanner.swift; sourceTree = "<group>"; };
+		436553391D3D347E00DD98B7 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		4365533C1D3D354800DD98B7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4365533D1D3D354800DD98B7 /* KeyboardFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardFramework.h; sourceTree = "<group>"; };
 		4381624C1D00A25E00C5BB5B /* Morphii.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Morphii.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4381624F1D00A25E00C5BB5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		438162541D00A25E00C5BB5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -421,6 +460,68 @@
 			name = "Custom Views";
 			sourceTree = "<group>";
 		};
+		436553181D3D33E600DD98B7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				436553101D3D33C500DD98B7 /* ForwardingView.swift */,
+				436553111D3D33C500DD98B7 /* KeyboardInputTraits.swift */,
+				436553121D3D33C500DD98B7 /* KeyboardLayout.swift */,
+				4398CBBE1D05FDB900074BC7 /* KeyboardViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		4365531F1D3D340400DD98B7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				436553191D3D33FE00DD98B7 /* DefaultKeyboard.swift */,
+				4365531A1D3D33FE00DD98B7 /* DirectionEnum.swift */,
+				4365531B1D3D33FE00DD98B7 /* KeyboardModel.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		436553301D3D342C00DD98B7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				436553201D3D342100DD98B7 /* DefaultSettings.swift */,
+				436553211D3D342100DD98B7 /* DefaultSettings.xib */,
+				436553221D3D342100DD98B7 /* ExtraView.swift */,
+				436553231D3D342100DD98B7 /* ImageKey.swift */,
+				436553241D3D342100DD98B7 /* KeyboardConnector.swift */,
+				436553251D3D342100DD98B7 /* KeyboardKey.swift */,
+				436553261D3D342100DD98B7 /* KeyboardKeyBackground.swift */,
+				436553271D3D342100DD98B7 /* Shapes.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		436553331D3D344400DD98B7 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				436553311D3D344000DD98B7 /* Utilities.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		436553381D3D346600DD98B7 /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				436553341D3D346000DD98B7 /* Catboard.swift */,
+				436553351D3D346000DD98B7 /* CatboardBanner.swift */,
+			);
+			name = Demo;
+			sourceTree = "<group>";
+		};
+		4365533B1D3D354800DD98B7 /* KeyboardFramework */ = {
+			isa = PBXGroup;
+			children = (
+				4365533C1D3D354800DD98B7 /* Info.plist */,
+				4365533D1D3D354800DD98B7 /* KeyboardFramework.h */,
+			);
+			path = KeyboardFramework;
+			sourceTree = "<group>";
+		};
 		438162431D00A25E00C5BB5B = {
 			isa = PBXGroup;
 			children = (
@@ -430,6 +531,7 @@
 				438162661D00A25F00C5BB5B /* MorphiiTests */,
 				438162711D00A25F00C5BB5B /* MorphiiUITests */,
 				4398CBBD1D05FDB900074BC7 /* Morphii Mobile Keyboard */,
+				4365533B1D3D354800DD98B7 /* KeyboardFramework */,
 				4381624D1D00A25E00C5BB5B /* Products */,
 				657271EE37B5787F608F6C5B /* Pods */,
 				1E28AE6B8133FE77F7FC132B /* Frameworks */,
@@ -537,9 +639,14 @@
 		4398CBBD1D05FDB900074BC7 /* Morphii Mobile Keyboard */ = {
 			isa = PBXGroup;
 			children = (
+				436553331D3D344400DD98B7 /* Utilities */,
+				436553301D3D342C00DD98B7 /* Views */,
+				4365531F1D3D340400DD98B7 /* Model */,
+				436553181D3D33E600DD98B7 /* Controller */,
 				43A9A6451D0B1B3C00AB90E4 /* Morphii Mobile Keyboard.entitlements */,
-				4398CBBE1D05FDB900074BC7 /* KeyboardViewController.swift */,
+				436553391D3D347E00DD98B7 /* Media.xcassets */,
 				4398CBC01D05FDB900074BC7 /* Info.plist */,
+				436553381D3D346600DD98B7 /* Demo */,
 			);
 			path = "Morphii Mobile Keyboard";
 			sourceTree = "<group>";
@@ -830,6 +937,7 @@
 				43A9E05C1D11D294001F3A1B /* SFUIDisplay-Light.ttf in Resources */,
 				43A9E04C1D11D294001F3A1B /* SFCompactText-MediumItalic.ttf in Resources */,
 				43A9E0701D11D294001F3A1B /* SFUIText-Light.ttf in Resources */,
+				436553291D3D342100DD98B7 /* DefaultSettings.xib in Resources */,
 				43A9E0441D11D294001F3A1B /* SFCompactText-HeavyItalic.ttf in Resources */,
 				43A9E0781D11D294001F3A1B /* SFUIText-Regular.ttf in Resources */,
 				43A9E03C1D11D294001F3A1B /* SFCompactDisplay-Ultralight.ttf in Resources */,
@@ -856,6 +964,8 @@
 				43A9E0401D11D294001F3A1B /* SFCompactText-BoldItalic.ttf in Resources */,
 				43A9E0421D11D294001F3A1B /* SFCompactText-Heavy.ttf in Resources */,
 				43A9E0361D11D294001F3A1B /* SFCompactDisplay-Regular.ttf in Resources */,
+				4365533E1D3D354800DD98B7 /* Info.plist in Resources */,
+				4365533A1D3D347E00DD98B7 /* Media.xcassets in Resources */,
 				43A9E07C1D11D294001F3A1B /* SFUIText-Semibold.ttf in Resources */,
 				43A9E0581D11D294001F3A1B /* SFUIDisplay-Bold.ttf in Resources */,
 				43A9E07E1D11D294001F3A1B /* SFUIText-SemiboldItalic.ttf in Resources */,
@@ -1036,19 +1146,35 @@
 			files = (
 				43CB11801D36BFFB00964C38 /* TrendingData+CoreDataProperties.swift in Sources */,
 				43F2A30B1D1C5F7400B9AA9C /* User.swift in Sources */,
+				436553161D3D33C500DD98B7 /* KeyboardLayout.swift in Sources */,
 				43F2A3031D1C322000B9AA9C /* Config.swift in Sources */,
+				436553321D3D344000DD98B7 /* Utilities.swift in Sources */,
 				43CB11821D36BFFB00964C38 /* TrendingData.swift in Sources */,
 				43A9DFA61D107915001F3A1B /* HeaderCollectionReusableView.swift in Sources */,
 				43F2A30E1D1C6B6900B9AA9C /* CollectionTableViewCell.swift in Sources */,
+				4365531E1D3D33FE00DD98B7 /* KeyboardModel.swift in Sources */,
+				436553361D3D346000DD98B7 /* Catboard.swift in Sources */,
 				435C8EEB1D1C89FB0036B292 /* Morphii+CoreDataProperties.swift in Sources */,
 				43F2A3091D1C5F7400B9AA9C /* User+CoreDataProperties.swift in Sources */,
+				4365532D1D3D342100DD98B7 /* KeyboardKey.swift in Sources */,
 				43A9A6461D0B1D1500AB90E4 /* CDHelper.swift in Sources */,
 				43F2A3111D1C721100B9AA9C /* MorphiiScrollView.swift in Sources */,
+				4365532E1D3D342100DD98B7 /* KeyboardKeyBackground.swift in Sources */,
 				4398CBBF1D05FDB900074BC7 /* KeyboardViewController.swift in Sources */,
+				436553141D3D33C500DD98B7 /* ForwardingView.swift in Sources */,
+				436553281D3D342100DD98B7 /* DefaultSettings.swift in Sources */,
+				4365532F1D3D342100DD98B7 /* Shapes.swift in Sources */,
 				435C8EED1D1C89FB0036B292 /* Morphii.swift in Sources */,
+				436553151D3D33C500DD98B7 /* KeyboardInputTraits.swift in Sources */,
+				4365532B1D3D342100DD98B7 /* ImageKey.swift in Sources */,
 				43A9A6471D0B1D4200AB90E4 /* Model.xcdatamodeld in Sources */,
 				43A9DFFB1D10B6AA001F3A1B /* MethodHelper.swift in Sources */,
+				4365531C1D3D33FE00DD98B7 /* DefaultKeyboard.swift in Sources */,
+				4365532C1D3D342100DD98B7 /* KeyboardConnector.swift in Sources */,
+				436553371D3D346000DD98B7 /* CatboardBanner.swift in Sources */,
+				4365531D1D3D33FE00DD98B7 /* DirectionEnum.swift in Sources */,
 				43A9DFF81D10ACE4001F3A1B /* MorphiiSelectionView.swift in Sources */,
+				4365532A1D3D342100DD98B7 /* ExtraView.swift in Sources */,
 				43843ACB1D0B4FFB00B34D5E /* Constants.swift in Sources */,
 				43A9DFF91D10B406001F3A1B /* MorphiiView.swift in Sources */,
 			);
