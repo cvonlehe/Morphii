@@ -21,12 +21,7 @@ class CatboardBanner: ExtraView {
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
         
-        self.addSubview(self.catSwitch)
-        self.addSubview(self.catLabel)
         
-        self.catSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey(kCatTypeEnabled)
-        self.catSwitch.transform = CGAffineTransformMakeScale(0.75, 0.75)
-        self.catSwitch.addTarget(self, action: Selector("respondToSwitch"), forControlEvents: UIControlEvents.ValueChanged)
         
         self.updateAppearance()
     }

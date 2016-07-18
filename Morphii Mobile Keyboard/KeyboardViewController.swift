@@ -2,8 +2,6 @@
 //  KeyboardViewController.swift
 //  Keyboard
 //
-//  Created by Alexei Baboulevitch on 6/9/14.
-//  Copyright (c) 2014 Alexei Baboulevitch ("Archagon"). All rights reserved.
 //
 
 import UIKit
@@ -22,6 +20,21 @@ let kSmallLowercase = "kSmallLowercase"
 
 class KeyboardViewController: UIInputViewController {
     
+    var globeContainerView:UIView!
+    var recentContainerView:UIView!
+    var favoriteContainerView:UIView!
+    var homeContainerView:UIView!
+    var abcContainerView:UIView!
+    
+    var globeButton:UIButton!
+    var recentButton:UIButton!
+    var favoriteButton:UIButton!
+    var homeButton:UIButton!
+    var abcButtonLabel:UILabel!
+    var centerView:CenterView!
+
+
+    
     let backspaceDelay: NSTimeInterval = 0.5
     let backspaceRepeat: NSTimeInterval = 0.07
     
@@ -32,6 +45,140 @@ class KeyboardViewController: UIInputViewController {
     
     var bannerView: ExtraView?
     var settingsView: ExtraView?
+    
+    func addNavigationToBannerView (bannerView:ExtraView) {
+        let containerWidth = bannerView.frame.size.width / 5
+        var containerX = CGFloat(0)
+        let buttonLength = CGFloat(20)
+        let buttonX = (containerWidth / 2) - (buttonLength / 2)
+        let buttonY = (bannerView.frame.size.height / 2) - (buttonLength / 2)
+        
+        globeContainerView = UIView(frame: CGRect(x: containerX, y: 0, width: containerWidth, height: bannerView.frame.size.height))
+        containerX += containerWidth
+        globeContainerView.backgroundColor = UIColor.whiteColor()
+        bannerView.addSubview(globeContainerView)
+        globeButton = UIButton(frame: CGRect(x: buttonX, y: buttonY, width: buttonLength, height: buttonLength))
+        globeButton.setImage(UIImage(named: "globe"), forState: .Normal)
+        globeButton.addTarget(self, action: #selector(KeyboardViewController.globeButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        globeContainerView.addSubview(globeButton)
+        
+        recentContainerView = UIView(frame: CGRect(x: containerX, y: 0, width: containerWidth, height: bannerView.frame.size.height))
+        containerX += containerWidth
+        recentContainerView.backgroundColor = UIColor.whiteColor()
+        bannerView.addSubview(recentContainerView)
+        recentButton = UIButton(frame: CGRect(x: buttonX, y: buttonY, width: buttonLength, height: buttonLength))
+        recentButton.setImage(UIImage(named: "clock"), forState: .Normal)
+        recentButton.addTarget(self, action: #selector(KeyboardViewController.recentButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        recentContainerView .addSubview(recentButton)
+        
+        favoriteContainerView = UIView(frame: CGRect(x: containerX, y: 0, width: containerWidth, height: bannerView.frame.size.height))
+        containerX += containerWidth
+        favoriteContainerView.backgroundColor = UIColor.whiteColor()
+        bannerView.addSubview(favoriteContainerView)
+        favoriteButton = UIButton(frame: CGRect(x: buttonX, y: buttonY, width: buttonLength, height: buttonLength))
+        favoriteButton.setImage(UIImage(named: "favorite"), forState: .Normal)
+        favoriteButton.addTarget(self, action: #selector(KeyboardViewController.favoriteButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        favoriteContainerView .addSubview(favoriteButton)
+        
+        homeContainerView = UIView(frame: CGRect(x: containerX, y: 0, width: containerWidth, height: bannerView.frame.size.height))
+        containerX += containerWidth
+        homeContainerView.backgroundColor = UIColor.whiteColor()
+        bannerView.addSubview(homeContainerView)
+        homeButton = UIButton(frame: CGRect(x: buttonX, y: buttonY, width: buttonLength, height: buttonLength))
+        homeButton.setImage(UIImage(named: "home"), forState: .Normal)
+        homeButton.addTarget(self, action: #selector(KeyboardViewController.homeButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        homeContainerView.addSubview(homeButton)
+        
+        
+        abcContainerView = UIView(frame: CGRect(x: containerX, y: 0, width: containerWidth, height: bannerView.frame.size.height))
+        containerX += containerWidth
+        abcContainerView.backgroundColor = UIColor.whiteColor()
+        bannerView.addSubview(abcContainerView)
+        abcButtonLabel = UILabel(frame: CGRect(x: 0, y: 0, width: abcContainerView.frame.size.width, height: abcContainerView.frame.size.height))
+        abcButtonLabel.textAlignment = .Center
+        abcButtonLabel.text = "ABC"
+        abcButtonLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(KeyboardViewController.abcButtonPressed(_:))))
+        abcButtonLabel.userInteractionEnabled = true
+        abcContainerView.addSubview(abcButtonLabel)
+        
+    }
+    
+    func globeButtonPressed (sender:UIButton) {
+        print("globeButtonPressed")
+        setCenterView(.Globe)
+    }
+    
+    func recentButtonPressed (sender:UIButton) {
+        print("recentButtonPressed")
+        setCenterView(.Recents)
+        
+    }
+    
+    func favoriteButtonPressed (sender:UIButton) {
+        print("favoriteButtonPressed")
+        setCenterView(.Favorites)
+    }
+    
+    func homeButtonPressed (sender:UIButton) {
+        print("homeButtonPressed")
+        setCenterView(.Home)
+    }
+    
+    func abcButtonPressed (tap:UITapGestureRecognizer) {
+        print("abcButtonPressed")
+        setCenterView(.Keyboard)
+    }
+    
+    enum CenterView {
+        case Globe
+        case Recents
+        case Favorites
+        case Home
+        case Keyboard
+    }
+    
+    func setCenterView (center:CenterView) {
+        centerView = center
+        setAllContainerViewBackgroundsToWhite(center)
+        switch center {
+        case .Globe:
+            self.forwardingView.resetTrackedViews()
+            self.shiftStartingState = nil
+            self.shiftWasMultitapped = false
+            self.advanceToNextInputMode()
+            break
+        case .Recents:
+            self.recentContainerView.backgroundColor = UIColor ( red: 0.0, green: 0.8863, blue: 0.4275, alpha: 1.0 )
+            break
+        case .Favorites:
+            self.favoriteContainerView.backgroundColor = UIColor ( red: 0.0, green: 0.8863, blue: 0.4275, alpha: 1.0 )
+            break
+        case .Home:
+            self.homeContainerView.backgroundColor = UIColor ( red: 0.0, green: 0.8863, blue: 0.4275, alpha: 1.0 )
+            break
+        case .Keyboard:
+            self.abcContainerView.backgroundColor = UIColor ( red: 0.0, green: 0.8863, blue: 0.4275, alpha: 1.0 )
+            break
+        }
+    }
+    
+    func setAllContainerViewBackgroundsToWhite (center:CenterView) {
+        if center != .Favorites {
+            favoriteContainerView.backgroundColor = UIColor.whiteColor()
+        }
+        if center != .Globe {
+            globeContainerView.backgroundColor = UIColor.whiteColor()
+        }
+        if center != .Home {
+            homeContainerView.backgroundColor = UIColor.whiteColor()
+        }
+        if center != .Keyboard {
+            abcContainerView.backgroundColor = UIColor.whiteColor()
+        }
+        if center != .Recents {
+            recentContainerView.backgroundColor = UIColor.whiteColor()
+        }
+    }
     
     var currentMode: Int {
         didSet {
@@ -224,12 +371,20 @@ class KeyboardViewController: UIInputViewController {
             self.lastLayoutBounds = orientationSavvyBounds
             self.setupKeys()
         }
+        let y = self.view.frame.origin.y + self.view.frame.size.height - metric("topBanner")
         
-        self.bannerView?.frame = CGRectMake(0, 0, self.view.bounds.width, metric("topBanner"))
+        self.bannerView?.frame = CGRectMake(0, y, self.view.bounds.width, metric("topBanner"))
+        if let banner = bannerView {
+            addNavigationToBannerView(banner)
+        }
         
-        let newOrigin = CGPointMake(0, self.view.bounds.height - self.forwardingView.bounds.height)
+        let newOrigin = CGPointMake(0, 0)
         self.forwardingView.frame.origin = newOrigin
     }
+    
+
+    
+
     
     override func loadView() {
         super.loadView()
@@ -332,7 +487,7 @@ class KeyboardViewController: UIInputViewController {
                         }
                         
                         if key.hasOutput {
-                            keyView.addTarget(self, action: "keyPressedHelper:", forControlEvents: .TouchUpInside)
+                            keyView.addTarget(self, action: #selector(KeyboardViewController.keyPressedHelper(_:)), forControlEvents: .TouchUpInside)
                         }
                         
                         if key.type != Key.KeyType.Shift && key.type != Key.KeyType.ModeChange {

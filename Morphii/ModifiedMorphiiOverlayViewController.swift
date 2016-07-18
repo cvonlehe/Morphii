@@ -76,17 +76,7 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
     }
     
     @IBAction func saveButtonPressed(sender: UIButton) {
-        morphiiO?.name = morhpiiNameLabel.text
-        morphiiO?.tags = NSMutableArray(array: Morphii.getTagsFromString(favoriteTagsTextField.text))
-        morphiiO?.emoodl = morphiiView.emoodl
-        CDHelper.sharedInstance.saveContext { (success) in
-            if success {
-                MethodHelper.showSuccessErrorHUD(true, message: "Saved", inView: self.view)
-                MorphiiAPI.sendFavoriteData(self.morphiiO, favoriteNameO: self.favoriteNameTextField.text)
-            }else {
-                MethodHelper.showAlert("Error", message: "There was an error saving your morphii. Please try again")
-            }
-        }
+
     }
     
     @IBAction func shareButtonPressed(sender: UIButton) {
@@ -111,6 +101,17 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
         morphiiView.emoodl = favoriteMorphiiView.emoodl
         favoriteNameTextField.resignFirstResponder()
         favoriteTagsTextField.resignFirstResponder()
+        morphiiO?.name = morhpiiNameLabel.text
+        morphiiO?.tags = NSMutableArray(array: Morphii.getTagsFromString(favoriteTagsTextField.text))
+        morphiiO?.emoodl = morphiiView.emoodl
+        CDHelper.sharedInstance.saveContext { (success) in
+            if success {
+                MethodHelper.showSuccessErrorHUD(true, message: "Saved", inView: self.view)
+                MorphiiAPI.sendFavoriteData(self.morphiiO, favoriteNameO: self.favoriteNameTextField.text)
+            }else {
+                MethodHelper.showAlert("Error", message: "There was an error saving your morphii. Please try again")
+            }
+        }
     }
     
     @IBAction func editButtonPressed(sender: UIButton) {
@@ -153,6 +154,9 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
 
 extension ModifiedMorphiiOverlayViewController:UITextFieldDelegate {
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        if string == "" {
+            return true
+        }
         if favoriteTagsTextField == textField && string == " " {
             guard let wordsArray = favoriteTagsTextField.text?.componentsSeparatedByString(" ") else {return true}
             var newWords:[String] = []
@@ -164,6 +168,10 @@ extension ModifiedMorphiiOverlayViewController:UITextFieldDelegate {
             }
             favoriteTagsTextField.text = newWords.joinWithSeparator(" ")
             print("WORDS:",newWords)
+        }else if textField == favoriteTagsTextField {
+            let characterSet = NSCharacterSet(charactersInString: acceptableCharacters)
+            let filtered = string.componentsSeparatedByCharactersInSet(characterSet).joinWithSeparator("")
+            return string != filtered
         }
         return true
     }

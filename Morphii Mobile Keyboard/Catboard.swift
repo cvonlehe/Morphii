@@ -20,7 +20,7 @@ class Catboard: KeyboardViewController {
     let takeDebugScreenshot: Bool = false
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        NSUserDefaults.standardUserDefaults().registerDefaults([kCatTypeEnabled: true])
+        NSUserDefaults.standardUserDefaults().registerDefaults([kCatTypeEnabled: false])
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
@@ -33,10 +33,8 @@ class Catboard: KeyboardViewController {
         
         let keyOutput = key.outputForCase(self.shiftState.uppercase())
         
-        if !NSUserDefaults.standardUserDefaults().boolForKey(kCatTypeEnabled) {
-            textDocumentProxy.insertText(keyOutput)
-            return
-        }
+        textDocumentProxy.insertText(keyOutput)
+        return
         
         if key.type == .Character || key.type == .SpecialCharacter {
             if let context = textDocumentProxy.documentContextBeforeInput {

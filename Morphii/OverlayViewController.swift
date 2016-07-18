@@ -172,7 +172,7 @@ extension OverlayViewController {
         self.morphiiView.setUpMorphii(self.morphiiO!, emoodl: morphiiO!.emoodl?.doubleValue)
         self.morphiiNameLabel.text = self.morphiiO!.name
         if let collectionName = morphiiO?.groupName {
-            collectionNameLabel.text = collectionName.uppercaseString
+            collectionNameLabel.text = collectionName
             morphiiScrollView.setMorphiis(Morphii.getMorphiisForCollectionTitle(collectionName), delegate: self)
         }
         print("MORPHII_GROUP:",self.morphiiO!.groupName)
@@ -217,6 +217,9 @@ extension OverlayViewController {
 
 extension OverlayViewController:UITextFieldDelegate {
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        if string == "" {
+            return true
+        }
         if favoriteTagsTextField == textField && string == " " {
             guard let wordsArray = favoriteTagsTextField.text?.componentsSeparatedByString(" ") else {return true}
             var newWords:[String] = []
@@ -231,7 +234,7 @@ extension OverlayViewController:UITextFieldDelegate {
         }else if textField == favoriteTagsTextField {
             let characterSet = NSCharacterSet(charactersInString: acceptableCharacters)
             let filtered = string.componentsSeparatedByCharactersInSet(characterSet).joinWithSeparator("")
-            return string == filtered
+            return string != filtered
         }
         return true
     }

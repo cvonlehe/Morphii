@@ -12,7 +12,6 @@
             <string>SFCompactDisplay-Regular</string>
             <string>SFCompactDisplay-Regular</string>
             <string>SFCompactDisplay-Regular</string>
-            <string>SFCompactDisplay-Regular</string>
         </mutableArray>
         <mutableArray key="SFCompactDisplay-Semibold.ttf">
             <string>SFCompactDisplay-Semibold</string>
@@ -1321,24 +1320,11 @@
                                                                         <constraint firstAttribute="width" secondItem="yjA-ex-w0s" secondAttribute="height" multiplier="1:1" id="llJ-nN-C1p"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="svm-XU-9V8">
-                                                                    <rect key="frame" x="0.0" y="313" width="152" height="40"/>
-                                                                    <color key="backgroundColor" red="0.0" green="0.8862745098" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="40" id="U2j-Tq-dH4"/>
-                                                                    </constraints>
-                                                                    <fontDescription key="fontDescription" name="SFCompactDisplay-Regular" family="SF Compact Display" pointSize="18"/>
-                                                                    <state key="normal" title="Save">
-                                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    </state>
-                                                                    <connections>
-                                                                        <action selector="saveButtonPressed:" destination="teh-Lt-pIM" eventType="touchUpInside" id="XnF-lL-OAr"/>
-                                                                    </connections>
-                                                                </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l7b-zU-sMO">
-                                                                    <rect key="frame" x="153" y="313" width="151" height="40"/>
+                                                                    <rect key="frame" x="0.0" y="313" width="304" height="40"/>
                                                                     <color key="backgroundColor" red="0.0" green="0.8862745098" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <constraints>
+                                                                        <constraint firstAttribute="height" constant="40" id="LhZ-S6-kqH"/>
                                                                         <constraint firstAttribute="height" constant="30" id="aqo-ef-0ja"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="SFCompactDisplay-Regular" family="SF Compact Display" pointSize="18"/>
@@ -1357,16 +1343,12 @@
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstItem="svm-XU-9V8" firstAttribute="leading" secondItem="5Q0-Zb-ON1" secondAttribute="leading" id="2uK-fo-CTZ"/>
-                                                                <constraint firstItem="svm-XU-9V8" firstAttribute="width" secondItem="5Q0-Zb-ON1" secondAttribute="width" multiplier="0.5" id="4ev-bY-t5B"/>
+                                                                <constraint firstItem="l7b-zU-sMO" firstAttribute="leading" secondItem="5Q0-Zb-ON1" secondAttribute="leading" id="AsW-YQ-Rx2"/>
                                                                 <constraint firstAttribute="trailing" secondItem="yjA-ex-w0s" secondAttribute="trailing" constant="8" id="CxG-M2-a9x"/>
                                                                 <constraint firstAttribute="trailing" secondItem="l7b-zU-sMO" secondAttribute="trailing" id="MT8-QH-ioK"/>
                                                                 <constraint firstItem="yjA-ex-w0s" firstAttribute="leading" secondItem="5Q0-Zb-ON1" secondAttribute="leading" constant="8" id="NYF-Ha-OkA"/>
                                                                 <constraint firstItem="yjA-ex-w0s" firstAttribute="top" secondItem="5Q0-Zb-ON1" secondAttribute="top" constant="8" id="VeK-SS-FNc"/>
                                                                 <constraint firstAttribute="width" constant="304" id="aWC-j8-BrY"/>
-                                                                <constraint firstItem="l7b-zU-sMO" firstAttribute="leading" secondItem="svm-XU-9V8" secondAttribute="trailing" constant="1" id="bhn-A8-K6V"/>
-                                                                <constraint firstAttribute="bottom" secondItem="svm-XU-9V8" secondAttribute="bottom" id="gff-Fl-twv"/>
-                                                                <constraint firstItem="l7b-zU-sMO" firstAttribute="height" secondItem="svm-XU-9V8" secondAttribute="height" id="jA6-Cm-wbq"/>
                                                                 <constraint firstAttribute="bottom" secondItem="l7b-zU-sMO" secondAttribute="bottom" id="wAH-eP-oLd"/>
                                                             </constraints>
                                                             <variation key="default">
@@ -1401,7 +1383,7 @@
                                                                         <constraint firstAttribute="height" constant="40" id="3em-hZ-aws"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="SFCompactDisplay-Semibold" family="SF Compact Display" pointSize="17"/>
-                                                                    <state key="normal" title="Done">
+                                                                    <state key="normal" title="Save">
                                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     </state>
                                                                     <connections>
@@ -1432,7 +1414,7 @@
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
                                                                             <connections>
-                                                                                <outlet property="delegate" destination="teh-Lt-pIM" id="hQ7-Ib-p9p"/>
+                                                                                <outlet property="delegate" destination="teh-Lt-pIM" id="7l3-Zy-qhk"/>
                                                                             </connections>
                                                                         </textField>
                                                                     </subviews>
@@ -1481,7 +1463,7 @@
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                                                             <connections>
-                                                                                <outlet property="delegate" destination="teh-Lt-pIM" id="p5s-s3-SJi"/>
+                                                                                <outlet property="delegate" destination="teh-Lt-pIM" id="2Oa-B3-gyB"/>
                                                                             </connections>
                                                                         </textField>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tag" translatesAutoresizingMaskIntoConstraints="NO" id="Jas-9H-V7i">
@@ -1672,8 +1654,8 @@
                                         </state>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="ZuY-Z3-JJP"/>
                                                 <exclude reference="5hg-T0-uPZ"/>
+                                                <exclude reference="ZuY-Z3-JJP"/>
                                             </mask>
                                         </variation>
                                         <connections>
@@ -2832,7 +2814,7 @@
         <image name="favorite" width="33" height="33"/>
         <image name="favorites" width="19" height="18"/>
         <image name="favorites_selected" width="19" height="18"/>
-        <image name="home" width="22" height="18"/>
+        <image name="home" width="33" height="33"/>
         <image name="home_selected" width="22" height="18"/>
         <image name="magnifying_glass" width="33" height="33"/>
         <image name="morphii_logo_nav_bar" width="123" height="28"/>
