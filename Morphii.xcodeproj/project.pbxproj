@@ -42,6 +42,8 @@
 		436553371D3D346000DD98B7 /* CatboardBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436553351D3D346000DD98B7 /* CatboardBanner.swift */; };
 		4365533A1D3D347E00DD98B7 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 436553391D3D347E00DD98B7 /* Media.xcassets */; };
 		4365533E1D3D354800DD98B7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4365533C1D3D354800DD98B7 /* Info.plist */; };
+		436553401D3E6E1300DD98B7 /* RecentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4365533F1D3E6E1300DD98B7 /* RecentView.xib */; };
+		436553421D3E6E2B00DD98B7 /* RecentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436553411D3E6E2B00DD98B7 /* RecentView.swift */; };
 		438162501D00A25E00C5BB5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4381624F1D00A25E00C5BB5B /* AppDelegate.swift */; };
 		438162551D00A25E00C5BB5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 438162531D00A25E00C5BB5B /* Main.storyboard */; };
 		4381625A1D00A25E00C5BB5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 438162591D00A25E00C5BB5B /* Assets.xcassets */; };
@@ -261,6 +263,8 @@
 		436553391D3D347E00DD98B7 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		4365533C1D3D354800DD98B7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4365533D1D3D354800DD98B7 /* KeyboardFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardFramework.h; sourceTree = "<group>"; };
+		4365533F1D3E6E1300DD98B7 /* RecentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecentView.xib; sourceTree = "<group>"; };
+		436553411D3E6E2B00DD98B7 /* RecentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentView.swift; sourceTree = "<group>"; };
 		4381624C1D00A25E00C5BB5B /* Morphii.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Morphii.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4381624F1D00A25E00C5BB5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		438162541D00A25E00C5BB5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -487,6 +491,8 @@
 				436553201D3D342100DD98B7 /* DefaultSettings.swift */,
 				436553211D3D342100DD98B7 /* DefaultSettings.xib */,
 				436553221D3D342100DD98B7 /* ExtraView.swift */,
+				4365533F1D3E6E1300DD98B7 /* RecentView.xib */,
+				436553411D3E6E2B00DD98B7 /* RecentView.swift */,
 				436553231D3D342100DD98B7 /* ImageKey.swift */,
 				436553241D3D342100DD98B7 /* KeyboardConnector.swift */,
 				436553251D3D342100DD98B7 /* KeyboardKey.swift */,
@@ -963,6 +969,7 @@
 				43A9E0481D11D294001F3A1B /* SFCompactText-LightItalic.ttf in Resources */,
 				43A9E0401D11D294001F3A1B /* SFCompactText-BoldItalic.ttf in Resources */,
 				43A9E0421D11D294001F3A1B /* SFCompactText-Heavy.ttf in Resources */,
+				436553401D3E6E1300DD98B7 /* RecentView.xib in Resources */,
 				43A9E0361D11D294001F3A1B /* SFCompactDisplay-Regular.ttf in Resources */,
 				4365533E1D3D354800DD98B7 /* Info.plist in Resources */,
 				4365533A1D3D347E00DD98B7 /* Media.xcassets in Resources */,
@@ -1153,6 +1160,7 @@
 				43A9DFA61D107915001F3A1B /* HeaderCollectionReusableView.swift in Sources */,
 				43F2A30E1D1C6B6900B9AA9C /* CollectionTableViewCell.swift in Sources */,
 				4365531E1D3D33FE00DD98B7 /* KeyboardModel.swift in Sources */,
+				436553421D3E6E2B00DD98B7 /* RecentView.swift in Sources */,
 				436553361D3D346000DD98B7 /* Catboard.swift in Sources */,
 				435C8EEB1D1C89FB0036B292 /* Morphii+CoreDataProperties.swift in Sources */,
 				43F2A3091D1C5F7400B9AA9C /* User+CoreDataProperties.swift in Sources */,

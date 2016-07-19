@@ -31,9 +31,9 @@ class KeyboardViewController: UIInputViewController {
     var favoriteButton:UIButton!
     var homeButton:UIButton!
     var abcButtonLabel:UILabel!
-    var centerView:CenterView!
+    var centerView = CenterView.Recents
 
-
+    var recentView:RecentView?
     
     let backspaceDelay: NSTimeInterval = 0.5
     let backspaceRepeat: NSTimeInterval = 0.07
@@ -46,7 +46,51 @@ class KeyboardViewController: UIInputViewController {
     var bannerView: ExtraView?
     var settingsView: ExtraView?
     
+    override func loadView() {
+        super.loadView()
+        
+        if let aBanner = self.createBanner() {
+            aBanner.hidden = true
+            self.view.insertSubview(aBanner, belowSubview: self.forwardingView)
+            self.bannerView = aBanner
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.bannerView?.hidden = false
+        self.keyboardHeight = self.heightForOrientation(self.interfaceOrientation, withTopBanner: true)
+        setCenterView(.Recents)
+    }
+    
+    override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        self.forwardingView.resetTrackedViews()
+        self.shiftStartingState = nil
+        self.shiftWasMultitapped = false
+        
+        // optimization: ensures smooth animation
+        if let keyPool = self.layout?.keyPool {
+            for view in keyPool {
+                view.shouldRasterize = true
+            }
+        }
+        
+        self.keyboardHeight = self.heightForOrientation(toInterfaceOrientation, withTopBanner: true)
+    }
+    
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        // optimization: ensures quick mode and shift transitions
+        if let keyPool = self.layout?.keyPool {
+            for view in keyPool {
+                view.shouldRasterize = false
+            }
+        }
+    }
+    
     func addNavigationToBannerView (bannerView:ExtraView) {
+        for subview in bannerView.subviews {
+            subview.removeFromSuperview()
+        }
         let containerWidth = bannerView.frame.size.width / 5
         var containerX = CGFloat(0)
         let buttonLength = CGFloat(20)
@@ -55,44 +99,35 @@ class KeyboardViewController: UIInputViewController {
         
         globeContainerView = UIView(frame: CGRect(x: containerX, y: 0, width: containerWidth, height: bannerView.frame.size.height))
         containerX += containerWidth
-        globeContainerView.backgroundColor = UIColor.whiteColor()
         bannerView.addSubview(globeContainerView)
         globeButton = UIButton(frame: CGRect(x: buttonX, y: buttonY, width: buttonLength, height: buttonLength))
-        globeButton.setImage(UIImage(named: "globe"), forState: .Normal)
         globeButton.addTarget(self, action: #selector(KeyboardViewController.globeButtonPressed(_:)), forControlEvents: .TouchUpInside)
         globeContainerView.addSubview(globeButton)
         
         recentContainerView = UIView(frame: CGRect(x: containerX, y: 0, width: containerWidth, height: bannerView.frame.size.height))
         containerX += containerWidth
-        recentContainerView.backgroundColor = UIColor.whiteColor()
         bannerView.addSubview(recentContainerView)
         recentButton = UIButton(frame: CGRect(x: buttonX, y: buttonY, width: buttonLength, height: buttonLength))
-        recentButton.setImage(UIImage(named: "clock"), forState: .Normal)
         recentButton.addTarget(self, action: #selector(KeyboardViewController.recentButtonPressed(_:)), forControlEvents: .TouchUpInside)
         recentContainerView .addSubview(recentButton)
         
         favoriteContainerView = UIView(frame: CGRect(x: containerX, y: 0, width: containerWidth, height: bannerView.frame.size.height))
         containerX += containerWidth
-        favoriteContainerView.backgroundColor = UIColor.whiteColor()
         bannerView.addSubview(favoriteContainerView)
         favoriteButton = UIButton(frame: CGRect(x: buttonX, y: buttonY, width: buttonLength, height: buttonLength))
-        favoriteButton.setImage(UIImage(named: "favorite"), forState: .Normal)
         favoriteButton.addTarget(self, action: #selector(KeyboardViewController.favoriteButtonPressed(_:)), forControlEvents: .TouchUpInside)
         favoriteContainerView .addSubview(favoriteButton)
         
         homeContainerView = UIView(frame: CGRect(x: containerX, y: 0, width: containerWidth, height: bannerView.frame.size.height))
         containerX += containerWidth
-        homeContainerView.backgroundColor = UIColor.whiteColor()
         bannerView.addSubview(homeContainerView)
         homeButton = UIButton(frame: CGRect(x: buttonX, y: buttonY, width: buttonLength, height: buttonLength))
-        homeButton.setImage(UIImage(named: "home"), forState: .Normal)
         homeButton.addTarget(self, action: #selector(KeyboardViewController.homeButtonPressed(_:)), forControlEvents: .TouchUpInside)
         homeContainerView.addSubview(homeButton)
         
         
         abcContainerView = UIView(frame: CGRect(x: containerX, y: 0, width: containerWidth, height: bannerView.frame.size.height))
         containerX += containerWidth
-        abcContainerView.backgroundColor = UIColor.whiteColor()
         bannerView.addSubview(abcContainerView)
         abcButtonLabel = UILabel(frame: CGRect(x: 0, y: 0, width: abcContainerView.frame.size.width, height: abcContainerView.frame.size.height))
         abcButtonLabel.textAlignment = .Center
@@ -100,6 +135,8 @@ class KeyboardViewController: UIInputViewController {
         abcButtonLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(KeyboardViewController.abcButtonPressed(_:))))
         abcButtonLabel.userInteractionEnabled = true
         abcContainerView.addSubview(abcButtonLabel)
+        
+        setAllContainerViewBackgrounds()
         
     }
     
@@ -139,7 +176,7 @@ class KeyboardViewController: UIInputViewController {
     
     func setCenterView (center:CenterView) {
         centerView = center
-        setAllContainerViewBackgroundsToWhite(center)
+        setAllContainerViewBackgrounds()
         switch center {
         case .Globe:
             self.forwardingView.resetTrackedViews()
@@ -148,35 +185,58 @@ class KeyboardViewController: UIInputViewController {
             self.advanceToNextInputMode()
             break
         case .Recents:
-            self.recentContainerView.backgroundColor = UIColor ( red: 0.0, green: 0.8863, blue: 0.4275, alpha: 1.0 )
+            recentView = RecentView(globalColors: self.dynamicType.globalColors, darkMode: false, solidColorMode: self.solidColorMode())
+            recentView?.addToSuperView(self.view)
             break
         case .Favorites:
-            self.favoriteContainerView.backgroundColor = UIColor ( red: 0.0, green: 0.8863, blue: 0.4275, alpha: 1.0 )
+
             break
         case .Home:
-            self.homeContainerView.backgroundColor = UIColor ( red: 0.0, green: 0.8863, blue: 0.4275, alpha: 1.0 )
+            
             break
         case .Keyboard:
-            self.abcContainerView.backgroundColor = UIColor ( red: 0.0, green: 0.8863, blue: 0.4275, alpha: 1.0 )
+            returnToKeybord()
             break
         }
     }
     
-    func setAllContainerViewBackgroundsToWhite (center:CenterView) {
-        if center != .Favorites {
+    func returnToKeybord () {
+        recentView?.removeFromSuperview()
+        recentView = nil
+    }
+    
+    func setAllContainerViewBackgrounds () {
+        if centerView != .Favorites {
             favoriteContainerView.backgroundColor = UIColor.whiteColor()
+            favoriteButton.setImage(UIImage(named: "favorites"), forState: .Normal)
+        }else {
+            self.favoriteContainerView.backgroundColor = UIColor ( red: 0.0, green: 0.8863, blue: 0.4275, alpha: 1.0 )
+            favoriteButton.setImage(UIImage(named: "favorites_selected"), forState: .Normal)
         }
-        if center != .Globe {
+        if centerView != .Globe {
             globeContainerView.backgroundColor = UIColor.whiteColor()
+            globeButton.setImage(UIImage(named: "globe"), forState: .Normal)
         }
-        if center != .Home {
+        if centerView != .Home {
             homeContainerView.backgroundColor = UIColor.whiteColor()
+            homeButton.setImage(UIImage(named: "home"), forState: .Normal)
+        }else {
+            self.homeContainerView.backgroundColor = UIColor ( red: 0.0, green: 0.8863, blue: 0.4275, alpha: 1.0 )
+            homeButton.setImage(UIImage(named: "home_selected"), forState: .Normal)
         }
-        if center != .Keyboard {
+        if centerView != .Keyboard {
             abcContainerView.backgroundColor = UIColor.whiteColor()
+            abcButtonLabel.textColor = UIColor.darkGrayColor()
+        }else {
+            self.abcContainerView.backgroundColor = UIColor ( red: 0.0, green: 0.8863, blue: 0.4275, alpha: 1.0 )
+            abcButtonLabel.textColor = UIColor.whiteColor()
         }
-        if center != .Recents {
+        if centerView != .Recents {
             recentContainerView.backgroundColor = UIColor.whiteColor()
+            recentButton.setImage(UIImage(named: "clock"), forState: .Normal)
+        }else {
+            self.recentContainerView.backgroundColor = UIColor ( red: 0.0, green: 0.8863, blue: 0.4275, alpha: 1.0 )
+            recentButton.setImage(UIImage(named: "clock_selected"), forState: .Normal)
         }
     }
     
@@ -193,6 +253,7 @@ class KeyboardViewController: UIInputViewController {
             return (backspaceDelayTimer != nil) || (backspaceRepeatTimer != nil)
         }
     }
+    
     var backspaceDelayTimer: NSTimer?
     var backspaceRepeatTimer: NSTimer?
     
@@ -386,44 +447,7 @@ class KeyboardViewController: UIInputViewController {
     
 
     
-    override func loadView() {
-        super.loadView()
-        
-        if let aBanner = self.createBanner() {
-            aBanner.hidden = true
-            self.view.insertSubview(aBanner, belowSubview: self.forwardingView)
-            self.bannerView = aBanner
-        }
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        self.bannerView?.hidden = false
-        self.keyboardHeight = self.heightForOrientation(self.interfaceOrientation, withTopBanner: true)
-    }
-    
-    override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
-        self.forwardingView.resetTrackedViews()
-        self.shiftStartingState = nil
-        self.shiftWasMultitapped = false
-        
-        // optimization: ensures smooth animation
-        if let keyPool = self.layout?.keyPool {
-            for view in keyPool {
-                view.shouldRasterize = true
-            }
-        }
-        
-        self.keyboardHeight = self.heightForOrientation(toInterfaceOrientation, withTopBanner: true)
-    }
-    
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
-        // optimization: ensures quick mode and shift transitions
-        if let keyPool = self.layout?.keyPool {
-            for view in keyPool {
-                view.shouldRasterize = false
-            }
-        }
-    }
+
     
     func heightForOrientation(orientation: UIInterfaceOrientation, withTopBanner: Bool) -> CGFloat {
         let isPad = UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad
@@ -460,7 +484,8 @@ class KeyboardViewController: UIInputViewController {
                         
                         switch key.type {
                         case Key.KeyType.KeyboardChange:
-                            keyView.addTarget(self, action: "advanceTapped:", forControlEvents: .TouchUpInside)
+                            //keyView.removeFromSuperview()
+                            keyView.addTarget(self, action: #selector(KeyboardViewController.advanceTapped(_:)), forControlEvents: .TouchUpInside)
                         case Key.KeyType.Backspace:
                             let cancelEvents: UIControlEvents = [UIControlEvents.TouchUpInside, UIControlEvents.TouchUpInside, UIControlEvents.TouchDragExit, UIControlEvents.TouchUpOutside, UIControlEvents.TouchCancel, UIControlEvents.TouchDragOutside]
                             
@@ -473,7 +498,8 @@ class KeyboardViewController: UIInputViewController {
                         case Key.KeyType.ModeChange:
                             keyView.addTarget(self, action: Selector("modeChangeTapped:"), forControlEvents: .TouchDown)
                         case Key.KeyType.Settings:
-                            keyView.addTarget(self, action: Selector("toggleSettings"), forControlEvents: .TouchUpInside)
+                            keyView.removeFromSuperview()
+                            keyView.addTarget(self, action: #selector(KeyboardViewController.toggleSettings), forControlEvents: .TouchUpInside)
                         default:
                             break
                         }
@@ -791,11 +817,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func advanceTapped(sender: KeyboardKey) {
-        self.forwardingView.resetTrackedViews()
-        self.shiftStartingState = nil
-        self.shiftWasMultitapped = false
-        
-        self.advanceToNextInputMode()
+        setCenterView(.Home)
     }
     
     @IBAction func toggleSettings() {
@@ -979,7 +1001,7 @@ class KeyboardViewController: UIInputViewController {
     func createSettings() -> ExtraView? {
         // note that dark mode is not yet valid here, so we just put false for clarity
         let settingsView = DefaultSettings(globalColors: self.dynamicType.globalColors, darkMode: false, solidColorMode: self.solidColorMode())
-        settingsView.backButton?.addTarget(self, action: Selector("toggleSettings"), forControlEvents: UIControlEvents.TouchUpInside)
+        settingsView.backButton?.addTarget(self, action: #selector(KeyboardViewController.toggleSettings), forControlEvents: UIControlEvents.TouchUpInside)
         return settingsView
     }
 }

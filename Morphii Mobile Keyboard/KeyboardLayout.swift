@@ -454,9 +454,12 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
                     key.shape = backspaceShape
                 }
             case Key.KeyType.KeyboardChange:
-                if key.shape == nil {
-                    let globeShape = self.getShape(GlobeShape)
-                    key.shape = globeShape
+                if let imageKey = key as? ImageKey {
+                    if imageKey.image == nil {
+                        let gearImage = UIImage(named: "smiley_face")
+                        let settingsImageView = UIImageView(image: gearImage)
+                        imageKey.image = settingsImageView
+                    }
                 }
             default:
                 break
@@ -970,14 +973,14 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
             leftSideAreaWidth = leftSideAreaWidth + gapWidth + micButtonWidth
         }
         
-        var spaceWidth = frame.width - leftSideAreaWidth - rightSideAreaWidth - gapWidth * CGFloat(2)
+        var spaceWidth = UIScreen.mainScreen().bounds.size.width - 170
         spaceWidth = rounded(spaceWidth)
         
         var currentOrigin = frame.origin.x
         var beforeSpace: Bool = true
         for (k, key) in row.enumerate() {
             if key.type == Key.KeyType.Space {
-                frames.append(CGRectMake(rounded(currentOrigin), frame.origin.y, spaceWidth, frame.height))
+                frames.append(CGRectMake(85, frame.origin.y, spaceWidth, frame.height))
                 currentOrigin += (spaceWidth + gapWidth)
                 beforeSpace = false
             }
@@ -992,7 +995,7 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
                 }
             }
             else {
-                frames.append(CGRectMake(rounded(currentOrigin), frame.origin.y, rightButtonWidth, frame.height))
+                frames.append(CGRectMake(spaceWidth + 90, frame.origin.y, rightButtonWidth, frame.height))
                 currentOrigin += (rightButtonWidth + gapWidth)
             }
         }

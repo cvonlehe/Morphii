@@ -2,8 +2,6 @@
 //  Utilities.swift
 //  TastyImitationKeyboard
 //
-//  Created by Alexei Baboulevitch on 10/22/14.
-//  Copyright (c) 2014 Alexei Baboulevitch ("Archagon"). All rights reserved.
 //
 
 import Foundation

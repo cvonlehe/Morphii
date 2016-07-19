@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="SFUIText-Regular.ttf">
+            <string>SFUIText-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecentView" customModule="Morphii_Mobile_Keyboard" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Cc-Pi-VmJ">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="20"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recently Sent Morphiis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ndf-aV-HDi">
+                            <rect key="frame" x="8" y="0.0" width="584" height="20"/>
+                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.90588235294117647" green="0.90588235294117647" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="Ndf-aV-HDi" firstAttribute="leading" secondItem="2Cc-Pi-VmJ" secondAttribute="leading" constant="8" id="9kd-l8-F4K"/>
+                        <constraint firstAttribute="height" constant="20" id="IXh-Ej-NGX"/>
+                        <constraint firstAttribute="trailing" secondItem="Ndf-aV-HDi" secondAttribute="trailing" constant="8" id="JH0-tY-ebx"/>
+                        <constraint firstAttribute="bottom" secondItem="Ndf-aV-HDi" secondAttribute="bottom" id="UCo-he-Pxi"/>
+                        <constraint firstItem="Ndf-aV-HDi" firstAttribute="top" secondItem="2Cc-Pi-VmJ" secondAttribute="top" id="oYG-oQ-fXN"/>
+                    </constraints>
+                </view>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gtI-Js-N03">
+                    <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" red="0.95999088216914896" green="0.95999088216914896" blue="0.95999088216914896" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="gtI-Js-N03" secondAttribute="trailing" id="Apa-nx-aAG"/>
+                <constraint firstItem="gtI-Js-N03" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Gcg-7F-Oy8"/>
+                <constraint firstAttribute="trailing" secondItem="2Cc-Pi-VmJ" secondAttribute="trailing" id="ZlW-LG-ZBm"/>
+                <constraint firstItem="gtI-Js-N03" firstAttribute="top" secondItem="2Cc-Pi-VmJ" secondAttribute="bottom" id="c6E-gn-ugn"/>
+                <constraint firstItem="2Cc-Pi-VmJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="kL6-Tt-oPq"/>
+                <constraint firstItem="2Cc-Pi-VmJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="oYF-ui-5uX"/>
+                <constraint firstAttribute="bottom" secondItem="gtI-Js-N03" secondAttribute="bottom" id="wev-V7-qEo"/>
+            </constraints>
+        </view>
+    </objects>
+</document>
