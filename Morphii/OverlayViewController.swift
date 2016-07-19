@@ -189,15 +189,16 @@ extension OverlayViewController {
     }
     
     @IBAction func shareButtonPressed(sender: UIButton) {
+        morphiiView.morphii.setLastUsedDate(NSDate())
         morphiiView.shareMorphii(self)
     }
     
     @IBAction func favoriteMorphiiButtonPressed(sender: UIButton) {
         favoriteNameTextField.text = ""
         if let mView = favoriteMorphiiView {
-            mView.setNewMorphii(morphiiView.morphii, emoodl: morphiiView.emoodl)
+            mView.setNewMorphii(morphiiView.morphii, emoodl: morphiiView.emoodl, showName: true)
         }else {
-            favoriteMorphiiView = MorphiiSelectionView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: favoriteMorphiiContainerView.frame.size), morphii: morphiiView.morphii, delegate: nil)
+            favoriteMorphiiView = MorphiiSelectionView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: favoriteMorphiiContainerView.frame.size), morphii: morphiiView.morphii, delegate: nil, showName: true)
             favoriteMorphiiContainerView.addSubview(favoriteMorphiiView!)
             favoriteMorphiiView?.morphiiView.emoodl = morphiiView.emoodl
         }

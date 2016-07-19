@@ -12,6 +12,8 @@ class RecentView: ExtraView {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var morphiiScrollView: UIScrollView!
+    var morphiis:[Morphii] = []
+    var fetchType:MorphiiFetchType!
     
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
@@ -23,20 +25,48 @@ class RecentView: ExtraView {
     }
     
     func loadMorphiis (fetchType:MorphiiFetchType) {
+        print("loadMorphiis")
+        morphiis.removeAll()
+        self.fetchType = fetchType
+        for subview in morphiiScrollView.subviews {
+            subview.removeFromSuperview()
+        }
         switch fetchType {
         case .Home:
             titleLabel.text = "All Morphiis"
+            morphiis = Morphii.fetchAllMorphiis()
             break
         case .Recents:
+            morphiis = Morphii.getMostRecentlyUsedMorphiis()
             titleLabel.text = "Recently Sent Morphiis"
             break
         case .Favorites:
+            morphiis = Morphii.getFavoriteMorphiis()
             titleLabel.text = "Your Saved Morphiis"
             break
         }
+        performSelector(#selector(RecentView.loadMorphiis as (RecentView) -> () -> ()), withObject: nil, afterDelay: 0.01)
     }
     
-
+    func loadMorphiis () {
+        let morphiiSideLength = frame.size.height / 2 - 10
+        var x = CGFloat(0)
+        var y = CGFloat(0)
+        for morphii in morphiis {
+            let morphiiView = MorphiiSelectionView(frame: CGRect(x: x, y: y, width: morphiiSideLength, height: morphiiSideLength), morphii: morphii, delegate: nil, showName: fetchType != .Recents)
+            morphiiView.backgroundColor = UIColor.clearColor()
+            //morphiiView.setUpMorphii(morphii, emoodl: morphii.emoodl?.doubleValue)
+            morphiiScrollView.addSubview(morphiiView)
+            if y > 0 {
+                y = 0
+                x += morphiiSideLength
+            }else {
+                y = morphiiSideLength
+            }
+        }
+        morphiiScrollView.contentSize = CGSize(width: x + morphiiSideLength, height: (morphiiSideLength * 2))
+        morphiiScrollView.scrollEnabled = true
+    }
     
     func loadNib() {
         let assets = NSBundle(forClass: self.dynamicType).loadNibNamed("RecentView", owner: self, options: nil)

@@ -18,7 +18,7 @@ class MorphiiSelectionView: UIView {
     var nameLabel:UILabel!
     var morphiiView:MorphiiView!
     
-    init(frame:CGRect, morphii:Morphii, delegate:MorphiiSelectionViewDelegate?) {
+    init(frame:CGRect, morphii:Morphii, delegate:MorphiiSelectionViewDelegate?, showName:Bool) {
         super.init(frame: frame)
         let labelHeight = CGFloat(20)
         let morphiiViewSideLength = CGFloat(frame.size.height - labelHeight - 4)
@@ -30,14 +30,16 @@ class MorphiiSelectionView: UIView {
         nameLabel.font = UIFont(name: nameLabel.font!.fontName, size: 11.0)
         nameLabel.textAlignment = .Center
         addSubview(nameLabel)
-        setNewMorphii(morphii, emoodl: morphii.emoodl?.doubleValue)
+        setNewMorphii(morphii, emoodl: morphii.emoodl?.doubleValue, showName: showName)
         backgroundColor = UIColor.whiteColor()
         self.delegate = delegate
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(MorphiiSelectionView.viewTapped(_:))))
     }
     
-    func setNewMorphii (morphii:Morphii, emoodl:Double?) {
-        nameLabel.text = morphii.name
+    func setNewMorphii (morphii:Morphii, emoodl:Double?, showName:Bool) {
+        if showName {
+            nameLabel.text = morphii.name
+        }
         morphiiView.setUpMorphii(morphii, emoodl: emoodl)
         self.morphii = morphii
     }

@@ -286,4 +286,36 @@ class Morphii: NSManagedObject {
         CDHelper.sharedInstance.saveContext(completion)
     }
     
+    class func getMostRecentlyUsedMorphiis () -> [Morphii] {
+        let request = NSFetchRequest(entityName: EntityNames.Morphii)
+        let sort = NSSortDescriptor(key: "lastUsed", ascending: true)
+        request.sortDescriptors = [sort]
+        request.fetchLimit = 26
+        request.predicate = NSPredicate(format: "lastUsed != nil")
+        do {
+            guard let m = try CDHelper.sharedInstance.managedObjectContext.executeFetchRequest(request) as? [Morphii] else {return []}
+            return m
+        }catch {
+            return []
+        }
+    }
+    
+    func setLastUsedDate (date:NSDate) {
+        lastUsed = date
+        CDHelper.sharedInstance.saveContext(nil)
+    }
+    
+    class func getFavoriteMorphiis () -> [Morphii] {
+        let request = NSFetchRequest(entityName: Morphii.EntityName)
+        let sort = NSSortDescriptor(key: "order", ascending: true)
+        request.sortDescriptors = [sort]
+        request.predicate = NSPredicate(format: "isFavorite == %@", NSNumber(bool: true))
+        do {
+            guard let morphiis = try CDHelper.sharedInstance.managedObjectContext.executeFetchRequest(request) as? [Morphii] else {return []}
+            return morphiis
+        }catch {
+            return []
+        }
+    }
+    
 }

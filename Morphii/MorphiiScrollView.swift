@@ -25,7 +25,7 @@ class MorphiiScrollView: UIScrollView {
         var x = CGFloat(0)
         for morphii in morphiis {
             let rect = CGRect(x: x, y: 0, width: 75.0, height: 75.0)
-            addSubview(MorphiiSelectionView(frame: rect, morphii: morphii, delegate: delegate))
+            addSubview(MorphiiSelectionView(frame: rect, morphii: morphii, delegate: delegate, showName: true))
             x += 75.0
         }
         contentSize = CGSize(width: x, height: 0)

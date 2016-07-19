@@ -63,7 +63,7 @@ class HomeViewController: UIViewController {
             }
             foundMorphiis = true
         }
-        performSelector(#selector(HomeViewController.getMorphiis), withObject: nil, afterDelay: 2)
+        performSelector(#selector(HomeViewController.getMorphiis), withObject: nil, afterDelay: 1)
     }
     
     func getMorphiis () {
