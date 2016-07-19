@@ -24,5 +24,6 @@ extension Morphii {
     @NSManaged var sequence: NSNumber?
     @NSManaged var tags: NSMutableArray?
     @NSManaged var order: NSNumber?
+    
 
 }

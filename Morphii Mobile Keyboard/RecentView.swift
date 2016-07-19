@@ -10,6 +10,9 @@ import UIKit
 
 class RecentView: ExtraView {
 
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var morphiiScrollView: UIScrollView!
+    
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
         self.loadNib()
@@ -18,6 +21,22 @@ class RecentView: ExtraView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("loading from nib not supported")
     }
+    
+    func loadMorphiis (fetchType:MorphiiFetchType) {
+        switch fetchType {
+        case .Home:
+            titleLabel.text = "All Morphiis"
+            break
+        case .Recents:
+            titleLabel.text = "Recently Sent Morphiis"
+            break
+        case .Favorites:
+            titleLabel.text = "Your Saved Morphiis"
+            break
+        }
+    }
+    
+
     
     func loadNib() {
         let assets = NSBundle(forClass: self.dynamicType).loadNibNamed("RecentView", owner: self, options: nil)
@@ -57,4 +76,10 @@ class RecentView: ExtraView {
         superView.addConstraint(bottom)
     }
 
+}
+
+enum MorphiiFetchType {
+    case Recents
+    case Favorites
+    case Home
 }

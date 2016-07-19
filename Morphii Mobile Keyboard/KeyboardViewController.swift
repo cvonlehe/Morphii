@@ -185,19 +185,26 @@ class KeyboardViewController: UIInputViewController {
             self.advanceToNextInputMode()
             break
         case .Recents:
-            recentView = RecentView(globalColors: self.dynamicType.globalColors, darkMode: false, solidColorMode: self.solidColorMode())
-            recentView?.addToSuperView(self.view)
+            setRecentView(.Recents)
             break
         case .Favorites:
-
+            setRecentView(.Favorites)
             break
         case .Home:
-            
+            setRecentView(.Home)
             break
         case .Keyboard:
             returnToKeybord()
             break
         }
+    }
+    
+    func setRecentView (fetchType:MorphiiFetchType) {
+        if recentView == nil {
+            recentView = RecentView(globalColors: self.dynamicType.globalColors, darkMode: false, solidColorMode: self.solidColorMode())
+            recentView?.addToSuperView(self.view)
+        }
+        recentView?.loadMorphiis(fetchType)
     }
     
     func returnToKeybord () {
