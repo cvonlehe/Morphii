@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="SFUIDisplay-Regular.ttf">
+            <string>SFUIDisplay-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShareMorphiiOverlayView" customModule="Morphii_Mobile_Keyboard" customModuleProvider="target">
+            <connections>
+                <outlet property="addToFavoritesContainerView" destination="JPF-3v-bwg" id="yUj-iU-s9X"/>
+                <outlet property="copyMorphiiContainerView" destination="TZZ-gh-cTE" id="auN-iW-Ja0"/>
+                <outlet property="saveToCameraRollContainerView" destination="wxm-MH-2MU" id="DPA-6o-WCm"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Caa-tQ-LFS">
+                    <rect key="frame" x="0.0" y="560" width="600" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Jg0-pF-SwY"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="20"/>
+                    <state key="normal" title="Cancel">
+                        <color key="titleColor" red="0.92549019607843142" green="0.28235294117647058" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="cancelButtonPressed:" destination="-1" eventType="touchUpInside" id="Rj0-jj-Wy4"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TZZ-gh-cTE">
+                    <rect key="frame" x="0.0" y="0.0" width="200" height="552"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copy Morphii" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c3n-Ig-BYL">
+                            <rect key="frame" x="50" y="256" width="100" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="Aap-cQ-du2"/>
+                                <constraint firstAttribute="height" constant="40" id="ySv-Eo-qS3"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="c3n-Ig-BYL" firstAttribute="centerY" secondItem="TZZ-gh-cTE" secondAttribute="centerY" id="5JC-yB-uWR"/>
+                        <constraint firstItem="c3n-Ig-BYL" firstAttribute="centerX" secondItem="TZZ-gh-cTE" secondAttribute="centerX" id="m3c-Na-Cnk"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wxm-MH-2MU">
+                    <rect key="frame" x="400" y="0.0" width="200" height="552"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save to Camera Roll" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DyO-ms-NWS">
+                            <rect key="frame" x="50" y="256" width="100" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="aus-5F-VDb"/>
+                                <constraint firstAttribute="width" constant="100" id="foT-lX-mPO"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="DyO-ms-NWS" firstAttribute="centerY" secondItem="wxm-MH-2MU" secondAttribute="centerY" id="P0C-pe-TZo"/>
+                        <constraint firstItem="DyO-ms-NWS" firstAttribute="centerX" secondItem="wxm-MH-2MU" secondAttribute="centerX" id="RU0-za-j69"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Only cancel works right now" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1V5-UV-OxU">
+                    <rect key="frame" x="89" y="8" width="422" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="1zB-zN-kcC"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JPF-3v-bwg">
+                    <rect key="frame" x="200" y="0.0" width="200" height="552"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add to Favorites" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WL7-ZZ-Aaj">
+                            <rect key="frame" x="50" y="256" width="100" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="CMn-wT-UJJ"/>
+                                <constraint firstAttribute="width" constant="100" id="ghv-63-shl"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="WL7-ZZ-Aaj" firstAttribute="centerY" secondItem="JPF-3v-bwg" secondAttribute="centerY" id="y1b-aO-Xex"/>
+                        <constraint firstItem="WL7-ZZ-Aaj" firstAttribute="centerX" secondItem="JPF-3v-bwg" secondAttribute="centerX" id="zW9-xk-hTR"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.14901960784313725" green="0.16862745098039217" blue="0.22352941176470589" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="JPF-3v-bwg" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="14T-YA-fUn"/>
+                <constraint firstItem="JPF-3v-bwg" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="1n1-m0-w9J"/>
+                <constraint firstItem="wxm-MH-2MU" firstAttribute="height" secondItem="JPF-3v-bwg" secondAttribute="height" id="3VK-rv-9mr"/>
+                <constraint firstItem="Caa-tQ-LFS" firstAttribute="top" secondItem="TZZ-gh-cTE" secondAttribute="bottom" constant="8" id="70f-5M-lpr"/>
+                <constraint firstAttribute="trailing" secondItem="Caa-tQ-LFS" secondAttribute="trailing" id="9hp-zg-BgH"/>
+                <constraint firstItem="wxm-MH-2MU" firstAttribute="centerY" secondItem="JPF-3v-bwg" secondAttribute="centerY" id="Beg-03-Tm7"/>
+                <constraint firstAttribute="trailing" secondItem="1V5-UV-OxU" secondAttribute="trailing" constant="89" id="DYS-dg-2W5"/>
+                <constraint firstAttribute="bottom" secondItem="Caa-tQ-LFS" secondAttribute="bottom" id="FQT-b0-QOv"/>
+                <constraint firstItem="1V5-UV-OxU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="LH4-x6-Rue"/>
+                <constraint firstItem="wxm-MH-2MU" firstAttribute="width" secondItem="JPF-3v-bwg" secondAttribute="width" id="UnV-tf-FVv"/>
+                <constraint firstItem="JPF-3v-bwg" firstAttribute="centerY" secondItem="TZZ-gh-cTE" secondAttribute="centerY" id="ZZk-w5-xMw"/>
+                <constraint firstItem="JPF-3v-bwg" firstAttribute="height" secondItem="TZZ-gh-cTE" secondAttribute="height" id="elB-V8-a9L"/>
+                <constraint firstItem="TZZ-gh-cTE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="feE-fH-lsb"/>
+                <constraint firstItem="wxm-MH-2MU" firstAttribute="leading" secondItem="JPF-3v-bwg" secondAttribute="trailing" id="mit-fm-7eW"/>
+                <constraint firstItem="Caa-tQ-LFS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="o4P-C1-PBt"/>
+                <constraint firstItem="TZZ-gh-cTE" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.333" id="qyB-SI-gva"/>
+                <constraint firstItem="1V5-UV-OxU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="89" id="rIr-qB-hfS"/>
+                <constraint firstItem="JPF-3v-bwg" firstAttribute="width" secondItem="TZZ-gh-cTE" secondAttribute="width" id="rUx-Bz-sys"/>
+                <constraint firstItem="TZZ-gh-cTE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="tKl-iX-f17"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="14T-YA-fUn"/>
+                </mask>
+            </variation>
+        </view>
+    </objects>
+</document>

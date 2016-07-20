@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="SFUIDisplay-Regular.ttf">
+            <string>SFUIDisplay-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KeyboardMorphiiOverlayView" customModule="Morphii_Mobile_Keyboard" customModuleProvider="target">
+            <connections>
+                <outlet property="morphiiNameLabel" destination="H71-aM-fDm" id="G5Q-rg-Nhl"/>
+                <outlet property="morphiiView" destination="fbd-gU-OAs" id="UWQ-g3-ibd"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="92a-af-xaf">
+                    <rect key="frame" x="8" y="8" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="Hcf-tF-O89"/>
+                        <constraint firstAttribute="height" constant="30" id="bpH-2E-lOJ"/>
+                    </constraints>
+                    <state key="normal" image="back"/>
+                    <connections>
+                        <action selector="backButtonPressed:" destination="-1" eventType="touchUpInside" id="yXw-0O-XfR"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A6E-vQ-FR3">
+                    <rect key="frame" x="562" y="8" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="4qc-AA-2kv"/>
+                        <constraint firstAttribute="height" constant="30" id="LHp-HO-Ywu"/>
+                        <constraint firstAttribute="width" constant="46" id="Y6N-ur-caJ"/>
+                        <constraint firstAttribute="width" constant="30" id="ySt-by-sAz"/>
+                    </constraints>
+                    <state key="normal" image="share"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="4qc-AA-2kv"/>
+                            <exclude reference="LHp-HO-Ywu"/>
+                            <exclude reference="Y6N-ur-caJ"/>
+                            <exclude reference="ySt-by-sAz"/>
+                        </mask>
+                    </variation>
+                    <connections>
+                        <action selector="shareButtonPressed:" destination="-1" eventType="touchUpInside" id="vy6-kJ-uvM"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="H71-aM-fDm">
+                    <rect key="frame" x="46" y="8" width="508" height="30"/>
+                    <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="18"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbd-gU-OAs" customClass="MorphiiView" customModule="Morphii_Mobile_Keyboard" customModuleProvider="target">
+                    <rect key="frame" x="27" y="46" width="546" height="546"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="fbd-gU-OAs" secondAttribute="height" multiplier="1:1" id="w03-wb-9dT"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="A6E-vQ-FR3" secondAttribute="trailing" constant="8" id="5wB-Ur-Rl0"/>
+                <constraint firstItem="fbd-gU-OAs" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="92c-TU-Elk"/>
+                <constraint firstItem="A6E-vQ-FR3" firstAttribute="leading" secondItem="H71-aM-fDm" secondAttribute="trailing" constant="8" id="Bib-DC-kvw"/>
+                <constraint firstAttribute="bottom" secondItem="fbd-gU-OAs" secondAttribute="bottom" constant="8" id="GE6-hz-lCe"/>
+                <constraint firstItem="H71-aM-fDm" firstAttribute="leading" secondItem="92a-af-xaf" secondAttribute="trailing" constant="8" id="Y36-hX-gDg"/>
+                <constraint firstItem="fbd-gU-OAs" firstAttribute="top" secondItem="H71-aM-fDm" secondAttribute="bottom" constant="8" id="YvK-7L-lTY"/>
+                <constraint firstItem="A6E-vQ-FR3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="cEU-BK-UBy"/>
+                <constraint firstItem="H71-aM-fDm" firstAttribute="height" secondItem="92a-af-xaf" secondAttribute="height" id="gBR-zq-rfa"/>
+                <constraint firstItem="A6E-vQ-FR3" firstAttribute="height" secondItem="92a-af-xaf" secondAttribute="height" id="h0r-Xu-qJ9"/>
+                <constraint firstItem="92a-af-xaf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="jO2-5v-rox"/>
+                <constraint firstItem="H71-aM-fDm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="pS6-1w-knC"/>
+                <constraint firstItem="92a-af-xaf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="sTl-f9-e3I"/>
+                <constraint firstItem="A6E-vQ-FR3" firstAttribute="width" secondItem="92a-af-xaf" secondAttribute="width" id="y1O-lw-kmU"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="back" width="33" height="33"/>
+        <image name="share" width="33" height="33"/>
+    </resources>
+</document>

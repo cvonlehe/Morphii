@@ -344,7 +344,6 @@ class MorphiiView: UIView, MorphiiProtocol {
     }
     
     func copyMorphyToClipboard() -> Bool{
-        
 
         
         //copy that image to the pasteboard

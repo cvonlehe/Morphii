@@ -2814,7 +2814,7 @@
         <image name="favorite" width="33" height="33"/>
         <image name="favorites" width="19" height="18"/>
         <image name="favorites_selected" width="19" height="18"/>
-        <image name="home" width="33" height="33"/>
+        <image name="home" width="22" height="18"/>
         <image name="home_selected" width="22" height="18"/>
         <image name="magnifying_glass" width="33" height="33"/>
         <image name="morphii_logo_nav_bar" width="123" height="28"/>

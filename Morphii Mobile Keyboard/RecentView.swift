@@ -14,10 +14,12 @@ class RecentView: ExtraView {
     @IBOutlet weak var morphiiScrollView: UIScrollView!
     var morphiis:[Morphii] = []
     var fetchType = MorphiiFetchType.Recents
-    
+    var morphiiOverlay:KeyboardMorphiiOverlayView?
+
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
         self.loadNib()
+
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -56,7 +58,6 @@ class RecentView: ExtraView {
             let morphiiView = MorphiiSelectionView(frame: CGRect(x: x, y: y, width: morphiiSideLength, height: morphiiSideLength), morphii: morphii, delegate: nil, showName: fetchType != .Recents)
             morphiiView.backgroundColor = UIColor.clearColor()
             morphiiView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(RecentView.morphiiSelectionViewTapped(_:))))
-            //morphiiView.setUpMorphii(morphii, emoodl: morphii.emoodl?.doubleValue)
             morphiiScrollView.addSubview(morphiiView)
             if y > 0 {
                 y = 0
@@ -73,8 +74,10 @@ class RecentView: ExtraView {
         guard let morphiiSelectionView = tap.view as? MorphiiSelectionView else {return}
         switch self.fetchType {
         case .Home:
+            displayMorphiiOverylay(morphiiSelectionView.morphiiView.morphii)
             break
         case .Recents:
+            displayMorphiiOverylay(morphiiSelectionView.morphiiView.morphii)
             break
         case .Favorites:
             favoriteMorphiiTapped(morphiiSelectionView)
@@ -90,13 +93,16 @@ class RecentView: ExtraView {
             MethodHelper.showSuccessErrorHUD(false, message: "Full Access Required", inView: self)
             return
         }
-        if morphiiSelectionView.morphiiView.copyMorphyToClipboard() {
+        var morphiiView:MorphiiView? = MorphiiView(frame: CGRect(x: 0, y: 0, width: 600, height: 600))
+        morphiiView!.setUpMorphii(morphiiSelectionView.morphiiView.morphii, emoodl: morphiiSelectionView.morphiiView.morphii.emoodl?.doubleValue)
+        if morphiiView!.copyMorphyToClipboard() {
             print("COPIED")
             MethodHelper.showSuccessErrorHUD(true, message: "Copied to Clipboard", inView: self)
         }else {
             print("NOT_COPIED")
             MethodHelper.showSuccessErrorHUD(false, message: "Error Copying. Try again", inView: self)
         }
+        morphiiView = nil
     }
     
     func loadNib() {
@@ -136,7 +142,23 @@ class RecentView: ExtraView {
         superView.addConstraint(centerXConstraint)
         superView.addConstraint(bottom)
     }
+    
+    func displayMorphiiOverylay (morphii:Morphii) {
+        if morphiiOverlay == nil {
+            morphiiOverlay = KeyboardMorphiiOverlayView(globalColors: globalColors, darkMode: false, solidColorMode: solidColorMode)
+            morphiiOverlay?.addToSuperView(self, morphii: morphii)
+        }
+        
+    }
 
+}
+
+extension RecentView:KeyboardMorphiiOverlayViewDelegate {
+    func backButtonPressed() {
+        morphiiOverlay?.removeFromSuperview()
+        morphiiOverlay = nil
+    }
+    
 }
 
 enum MorphiiFetchType {

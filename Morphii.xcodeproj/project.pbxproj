@@ -54,6 +54,10 @@
 		438162881D00B46800C5BB5B /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 438162861D00B46800C5BB5B /* Fabric.framework */; };
 		438162891D00B46900C5BB5B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 438162871D00B46800C5BB5B /* Crashlytics.framework */; };
 		43843ACB1D0B4FFB00B34D5E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4398CBB11D05C06B00074BC7 /* Constants.swift */; };
+		4395174A1D3FFAF2000EE666 /* KeyboardMorphiiOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 439517491D3FFAF2000EE666 /* KeyboardMorphiiOverlayView.xib */; };
+		4395174C1D3FFB08000EE666 /* KeyboardMorphiiOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4395174B1D3FFB08000EE666 /* KeyboardMorphiiOverlayView.swift */; };
+		4395174E1D4014B6000EE666 /* ShareMorphiiOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4395174D1D4014B6000EE666 /* ShareMorphiiOverlayView.xib */; };
+		439517501D4014D7000EE666 /* ShareMorphiiOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4395174F1D4014D7000EE666 /* ShareMorphiiOverlayView.swift */; };
 		4398CBB01D05BFE500074BC7 /* MethodHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4398CBAF1D05BFE500074BC7 /* MethodHelper.swift */; };
 		4398CBB21D05C06B00074BC7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4398CBB11D05C06B00074BC7 /* Constants.swift */; };
 		4398CBB51D05F1B700074BC7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4398CBB41D05F1B700074BC7 /* SettingsViewController.swift */; };
@@ -280,6 +284,10 @@
 		438162831D00B29400C5BB5B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		438162861D00B46800C5BB5B /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		438162871D00B46800C5BB5B /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		439517491D3FFAF2000EE666 /* KeyboardMorphiiOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardMorphiiOverlayView.xib; sourceTree = "<group>"; };
+		4395174B1D3FFB08000EE666 /* KeyboardMorphiiOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardMorphiiOverlayView.swift; sourceTree = "<group>"; };
+		4395174D1D4014B6000EE666 /* ShareMorphiiOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareMorphiiOverlayView.xib; sourceTree = "<group>"; };
+		4395174F1D4014D7000EE666 /* ShareMorphiiOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareMorphiiOverlayView.swift; sourceTree = "<group>"; };
 		4398CBAF1D05BFE500074BC7 /* MethodHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MethodHelper.swift; sourceTree = "<group>"; };
 		4398CBB11D05C06B00074BC7 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4398CBB41D05F1B700074BC7 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -493,6 +501,10 @@
 				436553221D3D342100DD98B7 /* ExtraView.swift */,
 				4365533F1D3E6E1300DD98B7 /* RecentView.xib */,
 				436553411D3E6E2B00DD98B7 /* RecentView.swift */,
+				439517491D3FFAF2000EE666 /* KeyboardMorphiiOverlayView.xib */,
+				4395174B1D3FFB08000EE666 /* KeyboardMorphiiOverlayView.swift */,
+				4395174D1D4014B6000EE666 /* ShareMorphiiOverlayView.xib */,
+				4395174F1D4014D7000EE666 /* ShareMorphiiOverlayView.swift */,
 				436553231D3D342100DD98B7 /* ImageKey.swift */,
 				436553241D3D342100DD98B7 /* KeyboardConnector.swift */,
 				436553251D3D342100DD98B7 /* KeyboardKey.swift */,
@@ -963,10 +975,12 @@
 				43A9E04E1D11D294001F3A1B /* SFCompactText-Regular.ttf in Resources */,
 				43A9E06C1D11D294001F3A1B /* SFUIText-Heavy.ttf in Resources */,
 				43A9E05A1D11D294001F3A1B /* SFUIDisplay-Heavy.ttf in Resources */,
+				4395174A1D3FFAF2000EE666 /* KeyboardMorphiiOverlayView.xib in Resources */,
 				43A9E03E1D11D294001F3A1B /* SFCompactText-Bold.ttf in Resources */,
 				43A9E0761D11D294001F3A1B /* SFUIText-MediumItalic.ttf in Resources */,
 				43A9E02E1D11D294001F3A1B /* SFCompactDisplay-Bold.ttf in Resources */,
 				43A9E0481D11D294001F3A1B /* SFCompactText-LightItalic.ttf in Resources */,
+				4395174E1D4014B6000EE666 /* ShareMorphiiOverlayView.xib in Resources */,
 				43A9E0401D11D294001F3A1B /* SFCompactText-BoldItalic.ttf in Resources */,
 				43A9E0421D11D294001F3A1B /* SFCompactText-Heavy.ttf in Resources */,
 				436553401D3E6E1300DD98B7 /* RecentView.xib in Resources */,
@@ -1167,6 +1181,7 @@
 				4365532D1D3D342100DD98B7 /* KeyboardKey.swift in Sources */,
 				43A9A6461D0B1D1500AB90E4 /* CDHelper.swift in Sources */,
 				43F2A3111D1C721100B9AA9C /* MorphiiScrollView.swift in Sources */,
+				439517501D4014D7000EE666 /* ShareMorphiiOverlayView.swift in Sources */,
 				4365532E1D3D342100DD98B7 /* KeyboardKeyBackground.swift in Sources */,
 				4398CBBF1D05FDB900074BC7 /* KeyboardViewController.swift in Sources */,
 				436553141D3D33C500DD98B7 /* ForwardingView.swift in Sources */,
@@ -1179,6 +1194,7 @@
 				43A9DFFB1D10B6AA001F3A1B /* MethodHelper.swift in Sources */,
 				4365531C1D3D33FE00DD98B7 /* DefaultKeyboard.swift in Sources */,
 				4365532C1D3D342100DD98B7 /* KeyboardConnector.swift in Sources */,
+				4395174C1D3FFB08000EE666 /* KeyboardMorphiiOverlayView.swift in Sources */,
 				436553371D3D346000DD98B7 /* CatboardBanner.swift in Sources */,
 				4365531D1D3D33FE00DD98B7 /* DirectionEnum.swift in Sources */,
 				43A9DFF81D10ACE4001F3A1B /* MorphiiSelectionView.swift in Sources */,
