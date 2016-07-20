@@ -1011,4 +1011,6 @@ class KeyboardViewController: UIInputViewController {
         settingsView.backButton?.addTarget(self, action: #selector(KeyboardViewController.toggleSettings), forControlEvents: UIControlEvents.TouchUpInside)
         return settingsView
     }
+    
+
 }

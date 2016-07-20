@@ -189,7 +189,6 @@ extension OverlayViewController {
     }
     
     @IBAction func shareButtonPressed(sender: UIButton) {
-        morphiiView.morphii.setLastUsedDate(NSDate())
         morphiiView.shareMorphii(self)
     }
     

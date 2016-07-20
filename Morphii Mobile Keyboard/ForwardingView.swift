@@ -92,7 +92,7 @@ class ForwardingView: UIView {
         }
     }
     
-    // http://stackoverflow.com/questions/3552108/finding-closest-object-to-cgpoint b/c I'm lazy
+    // http://stackoverflow.com/questions/3552108/finding-closest-object-to-cgpoint
     func distanceBetween(rect: CGRect, point: CGPoint) -> CGFloat {
         if CGRectContainsPoint(rect, point) {
             return 0

@@ -13,7 +13,7 @@ class RecentView: ExtraView {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var morphiiScrollView: UIScrollView!
     var morphiis:[Morphii] = []
-    var fetchType:MorphiiFetchType!
+    var fetchType = MorphiiFetchType.Recents
     
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
@@ -55,6 +55,7 @@ class RecentView: ExtraView {
         for morphii in morphiis {
             let morphiiView = MorphiiSelectionView(frame: CGRect(x: x, y: y, width: morphiiSideLength, height: morphiiSideLength), morphii: morphii, delegate: nil, showName: fetchType != .Recents)
             morphiiView.backgroundColor = UIColor.clearColor()
+            morphiiView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(RecentView.morphiiSelectionViewTapped(_:))))
             //morphiiView.setUpMorphii(morphii, emoodl: morphii.emoodl?.doubleValue)
             morphiiScrollView.addSubview(morphiiView)
             if y > 0 {
@@ -66,6 +67,36 @@ class RecentView: ExtraView {
         }
         morphiiScrollView.contentSize = CGSize(width: x + morphiiSideLength, height: (morphiiSideLength * 2))
         morphiiScrollView.scrollEnabled = true
+    }
+    
+    func morphiiSelectionViewTapped (tap:UITapGestureRecognizer) {
+        guard let morphiiSelectionView = tap.view as? MorphiiSelectionView else {return}
+        switch self.fetchType {
+        case .Home:
+            break
+        case .Recents:
+            break
+        case .Favorites:
+            favoriteMorphiiTapped(morphiiSelectionView)
+            break
+        }
+
+    }
+    
+    func favoriteMorphiiTapped (morphiiSelectionView:MorphiiSelectionView) {
+        if MethodHelper.openAccessIsGranted() {
+            print("GRANTED")
+        }else {
+            MethodHelper.showSuccessErrorHUD(false, message: "Full Access Required", inView: self)
+            return
+        }
+        if morphiiSelectionView.morphiiView.copyMorphyToClipboard() {
+            print("COPIED")
+            MethodHelper.showSuccessErrorHUD(true, message: "Copied to Clipboard", inView: self)
+        }else {
+            print("NOT_COPIED")
+            MethodHelper.showSuccessErrorHUD(false, message: "Error Copying. Try again", inView: self)
+        }
     }
     
     func loadNib() {

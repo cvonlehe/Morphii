@@ -75,4 +75,15 @@ class MethodHelper {
         view.layer.removeAllAnimations()
     }
     
+    class func openAccessIsGranted () -> Bool {
+        guard let containerPath = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier("group.morphii")?.path else {return false}
+        
+        do {
+            try NSFileManager.defaultManager().contentsOfDirectoryAtPath(containerPath)
+            return true
+        }catch {
+            return false
+        }
+    }
+    
 }

@@ -327,9 +327,12 @@ class MorphiiView: UIView, MorphiiProtocol {
         vc.completionWithItemsHandler = {(activityType, completed:Bool, returnedItems:[AnyObject]?, error: NSError?) in
             
             // Return if cancelled
-            if (!completed) {
-
-            } else {
+            if (completed) {
+                if let type = activityType {
+                    if type == UIActivityTypeCopyToPasteboard {
+                        self.morphii.setLastUsedDate(NSDate())
+                    }
+                }
             }
             
             //activity complete
@@ -340,17 +343,22 @@ class MorphiiView: UIView, MorphiiProtocol {
         
     }
     
-    private func copyMorphyToClipboard() -> NSData{
+    func copyMorphyToClipboard() -> Bool{
         
 
         
         //copy that image to the pasteboard
-        let pasteBoard:UIPasteboard = UIPasteboard(name: UIPasteboardNameGeneral, create: false)!
+        guard let pasteBoard:UIPasteboard = UIPasteboard(name: UIPasteboardNameGeneral, create: false) else {return false}
         pasteBoard.persistent = true
         let pbData:NSData = UIImagePNGRepresentation(getMorphiiImage())!
         pasteBoard.setValue(pbData, forPasteboardType:"public.png")
-        
-        return pbData
+        if let value = pasteBoard.dataForPasteboardType("public.png") {
+            if value == pbData {
+                morphii.setLastUsedDate(NSDate())
+                return true
+            }
+        }
+        return false
     }
     
     func saveMorphiiToSavedPhotos (completion:((success:Bool)->Void)?) {

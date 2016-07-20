@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-
+import UIKit
 
 class Morphii: NSManagedObject {
 
@@ -288,7 +288,7 @@ class Morphii: NSManagedObject {
     
     class func getMostRecentlyUsedMorphiis () -> [Morphii] {
         let request = NSFetchRequest(entityName: EntityNames.Morphii)
-        let sort = NSSortDescriptor(key: "lastUsed", ascending: true)
+        let sort = NSSortDescriptor(key: "lastUsed", ascending: false)
         request.sortDescriptors = [sort]
         request.fetchLimit = 26
         request.predicate = NSPredicate(format: "lastUsed != nil")
