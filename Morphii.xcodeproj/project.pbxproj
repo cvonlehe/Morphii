@@ -58,6 +58,8 @@
 		4395174C1D3FFB08000EE666 /* KeyboardMorphiiOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4395174B1D3FFB08000EE666 /* KeyboardMorphiiOverlayView.swift */; };
 		4395174E1D4014B6000EE666 /* ShareMorphiiOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4395174D1D4014B6000EE666 /* ShareMorphiiOverlayView.xib */; };
 		439517501D4014D7000EE666 /* ShareMorphiiOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4395174F1D4014D7000EE666 /* ShareMorphiiOverlayView.swift */; };
+		439517521D416DC6000EE666 /* AddFavoriteContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 439517511D416DC5000EE666 /* AddFavoriteContainerView.xib */; };
+		439517541D416DDF000EE666 /* AddFavoriteContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439517531D416DDF000EE666 /* AddFavoriteContainerView.swift */; };
 		4398CBB01D05BFE500074BC7 /* MethodHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4398CBAF1D05BFE500074BC7 /* MethodHelper.swift */; };
 		4398CBB21D05C06B00074BC7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4398CBB11D05C06B00074BC7 /* Constants.swift */; };
 		4398CBB51D05F1B700074BC7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4398CBB41D05F1B700074BC7 /* SettingsViewController.swift */; };
@@ -288,6 +290,8 @@
 		4395174B1D3FFB08000EE666 /* KeyboardMorphiiOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardMorphiiOverlayView.swift; sourceTree = "<group>"; };
 		4395174D1D4014B6000EE666 /* ShareMorphiiOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareMorphiiOverlayView.xib; sourceTree = "<group>"; };
 		4395174F1D4014D7000EE666 /* ShareMorphiiOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareMorphiiOverlayView.swift; sourceTree = "<group>"; };
+		439517511D416DC5000EE666 /* AddFavoriteContainerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFavoriteContainerView.xib; sourceTree = "<group>"; };
+		439517531D416DDF000EE666 /* AddFavoriteContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFavoriteContainerView.swift; sourceTree = "<group>"; };
 		4398CBAF1D05BFE500074BC7 /* MethodHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MethodHelper.swift; sourceTree = "<group>"; };
 		4398CBB11D05C06B00074BC7 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4398CBB41D05F1B700074BC7 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -505,6 +509,8 @@
 				4395174B1D3FFB08000EE666 /* KeyboardMorphiiOverlayView.swift */,
 				4395174D1D4014B6000EE666 /* ShareMorphiiOverlayView.xib */,
 				4395174F1D4014D7000EE666 /* ShareMorphiiOverlayView.swift */,
+				439517511D416DC5000EE666 /* AddFavoriteContainerView.xib */,
+				439517531D416DDF000EE666 /* AddFavoriteContainerView.swift */,
 				436553231D3D342100DD98B7 /* ImageKey.swift */,
 				436553241D3D342100DD98B7 /* KeyboardConnector.swift */,
 				436553251D3D342100DD98B7 /* KeyboardKey.swift */,
@@ -970,6 +976,7 @@
 				43A9E0341D11D294001F3A1B /* SFCompactDisplay-Medium.ttf in Resources */,
 				43A9E06A1D11D294001F3A1B /* SFUIText-BoldItalic.ttf in Resources */,
 				43A9E0741D11D294001F3A1B /* SFUIText-Medium.ttf in Resources */,
+				439517521D416DC6000EE666 /* AddFavoriteContainerView.xib in Resources */,
 				43A9E0541D11D294001F3A1B /* SFCompactText-SemiboldItalic.ttf in Resources */,
 				43A9E0561D11D294001F3A1B /* SFUIDisplay-Black.ttf in Resources */,
 				43A9E04E1D11D294001F3A1B /* SFCompactText-Regular.ttf in Resources */,
@@ -1196,6 +1203,7 @@
 				4365532C1D3D342100DD98B7 /* KeyboardConnector.swift in Sources */,
 				4395174C1D3FFB08000EE666 /* KeyboardMorphiiOverlayView.swift in Sources */,
 				436553371D3D346000DD98B7 /* CatboardBanner.swift in Sources */,
+				439517541D416DDF000EE666 /* AddFavoriteContainerView.swift in Sources */,
 				4365531D1D3D33FE00DD98B7 /* DirectionEnum.swift in Sources */,
 				43A9DFF81D10ACE4001F3A1B /* MorphiiSelectionView.swift in Sources */,
 				4365532A1D3D342100DD98B7 /* ExtraView.swift in Sources */,

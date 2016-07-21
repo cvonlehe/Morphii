@@ -8,7 +8,6 @@
 
 func defaultKeyboard() -> Keyboard {
     let defaultKeyboard = Keyboard()
-    
     for key in ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"] {
         let keyModel = Key(.Character)
         keyModel.setLetter(key)
@@ -51,7 +50,7 @@ func defaultKeyboard() -> Keyboard {
     defaultKeyboard.addKey(space, row: 3, page: 0)
     
     let returnKey = Key(.Return)
-    returnKey.uppercaseKeyCap = "return"
+    returnKey.uppercaseKeyCap = KeyboardViewController.returnKeyString
     returnKey.uppercaseOutput = "\n"
     returnKey.lowercaseOutput = "\n"
     defaultKeyboard.addKey(returnKey, row: 3, page: 0)

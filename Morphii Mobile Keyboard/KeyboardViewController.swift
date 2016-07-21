@@ -19,7 +19,9 @@ let kKeyboardClicks = "kKeyboardClicks"
 let kSmallLowercase = "kSmallLowercase"
 
 class KeyboardViewController: UIInputViewController {
-    
+    static var sViewController:KeyboardViewController!
+    static var returnKeyString = "Done"
+
     var globeContainerView:UIView!
     var recentContainerView:UIView!
     var favoriteContainerView:UIView!
@@ -45,10 +47,12 @@ class KeyboardViewController: UIInputViewController {
     
     var bannerView: ExtraView?
     var settingsView: ExtraView?
+    var addFavoriteContainerView:UIView?
+    var shareView:UIView?
     
     override func loadView() {
         super.loadView()
-        
+        KeyboardViewController.sViewController = self
         if let aBanner = self.createBanner() {
             aBanner.hidden = true
             self.view.insertSubview(aBanner, belowSubview: self.forwardingView)
@@ -446,7 +450,7 @@ class KeyboardViewController: UIInputViewController {
             addNavigationToBannerView(banner)
         }
         
-        let newOrigin = CGPointMake(0, 0)
+        let newOrigin = CGPointMake(0, CGFloat(Int(view.frame.height - 250)))
         self.forwardingView.frame.origin = newOrigin
     }
     
@@ -976,9 +980,6 @@ class KeyboardViewController: UIInputViewController {
     
     // this only works if full access is enabled
     func playKeySound() {
-        if !NSUserDefaults.standardUserDefaults().boolForKey(kKeyboardClicks) {
-            return
-        }
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             AudioServicesPlaySystemSound(1104)
@@ -1012,5 +1013,33 @@ class KeyboardViewController: UIInputViewController {
         return settingsView
     }
     
+    func addMorphiiToFavorites (shareView:UIView, morphiiView:MorphiiView) {
+        KeyboardViewController.returnKeyString = "234"
+        self.shareView = shareView
+        shareView.hidden = true
+        recentView?.hidden = true
+       // updateAppearances(true)
+        setHeight(350)
+        viewDidLayoutSubviews()
+        addFavoriteContainerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.size.width, height: 100))
+        view.addSubview(addFavoriteContainerView!)
+        let widthConstraint = NSLayoutConstraint(item: addFavoriteContainerView!, attribute: .Width, relatedBy: .Equal, toItem: self.view, attribute: .Width, multiplier: 1, constant: 0)
+        let heightConstraint = NSLayoutConstraint(item: addFavoriteContainerView!, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 100)
+        let xConstraint = NSLayoutConstraint(item: addFavoriteContainerView!, attribute: .CenterX, relatedBy: .Equal, toItem: self.view, attribute: .CenterX, multiplier: 1, constant: 0)
+        let yConstraint = NSLayoutConstraint(item: addFavoriteContainerView!, attribute: .Top, relatedBy: .Equal, toItem: self.view, attribute: .Top, multiplier: 1, constant: 0)
+        view.addConstraints([widthConstraint, heightConstraint, xConstraint, yConstraint])
+        let addToFavoritesView = AddFavoriteContainerView(globalColors: self.dynamicType.globalColors, darkMode: true, solidColorMode: self.solidColorMode())
+        addToFavoritesView.addToSuperView(addFavoriteContainerView!, morphiiView: morphiiView, delegate: self)
+    }
+    
+}
 
+extension KeyboardViewController:AddFavoriteContainerViewDelegate {
+    func closeButtonPressed () {
+        addFavoriteContainerView?.removeFromSuperview()
+        addFavoriteContainerView = nil
+        setHeight(250)
+        shareView?.hidden = false
+        recentView?.hidden = true
+    }
 }

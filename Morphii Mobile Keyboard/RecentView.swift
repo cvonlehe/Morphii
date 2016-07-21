@@ -95,6 +95,8 @@ class RecentView: ExtraView {
         }
         var morphiiView:MorphiiView? = MorphiiView(frame: CGRect(x: 0, y: 0, width: 600, height: 600))
         morphiiView!.setUpMorphii(morphiiSelectionView.morphiiView.morphii, emoodl: morphiiSelectionView.morphiiView.morphii.emoodl?.doubleValue)
+        morphiiView?.backgroundColor = UIColor.whiteColor()
+        
         if morphiiView!.copyMorphyToClipboard() {
             print("COPIED")
             MethodHelper.showSuccessErrorHUD(true, message: "Copied to Clipboard", inView: self)

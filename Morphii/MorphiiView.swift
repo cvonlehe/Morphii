@@ -17,6 +17,7 @@
 
 import UIKit
 import Foundation
+import Photos
 
 protocol MorphiiProtocol{
     func smileForMorphiiView(sender:MorphiiView) -> Double
@@ -29,7 +30,7 @@ class MorphiiView: UIView, MorphiiProtocol {
     //var morphy:MorphyObj?
     //var morphii:MorphiiClass.MorphiiFile!
     var morphii:Morphii!
-    private var completion:((success:Bool)->Void)?
+    private var completion:((hasAccess:Bool, success:Bool)->Void)?
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -360,14 +361,33 @@ class MorphiiView: UIView, MorphiiProtocol {
         return false
     }
     
-    func saveMorphiiToSavedPhotos (completion:((success:Bool)->Void)?) {
-        self.completion = completion
-        UIImageWriteToSavedPhotosAlbum(getMorphiiImage(), self, #selector(MorphiiView.image(_:didFinishSavingWithError:contextInfo:)), nil)
+    func saveMorphiiToSavedPhotos (completion:((hasAccess:Bool, success:Bool)->Void)?) {
+        PHPhotoLibrary.requestAuthorization { status in
+            switch status {
+            case .Authorized:
+                self.completion = completion
+                UIImageWriteToSavedPhotosAlbum(self.getMorphiiImage(), self, #selector(MorphiiView.image(_:didFinishSavingWithError:contextInfo:)), nil)
+                break
+            case .Restricted:
+                print("Restricted")
+                break
+            case .Denied:
+                print("Denied")
+                if let comp = completion {
+                    comp(hasAccess: false, success: false)
+                }
+                break
+            default:
+                // place for .NotDetermined - in this callback status is already determined so should never get here
+                break
+            }
+        }
+
     }
     
     func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafePointer<Void>) {
         if let com = completion {
-            com(success: error == nil)
+            com(hasAccess:true, success: error == nil)
         }
     }
     

@@ -76,7 +76,7 @@ class KeyboardMorphiiOverlayView: ExtraView {
     @IBAction func shareButtonPressed(sender: UIButton) {
         if shareOverlay == nil {
             shareOverlay = ShareMorphiiOverlayView(globalColors: globalColors, darkMode: false, solidColorMode: solidColorMode)
-            shareOverlay?.addToSuperView(superview?.superview, delegate:self, morphii: morphiiView.morphii)
+            shareOverlay?.addToSuperView(superview?.superview, delegate:self, morphiiView: morphiiView)
         }
     }
 
@@ -87,4 +87,15 @@ extension KeyboardMorphiiOverlayView:ShareMorphiiOverlayViewDelegate {
         shareOverlay?.removeFromSuperview()
         shareOverlay = nil
     }
+    
+    func copiedMorphii() {
+        cancelPressed()
+        MethodHelper.showSuccessErrorHUD(true, message: "Copied to Clipboard", inView: self)
+    }
+    
+    func savedMorphiiToCameraRoll() {
+        cancelPressed()
+        MethodHelper.showSuccessErrorHUD(true, message: "Saved to Camera Roll", inView: self)
+    }
+    
 }

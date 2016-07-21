@@ -179,8 +179,12 @@ extension OverlayViewController {
     }
     
     @IBAction func saveMorphiiButtonPressed(sender: UIButton) {
-        morphiiView.saveMorphiiToSavedPhotos { (success) in
-            if success {
+        morphiiView.saveMorphiiToSavedPhotos { (hasAccess, success) in
+            if !hasAccess {
+                let alert = UIAlertController(title: "Photo Library Access Required", message: "Access to your photos is required to save Morphiis to your camera roll. Please go to your phone's settings to enable access.", preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }else if success {
                 MethodHelper.showSuccessErrorHUD(true, message: "Saved to Camera Roll", inView: self.view)
             }else {
                 print("FAILURE")
