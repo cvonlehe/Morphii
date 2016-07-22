@@ -32,7 +32,9 @@ class ForceUpgradeViewController: UIViewController {
 
     class func createForceUpgradeView (viewController:UIViewController) {
         let nextView = viewController.storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.ForceUpgradeViewController) as! ForceUpgradeViewController
-        viewController.presentViewController(nextView, animated: true, completion: nil)
+        dispatch_async(dispatch_get_main_queue()) { 
+            viewController.presentViewController(nextView, animated: true, completion: nil)
+        }
     }
 
     @IBAction func goToAppStoreButtonPressed(sender: UIButton) {
