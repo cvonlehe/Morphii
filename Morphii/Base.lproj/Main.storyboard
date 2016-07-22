@@ -52,8 +52,12 @@
             <string>SFUIDisplay-Regular</string>
             <string>SFUIDisplay-Regular</string>
             <string>SFUIDisplay-Regular</string>
+            <string>SFUIDisplay-Regular</string>
+            <string>SFUIDisplay-Regular</string>
         </mutableArray>
         <mutableArray key="SFUIDisplay-Semibold.ttf">
+            <string>SFUIDisplay-Semibold</string>
+            <string>SFUIDisplay-Semibold</string>
             <string>SFUIDisplay-Semibold</string>
         </mutableArray>
         <mutableArray key="SFUIText-Light.ttf">
@@ -67,6 +71,8 @@
             <string>SFUIText-Medium</string>
         </mutableArray>
         <mutableArray key="SFUIText-Regular.ttf">
+            <string>SFUIText-Regular</string>
+            <string>SFUIText-Regular</string>
             <string>SFUIText-Regular</string>
             <string>SFUIText-Regular</string>
             <string>SFUIText-Regular</string>
@@ -357,6 +363,11 @@
                                                                         <constraint firstAttribute="height" constant="195" id="Q7L-eT-OI8"/>
                                                                         <constraint firstAttribute="width" constant="195" id="ZVO-7j-rDc"/>
                                                                     </constraints>
+                                                                    <variation key="default">
+                                                                        <mask key="constraints">
+                                                                            <exclude reference="ZVO-7j-rDc"/>
+                                                                        </mask>
+                                                                    </variation>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YcQ-tN-0EW">
                                                                     <rect key="frame" x="0.0" y="203" width="304" height="40"/>
@@ -457,10 +468,12 @@
                                                                 <constraint firstItem="ph6-lN-gk8" firstAttribute="leading" secondItem="jQ4-iG-2DL" secondAttribute="leading" id="4i4-x4-mjl"/>
                                                                 <constraint firstItem="mVu-H8-G7m" firstAttribute="top" secondItem="jQ4-iG-2DL" secondAttribute="top" id="4iQ-B2-7MS"/>
                                                                 <constraint firstAttribute="trailing" secondItem="B0P-hf-1r8" secondAttribute="trailing" id="6lM-M4-xbX"/>
+                                                                <constraint firstAttribute="trailing" secondItem="mVu-H8-G7m" secondAttribute="trailing" constant="55" id="C2s-0p-uwf"/>
                                                                 <constraint firstItem="B0P-hf-1r8" firstAttribute="leading" secondItem="jQ4-iG-2DL" secondAttribute="leading" id="Ifw-n5-NdL"/>
                                                                 <constraint firstAttribute="trailing" secondItem="YcQ-tN-0EW" secondAttribute="trailing" id="Ng4-Xd-C58"/>
                                                                 <constraint firstAttribute="trailing" secondItem="ph6-lN-gk8" secondAttribute="trailing" id="XBL-aL-cdx"/>
                                                                 <constraint firstAttribute="width" constant="304" id="iuy-Mf-Ezx"/>
+                                                                <constraint firstItem="mVu-H8-G7m" firstAttribute="leading" secondItem="jQ4-iG-2DL" secondAttribute="leading" constant="54" id="lbS-eg-dO1"/>
                                                                 <constraint firstItem="ph6-lN-gk8" firstAttribute="top" secondItem="B0P-hf-1r8" secondAttribute="bottom" id="rR1-jF-LaK"/>
                                                                 <constraint firstItem="YcQ-tN-0EW" firstAttribute="top" secondItem="mVu-H8-G7m" secondAttribute="bottom" constant="8" id="rUA-zN-Weq"/>
                                                                 <constraint firstItem="mVu-H8-G7m" firstAttribute="centerX" secondItem="jQ4-iG-2DL" secondAttribute="centerX" id="xwZ-CU-ITq"/>
@@ -1011,6 +1024,139 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="smE-jV-teo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1021" y="-1440"/>
+        </scene>
+        <!--Force Upgrade View Controller-->
+        <scene sceneID="oq4-ZT-QdJ">
+            <objects>
+                <viewController storyboardIdentifier="ForceUpgradeViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="61C-rt-en8" customClass="ForceUpgradeViewController" customModule="Morphii" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xFp-tS-9ZV"/>
+                        <viewControllerLayoutGuide type="bottom" id="yw2-Vf-Wb3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7hY-7j-vEa">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iM8-0c-esn">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="You Could Use an Upgrade!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Ujp-2M-tjD">
+                                        <rect key="frame" x="8" y="99" width="304" height="57"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="57" id="YLo-HE-xoq"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="23"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="It looks like you don't have the latest version of the Morphii app. Please go to the App Store to update." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="kRo-pT-mcQ">
+                                        <rect key="frame" x="8" y="164" width="304" height="87"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="87" id="t5Z-ql-KtJ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y4c-0n-XJJ">
+                                        <rect key="frame" x="76" y="457" width="168" height="39"/>
+                                        <color key="backgroundColor" red="0.0" green="0.8862745098" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="39" id="OBN-4L-kDu"/>
+                                            <constraint firstAttribute="width" constant="168" id="WXd-KG-QLp"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
+                                        <state key="normal" title="Go to the App Store">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="goToAppStoreButtonPressed:" destination="61C-rt-en8" eventType="touchUpInside" id="im8-hH-odD"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="kRo-pT-mcQ" firstAttribute="top" secondItem="Ujp-2M-tjD" secondAttribute="bottom" constant="8" id="9J5-gh-RIk"/>
+                                    <constraint firstAttribute="bottom" secondItem="Y4c-0n-XJJ" secondAttribute="bottom" constant="72" id="Kbi-ja-PQU"/>
+                                    <constraint firstItem="Y4c-0n-XJJ" firstAttribute="centerX" secondItem="iM8-0c-esn" secondAttribute="centerX" id="NAP-Dk-wkT"/>
+                                    <constraint firstItem="Ujp-2M-tjD" firstAttribute="top" secondItem="iM8-0c-esn" secondAttribute="top" constant="99" id="QVO-DV-sGr"/>
+                                    <constraint firstAttribute="trailing" secondItem="kRo-pT-mcQ" secondAttribute="trailing" constant="8" id="jtI-Kk-2jZ"/>
+                                    <constraint firstItem="kRo-pT-mcQ" firstAttribute="leading" secondItem="iM8-0c-esn" secondAttribute="leading" constant="8" id="lvz-LP-dQD"/>
+                                    <constraint firstItem="Ujp-2M-tjD" firstAttribute="leading" secondItem="iM8-0c-esn" secondAttribute="leading" constant="8" id="r11-3P-2zD"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ujp-2M-tjD" secondAttribute="trailing" constant="8" id="rkm-Hb-BWF"/>
+                                </constraints>
+                            </view>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W9n-Rp-apn">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="lIB-ik-mHu">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ke6-uC-xjd">
+                                            <rect key="frame" x="76" y="457" width="168" height="39"/>
+                                            <color key="backgroundColor" red="0.0" green="0.8862745098" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="168" id="0Ae-g6-2K5"/>
+                                                <constraint firstAttribute="height" constant="39" id="8YC-VB-633"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
+                                            <state key="normal" title="Go to the App Store">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="goToAppStoreButtonPressed:" destination="61C-rt-en8" eventType="touchUpInside" id="w0y-n9-tBs"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JhR-Af-Ow3">
+                                            <rect key="frame" x="8" y="99" width="304" height="57"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="57" id="Bfe-KO-Y4j"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="SFUIDisplay-Semibold" family="SF UI Display" pointSize="23"/>
+                                            <state key="normal" title="You Could Use an Upgrade!">
+                                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="It looks like you don't have the latest version of the Morphii app. Please go to the App Store to update." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1tC-Ea-dU5">
+                                            <rect key="frame" x="8" y="164" width="304" height="87"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="87" id="eE0-v4-hK6"/>
+                                            </constraints>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="JhR-Af-Ow3" secondAttribute="trailing" constant="8" id="JWz-n4-Box"/>
+                                        <constraint firstItem="JhR-Af-Ow3" firstAttribute="leading" secondItem="lIB-ik-mHu" secondAttribute="leading" constant="8" id="LET-oJ-KKX"/>
+                                        <constraint firstAttribute="bottom" secondItem="ke6-uC-xjd" secondAttribute="bottom" constant="72" id="NHn-Sb-aka"/>
+                                        <constraint firstItem="1tC-Ea-dU5" firstAttribute="width" secondItem="JhR-Af-Ow3" secondAttribute="width" id="NfM-DH-zj9"/>
+                                        <constraint firstItem="ke6-uC-xjd" firstAttribute="centerX" secondItem="lIB-ik-mHu" secondAttribute="centerX" id="TFQ-cf-sKi"/>
+                                        <constraint firstItem="1tC-Ea-dU5" firstAttribute="centerX" secondItem="JhR-Af-Ow3" secondAttribute="centerX" id="clY-wr-HrX"/>
+                                        <constraint firstItem="JhR-Af-Ow3" firstAttribute="top" secondItem="lIB-ik-mHu" secondAttribute="top" constant="99" id="sLH-NE-jyz"/>
+                                        <constraint firstItem="1tC-Ea-dU5" firstAttribute="top" secondItem="JhR-Af-Ow3" secondAttribute="bottom" constant="8" id="yvd-Gk-YVs"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="W9n-Rp-apn" firstAttribute="top" secondItem="7hY-7j-vEa" secondAttribute="top" id="6tV-kw-AGb"/>
+                            <constraint firstItem="yw2-Vf-Wb3" firstAttribute="top" secondItem="W9n-Rp-apn" secondAttribute="bottom" id="8v7-Ri-TEa"/>
+                            <constraint firstAttribute="trailing" secondItem="W9n-Rp-apn" secondAttribute="trailing" id="Ko1-1T-CAj"/>
+                            <constraint firstItem="W9n-Rp-apn" firstAttribute="leading" secondItem="7hY-7j-vEa" secondAttribute="leading" id="h39-q1-OXa"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="goToAppStoreButton" destination="ke6-uC-xjd" id="mjO-FQ-a6o"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ATd-jP-UDY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1378" y="-1440"/>
         </scene>
         <!--Home-->
         <scene sceneID="c9A-OF-oZq">

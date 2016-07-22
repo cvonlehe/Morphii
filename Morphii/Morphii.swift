@@ -38,6 +38,11 @@ class Morphii: NSManagedObject {
         //let recKeywords = morphiiRecords[i].valueForKey("keywords") as! [ String ]
         let recSequence = morphiiRecord.valueForKey(MorphiiAPIKeys.sequence) as! Int
         let groupName = morphiiRecord.valueForKey(MorphiiAPIKeys.groupName) as! String
+    
+        if let morphii = getMorphiisForId(recId) {
+            morphii.deleteMorphii(nil)
+        }
+        
         return setData(recId, name: recName, scaleType: scaleType, sequence: recSequence, groupName:groupName, metaData: metaData, emoodl: emoodl, isFavorite: isFavorite, tags: keywords, order: 1)
     }
     
@@ -68,6 +73,9 @@ class Morphii: NSManagedObject {
         }
         do {
             try CDHelper.sharedInstance.managedObjectContext.save()
+            if isFavorite {
+                morphii.setLastUsedDate(NSDate())
+            }
             return morphii
         }catch {
             return nil
@@ -130,6 +138,20 @@ class Morphii: NSManagedObject {
             return []
         }
         return morphiis
+    }
+    
+    class func getMorphiisForId (id:String) -> Morphii? {
+        let request = NSFetchRequest(entityName: EntityNames.Morphii)
+        let predicate = NSPredicate(format: "id == %@", id)
+        request.predicate = predicate
+        do {
+            guard let m = try CDHelper.sharedInstance.managedObjectContext.executeFetchRequest(request) as? [Morphii] else {
+                return nil
+            }
+            return m.first
+        }catch {
+            return nil
+        }
     }
     
     class func getTagsFromString (string:String?) -> [String] {
@@ -318,4 +340,15 @@ class Morphii: NSManagedObject {
         }
     }
     
+    class func deleteNonfavoriteMorphiis () -> Bool {
+        let request = NSFetchRequest(entityName: EntityNames.Morphii)
+        request.predicate = NSPredicate(format: "isFavorite == %@", NSNumber(bool: false))
+        let delteRequest = NSBatchDeleteRequest(fetchRequest: request)
+        do {
+            try CDHelper.sharedInstance.coordinator.executeRequest(delteRequest, withContext: CDHelper.sharedInstance.managedObjectContext)
+            return true
+        }catch {
+            return false
+        }
+    }
 }

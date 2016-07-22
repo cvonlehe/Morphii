@@ -93,18 +93,14 @@ class RecentView: ExtraView {
             MethodHelper.showSuccessErrorHUD(false, message: "Full Access Required", inView: self)
             return
         }
-        var morphiiView:MorphiiView? = MorphiiView(frame: CGRect(x: 0, y: 0, width: 600, height: 600))
-        morphiiView!.setUpMorphii(morphiiSelectionView.morphiiView.morphii, emoodl: morphiiSelectionView.morphiiView.morphii.emoodl?.doubleValue)
-        morphiiView?.backgroundColor = UIColor.whiteColor()
         
-        if morphiiView!.copyMorphyToClipboard() {
+        if morphiiSelectionView.morphiiView.copyMorphyToClipboard() {
             print("COPIED")
             MethodHelper.showSuccessErrorHUD(true, message: "Copied to Clipboard", inView: self)
         }else {
             print("NOT_COPIED")
             MethodHelper.showSuccessErrorHUD(false, message: "Error Copying. Try again", inView: self)
         }
-        morphiiView = nil
     }
     
     func loadNib() {

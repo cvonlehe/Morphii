@@ -350,14 +350,17 @@ class MorphiiView: UIView, MorphiiProtocol {
         //copy that image to the pasteboard
         guard let pasteBoard:UIPasteboard = UIPasteboard(name: UIPasteboardNameGeneral, create: false) else {return false}
         pasteBoard.persistent = true
+        backgroundColor = UIColor.whiteColor()
         let pbData:NSData = UIImagePNGRepresentation(getMorphiiImage())!
         pasteBoard.setValue(pbData, forPasteboardType:"public.png")
         if let value = pasteBoard.dataForPasteboardType("public.png") {
             if value == pbData {
                 morphii.setLastUsedDate(NSDate())
+                backgroundColor = UIColor.clearColor()
                 return true
             }
         }
+        backgroundColor = UIColor.clearColor()
         return false
     }
     

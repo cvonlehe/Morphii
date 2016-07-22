@@ -67,14 +67,8 @@ class AddFavoriteContainerView: ExtraView {
         sView.addConstraint(bottom)
         self.delegate = delegate
         self.morphiiView.setUpMorphii(morphiiView.morphii, emoodl: morphiiView.emoodl)
-        nameTextField.text = morphiiView.morphii.name
         morphiiView.userInteractionEnabled = false
-        if let tags = morphiiView.morphii.tags {
-            var tagsString = tags.componentsJoinedByString(" #")
-            tagsString = "#\(tagsString)"
-            tagsTextField.text = tagsString
-        }
-        
+        nameTextField.becomeFirstResponder()
     }
 
     @IBAction func closeButtonPressed(sender: UIButton) {

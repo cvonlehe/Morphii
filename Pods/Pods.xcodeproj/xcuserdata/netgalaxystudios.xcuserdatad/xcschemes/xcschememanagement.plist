@@ -9,6 +9,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>AWSCore.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>AWSMobileAnalytics.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Alamofire.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,7 +57,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2A9BD49BCE80A3A8BBD64004FA6459DD</key>
+		<key>29E8FE0B316EE83946F48C4684185D90</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2AE14E40D653E187BF6E224FBE83A1FE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -62,6 +77,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>63A2B70CD13FFB7C60AF5BEB9EB2CE03</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>6FD3CCBBEF3EB7E85F602344C6289F7B</key>
 		<dict>
 			<key>primary</key>
@@ -72,7 +92,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7D7577DDD1853CCF2115674F4D1644EA</key>
+		<key>AA6A0968F3CFA7234784FC6E71F3CE7E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,7 +102,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F27C968D9CEF919B9E355DBBF81F3B48</key>
+		<key>FC3557B6FFEE0E181E2C23F866C4DADC</key>
 		<dict>
 			<key>primary</key>
 			<true/>

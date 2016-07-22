@@ -49,7 +49,8 @@ class KeyboardViewController: UIInputViewController {
     var settingsView: ExtraView?
     var addFavoriteContainerView:UIView?
     var shareView:UIView?
-    
+    var addFavoriteView:AddFavoriteContainerView?
+
     override func loadView() {
         super.loadView()
         KeyboardViewController.sViewController = self
@@ -1022,14 +1023,16 @@ class KeyboardViewController: UIInputViewController {
         setHeight(350)
         viewDidLayoutSubviews()
         addFavoriteContainerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.size.width, height: 100))
-        view.addSubview(addFavoriteContainerView!)
+        view.insertSubview(addFavoriteContainerView!, belowSubview: forwardingView)
         let widthConstraint = NSLayoutConstraint(item: addFavoriteContainerView!, attribute: .Width, relatedBy: .Equal, toItem: self.view, attribute: .Width, multiplier: 1, constant: 0)
         let heightConstraint = NSLayoutConstraint(item: addFavoriteContainerView!, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 100)
         let xConstraint = NSLayoutConstraint(item: addFavoriteContainerView!, attribute: .CenterX, relatedBy: .Equal, toItem: self.view, attribute: .CenterX, multiplier: 1, constant: 0)
         let yConstraint = NSLayoutConstraint(item: addFavoriteContainerView!, attribute: .Top, relatedBy: .Equal, toItem: self.view, attribute: .Top, multiplier: 1, constant: 0)
         view.addConstraints([widthConstraint, heightConstraint, xConstraint, yConstraint])
-        let addToFavoritesView = AddFavoriteContainerView(globalColors: self.dynamicType.globalColors, darkMode: true, solidColorMode: self.solidColorMode())
-        addToFavoritesView.addToSuperView(addFavoriteContainerView!, morphiiView: morphiiView, delegate: self)
+        addFavoriteView = AddFavoriteContainerView(globalColors: self.dynamicType.globalColors, darkMode: true, solidColorMode: self.solidColorMode())
+        addFavoriteView?.addToSuperView(addFavoriteContainerView!, morphiiView: morphiiView, delegate: self)
+        addFavoriteView?.nameTextField.delegate = self
+        addFavoriteView?.tagsTextField.delegate = self
     }
     
 }
@@ -1040,6 +1043,58 @@ extension KeyboardViewController:AddFavoriteContainerViewDelegate {
         addFavoriteContainerView = nil
         setHeight(250)
         shareView?.hidden = false
-        recentView?.hidden = true
+        recentView?.hidden = false
+    }
+}
+
+extension KeyboardViewController:UITextFieldDelegate {
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        guard let favoriteView = addFavoriteView else {return false}
+        if string == "" {
+            return true
+        }
+        if favoriteView.tagsTextField == textField && string == " " {
+            guard let wordsArray = favoriteView.tagsTextField.text?.componentsSeparatedByString(" ") else {return true}
+            var newWords:[String] = []
+            for var word in wordsArray {
+                if let character = word.characters.first where "\(character)" != "#" {
+                    word = "#\(word)"
+                }
+                newWords.append(word)
+            }
+            favoriteView.tagsTextField.text = newWords.joinWithSeparator(" ")
+            print("WORDS:",newWords)
+        }else if textField == favoriteView.tagsTextField {
+            let characterSet = NSCharacterSet(charactersInString: acceptableCharacters)
+            let filtered = string.componentsSeparatedByCharactersInSet(characterSet).joinWithSeparator("")
+            return string != filtered
+        }
+        return true
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        guard let favoriteView = addFavoriteView else {return false}
+        guard let morphii = favoriteView.morphiiView.morphii else {return false}
+        if let _ = Morphii.createNewMorphii(favoriteView.nameTextField.text,
+                                            name: favoriteView.nameTextField.text,
+                                            scaleType: Int((morphii.scaleType!)),
+                                            sequence: Int((morphii.sequence)!),
+                                            groupName: "Your Saved Morphiis",
+                                            metaData: morphii.metaData,
+                                            emoodl: favoriteView.morphiiView.emoodl,
+                                            isFavorite: true,
+                                            tags: Morphii.getTagsFromString(favoriteView.tagsTextField.text), order: 5000) {
+            addFavoriteContainerView?.removeFromSuperview()
+            addFavoriteContainerView = nil
+            setHeight(250)
+            recentView?.backButtonPressed()
+            shareView?.removeFromSuperview()
+            shareView = nil
+            recentView?.hidden = false
+            setCenterView(.Favorites)
+            MethodHelper.showSuccessErrorHUD(true, message: "Saved to Favorites", inView: self.view)
+            MorphiiAPI.sendFavoriteData(morphii, favoriteNameO: favoriteView.nameTextField.text)
+        }
+        return true
     }
 }

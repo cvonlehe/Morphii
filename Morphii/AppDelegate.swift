@@ -88,3 +88,19 @@ extension AppDelegate:UITabBarControllerDelegate {
     }
 }
 
+extension UIApplication {
+    
+    func safeSharedApplication() -> UIApplication? {
+        guard UIApplication.respondsToSelector(#selector(UIApplication.sharedApplication)) else {
+            return nil
+        }
+        
+        guard let unmanagedSharedApplication = UIApplication.performSelector(#selector(UIApplication.sharedApplication)) else {
+            return nil
+        }
+        
+        return unmanagedSharedApplication.takeRetainedValue() as? UIApplication
+    }
+    
+}
+

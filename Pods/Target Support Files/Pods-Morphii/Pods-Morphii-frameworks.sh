@@ -84,6 +84,8 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods-Morphii/AWSCore.framework"
+  install_framework "Pods-Morphii/AWSMobileAnalytics.framework"
   install_framework "Pods-Morphii/Alamofire.framework"
   install_framework "Pods-Morphii/Bolts.framework"
   install_framework "Pods-Morphii/JGProgressHUD.framework"
@@ -92,6 +94,8 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Morphii/TPKeyboardAvoiding.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods-Morphii/AWSCore.framework"
+  install_framework "Pods-Morphii/AWSMobileAnalytics.framework"
   install_framework "Pods-Morphii/Alamofire.framework"
   install_framework "Pods-Morphii/Bolts.framework"
   install_framework "Pods-Morphii/JGProgressHUD.framework"

@@ -30,6 +30,7 @@ class HomeViewController: UIViewController {
         super.viewWillAppear(animated)
         print("VIEWWILLAPPEAR")
         self.createFetchedResultsController()
+
     }
     
     
@@ -57,6 +58,11 @@ class HomeViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        MorphiiAPI.checkIfAppIsUpdated { (updated) in
+            if !updated {
+                ForceUpgradeViewController.createForceUpgradeView(self)
+            }
+        }
         if !foundMorphiis {
             if collectionO == nil {
                 MethodHelper.showHudWithMessage("Checking for updates...", view: view)

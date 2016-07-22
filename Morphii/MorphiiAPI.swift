@@ -15,6 +15,8 @@ class MorphiiAPI {
     static let LOGINURL = "\(Config.getCurrentConfig().MORPHII_API_BASE_URL)/admin/v1/login"
     static let FAVORITEURL = "\(Config.getCurrentConfig().MORPHII_API_BASE_URL)/kbapp/v1/favorites"
     static let TRENDINGURL = "\(Config.getCurrentConfig().MORPHII_API_BASE_URL)/kbapp/v1/stats"
+    static let APPVERSIONURL = "\(Config.getCurrentConfig().MORPHII_API_BASE_URL)/admin/v1/mobileApp/kb?type=ios"
+    
 
     class func fetchNewMorphiis(completion: (morphiisArray: [ Morphii ], success:Bool) -> Void ) -> Void {
         if alreadyCheckedForMorphiisToday() {
@@ -72,12 +74,10 @@ class MorphiiAPI {
         }
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        print("ALREADY_CHECKED_TODAY")
         return last == dateFormatter.stringFromDate(NSDate())
     }
     
     class func processMorphiiDataArray (morphiiRecords:[NSDictionary]) -> [Morphii] {
-        
         for record in morphiiRecords {
             if let data = record.valueForKey(MorphiiAPIKeys.data) as? NSDictionary,
                 let _ = data.valueForKey(MorphiiAPIKeys.metaData),
@@ -234,5 +234,58 @@ class MorphiiAPI {
                 print("Handle \(error) here")
             }
         }
+    }
+    
+    class func checkIfAppIsUpdated (completion:(updated:Bool)->Void) {
+        print("checkIfAppIsUpdated1")
+        guard let versionString = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as? String else {
+            completion(updated: true)
+            return
+        }
+        print("checkIfAppIsUpdated2")
+
+        print("checkIfAppIsUpdated3")
+        let request = NSMutableURLRequest(URL: NSURL(string: APPVERSIONURL)!)
+        request.HTTPMethod = "GET"
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue()) { (responseO, dataO, errorO) in
+            print("checkIfAppIsUpdated4")
+            guard let data = dataO else {
+                completion(updated: true)
+                return
+            }
+            print("checkIfAppIsUpdated5")
+            var jsonDict:NSDictionary?
+            do {
+                try jsonDict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary
+                print("checkIfAppIsUpdated:",jsonDict)
+                guard let minVersionString = jsonDict?.objectForKey("minVersion") as? String else {
+                    completion(updated: true)
+                    return
+                }
+                print("VERSION_STRING:",addUpVersionOrBuildString(versionString),"MIN_VERSION:",addUpVersionOrBuildString(minVersionString))
+                if addUpVersionOrBuildString(versionString) < addUpVersionOrBuildString(minVersionString) {
+                    completion(updated: false)
+                }else {
+                    completion(updated: true)
+                }
+            }catch {
+                print("Handle \(error) here")
+                completion(updated: true)
+
+            }
+        }
+    }
+    
+    class func addUpVersionOrBuildString (versionBuildString:String) -> Int {
+        let stringArray = versionBuildString.componentsSeparatedByString(".")
+        var multiplier = 100000
+        var sum = 0
+        for string in stringArray {
+            if let value = Int(string) {
+                sum = sum + (value * multiplier)
+            }
+            multiplier = multiplier / 10
+        }
+        return sum
     }
 }
