@@ -22,7 +22,12 @@ class AddFavoriteContainerView: ExtraView {
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
         self.loadNib()
-
+        nameTextField.layer.cornerRadius = 4
+        tagsTextField.layer.cornerRadius = 4
+        nameTextField.layer.borderColor = UIColor.whiteColor().CGColor
+        tagsTextField.layer.borderColor = UIColor.whiteColor().CGColor
+        nameTextField.layer.borderWidth = 1
+        tagsTextField.layer.borderWidth = 1
     }
     
     required init?(coder aDecoder: NSCoder) {
