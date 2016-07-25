@@ -103,6 +103,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController:FetchedResultsDisplayer {
     
     func selectedMorphii (morphii:Morphii) {
+        MorphiiAPI.sendMorphiiSelectedToAWS(morphii)
         OverlayViewController.createOverlay(self, morphiiO: morphii)
     }
     

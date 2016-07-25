@@ -47,7 +47,7 @@
                         <constraint firstAttribute="width" constant="42" id="tM2-TO-mpc"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                     <variation key="default">
                         <mask key="constraints">
@@ -70,7 +70,7 @@
                         <constraint firstAttribute="width" constant="42" id="CEY-dM-Kuj"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                     <variation key="default">
                         <mask key="constraints">
@@ -85,13 +85,13 @@
                         <constraint firstAttribute="width" constant="50" id="qc5-2p-RMS"/>
                     </constraints>
                     <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="35" maxY="35"/>
-                    <state key="normal" image="close_icon"/>
+                    <state key="normal" image="close_white"/>
                     <connections>
                         <action selector="closeButtonPressed:" destination="-1" eventType="touchUpInside" id="s7V-rq-h2D"/>
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="EFU-em-eit" firstAttribute="leading" secondItem="mG1-PN-nqE" secondAttribute="trailing" constant="8" id="0Ux-Kf-u81"/>
                 <constraint firstItem="mG1-PN-nqE" firstAttribute="leading" secondItem="Cee-Oi-d9n" secondAttribute="trailing" constant="8" id="0bF-Hc-KPV"/>
@@ -127,6 +127,6 @@
         </view>
     </objects>
     <resources>
-        <image name="close_icon" width="33" height="33"/>
+        <image name="close_white" width="33" height="33"/>
     </resources>
 </document>

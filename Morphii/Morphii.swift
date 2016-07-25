@@ -340,6 +340,21 @@ class Morphii: NSManagedObject {
         }
     }
     
+    class func getNonfavoriteMorphiis () -> [Morphii] {
+        var morphiis:[Morphii] = []
+        let request = NSFetchRequest(entityName: EntityNames.Morphii)
+        request.predicate = NSPredicate(format: "isFavorite == %@", NSNumber(bool: false))
+        do {
+            guard let m = try CDHelper.sharedInstance.managedObjectContext.executeFetchRequest(request) as? [Morphii] else {
+                return []
+            }
+            morphiis.appendContentsOf(m)
+        }catch {
+            return []
+        }
+        return morphiis
+    }
+    
     class func deleteNonfavoriteMorphiis () -> Bool {
         let request = NSFetchRequest(entityName: EntityNames.Morphii)
         request.predicate = NSPredicate(format: "isFavorite == %@", NSNumber(bool: false))

@@ -357,14 +357,16 @@
                                                             <rect key="frame" x="0.0" y="41" width="304" height="353"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mVu-H8-G7m" customClass="MorphiiView" customModule="Morphii" customModuleProvider="target">
-                                                                    <rect key="frame" x="54" y="0.0" width="195" height="195"/>
+                                                                    <rect key="frame" x="55" y="0.0" width="195" height="195"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="mVu-H8-G7m" secondAttribute="height" multiplier="1:1" id="FmV-eh-sYU"/>
                                                                         <constraint firstAttribute="height" constant="195" id="Q7L-eT-OI8"/>
                                                                         <constraint firstAttribute="width" constant="195" id="ZVO-7j-rDc"/>
                                                                     </constraints>
                                                                     <variation key="default">
                                                                         <mask key="constraints">
+                                                                            <exclude reference="Q7L-eT-OI8"/>
                                                                             <exclude reference="ZVO-7j-rDc"/>
                                                                         </mask>
                                                                     </variation>
@@ -458,6 +460,9 @@
                                                                 </view>
                                                                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ph6-lN-gk8" customClass="MorphiiScrollView" customModule="Morphii" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="281" width="304" height="72"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="72" id="kJj-n7-bHK"/>
+                                                                    </constraints>
                                                                 </scrollView>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -468,12 +473,14 @@
                                                                 <constraint firstItem="ph6-lN-gk8" firstAttribute="leading" secondItem="jQ4-iG-2DL" secondAttribute="leading" id="4i4-x4-mjl"/>
                                                                 <constraint firstItem="mVu-H8-G7m" firstAttribute="top" secondItem="jQ4-iG-2DL" secondAttribute="top" id="4iQ-B2-7MS"/>
                                                                 <constraint firstAttribute="trailing" secondItem="B0P-hf-1r8" secondAttribute="trailing" id="6lM-M4-xbX"/>
-                                                                <constraint firstAttribute="trailing" secondItem="mVu-H8-G7m" secondAttribute="trailing" constant="55" id="C2s-0p-uwf"/>
+                                                                <constraint firstItem="YcQ-tN-0EW" firstAttribute="top" secondItem="mVu-H8-G7m" secondAttribute="bottom" constant="8" id="8ef-ey-KGd"/>
+                                                                <constraint firstAttribute="trailing" secondItem="mVu-H8-G7m" secondAttribute="trailing" constant="8" id="C2s-0p-uwf"/>
                                                                 <constraint firstItem="B0P-hf-1r8" firstAttribute="leading" secondItem="jQ4-iG-2DL" secondAttribute="leading" id="Ifw-n5-NdL"/>
                                                                 <constraint firstAttribute="trailing" secondItem="YcQ-tN-0EW" secondAttribute="trailing" id="Ng4-Xd-C58"/>
                                                                 <constraint firstAttribute="trailing" secondItem="ph6-lN-gk8" secondAttribute="trailing" id="XBL-aL-cdx"/>
+                                                                <constraint firstItem="mVu-H8-G7m" firstAttribute="centerX" secondItem="jQ4-iG-2DL" secondAttribute="centerX" id="eVk-YU-JOj"/>
                                                                 <constraint firstAttribute="width" constant="304" id="iuy-Mf-Ezx"/>
-                                                                <constraint firstItem="mVu-H8-G7m" firstAttribute="leading" secondItem="jQ4-iG-2DL" secondAttribute="leading" constant="54" id="lbS-eg-dO1"/>
+                                                                <constraint firstItem="mVu-H8-G7m" firstAttribute="leading" secondItem="jQ4-iG-2DL" secondAttribute="leading" constant="8" id="lbS-eg-dO1"/>
                                                                 <constraint firstItem="ph6-lN-gk8" firstAttribute="top" secondItem="B0P-hf-1r8" secondAttribute="bottom" id="rR1-jF-LaK"/>
                                                                 <constraint firstItem="YcQ-tN-0EW" firstAttribute="top" secondItem="mVu-H8-G7m" secondAttribute="bottom" constant="8" id="rUA-zN-Weq"/>
                                                                 <constraint firstItem="mVu-H8-G7m" firstAttribute="centerX" secondItem="jQ4-iG-2DL" secondAttribute="centerX" id="xwZ-CU-ITq"/>
@@ -481,6 +488,10 @@
                                                             <variation key="default">
                                                                 <mask key="constraints">
                                                                     <exclude reference="iuy-Mf-Ezx"/>
+                                                                    <exclude reference="C2s-0p-uwf"/>
+                                                                    <exclude reference="lbS-eg-dO1"/>
+                                                                    <exclude reference="xwZ-CU-ITq"/>
+                                                                    <exclude reference="rUA-zN-Weq"/>
                                                                 </mask>
                                                             </variation>
                                                         </view>
@@ -601,6 +612,9 @@
                                                                             <rect key="frame" x="88" y="0.0" width="208" height="44"/>
                                                                             <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
                                                                             <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
+                                                                            <connections>
+                                                                                <outlet property="delegate" destination="Aqg-M8-e7q" id="6Nb-0B-I9j"/>
+                                                                            </connections>
                                                                         </textField>
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1846,7 +1860,7 @@
                                             <constraint firstAttribute="height" constant="30" id="Mfe-gN-fWG"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="20"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3BY-yI-pWy">
@@ -1856,7 +1870,7 @@
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="uVv-jt-yqh"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="default">
                                             <mask key="constraints">

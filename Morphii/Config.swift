@@ -18,6 +18,8 @@ class Config: NSObject {
     var MORPHII_API_USER_NAME = ""
     var MORPHII_API_PASSWORD = ""
     var appStoreUrl = "https://itunes.apple.com/us/app/netgalaxy-studios/id1114136380?ls=1&mt=8"
+    var AWS_APP_ID = ""
+    var AWS_POOL_ID = ""
 
     init(pfConfig:PFConfig) {
         super.init()
@@ -38,6 +40,12 @@ class Config: NSObject {
         }
         if let url = pfConfig.objectForKey(PFConfigValues.appStoreUrl) as? String {
             self.appStoreUrl = url
+        }
+        if let appId = pfConfig.objectForKey(PFConfigValues.AWS_APP_ID) as? String {
+            self.AWS_APP_ID = appId
+        }
+        if let poolId = pfConfig.objectForKey(PFConfigValues.AWS_POOL_ID) as? String {
+            self.AWS_POOL_ID = poolId
         }
     }
     

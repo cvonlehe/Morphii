@@ -66,6 +66,8 @@ class PFConfigValues {
     static let MORPHII_API_USER_NAME = "MORPHII_API_USER_NAME"
     static let MORPHII_API_PASSWORD = "MORPHII_API_PASSWORD"
     static let appStoreUrl = "appStoreUrl"
+    static let AWS_APP_ID = "AWS_APP_ID"
+    static let AWS_POOL_ID = "AWS_POOL_ID"
 }
 
 class EntityNames {

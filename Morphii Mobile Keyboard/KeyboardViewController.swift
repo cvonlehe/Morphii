@@ -21,7 +21,7 @@ let kSmallLowercase = "kSmallLowercase"
 class KeyboardViewController: UIInputViewController {
     static var sViewController:KeyboardViewController!
     static var returnKeyString = "Done"
-
+    var defaultColor:UIColor!
     var globeContainerView:UIView!
     var recentContainerView:UIView!
     var favoriteContainerView:UIView!
@@ -53,6 +53,11 @@ class KeyboardViewController: UIInputViewController {
 
     override func loadView() {
         super.loadView()
+        if let color = view.backgroundColor {
+            defaultColor = color
+        }else {
+            defaultColor = UIColor ( red: 0.7765, green: 0.7961, blue: 0.8196, alpha: 1.0 )
+        }
         KeyboardViewController.sViewController = self
         if let aBanner = self.createBanner() {
             aBanner.hidden = true
@@ -410,12 +415,13 @@ class KeyboardViewController: UIInputViewController {
     
     // only available after frame becomes non-zero
     func darkMode() -> Bool {
-        let darkMode = { () -> Bool in
-            let proxy = self.textDocumentProxy
-            return proxy.keyboardAppearance == UIKeyboardAppearance.Dark
-        }()
-        
-        return darkMode
+//        let darkMode = { () -> Bool in
+//            let proxy = self.textDocumentProxy
+//            return proxy.keyboardAppearance == UIKeyboardAppearance.Dark
+//        }()
+//        
+//        return darkMode
+        return true
     }
     
     func solidColorMode() -> Bool {
@@ -1033,6 +1039,7 @@ class KeyboardViewController: UIInputViewController {
         addFavoriteView?.addToSuperView(addFavoriteContainerView!, morphiiView: morphiiView, delegate: self)
         addFavoriteView?.nameTextField.delegate = self
         addFavoriteView?.tagsTextField.delegate = self
+        view.backgroundColor = UIColor.darkGrayColor()
     }
     
 }
@@ -1044,6 +1051,7 @@ extension KeyboardViewController:AddFavoriteContainerViewDelegate {
         setHeight(250)
         shareView?.hidden = false
         recentView?.hidden = false
+        view.backgroundColor = defaultColor
     }
 }
 
@@ -1093,7 +1101,7 @@ extension KeyboardViewController:UITextFieldDelegate {
             recentView?.hidden = false
             setCenterView(.Favorites)
             MethodHelper.showSuccessErrorHUD(true, message: "Saved to Favorites", inView: self.view)
-            MorphiiAPI.sendFavoriteData(morphii, favoriteNameO: favoriteView.nameTextField.text)
+            MorphiiAPI.sendFavoriteData(morphii, favoriteNameO: favoriteView.nameTextField.text, emoodl: favoriteView.morphiiView.emoodl)
         }
         return true
     }

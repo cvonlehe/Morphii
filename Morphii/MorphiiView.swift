@@ -291,6 +291,7 @@ class MorphiiView: UIView, MorphiiProtocol {
     }
     
     func showGestureForPanRecognizer(recognizer: UIPanGestureRecognizer) {
+        let beginIntensity = NSNumber(double: emoodl)
         if recognizer.state == UIGestureRecognizerState.Changed || recognizer.state == UIGestureRecognizerState.Ended {
             let translation:CGPoint = recognizer.translationInView(self)
             if (self.morphii.scaleType == 1){
@@ -304,6 +305,12 @@ class MorphiiView: UIView, MorphiiProtocol {
                 self.emoodl -= (Double(translation.y)) / 2.5
             }
             recognizer.setTranslation(CGPointZero, inView: self)
+        }
+        if recognizer.state == .Ended {
+            let endIntensity = NSNumber(double: emoodl)
+            print("BEGIN:",beginIntensity,"END:",endIntensity)
+            MorphiiAPI.sendIntensityChangeToAWS(morphii, beginIntensity: beginIntensity, endIntensity: endIntensity)
+
         }
     }
     
@@ -348,19 +355,17 @@ class MorphiiView: UIView, MorphiiProtocol {
 
         
         //copy that image to the pasteboard
+        backgroundColor = UIColor.whiteColor()
         guard let pasteBoard:UIPasteboard = UIPasteboard(name: UIPasteboardNameGeneral, create: false) else {return false}
         pasteBoard.persistent = true
-        backgroundColor = UIColor.whiteColor()
         let pbData:NSData = UIImagePNGRepresentation(getMorphiiImage())!
         pasteBoard.setValue(pbData, forPasteboardType:"public.png")
         if let value = pasteBoard.dataForPasteboardType("public.png") {
             if value == pbData {
                 morphii.setLastUsedDate(NSDate())
-                backgroundColor = UIColor.clearColor()
                 return true
             }
         }
-        backgroundColor = UIColor.clearColor()
         return false
     }
     
@@ -427,7 +432,8 @@ class MorphiiView: UIView, MorphiiProtocol {
 //        
 //        //end the graphics context
 //        UIGraphicsEndImageContext()
-        
+        layer.cornerRadius = frame.size.width / 2
+        clipsToBounds = true
         UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
         layer.renderInContext(UIGraphicsGetCurrentContext()!)
         var morphiiPic = UIGraphicsGetImageFromCurrentImageContext()

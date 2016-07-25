@@ -36,7 +36,7 @@ class RecentView: ExtraView {
         switch fetchType {
         case .Home:
             titleLabel.text = "All Morphiis"
-            morphiis = Morphii.fetchAllMorphiis()
+            morphiis = Morphii.getNonfavoriteMorphiis()
             break
         case .Recents:
             morphiis = Morphii.getMostRecentlyUsedMorphiis()

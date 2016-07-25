@@ -107,7 +107,7 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
         CDHelper.sharedInstance.saveContext { (success) in
             if success {
                 MethodHelper.showSuccessErrorHUD(true, message: "Saved", inView: self.view)
-                MorphiiAPI.sendFavoriteData(self.morphiiO, favoriteNameO: self.favoriteNameTextField.text)
+                MorphiiAPI.sendFavoriteData(self.morphiiO, favoriteNameO: self.favoriteNameTextField.text, emoodl: self.favoriteMorphiiView.emoodl)
             }else {
                 MethodHelper.showAlert("Error", message: "There was an error saving your morphii. Please try again")
             }
