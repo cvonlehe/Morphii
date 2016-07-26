@@ -45,38 +45,45 @@ class SettingsViewController: UIViewController {
         let nextView = self.storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.SettingsWebViewController) as! SettingsWebViewController
         nextView.loadURL = SettingsWebViewController.URLs.ourBlog
         presentViewController(nextView, animated: true, completion: nil)
+        MorphiiAPI.sendUserProfileActionToAWS(ProfileActions.OurBlog)
     }
     
     func privacyPolicyContainerViewTapped (tap:UITapGestureRecognizer) {
         let nextView = self.storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.SettingsWebViewController) as! SettingsWebViewController
         nextView.loadURL = SettingsWebViewController.URLs.privacyPolicy
         presentViewController(nextView, animated: true, completion: nil)
+        MorphiiAPI.sendUserProfileActionToAWS(ProfileActions.PrivacyPolicy)
     }
     
     func termsContainerViewTapped (tap:UITapGestureRecognizer) {
         let nextView = self.storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.SettingsWebViewController) as! SettingsWebViewController
         nextView.loadURL = SettingsWebViewController.URLs.termsAndConditions
         presentViewController(nextView, animated: true, completion: nil)
+        MorphiiAPI.sendUserProfileActionToAWS(ProfileActions.TermsAndConditions)
     }
     
     func feedbackContainerViewTapped (tap:UITapGestureRecognizer) {
         let nextView = self.storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.SettingsWebViewController) as! SettingsWebViewController
         nextView.loadURL = SettingsWebViewController.URLs.feedback
         presentViewController(nextView, animated: true, completion: nil)
+        MorphiiAPI.sendUserProfileActionToAWS(ProfileActions.Feedback)
     }
     
     func inviteFriendsContainerViewTapped (tap:UITapGestureRecognizer) {
         let string = "Check out Morphii Keyboard: \(Config.getCurrentConfig().appStoreUrl)"
         let activityViewController = UIActivityViewController(activityItems: [string], applicationActivities: nil)
         presentViewController(activityViewController, animated: true, completion: nil)
+        MorphiiAPI.sendUserProfileActionToAWS(ProfileActions.InviteFriends)
     }
     
     func rateThisAppContainerViewTapped (tap:UITapGestureRecognizer) {
         openURLInDefaultBrowser(Config.getCurrentConfig().appStoreUrl)
+        MorphiiAPI.sendUserProfileActionToAWS(ProfileActions.RateThisApp)
     }
     
     func setupKeyboardContainerViewTapped (tap:UITapGestureRecognizer) {
         TutorialViewController.presenTutorialViewController(self)
+        MorphiiAPI.sendUserProfileActionToAWS(ProfileActions.SetupMorphiiKeyboard)
     }
     
     override func viewDidLayoutSubviews() {
@@ -91,6 +98,7 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func switchFlipped(sender: UISwitch) {
+        MorphiiAPI.sendUserProfileChangeToAWS(ProfileChanges.addUrl, begin: !sender.on, end: sender.on)
         MethodHelper.setShouldNotAddURLToMessages(!sender.on)
     }
     

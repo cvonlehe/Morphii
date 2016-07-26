@@ -23,7 +23,22 @@ class HomeViewController: UIViewController {
         // Do any additional setup after loading the view.
         print("CURRENT_USER:",User.getCurrentUser()?.objectID)
 
-        performSelector(#selector(HomeViewController.createFetchedResultsController), withObject: nil, afterDelay: 3)
+        performSelector(#selector(HomeViewController.createFetchedResultsController), withObject: nil, afterDelay: 2)
+        if !MethodHelper.isReturningUser() {
+            getMorphiisFromJSONFile()
+            TutorialViewController.presenTutorialViewController(self)
+        }
+    }
+    
+    func getMorphiisFromJSONFile () {
+        guard let path = NSBundle.mainBundle().pathForResource("kb-app-morphiis", ofType: "json") else {return}
+        do {
+            let string = try String(contentsOfFile: path, encoding: NSUTF8StringEncoding)
+            guard let data = string.dataUsingEncoding(NSUTF8StringEncoding) else {return}
+            MorphiiAPI.convertJSONToMorphiis(data)
+        }catch {
+            
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -78,9 +93,7 @@ class HomeViewController: UIViewController {
             MethodHelper.hideHUD()
             self.fetcher.refreshFetchResults()
             self.collectionView.reloadData()
-            if !MethodHelper.isReturningUser() {
-                TutorialViewController.presenTutorialViewController(self)
-            }
+
         }
     }
 

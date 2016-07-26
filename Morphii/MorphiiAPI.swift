@@ -122,6 +122,47 @@ class MorphiiAPI {
         eventClient.submitEvents()
     }
     
+    class func sendMorphiiSendToAWS (morphii:Morphii, intensity:NSNumber, area:String?, name:String, share:String) {
+        guard let eventClient = awsEventClient else {return}
+        let event = eventClient.createEventWithEventType(AWSEvents.MorphiiFavoriteSave)
+        guard event != nil else {return}
+        guard let id = morphii.id, let name = morphii.name else {return}
+        event.addAttribute(id, forKey: AWSAttributes.id)
+        event.addAttribute(name, forKey: AWSAttributes.name)
+        event.addAttribute(share, forKey: AWSAttributes.share)
+        event.addMetric(intensity, forKey: AWSAttributes.intensity)
+        eventClient.recordEvent(event)
+        eventClient.submitEvents()
+    }
+    
+    class func sendUserProfileChangeToAWS (propertyName:String, begin:Bool, end:Bool) {
+        guard let eventClient = awsEventClient else {return}
+        let event = eventClient.createEventWithEventType(AWSEvents.MorphiiFavoriteSave)
+        guard event != nil else {return}
+        event.addAttribute(propertyName, forKey: AWSAttributes.name)
+        var beginString = "false"
+        if begin {
+            beginString = "true"
+        }
+        var endString = "false"
+        if end {
+            endString = "true"
+        }
+        event.addAttribute(beginString, forKey: AWSAttributes.begin)
+        event.addAttribute(endString, forKey: AWSAttributes.end)
+        eventClient.recordEvent(event)
+        eventClient.submitEvents()
+    }
+    
+    class func sendUserProfileActionToAWS (actionName:String) {
+        guard let eventClient = awsEventClient else {return}
+        let event = eventClient.createEventWithEventType(AWSEvents.MorphiiFavoriteSave)
+        guard event != nil else {return}
+        event.addAttribute(actionName, forKey: AWSAttributes.name)
+        eventClient.recordEvent(event)
+        eventClient.submitEvents()
+    }
+    
     class AWSEvents {
         static let MorphiiSelect = "morphii-change"
         static let MorphiiChangeIntensity = "morphii-intensity-change"

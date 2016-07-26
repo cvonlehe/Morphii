@@ -1096,7 +1096,7 @@ extension KeyboardViewController:UITextFieldDelegate {
                                             emoodl: favoriteView.morphiiView.emoodl,
                                             isFavorite: true,
                                             tags: tags, order: 5000) {
-         MorphiiAPI.sendFavoriteData(morphii, favoriteNameO: favoriteView.nameTextField.text, emoodl: favoriteView.morphiiView.emoodl, tags: tags)
+
             addFavoriteContainerView?.removeFromSuperview()
             addFavoriteContainerView = nil
             setHeight(250)
@@ -1107,6 +1107,24 @@ extension KeyboardViewController:UITextFieldDelegate {
             setCenterView(.Favorites)
             MethodHelper.showSuccessErrorHUD(true, message: "Saved to Favorites", inView: self.view)
             MorphiiAPI.sendFavoriteData(morphii, favoriteNameO: favoriteView.nameTextField.text, emoodl: favoriteView.morphiiView.emoodl, tags: tags)
+            //HERE
+            var area = ""
+            switch centerView {
+            case .Favorites:
+                area = MorphiiAreas.keyboardFavorites
+                break
+            case .Home:
+                area = MorphiiAreas.keyboardHome
+                break
+            case .Recents:
+                area = MorphiiAreas.keyboardRecent
+                break
+            default:
+                area = "Other"
+                break
+            }
+            
+            MorphiiAPI.sendMorphiiFavoriteSavedToAWS(favoriteView.morphiiView.morphii, intensity: favoriteView.morphiiView.emoodl, area: area, name: favoriteView.nameTextField.text!, tags: tags)
         }
         return true
     }

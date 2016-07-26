@@ -101,8 +101,9 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
 //            presentViewController(alertController, animated: true, completion: nil)
 //            return
 //        }
-         let tags = Morphii.getTagsFromString(favoriteTagsTextField.text)
         setCenterView(.MorphiiModifyView)
+        MethodHelper.showSuccessErrorHUD(true, message: "Saved", inView: self.view)
+         let tags = Morphii.getTagsFromString(favoriteTagsTextField.text)
         morhpiiNameLabel.text = favoriteNameTextField.text
         morphiiView.emoodl = favoriteMorphiiView.emoodl
         favoriteNameTextField.resignFirstResponder()
@@ -112,7 +113,7 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
         morphiiO?.emoodl = morphiiView.emoodl
         CDHelper.sharedInstance.saveContext { (success) in
             if success {
-                MethodHelper.showSuccessErrorHUD(true, message: "Saved", inView: self.view)
+
                 MorphiiAPI.sendFavoriteData(self.morphiiO, favoriteNameO: self.favoriteNameTextField.text, emoodl: self.favoriteMorphiiView.emoodl, tags: tags)
             }else {
                 MethodHelper.showAlert("Error", message: "There was an error saving your morphii. Please try again")

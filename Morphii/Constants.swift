@@ -94,4 +94,18 @@ class MorphiiAreas {
     static let keyboardSearch = "keyboard-search"
 }
 
+class ProfileChanges {
+    static let addUrl = "Add URL to Message"
+}
+
+class ProfileActions {
+    static let SetupMorphiiKeyboard = "Setup Morphii Keyboard"
+    static let InviteFriends = "Invite Friends"
+    static let Feedback = "Feedback"
+    static let RateThisApp = "Rate this App"
+    static let OurBlog = "Our Blog"
+    static let PrivacyPolicy = "Privacy Policy"
+    static let TermsAndConditions = "Terms and Conditions"
+}
+
 let acceptableCharacters = " #0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
