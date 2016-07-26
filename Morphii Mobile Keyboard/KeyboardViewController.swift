@@ -64,6 +64,9 @@ class KeyboardViewController: UIInputViewController {
             self.view.insertSubview(aBanner, belowSubview: self.forwardingView)
             self.bannerView = aBanner
         }
+        MorphiiAPI.setupParse()
+        MorphiiAPI.setupAWS()
+
     }
     
     override func viewWillAppear(animated: Bool) {

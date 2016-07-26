@@ -31,6 +31,7 @@ class MorphiiView: UIView, MorphiiProtocol {
     //var morphii:MorphiiClass.MorphiiFile!
     var morphii:Morphii!
     private var completion:((hasAccess:Bool, success:Bool)->Void)?
+    var area:String?
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -308,8 +309,8 @@ class MorphiiView: UIView, MorphiiProtocol {
         }
         if recognizer.state == .Ended {
             let endIntensity = NSNumber(double: emoodl)
-            print("BEGIN:",beginIntensity,"END:",endIntensity)
-            MorphiiAPI.sendIntensityChangeToAWS(morphii, beginIntensity: beginIntensity, endIntensity: endIntensity)
+            print("BEGIN:",beginIntensity,"END:",endIntensity,"AREA:",area)
+            MorphiiAPI.sendIntensityChangeToAWS(morphii, beginIntensity: beginIntensity, endIntensity: endIntensity, area: area)
 
         }
     }

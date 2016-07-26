@@ -35,7 +35,8 @@ class OverlayViewController: UIViewController {
     @IBOutlet weak var morphiiNameLabel: UILabel!
     var collections = Morphii.getCollectionTitles()
     var favoriteMorphiiView:MorphiiSelectionView?
-    
+    var area:String?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.scrollEnabled = false
@@ -60,11 +61,12 @@ class OverlayViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    class func createOverlay<Delegate:UIViewController where Delegate:OverlayViewControllerDelegate> (viewController:Delegate, morphiiO:Morphii?) {
+    class func createOverlay<Delegate:UIViewController where Delegate:OverlayViewControllerDelegate> (viewController:Delegate, morphiiO:Morphii?, area:String) {
         let nextView = viewController.storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.OverlayViewController) as! OverlayViewController
         viewController.presentViewController(nextView, animated: true, completion: nil)
         nextView.morphiiO = morphiiO
         nextView.delegateO = viewController
+        nextView.area = area
         if let _ = nextView.morphiiO {
             nextView.setMorphii()
         }
@@ -176,6 +178,7 @@ extension OverlayViewController {
             collectionNameLabel.text = collectionName
             morphiiScrollView.setMorphiis(Morphii.getMorphiisForCollectionTitle(collectionName), delegate: self)
         }
+        morphiiView.area = self.area
         print("MORPHII_GROUP:",self.morphiiO!.groupName)
     }
     

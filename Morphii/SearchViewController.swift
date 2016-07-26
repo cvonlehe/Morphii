@@ -143,13 +143,13 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource {
         if indexPath.section == 0 {
             let morphii = self.morphiis[indexPath.row]
             guard let isFavorite  = morphii.isFavorite?.boolValue else {
-                OverlayViewController.createOverlay(self, morphiiO: morphii)
+                OverlayViewController.createOverlay(self, morphiiO: morphii, area: MorphiiAreas.keyboardSearch)
                 return
             }
             if isFavorite {
-                ModifiedMorphiiOverlayViewController.createModifiedMorphiiOverlay(self, morphiiO: morphii)
+                ModifiedMorphiiOverlayViewController.createModifiedMorphiiOverlay(self, morphiiO: morphii, area: MorphiiAreas.keyboardSearch)
             }else {
-                OverlayViewController.createOverlay(self, morphiiO: morphii)
+                OverlayViewController.createOverlay(self, morphiiO: morphii, area: MorphiiAreas.keyboardSearch)
             }
         }else if indexPath.section == 2, let cell = tableView.cellForRowAtIndexPath(indexPath) as? MorphiiTableViewCell, let name = cell.nameLabel.text, let nextView = storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.HomeViewController) as?  HomeViewController {
             nextView.collectionO = name

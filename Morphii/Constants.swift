@@ -84,4 +84,14 @@ class CollectionReusableViewIds {
     static let HeaderCollectionReusableView = "HeaderCollectionReusableView"
 }
 
+class MorphiiAreas {
+    static let containerHome = "container­-home"
+    static let containerFavorites = "container­-favorites"
+    static let containerTrending = "container­-trending"
+    static let keyboardHome = "keyboard-home"
+    static let keyboardRecent = "keyboard-recent"
+    static let keyboardFavorites = "keyboard-favorites"
+    static let keyboardSearch = "keyboard-search"
+}
+
 let acceptableCharacters = " #0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"

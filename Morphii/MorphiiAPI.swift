@@ -10,6 +10,8 @@ import UIKit
 import Alamofire
 import AWSMobileAnalytics
 import CoreLocation
+import DeviceKit
+import Parse
 
 class MorphiiAPI {
     static var lastDate = "2015-05-15"
@@ -49,51 +51,98 @@ class MorphiiAPI {
         }
     }
     
+    class func setupParse () {
+        Parse.initializeWithConfiguration(ParseClientConfiguration { (config:ParseMutableClientConfiguration) -> Void in
+            config.applicationId = "morphiiappid9587983476t3"
+            config.clientKey = "abc123"
+            config.server = "http://162.243.251.100:1337/parse"
+            })
+    }
+    
     class func setupAWS () {
-        let analytics = AWSMobileAnalytics(forAppId: Config.getCurrentConfig().AWS_APP_ID, identityPoolId: Config.getCurrentConfig().AWS_POOL_ID)
-        if analytics != nil {
-            if analytics.eventClient != nil {
-                awsEventClient = analytics.eventClient
+        print("setupAWS1")
+        Config.refreshConfig { (success) in
+            print("setupAWS2")
+            let analytics = AWSMobileAnalytics(forAppId: Config.getCurrentConfig().AWS_APP_ID, identityPoolId: Config.getCurrentConfig().AWS_POOL_ID)
+            if analytics != nil {
+                if analytics.eventClient != nil {
+                    awsEventClient = analytics.eventClient
+                }
             }
         }
     }
     
-    class func sendMorphiiSelectedToAWS (morphii:Morphii) {
+    class func sendMorphiiSelectedToAWS (morphii:Morphii, area:String) {
+        print("sendMorphiiSelectedToAWS1")
         guard let eventClient = awsEventClient else {return}
+        print("sendMorphiiSelectedToAWS2")
         let event = eventClient.createEventWithEventType(AWSEvents.MorphiiSelect)
         guard event != nil else {return}
+        print("sendMorphiiSelectedToAWS3")
         guard let id = morphii.id, let name = morphii.name, let intensity = morphii.emoodl else {return}
-        event.addAttribute(id, forKey: AWSAttributes.morphiiId)
-        event.addAttribute(name, forKey: AWSAttributes.morphiiName)
-        event.addMetric(intensity, forKey: AWSAttributes.morphiiIntensity)
+        print("sendMorphiiSelectedToAWS4")
+        event.addAttribute(id, forKey: AWSAttributes.id)
+        event.addAttribute(name, forKey: AWSAttributes.name)
+        event.addAttribute(area, forKey: AWSAttributes.area)
+        event.addMetric(intensity, forKey: AWSAttributes.intensity)
         eventClient.recordEvent(event)
         eventClient.submitEvents()
     }
     
-    class func sendIntensityChangeToAWS (morphii:Morphii, beginIntensity:NSNumber, endIntensity:NSNumber) {
+    class func sendIntensityChangeToAWS (morphii:Morphii, beginIntensity:NSNumber, endIntensity:NSNumber, area:String?) {
         guard let eventClient = awsEventClient else {return}
         let event = eventClient.createEventWithEventType(AWSEvents.MorphiiSelect)
         guard event != nil else {return}
         guard let id = morphii.id, let name = morphii.name else {return}
-        event.addAttribute(id, forKey: AWSAttributes.morphiiId)
-        event.addAttribute(name, forKey: AWSAttributes.morphiiName)
-        event.addMetric(beginIntensity, forKey: AWSAttributes.beginIntensity)
-        event.addMetric(endIntensity, forKey: AWSAttributes.endIntensity)
+        event.addAttribute(id, forKey: AWSAttributes.id)
+        event.addAttribute(name, forKey: AWSAttributes.name)
+        if let a = area {
+            event.addAttribute(a, forKey: AWSAttributes.area)
+        }
+        event.addMetric(beginIntensity, forKey: AWSAttributes.begin)
+        event.addMetric(endIntensity, forKey: AWSAttributes.end)
+        eventClient.recordEvent(event)
+        eventClient.submitEvents()
+    }
+    
+    class func sendMorphiiFavoriteSavedToAWS (morphii:Morphii, intensity:NSNumber, area:String?, name:String, tags:[String]) {
+        guard let eventClient = awsEventClient else {return}
+        let event = eventClient.createEventWithEventType(AWSEvents.MorphiiFavoriteSave)
+        guard event != nil else {return}
+        guard let id = morphii.id, let name = morphii.name else {return}
+        event.addAttribute(id, forKey: AWSAttributes.id)
+        event.addAttribute(name, forKey: AWSAttributes.name)
+        if let a = area {
+            event.addAttribute(a, forKey: AWSAttributes.area)
+        }
+        let tagString = tags.joinWithSeparator(", ")
+        event.addAttribute(tagString, forKey: AWSAttributes.userProvidedTags)
+        event.addMetric(intensity, forKey: AWSAttributes.intensity)
         eventClient.recordEvent(event)
         eventClient.submitEvents()
     }
     
     class AWSEvents {
-        static let MorphiiSelect = "MorphiiSelect"
+        static let MorphiiSelect = "morphii-change"
+        static let MorphiiChangeIntensity = "morphii-intensity-change"
+        static let MorphiiFavoriteSave = "morphii-favorite-save"
+        static let MorphiiShareSelect = "morphii-share-select"
+        static let UserProfileChange = "user-profile-change"
+        static let UserProfileAction = "user-profile-action"
+    }
+    class AWSAttributes {
+        static let id = "id"
+        static let name = "name"
+        static let intensity = "intensity"
+        static let begin = "begin"
+        static let end = "end"
+        static let area = "area"
+        static let userProvidedName = "user-provided-name"
+        static let userProvidedTags = "user-provided-tags"
+        static let share = "share"
     }
     
-    class AWSAttributes {
-        static let morphiiId = "morphiiId"
-        static let morphiiName = "morphiiName"
-        static let morphiiIntensity = "morphiiIntensity"
-        static let beginIntensity = "beginIntensity"
-        static let endIntensity = "endIntensity"
-    }
+
     
     class func convertJSONToMorphiis (json:NSData?) -> [Morphii] {
         guard let JSON = json else {return []}
@@ -145,7 +194,7 @@ class MorphiiAPI {
                 var emoodl:Double?
                 if let group = groupName as? String {
                     if group == "EmojiOne" {
-                        emoodl = 150.0
+                        emoodl = 100.0
                     }
                 }
                 Morphii.createNewMorphii(record, emoodl: emoodl, isFavorite: false)
@@ -220,10 +269,6 @@ class MorphiiAPI {
         let dateString = dateFormatter.stringFromDate(NSDate())
         dateFormatter.dateFormat = "Z"
         let timeZoneOffsetString = dateFormatter.stringFromDate(NSDate())
-        var versionString = ""
-      if let version = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as? String {
-         versionString = version
-      }
       MethodHelper.getCurrentLocaiton { (locationO) in
          print("LOCATION:",locationO)
          var lat:Double = 0
@@ -232,16 +277,16 @@ class MorphiiAPI {
             lat = location.coordinate.latitude
             lng = location.coordinate.longitude
          }
-         let device = UIDevice.currentDevice().model
-         let model = UIDevice.currentDevice().name
+         let make = getMake()
+        let model = "\(Device())"
          let parameters = ["account":
             ["id":accountId],
             "device":
                ["id":deviceId,
                   "manufacturer":"Apple",
-                  "make":device,
+                  "make":make,
                   "model":model,
-                  "firmware":versionString],
+                  "firmware":Device().systemVersion],
             "client":[
                "lat":lat,
                "lng":lng],
@@ -294,6 +339,19 @@ class MorphiiAPI {
             print(error)
          }
       }
+    }
+    
+    class func getMake () -> String {
+        var make = "Other"
+        let device = Device()
+        if device.isPod {
+            make = "iPod"
+        } else if device.isPhone {
+            make = "iPhone"
+        } else if device.isPad {
+            make = "iPad"
+        }
+        return make
     }
    
     enum Headers {

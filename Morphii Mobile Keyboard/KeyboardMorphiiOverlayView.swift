@@ -50,7 +50,7 @@ class KeyboardMorphiiOverlayView: ExtraView {
         
     }
     
-    func addToSuperView<T:UIView where T:KeyboardMorphiiOverlayViewDelegate>(superView:T, morphii:Morphii) {
+    func addToSuperView<T:UIView where T:KeyboardMorphiiOverlayViewDelegate>(superView:T, morphii:Morphii, area:String) {
         superView.addSubview(self)
         self.delegate = superView
         translatesAutoresizingMaskIntoConstraints = false
@@ -66,6 +66,7 @@ class KeyboardMorphiiOverlayView: ExtraView {
         superView.addConstraint(bottom)
         morphiiView.setUpMorphii(morphii, emoodl: morphii.emoodl?.doubleValue)
         morphiiNameLabel.text = morphii.name
+        morphiiView.area = area
         
     }
     

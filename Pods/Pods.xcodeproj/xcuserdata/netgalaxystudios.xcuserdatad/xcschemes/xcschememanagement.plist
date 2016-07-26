@@ -29,6 +29,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>DeviceKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>JGProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -57,7 +62,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2AE14E40D653E187BF6E224FBE83A1FE</key>
+		<key>22D17C987A1ED5F2063B3E50AE6E3EBD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,7 +87,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AA6A0968F3CFA7234784FC6E71F3CE7E</key>
+		<key>827C7086376EFF7A24C18C0744C3883E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>82B864424069D7B1F01314C98616B949</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -102,7 +112,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FC3557B6FFEE0E181E2C23F866C4DADC</key>
+		<key>EF78824223C74AA13AE655CD2ACF32A3</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -52,12 +52,21 @@ class Config: NSObject {
     class func getCurrentConfig () -> Config {
         if currentConfig == nil {
             currentConfig = Config(pfConfig: PFConfig.currentConfig())
-            PFConfig.getConfigInBackgroundWithBlock({ (configO, errorO) in
-                if let config = configO {
-                    self.currentConfig = Config(pfConfig: config)
-                }
+            refreshConfig({ (success) in
+                
             })
         }
         return currentConfig
+    }
+    
+    class func refreshConfig (completion:(success:Bool)->Void) {
+        print("refreshConfig1")
+        PFConfig.getConfigInBackgroundWithBlock({ (configO, errorO) in
+            print("refreshConfig2")
+            if let config = configO {
+                self.currentConfig = Config(pfConfig: config)
+            }
+            completion(success: errorO == nil)
+        })
     }
 }

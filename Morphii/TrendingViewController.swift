@@ -209,7 +209,8 @@ class TrendingViewcController: UIViewController {
 
 extension TrendingViewcController:MorphiiSelectionViewDelegate {
     func selectedMorphii(morphii: Morphii) {
-        OverlayViewController.createOverlay(self, morphiiO: morphii)
+        MorphiiAPI.sendMorphiiSelectedToAWS(morphii, area: MorphiiAreas.containerTrending)
+        OverlayViewController.createOverlay(self, morphiiO: morphii, area: MorphiiAreas.containerTrending)
     }
 }
 

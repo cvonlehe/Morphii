@@ -28,6 +28,8 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
     @IBOutlet weak var favoriteTagsTextField: UITextField!
     @IBOutlet weak var favoriteNameTextField: UITextField!
     @IBOutlet weak var morhpiiNameLabel: UILabel!
+    var area:String?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.scrollEnabled = false
@@ -45,11 +47,12 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    class func createModifiedMorphiiOverlay<Delegate:UIViewController where Delegate:ModifiedMorphiiOverlayViewControllerDelegate> (viewController:Delegate, morphiiO:Morphii?) {
+    class func createModifiedMorphiiOverlay<Delegate:UIViewController where Delegate:ModifiedMorphiiOverlayViewControllerDelegate> (viewController:Delegate, morphiiO:Morphii?, area:String) {
         let nextView = viewController.storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.ModifiedMorphiiOverlayViewController) as! ModifiedMorphiiOverlayViewController
         viewController.presentViewController(nextView, animated: true, completion: nil)
         nextView.morphiiO = morphiiO
         nextView.delegateO = viewController
+        nextView.area = area
         if let _ = nextView.morphiiO {
             nextView.setMorphii()
         }
@@ -72,6 +75,8 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
         }
         favoriteNameTextField.text = morphiiO?.name
         self.favoriteMorphiiView.setUpMorphii(self.morphiiO!, emoodl: morphiiO!.emoodl?.doubleValue)
+        favoriteMorphiiView.area = area
+
         
     }
     

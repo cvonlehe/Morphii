@@ -115,7 +115,8 @@ extension FavoritesViewController:FetchedResultsDisplayer {
     func selectedMorphii (morphii:Morphii) {
         print("MORPHII_TAGS:",morphii.tags)
         if fetcher.longPressGesture.minimumPressDuration > 0.3 {
-            ModifiedMorphiiOverlayViewController.createModifiedMorphiiOverlay(self, morphiiO: morphii)
+            MorphiiAPI.sendMorphiiSelectedToAWS(morphii, area: MorphiiAreas.containerFavorites)
+            ModifiedMorphiiOverlayViewController.createModifiedMorphiiOverlay(self, morphiiO: morphii, area: MorphiiAreas.containerFavorites)
 
         }
     }

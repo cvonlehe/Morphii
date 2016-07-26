@@ -71,15 +71,19 @@ class RecentView: ExtraView {
     }
     
     func morphiiSelectionViewTapped (tap:UITapGestureRecognizer) {
+        print("morphiiSelectionViewTapped")
         guard let morphiiSelectionView = tap.view as? MorphiiSelectionView else {return}
         switch self.fetchType {
         case .Home:
+            MorphiiAPI.sendMorphiiSelectedToAWS(morphiiSelectionView.morphiiView.morphii, area: MorphiiAreas.keyboardHome)
             displayMorphiiOverylay(morphiiSelectionView.morphiiView.morphii)
             break
         case .Recents:
+            MorphiiAPI.sendMorphiiSelectedToAWS(morphiiSelectionView.morphiiView.morphii, area: MorphiiAreas.keyboardRecent)
             displayMorphiiOverylay(morphiiSelectionView.morphiiView.morphii)
             break
         case .Favorites:
+            MorphiiAPI.sendMorphiiSelectedToAWS(morphiiSelectionView.morphiiView.morphii, area: MorphiiAreas.keyboardFavorites)
             favoriteMorphiiTapped(morphiiSelectionView)
             break
         }
@@ -143,8 +147,20 @@ class RecentView: ExtraView {
     
     func displayMorphiiOverylay (morphii:Morphii) {
         if morphiiOverlay == nil {
+            var area = ""
+            switch fetchType {
+            case .Favorites:
+                area = MorphiiAreas.keyboardFavorites
+                break
+            case .Home:
+                area = MorphiiAreas.keyboardHome
+                break
+            case .Recents:
+                area = MorphiiAreas.keyboardRecent
+                break
+            }
             morphiiOverlay = KeyboardMorphiiOverlayView(globalColors: globalColors, darkMode: false, solidColorMode: solidColorMode)
-            morphiiOverlay?.addToSuperView(self, morphii: morphii)
+            morphiiOverlay?.addToSuperView(self, morphii: morphii, area: area)
         }
         
     }

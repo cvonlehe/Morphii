@@ -103,8 +103,8 @@ class HomeViewController: UIViewController {
 extension HomeViewController:FetchedResultsDisplayer {
     
     func selectedMorphii (morphii:Morphii) {
-        MorphiiAPI.sendMorphiiSelectedToAWS(morphii)
-        OverlayViewController.createOverlay(self, morphiiO: morphii)
+        MorphiiAPI.sendMorphiiSelectedToAWS(morphii, area: MorphiiAreas.containerHome)
+        OverlayViewController.createOverlay(self, morphiiO: morphii, area: MorphiiAreas.containerHome)
     }
     
     func beganRearranging() {
