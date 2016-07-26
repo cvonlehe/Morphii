@@ -11,11 +11,13 @@ import CoreData
 import Fabric
 import Crashlytics
 import Parse
+import CoreLocation
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
+   let locationManager = CLLocationManager()
 
     func application(application: UIApplication, willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         Parse.initializeWithConfiguration(ParseClientConfiguration { (config:ParseMutableClientConfiguration) -> Void in
@@ -37,6 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         Fabric.with([Crashlytics.self])
         MorphiiAPI.setupAWS()
+      locationManager.delegate = self
+      locationManager.requestWhenInUseAuthorization()
+      locationManager.startUpdatingLocation()
         return true
     }
     
@@ -80,6 +85,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appDelegate.window?.rootViewController = centerView
         appDelegate.window?.makeKeyAndVisible()
     }
+   
+   func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+      if locations.count > 0 {
+         MorphiiAPI.currentLocation = locations.first
+         locationManager.stopUpdatingLocation()
+      }
+   }
 
 }
 

@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import AWSMobileAnalytics
+import CoreLocation
 
 class MorphiiAPI {
     static var lastDate = "2015-05-15"
@@ -18,6 +19,7 @@ class MorphiiAPI {
     static let TRENDINGURL = "\(Config.getCurrentConfig().MORPHII_API_BASE_URL)/kbapp/v1/stats"
     static let APPVERSIONURL = "\(Config.getCurrentConfig().MORPHII_API_BASE_URL)/admin/v1/mobileApp/kb?type=ios"
     private static var awsEventClient:AWSMobileAnalyticsEventClient?
+   static var currentLocation:CLLocation?
 
 
     class func fetchNewMorphiis(completion: (morphiisArray: [ Morphii ], success:Bool) -> Void ) -> Void {
@@ -143,7 +145,7 @@ class MorphiiAPI {
                 var emoodl:Double?
                 if let group = groupName as? String {
                     if group == "EmojiOne" {
-                        emoodl = 200.0
+                        emoodl = 150.0
                     }
                 }
                 Morphii.createNewMorphii(record, emoodl: emoodl, isFavorite: false)
@@ -152,10 +154,6 @@ class MorphiiAPI {
         }
         let morphiis = Morphii.fetchAllMorphiis()
         return morphiis
-    }
-    
-    class func sendFavoriteData (completion:((success:Bool)->Void)?) {
-        
     }
     
     class func getHeader (header:Headers) -> [String:String] {
@@ -205,7 +203,7 @@ class MorphiiAPI {
         }
     }
     
-    class func sendFavoriteData (morphiiO:Morphii?, favoriteNameO:String?, emoodl:Double) {
+   class func sendFavoriteData (morphiiO:Morphii?, favoriteNameO:String?, emoodl:Double, tags:[String]) {
         guard let favoriteName = favoriteNameO, let morphii = morphiiO, let deviceId = UIDevice.currentDevice().identifierForVendor?.UUIDString, let morphiiId = morphii.id, let morphiiName = morphii.name, let intensity = morphii.emoodl?.doubleValue else {return}
         let accountIdString = Config.getCurrentConfig().MORPHII_API_ACCOUNT_ID.stringByReplacingOccurrencesOfString(" ", withString: "")
         var index = 0
@@ -222,25 +220,46 @@ class MorphiiAPI {
         let dateString = dateFormatter.stringFromDate(NSDate())
         dateFormatter.dateFormat = "Z"
         let timeZoneOffsetString = dateFormatter.stringFromDate(NSDate())
-        
-        let parameters = ["account":
-                            ["id":accountId],
-                          "device":
-                            ["id":deviceId],
-                          "timestamp":
-                            ["utc":dateString,
-                             "offset":timeZoneOffsetString],
-                          "morphii":
-                            ["id":morphiiId,
-                             "name":morphiiName,
-                             "intensity":emoodl/100],
-                          "favorite":
-                            ["name":favoriteName]
-                          ]
-        print("PARAMETERS:",parameters)
-        print("FAVORITE - devicedId:",deviceId,"favoriteName:",favoriteName,"morphiiId:",morphiiId,"morphiiName:",morphiiName,"intensity:",intensity/100.0,"dateString:",dateString,"timeZoneOffset:",timeZoneOffsetString,"AccountId:",accountId)
-        
-        do {
+        var versionString = ""
+      if let version = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as? String {
+         versionString = version
+      }
+      MethodHelper.getCurrentLocaiton { (locationO) in
+         print("LOCATION:",locationO)
+         var lat:Double = 0
+         var lng:Double = 0
+         if let location = locationO {
+            lat = location.coordinate.latitude
+            lng = location.coordinate.longitude
+         }
+         let device = UIDevice.currentDevice().model
+         let model = UIDevice.currentDevice().name
+         let parameters = ["account":
+            ["id":accountId],
+            "device":
+               ["id":deviceId,
+                  "manufacturer":"Apple",
+                  "make":device,
+                  "model":model,
+                  "firmware":versionString],
+            "client":[
+               "lat":lat,
+               "lng":lng],
+            "timestamp":
+               ["utc":dateString,
+                  "offset":timeZoneOffsetString],
+            "morphii":
+               ["id":morphiiId,
+                  "name":morphiiName,
+                  "intensity":emoodl/100],
+            "favorite":
+               ["name":favoriteName,
+                  "tags":tags]
+         ]
+         print("PARAMETERS:",parameters)
+         print("FAVORITE - devicedId:",deviceId,"favoriteName:",favoriteName,"morphiiId:",morphiiId,"morphiiName:",morphiiName,"intensity:",intensity/100.0,"dateString:",dateString,"timeZoneOffset:",timeZoneOffsetString,"AccountId:",accountId)
+         
+         do {
             
             let data = try NSJSONSerialization.dataWithJSONObject(parameters, options: NSJSONWritingOptions.init(rawValue: 0))
             let asciiCode = ("-" as NSString).characterAtIndex(0)
@@ -257,31 +276,32 @@ class MorphiiAPI {
             request.setValue(Config.getCurrentConfig().MORPHII_API_KEY, forHTTPHeaderField: "x-api-key")
             request.setValue("Bearer \(getToken())", forHTTPHeaderField: "Authorization")
             print("APIKEY:",Config.getCurrentConfig().MORPHII_API_KEY,"TOKEN:","Bearer\(getToken())")
-
+            
             let queue:NSOperationQueue = NSOperationQueue()
             NSURLConnection.sendAsynchronousRequest(request, queue: queue, completionHandler: { (response, data, error) in
-                guard let d = data else {return}
-                var jsonDict:NSDictionary?
-                do {
-                    try jsonDict = NSJSONSerialization.JSONObjectWithData(d, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary
-                    print("JSONDICT:",jsonDict)
-                    
-                }catch {
-                    print("Handle \(error) here")
-                }
-
+               guard let d = data else {return}
+               var jsonDict:NSDictionary?
+               do {
+                  try jsonDict = NSJSONSerialization.JSONObjectWithData(d, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary
+                  print("JSONDICT:",jsonDict)
+                  
+               }catch {
+                  print("Handle \(error) here")
+               }
+               
             })
-        } catch let error as NSError {
+         } catch let error as NSError {
             print(error)
-        }
+         }
+      }
     }
-    
+   
     enum Headers {
         case GET
         case LOGIN
         case FAVORITES
     }
-    
+   
     class func getTrendingData (completion:(dictO:NSDictionary?)->Void) {
         let request = NSMutableURLRequest(URL: NSURL(string: TRENDINGURL)!)
         request.HTTPMethod = "GET"

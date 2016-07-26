@@ -1083,6 +1083,7 @@ extension KeyboardViewController:UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         guard let favoriteView = addFavoriteView else {return false}
         guard let morphii = favoriteView.morphiiView.morphii else {return false}
+      let tags = Morphii.getTagsFromString(favoriteView.tagsTextField.text)
         if let _ = Morphii.createNewMorphii(favoriteView.nameTextField.text,
                                             name: favoriteView.nameTextField.text,
                                             scaleType: Int((morphii.scaleType!)),
@@ -1091,7 +1092,8 @@ extension KeyboardViewController:UITextFieldDelegate {
                                             metaData: morphii.metaData,
                                             emoodl: favoriteView.morphiiView.emoodl,
                                             isFavorite: true,
-                                            tags: Morphii.getTagsFromString(favoriteView.tagsTextField.text), order: 5000) {
+                                            tags: tags, order: 5000) {
+         MorphiiAPI.sendFavoriteData(morphii, favoriteNameO: favoriteView.nameTextField.text, emoodl: favoriteView.morphiiView.emoodl, tags: tags)
             addFavoriteContainerView?.removeFromSuperview()
             addFavoriteContainerView = nil
             setHeight(250)
@@ -1101,7 +1103,7 @@ extension KeyboardViewController:UITextFieldDelegate {
             recentView?.hidden = false
             setCenterView(.Favorites)
             MethodHelper.showSuccessErrorHUD(true, message: "Saved to Favorites", inView: self.view)
-            MorphiiAPI.sendFavoriteData(morphii, favoriteNameO: favoriteView.nameTextField.text, emoodl: favoriteView.morphiiView.emoodl)
+            MorphiiAPI.sendFavoriteData(morphii, favoriteNameO: favoriteView.nameTextField.text, emoodl: favoriteView.morphiiView.emoodl, tags: tags)
         }
         return true
     }

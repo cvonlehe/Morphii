@@ -28,7 +28,15 @@ class AddFavoriteContainerView: ExtraView {
         tagsTextField.layer.borderColor = UIColor.whiteColor().CGColor
         nameTextField.layer.borderWidth = 1
         tagsTextField.layer.borderWidth = 1
+         addPaddingToTextField(nameTextField)
+         addPaddingToTextField(tagsTextField)
     }
+   
+   func addPaddingToTextField (textField:UITextField) {
+      let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 20))
+      textField.leftView = paddingView
+      textField.leftViewMode = .Always
+   }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("loading from nib not supported")

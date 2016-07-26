@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import JGProgressHUD
+import CoreLocation
+import Parse
 
 class MethodHelper {
     private static var hud = JGProgressHUD(style: JGProgressHUDStyle.Dark)
@@ -85,5 +87,21 @@ class MethodHelper {
             return false
         }
     }
-    
+   
+   class func getCurrentLocaiton (completion:(locationO:CLLocation?)->Void) {
+      if let location = MorphiiAPI.currentLocation {
+         completion(locationO: location)
+      }else {
+         PFGeoPoint.geoPointForCurrentLocationInBackground({ (geoPointO, error) -> Void in
+            if let geoPoint = geoPointO {
+               let location = CLLocation(latitude: geoPoint.latitude, longitude: geoPoint.longitude)
+               MorphiiAPI.currentLocation = location
+            }
+            completion(locationO: MorphiiAPI.currentLocation)
+            
+         })
+      }
+      
+   }
+   
 }

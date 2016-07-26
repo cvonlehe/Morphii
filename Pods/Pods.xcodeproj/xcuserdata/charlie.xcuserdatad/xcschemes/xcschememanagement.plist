@@ -9,6 +9,16 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>AWSCore.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
+		<key>AWSMobileAnalytics.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>11</integer>
+		</dict>
 		<key>Alamofire.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -52,6 +62,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>2AE14E40D653E187BF6E224FBE83A1FE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2C8AA1BAF35413BDB954A1DF93576ED1</key>
 		<dict>
 			<key>primary</key>
@@ -77,12 +92,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>AA6A0968F3CFA7234784FC6E71F3CE7E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>B272B33F162D6E5C3510BA50ECF2684B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>D7C577A782ECBFCC395DF4C6F01965C3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DD4C60D0C1ADF7586B8862EEA147DE00</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>F27C968D9CEF919B9E355DBBF81F3B48</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FC3557B6FFEE0E181E2C23F866C4DADC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
