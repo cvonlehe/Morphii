@@ -104,8 +104,10 @@ class MorphiiAPI {
         }else {
             event.addAttribute(name, forKey: AWSAttributes.name)
         }
-        if let tags = morphii.tags {
-            event.addAttribute(tags.componentsJoinedByString(", "), forKey: AWSAttributes.userProvidedTags)
+        if area != MorphiiAreas.containerHome && area != MorphiiAreas.keyboardHome {
+            if let tags = morphii.tags {
+                event.addAttribute(tags.componentsJoinedByString(", "), forKey: AWSAttributes.userProvidedTags)
+            }
         }
         event.addAttribute(area, forKey: AWSAttributes.area)
         event.addMetric(getCorrectedIntensity(intensity), forKey: AWSAttributes.intensity)
