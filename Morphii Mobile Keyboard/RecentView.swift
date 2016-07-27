@@ -47,7 +47,7 @@ class RecentView: ExtraView {
             titleLabel.text = "Your Saved Morphiis"
             break
         }
-        performSelector(#selector(RecentView.loadMorphiis as (RecentView) -> () -> ()), withObject: nil, afterDelay: 0.01)
+        performSelector(#selector(RecentView.loadMorphiis as (RecentView) -> () -> ()), withObject: nil, afterDelay: 0.5)
     }
     
     func loadMorphiis () {

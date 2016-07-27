@@ -61,15 +61,26 @@ class MorphiiAPI {
     
     class func setupAWS () {
         print("setupAWS1")
-        Config.refreshConfig { (success) in
-            print("setupAWS2")
-            let analytics = AWSMobileAnalytics(forAppId: Config.getCurrentConfig().AWS_APP_ID, identityPoolId: Config.getCurrentConfig().AWS_POOL_ID)
-            if analytics != nil {
-                if analytics.eventClient != nil {
-                    awsEventClient = analytics.eventClient
-                }
+        print("setupAWS2")
+        let analytics = AWSMobileAnalytics(forAppId: Config.getCurrentConfig().AWS_APP_ID, identityPoolId: Config.getCurrentConfig().AWS_POOL_ID)
+        if analytics != nil {
+            if analytics.eventClient != nil {
+                awsEventClient = analytics.eventClient
             }
         }
+    }
+    
+    class func getCorrectedIntensity (intensity:NSNumber) -> NSNumber {
+        var newIntensity = NSNumber(int: 0)
+        if intensity.intValue < 0 {
+            newIntensity = NSNumber(int: 0)
+        }else if intensity.intValue > 100 {
+            newIntensity = NSNumber(int: 100)
+        }
+        if intensity.intValue > 1 {
+            newIntensity = NSNumber(double: intensity.doubleValue / 100)
+        }
+        return newIntensity
     }
     
     class func sendMorphiiSelectedToAWS (morphii:Morphii, area:String) {
@@ -84,14 +95,14 @@ class MorphiiAPI {
         event.addAttribute(id, forKey: AWSAttributes.id)
         event.addAttribute(name, forKey: AWSAttributes.name)
         event.addAttribute(area, forKey: AWSAttributes.area)
-        event.addMetric(intensity, forKey: AWSAttributes.intensity)
+        event.addMetric(getCorrectedIntensity(intensity), forKey: AWSAttributes.intensity)
         eventClient.recordEvent(event)
         eventClient.submitEvents()
     }
     
     class func sendIntensityChangeToAWS (morphii:Morphii, beginIntensity:NSNumber, endIntensity:NSNumber, area:String?) {
         guard let eventClient = awsEventClient else {return}
-        let event = eventClient.createEventWithEventType(AWSEvents.MorphiiSelect)
+        let event = eventClient.createEventWithEventType(AWSEvents.MorphiiChangeIntensity)
         guard event != nil else {return}
         guard let id = morphii.id, let name = morphii.name else {return}
         event.addAttribute(id, forKey: AWSAttributes.id)
@@ -99,8 +110,8 @@ class MorphiiAPI {
         if let a = area {
             event.addAttribute(a, forKey: AWSAttributes.area)
         }
-        event.addMetric(beginIntensity, forKey: AWSAttributes.begin)
-        event.addMetric(endIntensity, forKey: AWSAttributes.end)
+        event.addMetric(getCorrectedIntensity(beginIntensity), forKey: AWSAttributes.begin)
+        event.addMetric(getCorrectedIntensity(endIntensity), forKey: AWSAttributes.end)
         eventClient.recordEvent(event)
         eventClient.submitEvents()
     }
@@ -117,27 +128,27 @@ class MorphiiAPI {
         }
         let tagString = tags.joinWithSeparator(", ")
         event.addAttribute(tagString, forKey: AWSAttributes.userProvidedTags)
-        event.addMetric(intensity, forKey: AWSAttributes.intensity)
+        event.addMetric(getCorrectedIntensity(intensity), forKey: AWSAttributes.intensity)
         eventClient.recordEvent(event)
         eventClient.submitEvents()
     }
     
     class func sendMorphiiSendToAWS (morphii:Morphii, intensity:NSNumber, area:String?, name:String, share:String) {
         guard let eventClient = awsEventClient else {return}
-        let event = eventClient.createEventWithEventType(AWSEvents.MorphiiFavoriteSave)
+        let event = eventClient.createEventWithEventType(AWSEvents.MorphiiShareSelect)
         guard event != nil else {return}
         guard let id = morphii.id, let name = morphii.name else {return}
         event.addAttribute(id, forKey: AWSAttributes.id)
         event.addAttribute(name, forKey: AWSAttributes.name)
         event.addAttribute(share, forKey: AWSAttributes.share)
-        event.addMetric(intensity, forKey: AWSAttributes.intensity)
+        event.addMetric(getCorrectedIntensity(intensity), forKey: AWSAttributes.intensity)
         eventClient.recordEvent(event)
         eventClient.submitEvents()
     }
     
     class func sendUserProfileChangeToAWS (propertyName:String, begin:Bool, end:Bool) {
         guard let eventClient = awsEventClient else {return}
-        let event = eventClient.createEventWithEventType(AWSEvents.MorphiiFavoriteSave)
+        let event = eventClient.createEventWithEventType(AWSEvents.UserProfileChange)
         guard event != nil else {return}
         event.addAttribute(propertyName, forKey: AWSAttributes.name)
         var beginString = "false"
@@ -156,7 +167,7 @@ class MorphiiAPI {
     
     class func sendUserProfileActionToAWS (actionName:String) {
         guard let eventClient = awsEventClient else {return}
-        let event = eventClient.createEventWithEventType(AWSEvents.MorphiiFavoriteSave)
+        let event = eventClient.createEventWithEventType(AWSEvents.UserProfileAction)
         guard event != nil else {return}
         event.addAttribute(actionName, forKey: AWSAttributes.name)
         eventClient.recordEvent(event)
@@ -337,7 +348,7 @@ class MorphiiAPI {
             "morphii":
                ["id":morphiiId,
                   "name":morphiiName,
-                  "intensity":emoodl/100],
+                "intensity":getCorrectedIntensity(NSNumber(double:emoodl))],
             "favorite":
                ["name":favoriteName,
                   "tags":tags]

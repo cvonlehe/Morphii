@@ -439,7 +439,7 @@ class MorphiiView: UIView, MorphiiProtocol {
 //        
 //        //end the graphics context
 //        UIGraphicsEndImageContext()
-        layer.cornerRadius = frame.size.width / 2
+        layer.cornerRadius = (frame.size.width / 2) - 50
         clipsToBounds = true
         UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
         layer.renderInContext(UIGraphicsGetCurrentContext()!)
@@ -447,6 +447,8 @@ class MorphiiView: UIView, MorphiiProtocol {
         morphiiPic.drawInRect(CGRect(x: 0, y: 0, width: 600, height: 600))
         morphiiPic = morphiiPic.imageWithInsets(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         UIGraphicsEndImageContext()
+        layer.cornerRadius = 0
+
         return morphiiPic
     }
 }

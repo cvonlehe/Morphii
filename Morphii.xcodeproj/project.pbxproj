@@ -20,6 +20,8 @@
 		431A75DB1D0870980079F9BD /* OverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431A75DA1D0870980079F9BD /* OverlayViewController.swift */; };
 		431A75DD1D0896EE0079F9BD /* MorphiiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431A75DC1D0896EE0079F9BD /* MorphiiView.swift */; };
 		43217B991D480F97000DF2A5 /* kb-app-morphiis.json in Resources */ = {isa = PBXBuildFile; fileRef = 43217B981D480F97000DF2A5 /* kb-app-morphiis.json */; };
+		43217B9B1D4918B1000DF2A5 /* prod-credentials.txt in Resources */ = {isa = PBXBuildFile; fileRef = 43217B9A1D4918B1000DF2A5 /* prod-credentials.txt */; };
+		43217B9C1D491989000DF2A5 /* prod-credentials.txt in Resources */ = {isa = PBXBuildFile; fileRef = 43217B9A1D4918B1000DF2A5 /* prod-credentials.txt */; };
 		435C8EEA1D1C89FB0036B292 /* Morphii+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435C8EE81D1C89FB0036B292 /* Morphii+CoreDataProperties.swift */; };
 		435C8EEB1D1C89FB0036B292 /* Morphii+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435C8EE81D1C89FB0036B292 /* Morphii+CoreDataProperties.swift */; };
 		435C8EEC1D1C89FB0036B292 /* Morphii.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435C8EE91D1C89FB0036B292 /* Morphii.swift */; };
@@ -251,6 +253,7 @@
 		431A75DA1D0870980079F9BD /* OverlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayViewController.swift; sourceTree = "<group>"; };
 		431A75DC1D0896EE0079F9BD /* MorphiiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorphiiView.swift; sourceTree = "<group>"; };
 		43217B981D480F97000DF2A5 /* kb-app-morphiis.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "kb-app-morphiis.json"; sourceTree = "<group>"; };
+		43217B9A1D4918B1000DF2A5 /* prod-credentials.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "prod-credentials.txt"; sourceTree = "<group>"; };
 		435C8EE81D1C89FB0036B292 /* Morphii+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Morphii+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		435C8EE91D1C89FB0036B292 /* Morphii.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Morphii.swift; sourceTree = "<group>"; };
 		436553101D3D33C500DD98B7 /* ForwardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardingView.swift; sourceTree = "<group>"; };
@@ -591,6 +594,7 @@
 				43A9A6441D0B1B2E00AB90E4 /* Morphii.entitlements */,
 				4300E87C1D0854C000930766 /* grey_morphii.png */,
 				43217B981D480F97000DF2A5 /* kb-app-morphiis.json */,
+				43217B9A1D4918B1000DF2A5 /* prod-credentials.txt */,
 				4398CBAC1D05BF7000074BC7 /* Initialization */,
 				4398CBAE1D05BF8100074BC7 /* View Controllers */,
 				4398CBAD1D05BF7A00074BC7 /* Core Data */,
@@ -906,6 +910,7 @@
 				43A9E0511D11D294001F3A1B /* SFCompactText-Semibold.ttf in Resources */,
 				43A9E0491D11D294001F3A1B /* SFCompactText-Medium.ttf in Resources */,
 				43A9E03F1D11D294001F3A1B /* SFCompactText-BoldItalic.ttf in Resources */,
+				43217B9B1D4918B1000DF2A5 /* prod-credentials.txt in Resources */,
 				4381625D1D00A25E00C5BB5B /* LaunchScreen.storyboard in Resources */,
 				43A9E0571D11D294001F3A1B /* SFUIDisplay-Bold.ttf in Resources */,
 				43A9E03D1D11D294001F3A1B /* SFCompactText-Bold.ttf in Resources */,
@@ -986,6 +991,7 @@
 				43A9E0741D11D294001F3A1B /* SFUIText-Medium.ttf in Resources */,
 				439517521D416DC6000EE666 /* AddFavoriteContainerView.xib in Resources */,
 				43A9E0541D11D294001F3A1B /* SFCompactText-SemiboldItalic.ttf in Resources */,
+				43217B9C1D491989000DF2A5 /* prod-credentials.txt in Resources */,
 				43A9E0561D11D294001F3A1B /* SFUIDisplay-Black.ttf in Resources */,
 				43A9E04E1D11D294001F3A1B /* SFCompactText-Regular.ttf in Resources */,
 				43A9E06C1D11D294001F3A1B /* SFUIText-Heavy.ttf in Resources */,

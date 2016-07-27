@@ -80,6 +80,7 @@ class KeyboardViewController: UIInputViewController {
         self.forwardingView.resetTrackedViews()
         self.shiftStartingState = nil
         self.shiftWasMultitapped = false
+        setCenterView(centerView)
         
         // optimization: ensures smooth animation
         if let keyPool = self.layout?.keyPool {
@@ -89,6 +90,8 @@ class KeyboardViewController: UIInputViewController {
         }
         
         self.keyboardHeight = self.heightForOrientation(toInterfaceOrientation, withTopBanner: true)
+
+        
     }
     
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
@@ -98,6 +101,8 @@ class KeyboardViewController: UIInputViewController {
                 view.shouldRasterize = false
             }
         }
+        closeButtonPressed()
+        
     }
     
     func addNavigationToBannerView (bannerView:ExtraView) {
@@ -190,6 +195,7 @@ class KeyboardViewController: UIInputViewController {
     func setCenterView (center:CenterView) {
         centerView = center
         setAllContainerViewBackgrounds()
+        recentView?.backButtonPressed()
         switch center {
         case .Globe:
             self.forwardingView.resetTrackedViews()
@@ -398,6 +404,10 @@ class KeyboardViewController: UIInputViewController {
     
     var constraintsAdded: Bool = false
     func setupLayout() {
+        constraintsAdded = false
+        for subview in forwardingView.subviews {
+            subview.removeFromSuperview()
+        }
         if !constraintsAdded {
             self.layout = self.dynamicType.layoutClass.init(model: self.keyboard, superview: self.forwardingView, layoutConstants: self.dynamicType.layoutConstants, globalColors: self.dynamicType.globalColors, darkMode: self.darkMode(), solidColorMode: self.solidColorMode())
             
@@ -441,18 +451,13 @@ class KeyboardViewController: UIInputViewController {
         
         let orientationSavvyBounds = CGRectMake(0, 0, self.view.bounds.width, self.heightForOrientation(self.interfaceOrientation, withTopBanner: false))
         
-        if (lastLayoutBounds != nil && lastLayoutBounds == orientationSavvyBounds) {
-            // do nothing
-        }
-        else {
-            let uppercase = self.shiftState.uppercase()
-            let characterUppercase = (NSUserDefaults.standardUserDefaults().boolForKey(kSmallLowercase) ? uppercase : true)
-            
-            self.forwardingView.frame = orientationSavvyBounds
-            self.layout?.layoutKeys(self.currentMode, uppercase: uppercase, characterUppercase: characterUppercase, shiftState: self.shiftState)
-            self.lastLayoutBounds = orientationSavvyBounds
-            self.setupKeys()
-        }
+        let uppercase = self.shiftState.uppercase()
+        let characterUppercase = (NSUserDefaults.standardUserDefaults().boolForKey(kSmallLowercase) ? uppercase : true)
+        
+        self.forwardingView.frame = orientationSavvyBounds
+        self.layout?.layoutKeys(self.currentMode, uppercase: uppercase, characterUppercase: characterUppercase, shiftState: self.shiftState)
+        self.lastLayoutBounds = orientationSavvyBounds
+        self.setupKeys()
         let y = self.view.frame.origin.y + self.view.frame.size.height - metric("topBanner")
         
         self.bannerView?.frame = CGRectMake(0, y, self.view.bounds.width, metric("topBanner"))

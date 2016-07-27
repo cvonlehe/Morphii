@@ -7,13 +7,12 @@
 //
 
 import UIKit
-import Parse
 
 class Config: NSObject {
     private static var currentConfig:Config!
     
     var MORPHII_API_KEY = ""
-    var MORPHII_API_BASE_URL = "https://api-dev.morphii.com"
+    var MORPHII_API_BASE_URL = ""
     var MORPHII_API_ACCOUNT_ID = ""
     var MORPHII_API_USER_NAME = ""
     var MORPHII_API_PASSWORD = ""
@@ -21,8 +20,10 @@ class Config: NSObject {
     var AWS_APP_ID = ""
     var AWS_POOL_ID = ""
 
-    init(pfConfig:PFConfig) {
+    init(dictionary:NSDictionary?) {
         super.init()
+        print("DICTIONARY:",dictionary)
+        guard let pfConfig = dictionary else {return}
         if let api = pfConfig.objectForKey(PFConfigValues.MORPHII_API_KEY) as? String {
             MORPHII_API_KEY = api
         }
@@ -50,23 +51,26 @@ class Config: NSObject {
     }
     
     class func getCurrentConfig () -> Config {
+        var dict:NSDictionary?
         if currentConfig == nil {
-            currentConfig = Config(pfConfig: PFConfig.currentConfig())
-            refreshConfig({ (success) in
-                
-            })
-        }
-        return currentConfig
-    }
-    
-    class func refreshConfig (completion:(success:Bool)->Void) {
-        print("refreshConfig1")
-        PFConfig.getConfigInBackgroundWithBlock({ (configO, errorO) in
-            print("refreshConfig2")
-            if let config = configO {
-                self.currentConfig = Config(pfConfig: config)
+            if let path = NSBundle.mainBundle().pathForResource("prod-credentials", ofType: "txt") {
+                print("getCurrentConfig1")
+                do {
+                    let string = try String(contentsOfFile: path)
+                    if let data = string.dataUsingEncoding(NSUTF8StringEncoding) {
+                        print("getCurrentConfig2")
+                        do {
+                            let jsonDict = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary
+                            print("getCurrentConfig3")
+                            dict = jsonDict
+                        }catch {}
+                    }
+                }catch {}
             }
-            completion(success: errorO == nil)
-        })
+
+        }
+        currentConfig = Config(dictionary: dict)
+        print("MORPHII_API_KEY:",currentConfig.MORPHII_API_KEY,"MORPHII_API_BASE_URL:",currentConfig.MORPHII_API_BASE_URL,"MORPHII_API_ACCOUNT_ID:",currentConfig.MORPHII_API_ACCOUNT_ID,"MORPHII_API_USER_NAME:",currentConfig.MORPHII_API_USER_NAME,"MORPHII_API_PASSWORD:",currentConfig.MORPHII_API_PASSWORD,"AWS_APP_ID:",currentConfig.AWS_APP_ID,"AWS_POOL_ID:",currentConfig.AWS_POOL_ID)
+        return currentConfig
     }
 }

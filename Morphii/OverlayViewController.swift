@@ -84,6 +84,7 @@ class OverlayViewController: UIViewController {
             morphiiContainerLeadingConstraint.constant = -morphiiContainerView.frame.size.width
             break
         case .FavoriteView:
+            
             morphiiNameLabel.text = "Saved Morphii"
             morphiiContainerLeadingConstraint.constant = morphiiContainerView.frame.size.width
             break
@@ -205,6 +206,7 @@ extension OverlayViewController {
     
     @IBAction func favoriteMorphiiButtonPressed(sender: UIButton) {
         favoriteNameTextField.text = ""
+        favoriteTagsTextField.text = ""
         if let mView = favoriteMorphiiView {
             mView.setNewMorphii(morphiiView.morphii, emoodl: morphiiView.emoodl, showName: true)
         }else {
@@ -252,7 +254,7 @@ extension OverlayViewController:UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if textField == favoriteTagsTextField {
-            textField.resignFirstResponder()
+            addToFavoritesButtonPressed(UIButton())
         }else {
             favoriteTagsTextField.becomeFirstResponder()
         }
