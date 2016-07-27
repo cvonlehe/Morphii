@@ -51,8 +51,8 @@ class Config: NSObject {
     }
     
     class func getCurrentConfig () -> Config {
-        var dict:NSDictionary?
         if currentConfig == nil {
+            var dict:NSDictionary?
             if let path = NSBundle.mainBundle().pathForResource("prod-credentials", ofType: "txt") {
                 print("getCurrentConfig1")
                 do {
@@ -67,9 +67,8 @@ class Config: NSObject {
                     }
                 }catch {}
             }
-
+            currentConfig = Config(dictionary: dict)
         }
-        currentConfig = Config(dictionary: dict)
         print("MORPHII_API_KEY:",currentConfig.MORPHII_API_KEY,"MORPHII_API_BASE_URL:",currentConfig.MORPHII_API_BASE_URL,"MORPHII_API_ACCOUNT_ID:",currentConfig.MORPHII_API_ACCOUNT_ID,"MORPHII_API_USER_NAME:",currentConfig.MORPHII_API_USER_NAME,"MORPHII_API_PASSWORD:",currentConfig.MORPHII_API_PASSWORD,"AWS_APP_ID:",currentConfig.AWS_APP_ID,"AWS_POOL_ID:",currentConfig.AWS_POOL_ID)
         return currentConfig
     }

@@ -43,16 +43,16 @@ class Morphii: NSManagedObject {
             morphii.deleteMorphii(nil)
         }
         
-        return setData(recId, name: recName, scaleType: scaleType, sequence: recSequence, groupName:groupName, metaData: metaData, emoodl: emoodl, isFavorite: isFavorite, tags: keywords, order: 1)
+        return setData(recId, name: recName, scaleType: scaleType, sequence: recSequence, groupName:groupName, metaData: metaData, emoodl: emoodl, isFavorite: isFavorite, tags: keywords, order: 1, originalId: nil, originalName: nil)
     }
     
-    class func createNewMorphii(id: String?, name: String?, scaleType: Int?, /*category: String, keywords: [ String ],*/ sequence: Int?, groupName:String?, metaData: NSDictionary?, emoodl:Double?, isFavorite:Bool, tags:[String], order:Int) -> Morphii? {
+    class func createNewMorphii(id: String?, name: String?, scaleType: Int?, /*category: String, keywords: [ String ],*/ sequence: Int?, groupName:String?, metaData: NSDictionary?, emoodl:Double?, isFavorite:Bool, tags:[String], order:Int, originalId:String?, originalName:String?) -> Morphii? {
         
         guard let i = id, let n = name, let scale = scaleType, let seq = sequence, let group = groupName, let data = metaData, let em = emoodl else {return nil}
-        return setData(i, name: n, scaleType: scale, sequence: seq, groupName: group, metaData: data, emoodl: em, isFavorite: isFavorite, tags: tags, order: order)
+        return setData(i, name: n, scaleType: scale, sequence: seq, groupName: group, metaData: data, emoodl: em, isFavorite: isFavorite, tags: tags, order: order, originalId: originalId, originalName: originalName)
     }
     
-    private class func setData(id: String, name: String, scaleType: Int, /*category: String, keywords: [ String ],*/ sequence: Int, groupName:String, metaData: NSDictionary, emoodl:Double?, isFavorite:Bool, tags:[String], order:Int) -> Morphii? {
+    private class func setData(id: String, name: String, scaleType: Int, /*category: String, keywords: [ String ],*/ sequence: Int, groupName:String, metaData: NSDictionary, emoodl:Double?, isFavorite:Bool, tags:[String], order:Int, originalId:String?, originalName:String?) -> Morphii? {
         
         guard let morphii = NSEntityDescription.insertNewObjectForEntityForName(EntityNames.Morphii, inManagedObjectContext: CDHelper.sharedInstance.managedObjectContext) as? Morphii else {
             return nil
@@ -68,6 +68,8 @@ class Morphii: NSManagedObject {
         morphii.isFavorite = isFavorite
         morphii.emoodl = 50.0
         morphii.tags = NSMutableArray(array: tags)
+        morphii.originalId = originalId
+        morphii.originalName = originalName
         if let newEmoodl = emoodl {
             morphii.emoodl = newEmoodl
         }

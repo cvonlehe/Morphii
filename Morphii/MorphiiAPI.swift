@@ -92,8 +92,21 @@ class MorphiiAPI {
         print("sendMorphiiSelectedToAWS3")
         guard let id = morphii.id, let name = morphii.name, let intensity = morphii.emoodl else {return}
         print("sendMorphiiSelectedToAWS4")
-        event.addAttribute(id, forKey: AWSAttributes.id)
-        event.addAttribute(name, forKey: AWSAttributes.name)
+        if let originalId = morphii.originalId {
+            event.addAttribute(originalId, forKey: AWSAttributes.id)
+        }else {
+            event.addAttribute(id, forKey: AWSAttributes.id)
+        }
+        
+        if let originalName = morphii.originalName {
+            event.addAttribute(originalName, forKey: AWSAttributes.name)
+            event.addAttribute(name, forKey: AWSAttributes.userProvidedName)
+        }else {
+            event.addAttribute(name, forKey: AWSAttributes.name)
+        }
+        if let tags = morphii.tags {
+            event.addAttribute(tags.componentsJoinedByString(", "), forKey: AWSAttributes.userProvidedTags)
+        }
         event.addAttribute(area, forKey: AWSAttributes.area)
         event.addMetric(getCorrectedIntensity(intensity), forKey: AWSAttributes.intensity)
         eventClient.recordEvent(event)
@@ -121,8 +134,18 @@ class MorphiiAPI {
         let event = eventClient.createEventWithEventType(AWSEvents.MorphiiFavoriteSave)
         guard event != nil else {return}
         guard let id = morphii.id, let name = morphii.name else {return}
-        event.addAttribute(id, forKey: AWSAttributes.id)
-        event.addAttribute(name, forKey: AWSAttributes.name)
+        if let originalId = morphii.originalId {
+            event.addAttribute(originalId, forKey: AWSAttributes.id)
+        }else {
+            event.addAttribute(id, forKey: AWSAttributes.id)
+        }
+        
+        if let originalName = morphii.originalName {
+            event.addAttribute(originalName, forKey: AWSAttributes.name)
+            event.addAttribute(name, forKey: AWSAttributes.userProvidedName)
+        }else {
+            event.addAttribute(name, forKey: AWSAttributes.name)
+        }
         if let a = area {
             event.addAttribute(a, forKey: AWSAttributes.area)
         }
