@@ -24,10 +24,7 @@ class HomeViewController: UIViewController {
         print("CURRENT_USER:",User.getCurrentUser()?.objectID)
 
         performSelector(#selector(HomeViewController.createFetchedResultsController), withObject: nil, afterDelay: 2)
-        if !MethodHelper.isReturningUser() {
-            getMorphiisFromJSONFile()
-            TutorialViewController.presenTutorialViewController(self)
-        }
+
     }
     
     func getMorphiisFromJSONFile () {
@@ -73,9 +70,19 @@ class HomeViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        MorphiiAPI.checkIfAppIsUpdated { (updated) in
-            if !updated {
-                ForceUpgradeViewController.createForceUpgradeView(self)
+        if !MethodHelper.isReturningUser() {
+            getMorphiisFromJSONFile()
+            TutorialViewController.presenTutorialViewController(self)
+        }else {
+            MorphiiAPI.checkIfAppIsUpdated { (updated) in
+                print("viewDidAppear1")
+                if !updated {
+                    print("viewDidAppear2")
+                    let nextView = self.storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.ForceUpgradeViewController) as! ForceUpgradeViewController
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.presentViewController(nextView, animated: true, completion: nil)
+                    }
+                }
             }
         }
         if !foundMorphiis {
@@ -85,6 +92,10 @@ class HomeViewController: UIViewController {
             foundMorphiis = true
         }
         performSelector(#selector(HomeViewController.getMorphiis), withObject: nil, afterDelay: 1)
+    }
+    
+    func presentForceUpgradeView () {
+        ForceUpgradeViewController.createForceUpgradeView(self)
     }
     
     func getMorphiis () {

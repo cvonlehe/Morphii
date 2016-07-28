@@ -6,6 +6,7 @@
 
 import UIKit
 import AudioToolbox
+import DeviceKit
 
 let metrics: [String:Double] = [
     "topBanner": 30
@@ -64,7 +65,6 @@ class KeyboardViewController: UIInputViewController {
             self.view.insertSubview(aBanner, belowSubview: self.forwardingView)
             self.bannerView = aBanner
         }
-        MorphiiAPI.setupParse()
         MorphiiAPI.setupAWS()
 
     }
@@ -1100,7 +1100,7 @@ extension KeyboardViewController:UITextFieldDelegate {
                                             metaData: morphii.metaData,
                                             emoodl: favoriteView.morphiiView.emoodl,
                                             isFavorite: true,
-                                            tags: tags, order: 5000) {
+                                            tags: tags, order: 5000, originalId: morphii.id, originalName: morphii.name) {
 
             addFavoriteContainerView?.removeFromSuperview()
             addFavoriteContainerView = nil

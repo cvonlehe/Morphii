@@ -176,12 +176,8 @@ extension OverlayViewController {
     }
     
     func setMorphii() {
-        if morphiiO!.groupName! == "EmojiOne" {
-            self.morphiiView.setUpMorphii(self.morphiiO!, emoodl: 50.0)
-            
-        }else {
-            self.morphiiView.setUpMorphii(self.morphiiO!, emoodl: morphiiO!.emoodl?.doubleValue)
-        }
+        self.morphiiView.setUpMorphii(self.morphiiO!, emoodl: 50.0)
+
         self.morphiiNameLabel.text = self.morphiiO!.name
         if let collectionName = morphiiO?.groupName {
             collectionNameLabel.text = collectionName

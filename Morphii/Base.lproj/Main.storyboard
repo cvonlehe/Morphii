@@ -375,7 +375,7 @@
                                                                     <rect key="frame" x="0.0" y="203" width="304" height="40"/>
                                                                     <subviews>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9bV-gA-6C1">
-                                                                            <rect key="frame" x="264" y="0.0" width="32" height="32"/>
+                                                                            <rect key="frame" x="272" y="4" width="24" height="24"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="9bV-gA-6C1" secondAttribute="height" multiplier="1:1" id="L7e-0i-y8a"/>
                                                                             </constraints>
@@ -385,7 +385,7 @@
                                                                             </connections>
                                                                         </button>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jNg-4p-hMV">
-                                                                            <rect key="frame" x="8" y="0.0" width="32" height="32"/>
+                                                                            <rect key="frame" x="8" y="4" width="24" height="24"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="jNg-4p-hMV" secondAttribute="height" multiplier="1:1" id="uH2-yI-uPs"/>
                                                                             </constraints>
@@ -395,7 +395,7 @@
                                                                             </connections>
                                                                         </button>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T7E-zs-6v2">
-                                                                            <rect key="frame" x="136" y="0.0" width="32" height="32"/>
+                                                                            <rect key="frame" x="140" y="4" width="24" height="24"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="T7E-zs-6v2" secondAttribute="height" multiplier="1:1" id="vVs-AK-KJu"/>
                                                                             </constraints>
@@ -415,7 +415,7 @@
                                                                         <constraint firstItem="T7E-zs-6v2" firstAttribute="top" secondItem="YcQ-tN-0EW" secondAttribute="top" id="25G-Jg-VDC"/>
                                                                         <constraint firstItem="T7E-zs-6v2" firstAttribute="width" secondItem="T7E-zs-6v2" secondAttribute="height" multiplier="1:1" id="2Y3-ev-grp"/>
                                                                         <constraint firstItem="9bV-gA-6C1" firstAttribute="centerY" secondItem="T7E-zs-6v2" secondAttribute="centerY" id="BL3-fI-AWY"/>
-                                                                        <constraint firstItem="jNg-4p-hMV" firstAttribute="top" secondItem="YcQ-tN-0EW" secondAttribute="top" id="Cr8-G9-Bxa"/>
+                                                                        <constraint firstItem="jNg-4p-hMV" firstAttribute="top" secondItem="YcQ-tN-0EW" secondAttribute="top" constant="4" id="Cr8-G9-Bxa"/>
                                                                         <constraint firstItem="9bV-gA-6C1" firstAttribute="top" secondItem="YcQ-tN-0EW" secondAttribute="top" id="EE5-Sa-eC9"/>
                                                                         <constraint firstAttribute="bottom" secondItem="9bV-gA-6C1" secondAttribute="bottom" id="FqH-NV-gBT"/>
                                                                         <constraint firstItem="9bV-gA-6C1" firstAttribute="height" secondItem="T7E-zs-6v2" secondAttribute="height" id="GCA-Hy-MJM"/>
@@ -425,7 +425,7 @@
                                                                         <constraint firstAttribute="height" constant="40" id="a8p-AA-Dg6"/>
                                                                         <constraint firstItem="jNg-4p-hMV" firstAttribute="leading" secondItem="YcQ-tN-0EW" secondAttribute="leading" constant="8" id="acB-EC-Rf7"/>
                                                                         <constraint firstAttribute="bottom" secondItem="T7E-zs-6v2" secondAttribute="bottom" id="nvs-iF-cxv"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="jNg-4p-hMV" secondAttribute="bottom" constant="8" id="oqE-hW-bla"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="jNg-4p-hMV" secondAttribute="bottom" constant="12" id="oqE-hW-bla"/>
                                                                         <constraint firstItem="jNg-4p-hMV" firstAttribute="width" secondItem="jNg-4p-hMV" secondAttribute="height" multiplier="1:1" id="qw2-wp-Oa8"/>
                                                                         <constraint firstAttribute="trailing" secondItem="9bV-gA-6C1" secondAttribute="trailing" constant="8" id="xed-Zm-7JT"/>
                                                                     </constraints>

@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
    let locationManager = CLLocationManager()
 
     func application(application: UIApplication, willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
-        MorphiiAPI.setupParse()
         displayMainView()
         MorphiiAPI.login()
         Config.getCurrentConfig()

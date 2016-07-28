@@ -11,7 +11,6 @@ import Alamofire
 import AWSMobileAnalytics
 import CoreLocation
 import DeviceKit
-import Parse
 
 class MorphiiAPI {
     static var lastDate = "2015-05-15"
@@ -51,13 +50,6 @@ class MorphiiAPI {
         }
     }
     
-    class func setupParse () {
-        Parse.initializeWithConfiguration(ParseClientConfiguration { (config:ParseMutableClientConfiguration) -> Void in
-            config.applicationId = "morphiiappid9587983476t3"
-            config.clientKey = "abc123"
-            config.server = "http://162.243.251.100:1337/parse"
-            })
-    }
     
     class func setupAWS () {
         print("setupAWS1")
@@ -104,13 +96,16 @@ class MorphiiAPI {
         }else {
             event.addAttribute(name, forKey: AWSAttributes.name)
         }
-        if area != MorphiiAreas.containerHome && area != MorphiiAreas.keyboardHome {
+        if area != MorphiiAreas.containerHome && area != MorphiiAreas.keyboardHome && area != MorphiiAreas.containerTrending {
+            event.addMetric(0.5, forKey: AWSAttributes.intensity)
             if let tags = morphii.tags {
                 event.addAttribute(tags.componentsJoinedByString(", "), forKey: AWSAttributes.userProvidedTags)
             }
+        }else {
+            event.addMetric(getCorrectedIntensity(intensity), forKey: AWSAttributes.intensity)
         }
+        print("SAVEDINTENSITY:",getCorrectedIntensity(intensity))
         event.addAttribute(area, forKey: AWSAttributes.area)
-        event.addMetric(getCorrectedIntensity(intensity), forKey: AWSAttributes.intensity)
         eventClient.recordEvent(event)
         eventClient.submitEvents()
     }
@@ -120,11 +115,29 @@ class MorphiiAPI {
         let event = eventClient.createEventWithEventType(AWSEvents.MorphiiChangeIntensity)
         guard event != nil else {return}
         guard let id = morphii.id, let name = morphii.name else {return}
-        event.addAttribute(id, forKey: AWSAttributes.id)
-        event.addAttribute(name, forKey: AWSAttributes.name)
+        if let originalId = morphii.originalId {
+            event.addAttribute(originalId, forKey: AWSAttributes.id)
+        }else {
+            event.addAttribute(id, forKey: AWSAttributes.id)
+        }
+        
+        if let originalName = morphii.originalName {
+            event.addAttribute(originalName, forKey: AWSAttributes.name)
+            event.addAttribute(name, forKey: AWSAttributes.userProvidedName)
+        }else {
+            event.addAttribute(name, forKey: AWSAttributes.name)
+        }
         if let a = area {
             event.addAttribute(a, forKey: AWSAttributes.area)
         }
+        if area != MorphiiAreas.containerHome && area != MorphiiAreas.keyboardHome && area != MorphiiAreas.containerTrending {
+            if let tags = morphii.tags {
+                event.addAttribute(tags.componentsJoinedByString(", "), forKey: AWSAttributes.userProvidedTags)
+            }
+        }
+        print("INTENSITYCHANGE:",getCorrectedIntensity(beginIntensity))
+        print("INTENSITYCHANGE:",getCorrectedIntensity(endIntensity))
+
         event.addMetric(getCorrectedIntensity(beginIntensity), forKey: AWSAttributes.begin)
         event.addMetric(getCorrectedIntensity(endIntensity), forKey: AWSAttributes.end)
         eventClient.recordEvent(event)
@@ -472,7 +485,7 @@ class MorphiiAPI {
         let request = NSMutableURLRequest(URL: NSURL(string: APPVERSIONURL)!)
         request.HTTPMethod = "GET"
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue()) { (responseO, dataO, errorO) in
-            print("checkIfAppIsUpdated4")
+            print("checkIfAppIsUpdated4 DATA:",dataO,"RESPONSE:",responseO,"ERRPR:",errorO)
             guard let data = dataO else {
                 completion(updated: true)
                 return
@@ -481,16 +494,18 @@ class MorphiiAPI {
             var jsonDict:NSDictionary?
             do {
                 try jsonDict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary
-                print("checkIfAppIsUpdated:",jsonDict)
+                print("checkIfAppIsUpdated:",jsonDict, "version:",versionString)
                 guard let minVersionString = jsonDict?.objectForKey("minVersion") as? String else {
                     completion(updated: true)
                     return
                 }
                 print("VERSION_STRING:",addUpVersionOrBuildString(versionString),"MIN_VERSION:",addUpVersionOrBuildString(minVersionString))
-                if addUpVersionOrBuildString(versionString) < addUpVersionOrBuildString(minVersionString) {
-                    completion(updated: false)
-                }else {
+                if addUpVersionOrBuildString(versionString) >= addUpVersionOrBuildString(minVersionString) {
+                    print("checkIfAppIsUpdated6")
                     completion(updated: true)
+                }else {
+                    print("checkIfAppIsUpdated7")
+                    completion(updated: false)
                 }
             }catch {
                 print("Handle \(error) here")

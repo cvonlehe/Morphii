@@ -305,13 +305,20 @@ class MorphiiView: UIView, MorphiiProtocol {
                 //for "negative" emotions use this translation:SCALE TYPE 3
                 self.emoodl -= (Double(translation.y)) / 2.5
             }
+            print("EMOODL:",self.emoodl)
             recognizer.setTranslation(CGPointZero, inView: self)
+        }
+        if emoodl > 100 {
+            emoodl = 100
+        }else if emoodl < 0 {
+            emoodl = 0
         }
         if recognizer.state == .Ended {
             let endIntensity = NSNumber(double: emoodl)
             print("BEGIN:",beginIntensity,"END:",endIntensity,"AREA:",area)
-            MorphiiAPI.sendIntensityChangeToAWS(morphii, beginIntensity: beginIntensity, endIntensity: endIntensity, area: area)
-
+            if beginIntensity.doubleValue != endIntensity.doubleValue {
+                MorphiiAPI.sendIntensityChangeToAWS(morphii, beginIntensity: beginIntensity, endIntensity: endIntensity, area: area)
+            }
         }
     }
     

@@ -9,9 +9,9 @@ link_with 'Morphii', 'Morphii Mobile Keyboard'
 
 pod 'JGProgressHUD', '~> 1.3'
 pod 'Alamofire', '~> 3.4'
-pod 'Parse'
 pod 'AWSMobileAnalytics', '~> 2.4'
 pod 'DeviceKit', '~> 0.3.2'
+pod 'Parse'
 
 post_install do |installer|
     installer.pods_project.build_configuration_list.build_configurations.each do |configuration|

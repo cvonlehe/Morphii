@@ -17,31 +17,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grey_morphii.png" translatesAutoresizingMaskIntoConstraints="NO" id="DHW-Jm-lxx">
-                                <rect key="frame" x="18" y="97" width="285" height="285"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="285" id="Vrm-tv-c2m"/>
-                                    <constraint firstAttribute="width" constant="285" id="faF-3r-bHo"/>
-                                </constraints>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="was-YI-kDq">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="morphii keyboard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ujs-Fe-yVC">
-                                <rect key="frame" x="0.0" y="424" width="320" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="31" id="Bdg-VE-8sK"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.33395369700406763" green="0.33395369700406763" blue="0.33395369700406763" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="ujs-Fe-yVC" secondAttribute="trailing" id="6HJ-EN-pcR"/>
-                            <constraint firstItem="ujs-Fe-yVC" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="7aU-ov-dsT"/>
-                            <constraint firstItem="DHW-Jm-lxx" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="GhJ-bE-D9z"/>
-                            <constraint firstItem="DHW-Jm-lxx" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="HbK-ni-e16"/>
-                            <constraint firstItem="ujs-Fe-yVC" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="NAd-IF-ZBq"/>
-                            <constraint firstItem="ujs-Fe-yVC" firstAttribute="top" secondItem="DHW-Jm-lxx" secondAttribute="bottom" constant="42" id="WyQ-OR-pfB"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="was-YI-kDq" secondAttribute="bottom" id="24t-Rw-F71"/>
+                            <constraint firstItem="was-YI-kDq" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="TRb-PK-Lc0"/>
+                            <constraint firstAttribute="trailing" secondItem="was-YI-kDq" secondAttribute="trailing" id="bCb-Nb-VwO"/>
+                            <constraint firstItem="was-YI-kDq" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="uAX-S4-ZUJ"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
@@ -52,6 +37,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="grey_morphii.png" width="674" height="675"/>
+        <image name="splash" width="828" height="1472"/>
     </resources>
 </document>

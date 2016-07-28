@@ -64,7 +64,11 @@ class KeyboardMorphiiOverlayView: ExtraView {
         superView.addConstraint(top)
         superView.addConstraint(centerXConstraint)
         superView.addConstraint(bottom)
-        morphiiView.setUpMorphii(morphii, emoodl: morphii.emoodl?.doubleValue)
+        if area == MorphiiAreas.keyboardHome {
+            morphiiView.setUpMorphii(morphii, emoodl: 50.0)
+        }else {
+            morphiiView.setUpMorphii(morphii, emoodl: morphii.emoodl?.doubleValue)
+        }
         morphiiNameLabel.text = morphii.name
         morphiiView.area = area
         
