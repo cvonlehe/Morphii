@@ -434,7 +434,7 @@ class KeyboardViewController: UIInputViewController {
 //        }()
 //        
 //        return darkMode
-        return true
+        return false
     }
     
     func solidColorMode() -> Bool {
@@ -1100,7 +1100,7 @@ extension KeyboardViewController:UITextFieldDelegate {
                                             metaData: morphii.metaData,
                                             emoodl: favoriteView.morphiiView.emoodl,
                                             isFavorite: true,
-                                            tags: tags, order: 5000, originalId: morphii.id, originalName: morphii.name) {
+                                            tags: tags, order: 5000, originalId: morphii.id, originalName: morphii.name, showName: true) {
 
             addFavoriteContainerView?.removeFromSuperview()
             addFavoriteContainerView = nil

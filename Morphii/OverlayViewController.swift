@@ -151,7 +151,7 @@ extension OverlayViewController {
         favoriteNameTextField.resignFirstResponder()
         favoriteTagsTextField.resignFirstResponder()
       let tags = Morphii.getTagsFromString(favoriteTagsTextField.text)
-        if let _ = Morphii.createNewMorphii(favoriteNameTextField.text, name: favoriteNameTextField.text, scaleType: Int((morphiiO?.scaleType!)!), sequence: Int((morphiiO?.sequence)!), groupName: "Your Saved Morphiis", metaData: morphiiO?.metaData, emoodl: morphiiView?.emoodl, isFavorite: true, tags: tags, order: 5000, originalId: morphiiO?.id, originalName: morphiiO?.name) {
+        if let _ = Morphii.createNewMorphii(favoriteNameTextField.text, name: favoriteNameTextField.text, scaleType: Int((morphiiO?.scaleType!)!), sequence: Int((morphiiO?.sequence)!), groupName: "Your Saved Morphiis", metaData: morphiiO?.metaData, emoodl: morphiiView?.emoodl, isFavorite: true, tags: tags, order: 5000, originalId: morphiiO?.id, originalName: morphiiO?.name, showName: true) {
             
             MethodHelper.showSuccessErrorHUD(true, message: "Saved to Favorites", inView: self.view)
             MorphiiAPI.sendFavoriteData(morphiiO, favoriteNameO: favoriteNameTextField.text, emoodl: favoriteMorphiiView!.morphiiView.emoodl, tags: tags)

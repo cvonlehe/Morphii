@@ -37,7 +37,12 @@ class MorphiiSelectionView: UIView {
     }
     
     func setNewMorphii (morphii:Morphii, emoodl:Double?, showName:Bool) {
-        if showName {
+        print("setNewMorphii")
+        var shouldShow = showName
+        if let show = morphii.showName?.boolValue {
+            shouldShow = show
+        }
+        if shouldShow {
             nameLabel.text = morphii.name
         }
         morphiiView.setUpMorphii(morphii, emoodl: emoodl)

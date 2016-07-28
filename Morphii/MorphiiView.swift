@@ -26,6 +26,7 @@ protocol MorphiiProtocol{
 class MorphiiView: UIView, MorphiiProtocol {
     
     var dataSource:MorphiiProtocol?
+    var beginningIntensity = 50.0
     
     //var morphy:MorphyObj?
     //var morphii:MorphiiClass.MorphiiFile!
@@ -292,7 +293,7 @@ class MorphiiView: UIView, MorphiiProtocol {
     }
     
     func showGestureForPanRecognizer(recognizer: UIPanGestureRecognizer) {
-        let beginIntensity = NSNumber(double: emoodl)
+        let beginIntensity = NSNumber(double: beginningIntensity)
         if recognizer.state == UIGestureRecognizerState.Changed || recognizer.state == UIGestureRecognizerState.Ended {
             let translation:CGPoint = recognizer.translationInView(self)
             if (self.morphii.scaleType == 1){
@@ -319,6 +320,8 @@ class MorphiiView: UIView, MorphiiProtocol {
             if beginIntensity.doubleValue != endIntensity.doubleValue {
                 MorphiiAPI.sendIntensityChangeToAWS(morphii, beginIntensity: beginIntensity, endIntensity: endIntensity, area: area)
             }
+        }else if recognizer.state == .Began {
+            beginningIntensity = emoodl
         }
     }
     
@@ -374,6 +377,8 @@ class MorphiiView: UIView, MorphiiProtocol {
         pasteBoard.persistent = true
         let pbData:NSData = UIImagePNGRepresentation(getMorphiiImage())!
         pasteBoard.setValue(pbData, forPasteboardType:"public.png")
+//        let string = "Sent by Morphii Keyboard: "+Config.getCurrentConfig().appStoreUrl
+//        pasteBoard.setValue(string, forPasteboardType: "public.plain-text")
         if let value = pasteBoard.dataForPasteboardType("public.png") {
             if value == pbData {
                 morphii.setLastUsedDate(NSDate())

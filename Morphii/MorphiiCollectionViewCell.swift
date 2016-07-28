@@ -14,7 +14,16 @@ class MorphiiCollectionViewCell: UICollectionViewCell {
     var morphii:Morphii?
     
     func populateCellForMorphii (morphii:Morphii) {
-        morphiiNameLabel.text = morphii.name
+        var shouldShow = true
+        if let show = morphii.showName?.boolValue {
+            shouldShow = show
+        }
+        if shouldShow {
+            morphiiNameLabel.text = morphii.name
+        }else {
+            morphiiNameLabel.text = ""
+
+        }
         morphiiView.setUpMorphii(morphii, emoodl: morphii.emoodl?.doubleValue)
         self.morphii = morphii
     }

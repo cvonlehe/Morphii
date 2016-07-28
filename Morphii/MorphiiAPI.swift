@@ -280,14 +280,19 @@ class MorphiiAPI {
                 //                let _ = record.valueForKey(MorphiiAPIKeys.changedDateUTC)
                 //                let _ = data.valueForKey(MorphiiAPIKeys.png)
             {
-                print("GOT_MORPHII:",groupName)
+                print("GOT_MORPHII:",record)
                 var emoodl:Double?
                 if let group = groupName as? String {
                     if group == "EmojiOne" {
                         emoodl = 100.0
                     }
                 }
-                Morphii.createNewMorphii(record, emoodl: emoodl, isFavorite: false)
+                var showName = true
+                if let show = record.valueForKey(MorphiiAPIKeys.showName) as? Bool {
+                    print("show123:",show)
+                    showName = show
+                }
+                Morphii.createNewMorphii(record, emoodl: emoodl, isFavorite: false, showName: showName)
                 //morphiis.append(Morphii(morphiiRecord: record))
             }
         }

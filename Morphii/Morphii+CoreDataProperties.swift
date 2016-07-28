@@ -2,7 +2,7 @@
 //  Morphii+CoreDataProperties.swift
 //  Morphii
 //
-//  Created by netGALAXY Studios on 7/27/16.
+//  Created by netGALAXY Studios on 7/28/16.
 //  Copyright © 2016 netGALAXY Studios. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -27,5 +27,6 @@ extension Morphii {
     @NSManaged var tags: NSMutableArray?
     @NSManaged var originalName: String?
     @NSManaged var originalId: String?
+    @NSManaged var showName: NSNumber?
 
 }

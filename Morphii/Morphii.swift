@@ -23,7 +23,7 @@ class Morphii: NSManagedObject {
     
     
     //
-    class func createNewMorphii (morphiiRecord:NSDictionary, emoodl:Double?, isFavorite:Bool) -> Morphii? {
+    class func createNewMorphii (morphiiRecord:NSDictionary, emoodl:Double?, isFavorite:Bool, showName:Bool) -> Morphii? {
         
         let data = morphiiRecord.valueForKey(MorphiiAPIKeys.data) as! NSDictionary
         let metaData = data.valueForKey(MorphiiAPIKeys.metaData) as! NSDictionary
@@ -43,16 +43,16 @@ class Morphii: NSManagedObject {
             morphii.deleteMorphii(nil)
         }
         
-        return setData(recId, name: recName, scaleType: scaleType, sequence: recSequence, groupName:groupName, metaData: metaData, emoodl: emoodl, isFavorite: isFavorite, tags: keywords, order: 1, originalId: nil, originalName: nil)
+        return setData(recId, name: recName, scaleType: scaleType, sequence: recSequence, groupName:groupName, metaData: metaData, emoodl: emoodl, isFavorite: isFavorite, tags: keywords, order: 1, originalId: nil, originalName: nil, showName: showName)
     }
     
-    class func createNewMorphii(id: String?, name: String?, scaleType: Int?, /*category: String, keywords: [ String ],*/ sequence: Int?, groupName:String?, metaData: NSDictionary?, emoodl:Double?, isFavorite:Bool, tags:[String], order:Int, originalId:String?, originalName:String?) -> Morphii? {
+    class func createNewMorphii(id: String?, name: String?, scaleType: Int?, /*category: String, keywords: [ String ],*/ sequence: Int?, groupName:String?, metaData: NSDictionary?, emoodl:Double?, isFavorite:Bool, tags:[String], order:Int, originalId:String?, originalName:String?, showName:Bool) -> Morphii? {
         
         guard let i = id, let n = name, let scale = scaleType, let seq = sequence, let group = groupName, let data = metaData, let em = emoodl else {return nil}
-        return setData(i, name: n, scaleType: scale, sequence: seq, groupName: group, metaData: data, emoodl: em, isFavorite: isFavorite, tags: tags, order: order, originalId: originalId, originalName: originalName)
+        return setData(i, name: n, scaleType: scale, sequence: seq, groupName: group, metaData: data, emoodl: em, isFavorite: isFavorite, tags: tags, order: order, originalId: originalId, originalName: originalName, showName: showName)
     }
     
-    private class func setData(id: String, name: String, scaleType: Int, /*category: String, keywords: [ String ],*/ sequence: Int, groupName:String, metaData: NSDictionary, emoodl:Double?, isFavorite:Bool, tags:[String], order:Int, originalId:String?, originalName:String?) -> Morphii? {
+    private class func setData(id: String, name: String, scaleType: Int, /*category: String, keywords: [ String ],*/ sequence: Int, groupName:String, metaData: NSDictionary, emoodl:Double?, isFavorite:Bool, tags:[String], order:Int, originalId:String?, originalName:String?, showName:Bool) -> Morphii? {
         
         guard let morphii = NSEntityDescription.insertNewObjectForEntityForName(EntityNames.Morphii, inManagedObjectContext: CDHelper.sharedInstance.managedObjectContext) as? Morphii else {
             return nil
@@ -70,6 +70,7 @@ class Morphii: NSManagedObject {
         morphii.tags = NSMutableArray(array: tags)
         morphii.originalId = originalId
         morphii.originalName = originalName
+        morphii.showName = NSNumber(bool: showName)
         if let newEmoodl = emoodl {
             morphii.emoodl = newEmoodl
         }

@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import MediaPlayer
+import AVKit
 
 class HomeViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
@@ -71,8 +73,8 @@ class HomeViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if !MethodHelper.isReturningUser() {
-            getMorphiisFromJSONFile()
-            TutorialViewController.presenTutorialViewController(self)
+            //getMorphiisFromJSONFile()
+            self.displayTutorial()
         }else {
             MorphiiAPI.checkIfAppIsUpdated { (updated) in
                 print("viewDidAppear1")
@@ -120,6 +122,29 @@ class HomeViewController: UIViewController {
     }
     @IBAction func backButtonPressed(sender: UIButton) {
         navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func displayTutorial () {
+        guard let path = NSBundle.mainBundle().pathForResource("allow_full_access", ofType: "mov") else {
+            print("NO_PATH")
+            return
+        }
+        let url = NSURL(fileURLWithPath: path)
+        let player = AVPlayer(URL: url)
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HomeViewController.playerDidFinishPlaying(_:)),
+                                                         name: AVPlayerItemDidPlayToEndTimeNotification, object: player.currentItem)
+        self.presentViewController(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+        
+        MorphiiAPI.sendUserProfileActionToAWS(ProfileActions.SetupMorphiiKeyboard)
+    }
+    
+    func playerDidFinishPlaying(note: NSNotification) {
+        print("Video Finished")
+        dismissViewControllerAnimated(true, completion: nil)
     }
 
 }

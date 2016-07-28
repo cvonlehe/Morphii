@@ -21,6 +21,7 @@ class ViewControllerIDs {
     static let ModifiedMorphiiOverlayViewController = "ModifiedMorphiiOverlayViewController"
     static let TrendingViewcController = "TrendingViewcController"
     static let ForceUpgradeViewController = "ForceUpgradeViewController"
+    static let VideoTutorialViewController = "VideoTutorialViewController"
 }
 
 class CollectionViewCellIDs {
@@ -57,6 +58,7 @@ class MorphiiAPIKeys {
     static let category = "category"
     static let keywords = "keywords"
     static let groupName = "groupName"
+    static let showName = "showName"
 }
 
 class PFConfigValues {

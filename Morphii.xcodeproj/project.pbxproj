@@ -179,6 +179,8 @@
 		43CB11801D36BFFB00964C38 /* TrendingData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CB117D1D36BFFB00964C38 /* TrendingData+CoreDataProperties.swift */; };
 		43CB11811D36BFFB00964C38 /* TrendingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CB117E1D36BFFB00964C38 /* TrendingData.swift */; };
 		43CB11821D36BFFB00964C38 /* TrendingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CB117E1D36BFFB00964C38 /* TrendingData.swift */; };
+		43E222101D4A98E5003431DE /* VideoTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E2220F1D4A98E5003431DE /* VideoTutorialViewController.swift */; };
+		43E222121D4A9969003431DE /* allow_full_access.mov in Resources */ = {isa = PBXBuildFile; fileRef = 43E222111D4A9969003431DE /* allow_full_access.mov */; };
 		43F2A3031D1C322000B9AA9C /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A9A60E1D0A15D400AB90E4 /* Config.swift */; };
 		43F2A3051D1C367F00B9AA9C /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F2A3041D1C367F00B9AA9C /* CustomTabBarController.swift */; };
 		43F2A3081D1C5F7400B9AA9C /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F2A3061D1C5F7400B9AA9C /* User+CoreDataProperties.swift */; };
@@ -367,6 +369,8 @@
 		43CB117B1D3582C900964C38 /* TrendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingViewController.swift; sourceTree = "<group>"; };
 		43CB117D1D36BFFB00964C38 /* TrendingData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TrendingData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		43CB117E1D36BFFB00964C38 /* TrendingData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingData.swift; sourceTree = "<group>"; };
+		43E2220F1D4A98E5003431DE /* VideoTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTutorialViewController.swift; sourceTree = "<group>"; };
+		43E222111D4A9969003431DE /* allow_full_access.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = allow_full_access.mov; sourceTree = "<group>"; };
 		43F2A3041D1C367F00B9AA9C /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		43F2A3061D1C5F7400B9AA9C /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		43F2A3071D1C5F7400B9AA9C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -595,6 +599,7 @@
 				4300E87C1D0854C000930766 /* grey_morphii.png */,
 				43217B981D480F97000DF2A5 /* kb-app-morphiis.json */,
 				43217B9A1D4918B1000DF2A5 /* prod-credentials.txt */,
+				43E222111D4A9969003431DE /* allow_full_access.mov */,
 				4398CBAC1D05BF7000074BC7 /* Initialization */,
 				4398CBAE1D05BF8100074BC7 /* View Controllers */,
 				4398CBAD1D05BF7A00074BC7 /* Core Data */,
@@ -667,6 +672,7 @@
 				431749D71D25A323007FBB2D /* ModifiedMorphiiOverlayViewController.swift */,
 				43CB117B1D3582C900964C38 /* TrendingViewController.swift */,
 				439517561D42961E000EE666 /* ForceUpgradeViewController.swift */,
+				43E2220F1D4A98E5003431DE /* VideoTutorialViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -904,6 +910,7 @@
 				43A9E06F1D11D294001F3A1B /* SFUIText-Light.ttf in Resources */,
 				43A9E07B1D11D294001F3A1B /* SFUIText-Semibold.ttf in Resources */,
 				43A9E0331D11D294001F3A1B /* SFCompactDisplay-Medium.ttf in Resources */,
+				43E222121D4A9969003431DE /* allow_full_access.mov in Resources */,
 				43A9E0651D11D294001F3A1B /* SFUIDisplay-Ultralight.ttf in Resources */,
 				43A9E0591D11D294001F3A1B /* SFUIDisplay-Heavy.ttf in Resources */,
 				43A9E06D1D11D294001F3A1B /* SFUIText-HeavyItalic.ttf in Resources */,
@@ -1147,6 +1154,7 @@
 				43A9DFF41D10888F001F3A1B /* FetchedDelegateDataSource.swift in Sources */,
 				431A75DB1D0870980079F9BD /* OverlayViewController.swift in Sources */,
 				43A9DFA51D107915001F3A1B /* HeaderCollectionReusableView.swift in Sources */,
+				43E222101D4A98E5003431DE /* VideoTutorialViewController.swift in Sources */,
 				43CB117C1D3582C900964C38 /* TrendingViewController.swift in Sources */,
 				43A9A63B1D0B184300AB90E4 /* Model.xcdatamodeld in Sources */,
 				43CB11811D36BFFB00964C38 /* TrendingData.swift in Sources */,
