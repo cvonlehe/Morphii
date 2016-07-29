@@ -69,7 +69,15 @@ class KeyboardMorphiiOverlayView: ExtraView {
         }else {
             morphiiView.setUpMorphii(morphii, emoodl: morphii.emoodl?.doubleValue)
         }
-        morphiiNameLabel.text = morphii.name
+        var showName = true
+        if let show = morphii.showName?.boolValue {
+            showName = show
+        }
+        if showName {
+            morphiiNameLabel.text = morphii.name
+        }else {
+            morphiiNameLabel.text = ""
+        }
         morphiiView.area = area
         
     }

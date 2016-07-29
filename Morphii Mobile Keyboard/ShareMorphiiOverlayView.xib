@@ -60,7 +60,7 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copy Morphii" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="nek-B3-YPt">
                                     <rect key="frame" x="0.0" y="36" width="80" height="44"/>
                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="textColor" red="0.20000000000000001" green="0.22352941179999999" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -97,7 +97,7 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save to Camera Roll" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="HBd-Ch-Sla">
                                     <rect key="frame" x="0.0" y="36" width="80" height="44"/>
                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="textColor" red="0.20000000000000001" green="0.22352941179999999" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -133,13 +133,13 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TVZ-u6-wGz">
                             <rect key="frame" x="60" y="236" width="80" height="80"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="SkR-Tt-6o2">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorites" translatesAutoresizingMaskIntoConstraints="NO" id="SkR-Tt-6o2">
                                     <rect key="frame" x="0.0" y="0.0" width="80" height="36"/>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add to Favorites" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="IGU-FJ-7TW">
                                     <rect key="frame" x="0.0" y="36" width="80" height="44"/>
                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="textColor" red="0.20000000000000001" green="0.22352941179999999" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -229,7 +229,7 @@
                     <blurEffect style="light"/>
                 </visualEffectView>
             </subviews>
-            <color key="backgroundColor" red="0.14901960784313725" green="0.16862745098039217" blue="0.22352941176470589" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="xFu-BS-2Bu" firstAttribute="height" secondItem="l4N-yD-qJT" secondAttribute="height" id="08N-g2-PDg"/>
                 <constraint firstAttribute="trailing" secondItem="1tn-WZ-Nkc" secondAttribute="trailing" id="0v9-Qo-uSv"/>
@@ -267,8 +267,8 @@
         </view>
     </objects>
     <resources>
-        <image name="copy" width="33" height="33"/>
-        <image name="download_white" width="33" height="33"/>
-        <image name="star" width="33" height="33"/>
+        <image name="copy" width="43" height="50"/>
+        <image name="download_white" width="46" height="50"/>
+        <image name="favorites" width="19" height="18"/>
     </resources>
 </document>

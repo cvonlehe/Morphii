@@ -451,7 +451,6 @@ class MorphiiView: UIView, MorphiiProtocol {
 //        
 //        //end the graphics context
 //        UIGraphicsEndImageContext()
-        layer.cornerRadius = (frame.size.width / 2) - 50
         clipsToBounds = true
         UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
         layer.renderInContext(UIGraphicsGetCurrentContext()!)
@@ -460,8 +459,28 @@ class MorphiiView: UIView, MorphiiProtocol {
         morphiiPic = morphiiPic.imageWithInsets(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         UIGraphicsEndImageContext()
         layer.cornerRadius = 0
-
+        if let newImage = removeWhiteBackgroundFromImage(morphiiPic) {
+            print("NEW_IMAGE123:",newImage)
+            return newImage
+        }
         return morphiiPic
+    }
+    
+    func removeWhiteBackgroundFromImage (oldImage:UIImage) -> UIImage? {
+        
+        let image = UIImage(data: UIImageJPEGRepresentation(oldImage, 1.0)!)!
+
+        let rawImageRef: CGImageRef = image.CGImage!
+        
+        let colorMasking: [CGFloat] = [222, 255, 222, 255, 222, 255]
+        UIGraphicsBeginImageContext(image.size);
+        let maskedImageRef=CGImageCreateWithMaskingColors(rawImageRef, colorMasking);
+        CGContextTranslateCTM(UIGraphicsGetCurrentContext(), 0.0, image.size.height);
+        CGContextScaleCTM(UIGraphicsGetCurrentContext(), 1.0, -1.0);
+        CGContextDrawImage(UIGraphicsGetCurrentContext(), CGRectMake(0, 0, image.size.width, image.size.height), maskedImageRef);
+        let result = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return result
     }
 }
 

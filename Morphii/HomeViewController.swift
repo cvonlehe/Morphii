@@ -73,7 +73,7 @@ class HomeViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if !MethodHelper.isReturningUser() {
-            //getMorphiisFromJSONFile()
+            getMorphiisFromJSONFile()
             self.displayTutorial()
         }else {
             MorphiiAPI.checkIfAppIsUpdated { (updated) in

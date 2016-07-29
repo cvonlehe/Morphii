@@ -5,6 +5,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="SFUIDisplay-Regular.ttf">
+            <string>SFUIDisplay-Regular</string>
+        </mutableArray>
         <mutableArray key="SFUIText-Regular.ttf">
             <string>SFUIText-Regular</string>
         </mutableArray>
@@ -13,6 +16,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecentView" customModule="Morphii_Mobile_Keyboard" customModuleProvider="target">
             <connections>
                 <outlet property="morphiiScrollView" destination="gtI-Js-N03" id="NaA-TK-kik"/>
+                <outlet property="noMorphiisLabel" destination="Ycb-Eq-NUl" id="fNO-IX-cZ7"/>
+                <outlet property="noMorphiisView" destination="4Li-Ss-f1J" id="eao-7J-7eK"/>
                 <outlet property="titleLabel" destination="Ndf-aV-HDi" id="ici-LM-DLb"/>
             </connections>
         </placeholder>
@@ -26,8 +31,8 @@
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ndf-aV-HDi">
                             <rect key="frame" x="8" y="0.0" width="584" height="20"/>
-                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
-                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.22352941179999999" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -40,8 +45,37 @@
                         <constraint firstItem="Ndf-aV-HDi" firstAttribute="top" secondItem="2Cc-Pi-VmJ" secondAttribute="top" id="oYG-oQ-fXN"/>
                     </constraints>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gtI-Js-N03">
-                    <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Li-Ss-f1J">
+                    <rect key="frame" x="198" y="215" width="205" height="170"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="morphii_sad" translatesAutoresizingMaskIntoConstraints="NO" id="5dY-e1-ZKP">
+                            <rect key="frame" x="45" y="8" width="115" height="115"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="115" id="g30-mk-Hqx"/>
+                                <constraint firstAttribute="width" constant="115" id="hCp-1p-WS7"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no favorites" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="Ycb-Eq-NUl">
+                            <rect key="frame" x="8" y="131" width="189" height="39"/>
+                            <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
+                            <color key="textColor" red="0.72265625" green="0.72265625" blue="0.72265625" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="205" id="5dc-tM-7ha"/>
+                        <constraint firstAttribute="trailing" secondItem="Ycb-Eq-NUl" secondAttribute="trailing" constant="8" id="Bg6-ut-MtC"/>
+                        <constraint firstItem="5dY-e1-ZKP" firstAttribute="centerX" secondItem="4Li-Ss-f1J" secondAttribute="centerX" id="HsO-96-SEV"/>
+                        <constraint firstItem="Ycb-Eq-NUl" firstAttribute="top" secondItem="5dY-e1-ZKP" secondAttribute="bottom" constant="8" id="Qbv-8m-IDk"/>
+                        <constraint firstItem="5dY-e1-ZKP" firstAttribute="top" secondItem="4Li-Ss-f1J" secondAttribute="top" constant="8" id="iSX-Cx-t9P"/>
+                        <constraint firstAttribute="bottom" secondItem="Ycb-Eq-NUl" secondAttribute="bottom" id="lop-Tf-eNe"/>
+                        <constraint firstAttribute="height" constant="170" id="u3y-Xv-Q4a"/>
+                        <constraint firstItem="Ycb-Eq-NUl" firstAttribute="leading" secondItem="4Li-Ss-f1J" secondAttribute="leading" constant="8" id="z6M-G3-5Eq"/>
+                    </constraints>
+                </view>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gtI-Js-N03">
+                    <rect key="frame" x="600" y="20" width="600" height="580"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </scrollView>
             </subviews>
@@ -49,12 +83,17 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="gtI-Js-N03" secondAttribute="trailing" id="Apa-nx-aAG"/>
                 <constraint firstItem="gtI-Js-N03" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Gcg-7F-Oy8"/>
+                <constraint firstItem="4Li-Ss-f1J" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="L5M-LS-MhW"/>
                 <constraint firstAttribute="trailing" secondItem="2Cc-Pi-VmJ" secondAttribute="trailing" id="ZlW-LG-ZBm"/>
                 <constraint firstItem="gtI-Js-N03" firstAttribute="top" secondItem="2Cc-Pi-VmJ" secondAttribute="bottom" id="c6E-gn-ugn"/>
+                <constraint firstItem="4Li-Ss-f1J" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="cQi-oK-MXF"/>
                 <constraint firstItem="2Cc-Pi-VmJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="kL6-Tt-oPq"/>
                 <constraint firstItem="2Cc-Pi-VmJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="oYF-ui-5uX"/>
                 <constraint firstAttribute="bottom" secondItem="gtI-Js-N03" secondAttribute="bottom" id="wev-V7-qEo"/>
             </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="morphii_sad" width="386" height="386"/>
+    </resources>
 </document>

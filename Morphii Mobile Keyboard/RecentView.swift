@@ -10,6 +10,8 @@ import UIKit
 
 class RecentView: ExtraView {
 
+    @IBOutlet weak var noMorphiisLabel: UILabel!
+    @IBOutlet weak var noMorphiisView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var morphiiScrollView: UIScrollView!
     var morphiis:[Morphii] = []
@@ -35,15 +37,33 @@ class RecentView: ExtraView {
         }
         switch fetchType {
         case .Home:
+            self.noMorphiisView.hidden = true
+            self.morphiiScrollView.hidden = false
             titleLabel.text = "All Morphiis"
             morphiis = Morphii.getNonfavoriteMorphiis()
             break
         case .Recents:
             morphiis = Morphii.getMostRecentlyUsedMorphiis()
+            if morphiis.count <= 0 {
+                self.noMorphiisView.hidden = false
+                self.morphiiScrollView.hidden = true
+                self.noMorphiisLabel.text = "No Recently Sent Morphiis"
+            }else {
+                self.morphiiScrollView.hidden = false
+                self.noMorphiisView.hidden = true
+            }
             titleLabel.text = "Recently Sent Morphiis"
             break
         case .Favorites:
             morphiis = Morphii.getFavoriteMorphiis()
+            if morphiis.count <= 0 {
+                self.noMorphiisView.hidden = false
+                self.morphiiScrollView.hidden = true
+                self.noMorphiisLabel.text = "No Favorite Morphiis"
+            }else {
+                self.morphiiScrollView.hidden = false
+                self.noMorphiisView.hidden = true
+            }
             titleLabel.text = "Your Saved Morphiis"
             break
         }
@@ -137,7 +157,7 @@ class RecentView: ExtraView {
         let widthConstraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: superView, attribute: NSLayoutAttribute.Width, multiplier: 1, constant: 0)
         let centerXConstraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: superView, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
         let top = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: superView, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 0)
-        let bottom = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: superView, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: -30)
+        let bottom = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: superView, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: -40)
         
         superView.addConstraint(widthConstraint)
         superView.addConstraint(top)

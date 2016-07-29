@@ -16,7 +16,8 @@ class CustomTabBarController: UITabBarController {
         // Do any additional setup after loading the view.
         let size = CGSize(width: tabBar.frame.width / 4, height: tabBar.frame.height)
         let background = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: size))
-        background.backgroundColor = UIColor ( red: 0.0, green: 0.8863, blue: 0.4275, alpha: 1.0 )
+        tabBar.backgroundColor = UIColor ( red: 0.9255, green: 0.9255, blue: 0.9255, alpha: 1.0 )
+        background.backgroundColor = UIColor ( red: 0.1152, green: 0.8813, blue: 0.3532, alpha: 1.0 )
         tabBar.selectionIndicatorImage = UIImage(view: background)
         tabBar.tintColor = UIColor.whiteColor()
         if let items = tabBar.items {

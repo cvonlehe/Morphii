@@ -9,7 +9,7 @@ import AudioToolbox
 import DeviceKit
 
 let metrics: [String:Double] = [
-    "topBanner": 30
+    "topBanner": 40
 ]
 func metric(name: String) -> CGFloat { return CGFloat(metrics[name]!) }
 
@@ -73,7 +73,12 @@ class KeyboardViewController: UIInputViewController {
         super.viewWillAppear(animated)
         self.bannerView?.hidden = false
         self.keyboardHeight = self.heightForOrientation(self.interfaceOrientation, withTopBanner: true)
-        setCenterView(.Recents)
+        if Morphii.getMostRecentlyUsedMorphiis().count <= 0 {
+            setCenterView(.Home)
+        }else {
+            setCenterView(.Recents)
+        }
+
     }
     
     override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
@@ -150,6 +155,7 @@ class KeyboardViewController: UIInputViewController {
         abcButtonLabel = UILabel(frame: CGRect(x: 0, y: 0, width: abcContainerView.frame.size.width, height: abcContainerView.frame.size.height))
         abcButtonLabel.textAlignment = .Center
         abcButtonLabel.text = "ABC"
+        abcButtonLabel.font = UIFont(name: "SFUIText-Regular", size: 14)
         abcButtonLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(KeyboardViewController.abcButtonPressed(_:))))
         abcButtonLabel.userInteractionEnabled = true
         abcContainerView.addSubview(abcButtonLabel)
@@ -172,7 +178,7 @@ class KeyboardViewController: UIInputViewController {
     func favoriteButtonPressed (sender:UIButton) {
         print("favoriteButtonPressed")
         setCenterView(.Favorites)
-    }
+    } 
     
     func homeButtonPressed (sender:UIButton) {
         print("homeButtonPressed")
@@ -204,12 +210,15 @@ class KeyboardViewController: UIInputViewController {
             self.advanceToNextInputMode()
             break
         case .Recents:
+            setHeight(280)
             setRecentView(.Recents)
             break
         case .Favorites:
+            setHeight(280)
             setRecentView(.Favorites)
             break
         case .Home:
+            setHeight(280)
             setRecentView(.Home)
             break
         case .Keyboard:
@@ -227,6 +236,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func returnToKeybord () {
+        setHeight(270)
         recentView?.removeFromSuperview()
         recentView = nil
     }
@@ -465,7 +475,7 @@ class KeyboardViewController: UIInputViewController {
             addNavigationToBannerView(banner)
         }
         
-        let newOrigin = CGPointMake(0, CGFloat(Int(view.frame.height - 250)))
+        let newOrigin = CGPointMake(0, CGFloat(Int(view.frame.height - 260)))
         self.forwardingView.frame.origin = newOrigin
     }
     
@@ -1056,7 +1066,7 @@ extension KeyboardViewController:AddFavoriteContainerViewDelegate {
     func closeButtonPressed () {
         addFavoriteContainerView?.removeFromSuperview()
         addFavoriteContainerView = nil
-        setHeight(250)
+        setHeight(280)
         shareView?.hidden = false
         recentView?.hidden = false
         view.backgroundColor = defaultColor
@@ -1104,7 +1114,7 @@ extension KeyboardViewController:UITextFieldDelegate {
 
             addFavoriteContainerView?.removeFromSuperview()
             addFavoriteContainerView = nil
-            setHeight(250)
+            setHeight(280)
             recentView?.backButtonPressed()
             shareView?.removeFromSuperview()
             shareView = nil

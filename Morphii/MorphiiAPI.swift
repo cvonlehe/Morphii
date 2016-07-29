@@ -280,7 +280,7 @@ class MorphiiAPI {
                 //                let _ = record.valueForKey(MorphiiAPIKeys.changedDateUTC)
                 //                let _ = data.valueForKey(MorphiiAPIKeys.png)
             {
-                print("GOT_MORPHII:",record)
+                //print("GOT_MORPHII:",record)
                 var emoodl:Double?
                 if let group = groupName as? String {
                     if group == "EmojiOne" {
