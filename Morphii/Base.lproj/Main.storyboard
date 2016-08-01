@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -65,6 +66,9 @@
         </mutableArray>
         <mutableArray key="SFUIText-LightItalic.ttf">
             <string>SFUIText-LightItalic</string>
+        </mutableArray>
+        <mutableArray key="SFUIText-Medium.ttf">
+            <string>SFUIText-Medium</string>
         </mutableArray>
         <mutableArray key="SFUIText-Regular.ttf">
             <string>SFUIText-Regular</string>
@@ -216,13 +220,13 @@
                                                     </variation>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Morphii Name" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="cxS-XM-O7H">
-                                                    <rect key="frame" x="4" y="81" width="98" height="28"/>
+                                                    <rect key="frame" x="4" y="85" width="98" height="26"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="26" id="9fY-d8-Gwc"/>
                                                         <constraint firstAttribute="height" constant="25" id="SOJ-wg-SkQ"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="10"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
@@ -237,11 +241,11 @@
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="cxS-XM-O7H" secondAttribute="bottom" constant="-3" id="BBv-wF-Ndq"/>
+                                            <constraint firstAttribute="bottom" secondItem="cxS-XM-O7H" secondAttribute="bottom" constant="-5" id="BBv-wF-Ndq"/>
                                             <constraint firstAttribute="bottom" secondItem="AXs-cD-Er4" secondAttribute="bottom" constant="24" id="BHa-g2-kXL"/>
                                             <constraint firstItem="AXs-cD-Er4" firstAttribute="centerY" secondItem="Mau-Zd-1W2" secondAttribute="centerY" constant="-8" id="Bg1-he-4p2"/>
                                             <constraint firstItem="AXs-cD-Er4" firstAttribute="leading" secondItem="Mau-Zd-1W2" secondAttribute="leading" constant="8" id="Kdj-lt-tlE"/>
-                                            <constraint firstItem="cxS-XM-O7H" firstAttribute="top" secondItem="AXs-cD-Er4" secondAttribute="bottom" constant="-9" id="Qx6-HN-F49"/>
+                                            <constraint firstItem="cxS-XM-O7H" firstAttribute="top" secondItem="AXs-cD-Er4" secondAttribute="bottom" constant="-5" id="Qx6-HN-F49"/>
                                             <constraint firstItem="cxS-XM-O7H" firstAttribute="top" secondItem="AXs-cD-Er4" secondAttribute="bottom" constant="-2" id="R5B-zE-aH2"/>
                                             <constraint firstItem="AXs-cD-Er4" firstAttribute="top" secondItem="Mau-Zd-1W2" secondAttribute="top" id="g2j-W8-Yzg"/>
                                             <constraint firstAttribute="trailing" secondItem="cxS-XM-O7H" secondAttribute="trailing" constant="4" id="mHr-Nh-seG"/>
@@ -509,15 +513,15 @@
                                                     </mask>
                                                 </variation>
                                             </view>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="117" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bVN-4f-0vo">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="124" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bVN-4f-0vo">
                                                 <rect key="frame" x="304" y="41" width="304" height="353"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CollectionTableViewCell" rowHeight="117" id="vgF-0K-kWP" customClass="CollectionTableViewCell" customModule="Morphii" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="28" width="304" height="117"/>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CollectionTableViewCell" rowHeight="124" id="vgF-0K-kWP" customClass="CollectionTableViewCell" customModule="Morphii" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="28" width="304" height="124"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vgF-0K-kWP" id="dco-hu-3c8">
-                                                            <rect key="frame" x="0.0" y="0.0" width="304" height="117"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="304" height="124"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b87-Hg-l6l">
@@ -538,8 +542,8 @@
                                                                         <constraint firstItem="VuN-sf-vFp" firstAttribute="top" secondItem="b87-Hg-l6l" secondAttribute="top" id="ptb-cm-Yew"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FzQ-8v-i0C" customClass="MorphiiScrollView" customModule="Morphii" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="25" width="304" height="91"/>
+                                                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FzQ-8v-i0C" customClass="MorphiiScrollView" customModule="Morphii" customModuleProvider="target">
+                                                                    <rect key="frame" x="0.0" y="25" width="304" height="99"/>
                                                                 </scrollView>
                                                             </subviews>
                                                             <constraints>
@@ -898,14 +902,14 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MorphiiTableViewCell" rowHeight="68" id="fFg-w6-UPE" customClass="MorphiiTableViewCell" customModule="Morphii" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="68"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MorphiiTableViewCell" rowHeight="75" id="fFg-w6-UPE" customClass="MorphiiTableViewCell" customModule="Morphii" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fFg-w6-UPE" id="yDT-r7-0rY">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9cW-mw-zA8">
+                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9cW-mw-zA8">
                                                     <rect key="frame" x="72" y="67" width="248" height="1"/>
                                                     <color key="backgroundColor" red="0.72265625" green="0.72265625" blue="0.72265625" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
@@ -913,20 +917,26 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="moS-XS-ud9" customClass="MorphiiView" customModule="Morphii" customModuleProvider="target">
-                                                    <rect key="frame" x="8" y="2" width="64" height="64"/>
+                                                    <rect key="frame" x="8" y="4" width="59" height="59"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="width" secondItem="moS-XS-ud9" secondAttribute="height" multiplier="1:1" id="JyM-Hx-gWG"/>
                                                         <constraint firstAttribute="width" secondItem="moS-XS-ud9" secondAttribute="height" multiplier="1:1" id="Vr2-Ku-XcD"/>
                                                     </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="Vr2-Ku-XcD"/>
+                                                        </mask>
+                                                    </variation>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RpK-1V-H0m">
-                                                    <rect key="frame" x="80" y="8" width="194" height="51"/>
-                                                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
+                                                    <rect key="frame" x="75" y="8" width="199" height="58"/>
+                                                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
                                                     <color key="textColor" red="0.20000000000000001" green="0.22352941179999999" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="0uW-rR-Ubd">
-                                                    <rect key="frame" x="282" y="19" width="30" height="30"/>
+                                                    <rect key="frame" x="282" y="22" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="6A4-vp-ghB"/>
                                                         <constraint firstAttribute="height" constant="30" id="ecc-Y6-9dn"/>
@@ -942,15 +952,23 @@
                                                 <constraint firstAttribute="trailing" secondItem="RpK-1V-H0m" secondAttribute="trailing" constant="46" id="8A2-iU-ADV"/>
                                                 <constraint firstItem="0uW-rR-Ubd" firstAttribute="centerY" secondItem="yDT-r7-0rY" secondAttribute="centerY" id="NEm-Jl-2Tc"/>
                                                 <constraint firstItem="RpK-1V-H0m" firstAttribute="leading" secondItem="moS-XS-ud9" secondAttribute="trailing" constant="8" id="RE5-Cc-gHD"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="moS-XS-ud9" secondAttribute="bottom" constant="4" id="Ue1-Vi-9z4"/>
                                                 <constraint firstItem="9cW-mw-zA8" firstAttribute="top" secondItem="RpK-1V-H0m" secondAttribute="bottom" constant="8" id="a6y-6I-4fV"/>
                                                 <constraint firstItem="RpK-1V-H0m" firstAttribute="top" secondItem="yDT-r7-0rY" secondAttribute="top" constant="8" id="bJz-ag-TH0"/>
                                                 <constraint firstAttribute="bottom" secondItem="moS-XS-ud9" secondAttribute="bottom" constant="2" id="dEB-Bb-nEj"/>
+                                                <constraint firstItem="RpK-1V-H0m" firstAttribute="leading" secondItem="moS-XS-ud9" secondAttribute="trailing" constant="8" id="eY7-Px-zdK"/>
+                                                <constraint firstAttribute="bottom" secondItem="moS-XS-ud9" secondAttribute="bottom" constant="8" id="la6-Ua-zgx"/>
                                                 <constraint firstAttribute="bottom" secondItem="9cW-mw-zA8" secondAttribute="bottom" id="ujc-Fz-hBM"/>
+                                                <constraint firstItem="moS-XS-ud9" firstAttribute="top" secondItem="yDT-r7-0rY" secondAttribute="top" constant="4" id="y9Y-YD-kGW"/>
                                                 <constraint firstAttribute="trailing" secondItem="9cW-mw-zA8" secondAttribute="trailing" id="yGh-7b-I6D"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
+                                                    <exclude reference="2g1-Tr-9oR"/>
+                                                    <exclude reference="dEB-Bb-nEj"/>
+                                                    <exclude reference="la6-Ua-zgx"/>
                                                     <exclude reference="8A2-iU-ADV"/>
+                                                    <exclude reference="RE5-Cc-gHD"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -961,7 +979,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TagsTableViewCell" rowHeight="36" id="IyZ-Yv-iuX" customClass="TagsTableViewCell" customModule="Morphii" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="96" width="320" height="36"/>
+                                        <rect key="frame" x="0.0" y="103" width="320" height="36"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IyZ-Yv-iuX" id="0ig-lg-nrZ">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="36"/>
@@ -992,7 +1010,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NoXFoundTableViewCell" rowHeight="61" id="t2q-lj-07h" customClass="NoXFoundTableViewCell" customModule="Morphii" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="132" width="320" height="61"/>
+                                        <rect key="frame" x="0.0" y="139" width="320" height="61"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="t2q-lj-07h" id="5Wb-Af-tXF">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="61"/>
@@ -1000,7 +1018,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No X Found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yF5-iY-Yws">
                                                     <rect key="frame" x="40" y="0.0" width="280" height="61"/>
-                                                    <fontDescription key="fontDescription" name="SFUIText-LightItalic" family="SF UI Text" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="SFUIText-LightItalic" family="SF UI Text" pointSize="17"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1022,25 +1040,46 @@
                                     <outlet property="delegate" destination="JjE-11-mb0" id="VXg-6p-fc4"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lso-O0-AZ1">
+                                <rect key="frame" x="0.0" y="67" width="320" height="0.0"/>
+                                <color key="backgroundColor" red="0.8627306349734043" green="0.8627306349734043" blue="0.8627306349734043" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="wVR-cP-phX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
+                                <color key="textColor" red="0.20000000000000001" green="0.22352941179999999" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="0IQ-A4-e65" firstAttribute="leading" secondItem="UVM-dD-eJQ" secondAttribute="leading" id="2Q4-id-GeY"/>
                             <constraint firstItem="M3w-QZ-jev" firstAttribute="centerX" secondItem="UVM-dD-eJQ" secondAttribute="centerX" id="7Cw-S2-h3K"/>
                             <constraint firstItem="M3w-QZ-jev" firstAttribute="centerY" secondItem="UVM-dD-eJQ" secondAttribute="centerY" id="BcH-uC-B4Y"/>
+                            <constraint firstItem="lso-O0-AZ1" firstAttribute="width" secondItem="Efc-Il-e8D" secondAttribute="width" id="JJ4-ju-XGx"/>
                             <constraint firstItem="9Bz-Vi-n5z" firstAttribute="centerX" secondItem="UVM-dD-eJQ" secondAttribute="centerX" id="JXO-Y9-oTO"/>
-                            <constraint firstItem="0IQ-A4-e65" firstAttribute="top" secondItem="Efc-Il-e8D" secondAttribute="bottom" id="K8I-4H-mrx"/>
+                            <constraint firstItem="0IQ-A4-e65" firstAttribute="top" secondItem="Efc-Il-e8D" secondAttribute="bottom" constant="20" id="K8I-4H-mrx"/>
                             <constraint firstItem="Efc-Il-e8D" firstAttribute="top" secondItem="UVM-dD-eJQ" secondAttribute="top" id="L8O-S8-NGS"/>
                             <constraint firstItem="9Bz-Vi-n5z" firstAttribute="top" secondItem="M3w-QZ-jev" secondAttribute="bottom" constant="21" id="OLD-cg-r58"/>
+                            <constraint firstItem="lso-O0-AZ1" firstAttribute="top" secondItem="Efc-Il-e8D" secondAttribute="bottom" id="TC9-qw-uGM"/>
                             <constraint firstItem="xIJ-Bu-SIM" firstAttribute="top" secondItem="0IQ-A4-e65" secondAttribute="bottom" id="W1R-ey-JG1"/>
+                            <constraint firstItem="0IQ-A4-e65" firstAttribute="top" secondItem="lso-O0-AZ1" secondAttribute="bottom" id="bKJ-y7-4Bw"/>
                             <constraint firstAttribute="trailing" secondItem="0IQ-A4-e65" secondAttribute="trailing" id="bQV-JD-wh2"/>
                             <constraint firstAttribute="trailing" secondItem="Efc-Il-e8D" secondAttribute="trailing" id="gwq-IN-681"/>
+                            <constraint firstItem="lso-O0-AZ1" firstAttribute="centerX" secondItem="Efc-Il-e8D" secondAttribute="centerX" id="pG1-EY-2s5"/>
                             <constraint firstItem="Efc-Il-e8D" firstAttribute="leading" secondItem="UVM-dD-eJQ" secondAttribute="leading" id="uKK-wR-73P"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="K8I-4H-mrx"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="magnifyingGlassImageView" destination="M3w-QZ-jev" id="bpQ-NG-hUU"/>
+                        <outlet property="morphiiTagsLabel" destination="lso-O0-AZ1" id="j6r-Dq-qrC"/>
+                        <outlet property="morphiiTagsLabelHeightConstraint" destination="wVR-cP-phX" id="6m6-y6-zjP"/>
                         <outlet property="searchBar" destination="CAl-FK-QnF" id="0sX-SO-975"/>
                         <outlet property="searchLabel" destination="9Bz-Vi-n5z" id="ML6-jh-vio"/>
                         <outlet property="tableView" destination="0IQ-A4-e65" id="DPb-WZ-Exg"/>

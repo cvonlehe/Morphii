@@ -76,6 +76,7 @@ class RecentView: ExtraView {
         var y = CGFloat(0)
         for morphii in morphiis {
             let morphiiView = MorphiiSelectionView(frame: CGRect(x: x, y: y, width: morphiiSideLength, height: morphiiSideLength), morphii: morphii, delegate: nil, showName: fetchType != .Recents)
+            morphiiView.morphiiView.backgroundColor = UIColor.clearColor()
             morphiiView.backgroundColor = UIColor.clearColor()
             morphiiView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(RecentView.morphiiSelectionViewTapped(_:))))
             morphiiScrollView.addSubview(morphiiView)

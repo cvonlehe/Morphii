@@ -452,15 +452,17 @@ class MorphiiView: UIView, MorphiiProtocol {
 //        //end the graphics context
 //        UIGraphicsEndImageContext()
         clipsToBounds = true
+        backgroundColor = UIColor ( red: 0.3334, green: 0.3333, blue: 0.3334, alpha: 1.0 )
         UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
         layer.renderInContext(UIGraphicsGetCurrentContext()!)
-        var morphiiPic = UIGraphicsGetImageFromCurrentImageContext()
+        let morphiiPic = UIGraphicsGetImageFromCurrentImageContext()
         morphiiPic.drawInRect(CGRect(x: 0, y: 0, width: 600, height: 600))
-        morphiiPic = morphiiPic.imageWithInsets(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         UIGraphicsEndImageContext()
         layer.cornerRadius = 0
-        if let newImage = removeWhiteBackgroundFromImage(morphiiPic) {
+        backgroundColor = UIColor.clearColor()
+        if var newImage = removeWhiteBackgroundFromImage(morphiiPic) {
             print("NEW_IMAGE123:",newImage)
+            newImage = newImage.imageWithInsets(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
             return newImage
         }
         return morphiiPic
@@ -471,13 +473,16 @@ class MorphiiView: UIView, MorphiiProtocol {
         let image = UIImage(data: UIImageJPEGRepresentation(oldImage, 1.0)!)!
 
         let rawImageRef: CGImageRef = image.CGImage!
-        
-        let colorMasking: [CGFloat] = [222, 255, 222, 255, 222, 255]
+        let components = CGColorGetComponents(UIColor.darkGrayColor().CGColor)
+        let min = CGFloat(80.0)
+        let max = CGFloat(90.0)
+        let colorMasking: [CGFloat] = [min, max, min, max, min, max]
         UIGraphicsBeginImageContext(image.size);
         let maskedImageRef=CGImageCreateWithMaskingColors(rawImageRef, colorMasking);
         CGContextTranslateCTM(UIGraphicsGetCurrentContext(), 0.0, image.size.height);
         CGContextScaleCTM(UIGraphicsGetCurrentContext(), 1.0, -1.0);
         CGContextDrawImage(UIGraphicsGetCurrentContext(), CGRectMake(0, 0, image.size.width, image.size.height), maskedImageRef);
+        CGContextSetShouldAntialias(UIGraphicsGetCurrentContext(), false)
         let result = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         return result

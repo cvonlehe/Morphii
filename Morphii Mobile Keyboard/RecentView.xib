@@ -74,9 +74,9 @@
                         <constraint firstItem="Ycb-Eq-NUl" firstAttribute="leading" secondItem="4Li-Ss-f1J" secondAttribute="leading" constant="8" id="z6M-G3-5Eq"/>
                     </constraints>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gtI-Js-N03">
-                    <rect key="frame" x="600" y="20" width="600" height="580"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gtI-Js-N03">
+                    <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                    <color key="backgroundColor" red="0.96951862030212776" green="0.96951862030212776" blue="0.96951862030212776" alpha="1" colorSpace="calibratedRGB"/>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

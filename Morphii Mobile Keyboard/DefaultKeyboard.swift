@@ -38,10 +38,10 @@ func defaultKeyboard() -> Keyboard {
     defaultKeyboard.addKey(keyModeChangeNumbers, row: 3, page: 0)
     
     let keyboardChange = Key(.KeyboardChange)
-    defaultKeyboard.addKey(keyboardChange, row: 3, page: 0)
+    //defaultKeyboard.addKey(keyboardChange, row: 3, page: 0)
     
     let settings = Key(.Settings)
-    defaultKeyboard.addKey(settings, row: 3, page: 0)
+   // defaultKeyboard.addKey(settings, row: 3, page: 0)
     
     let space = Key(.Space)
     space.uppercaseKeyCap = "space"
@@ -85,9 +85,9 @@ func defaultKeyboard() -> Keyboard {
     keyModeChangeLetters.toMode = 0
     defaultKeyboard.addKey(keyModeChangeLetters, row: 3, page: 1)
     
-    defaultKeyboard.addKey(Key(keyboardChange), row: 3, page: 1)
+    //defaultKeyboard.addKey(Key(keyboardChange), row: 3, page: 1)
     
-    defaultKeyboard.addKey(Key(settings), row: 3, page: 1)
+    //defaultKeyboard.addKey(Key(settings), row: 3, page: 1)
     
     defaultKeyboard.addKey(Key(space), row: 3, page: 1)
     
@@ -117,9 +117,9 @@ func defaultKeyboard() -> Keyboard {
     
     defaultKeyboard.addKey(Key(keyModeChangeLetters), row: 3, page: 2)
     
-    defaultKeyboard.addKey(Key(keyboardChange), row: 3, page: 2)
+   // defaultKeyboard.addKey(Key(keyboardChange), row: 3, page: 2)
     
-    defaultKeyboard.addKey(Key(settings), row: 3, page: 2)
+    //defaultKeyboard.addKey(Key(settings), row: 3, page: 2)
     
     defaultKeyboard.addKey(Key(space), row: 3, page: 2)
     

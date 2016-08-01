@@ -148,7 +148,7 @@ extension FetchedDelegateDataSource:UICollectionViewDelegate {
 extension FetchedDelegateDataSource:UICollectionViewDelegateFlowLayout {
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let sideLength = (UIScreen.mainScreen().bounds.size.width / 4)
-        return CGSize(width: sideLength - 4, height: sideLength + 30)
+        return CGSize(width: sideLength - 4, height: sideLength + 10)
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {

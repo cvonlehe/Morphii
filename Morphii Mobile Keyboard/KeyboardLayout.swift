@@ -973,14 +973,14 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
             leftSideAreaWidth = leftSideAreaWidth + gapWidth + micButtonWidth
         }
         
-        var spaceWidth = UIScreen.mainScreen().bounds.size.width - 170
+        var spaceWidth = UIScreen.mainScreen().bounds.size.width - 140
         spaceWidth = rounded(spaceWidth)
         
         var currentOrigin = frame.origin.x
         var beforeSpace: Bool = true
         for (k, key) in row.enumerate() {
             if key.type == Key.KeyType.Space {
-                frames.append(CGRectMake(85, frame.origin.y, spaceWidth, frame.height))
+                frames.append(CGRectMake(50, frame.origin.y, spaceWidth, frame.height))
                 currentOrigin += (spaceWidth + gapWidth)
                 beforeSpace = false
             }
@@ -995,7 +995,7 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
                 }
             }
             else {
-                frames.append(CGRectMake(spaceWidth + 90, frame.origin.y, rightButtonWidth, frame.height))
+                frames.append(CGRectMake(spaceWidth + 60, frame.origin.y, rightButtonWidth, frame.height))
                 currentOrigin += (rightButtonWidth + gapWidth)
             }
         }

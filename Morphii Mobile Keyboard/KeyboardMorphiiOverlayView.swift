@@ -103,11 +103,13 @@ extension KeyboardMorphiiOverlayView:ShareMorphiiOverlayViewDelegate {
     
     func copiedMorphii() {
         cancelPressed()
+        morphiiView.backgroundColor = UIColor.clearColor()
         MethodHelper.showSuccessErrorHUD(true, message: "Copied to Clipboard", inView: self)
     }
     
     func savedMorphiiToCameraRoll() {
         cancelPressed()
+        morphiiView.backgroundColor = UIColor.clearColor()
         MethodHelper.showSuccessErrorHUD(true, message: "Saved to Camera Roll", inView: self)
     }
     

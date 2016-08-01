@@ -21,6 +21,8 @@ class SearchViewController: UIViewController {
     var headerHeight:Double = 0
     var morphiiHeaderHeight:Double = 0
     var hashtag:String?
+    @IBOutlet weak var morphiiTagsLabel: UILabel!
+    @IBOutlet weak var morphiiTagsLabelHeightConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +34,17 @@ class SearchViewController: UIViewController {
         magnifyingGlassImageView.layer.cornerRadius = magnifyingGlassImageView.frame.size.width / 2
         magnifyingGlassImageView.clipsToBounds = true
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 200, right: 0)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if let hash = hashtag {
+            morphiiTagsLabel.text = "  Morphiis matching '\(hash)'"
+            morphiiTagsLabelHeightConstraint.constant = 21
+        }else {
+            morphiiTagsLabel.text = ""
+            morphiiTagsLabelHeightConstraint.constant = 0
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -112,7 +125,7 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return 68
+            return 75
         }else if indexPath.section == 1 {
             if rowHeight == 0 {
                 return 0

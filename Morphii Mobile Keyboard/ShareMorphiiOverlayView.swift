@@ -69,7 +69,6 @@ class ShareMorphiiOverlayView: ExtraView {
             MethodHelper.showSuccessErrorHUD(false, message: "Full Access Required", inView: self)
             return
         }
-        superview?.backgroundColor = UIColor.whiteColor()
 
         if morphiiView.copyMorphyToClipboard() {
             delegate.copiedMorphii()

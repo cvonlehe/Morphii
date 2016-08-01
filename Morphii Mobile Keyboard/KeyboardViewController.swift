@@ -21,7 +21,7 @@ let kSmallLowercase = "kSmallLowercase"
 
 class KeyboardViewController: UIInputViewController {
     static var sViewController:KeyboardViewController!
-    static var returnKeyString = "Done"
+    static var returnKeyString = "return"
     var defaultColor:UIColor!
     var globeContainerView:UIView!
     var recentContainerView:UIView!
@@ -54,11 +54,9 @@ class KeyboardViewController: UIInputViewController {
 
     override func loadView() {
         super.loadView()
-        if let color = view.backgroundColor {
-            defaultColor = color
-        }else {
-            defaultColor = UIColor ( red: 0.7765, green: 0.7961, blue: 0.8196, alpha: 1.0 )
-        }
+        defaultColor = UIColor ( red: 0.7077, green: 0.7309, blue: 0.7677, alpha: 1.0 )
+        NSUserDefaults.standardUserDefaults().setBool(true, forKey: kSmallLowercase)
+
         KeyboardViewController.sViewController = self
         if let aBanner = self.createBanner() {
             aBanner.hidden = true
@@ -199,6 +197,10 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func setCenterView (center:CenterView) {
+
+        if addFavoriteContainerView != nil {
+            return
+        }
         centerView = center
         setAllContainerViewBackgrounds()
         recentView?.backButtonPressed()
@@ -520,7 +522,6 @@ class KeyboardViewController: UIInputViewController {
                         
                         switch key.type {
                         case Key.KeyType.KeyboardChange:
-                            //keyView.removeFromSuperview()
                             keyView.addTarget(self, action: #selector(KeyboardViewController.advanceTapped(_:)), forControlEvents: .TouchUpInside)
                         case Key.KeyType.Backspace:
                             let cancelEvents: UIControlEvents = [UIControlEvents.TouchUpInside, UIControlEvents.TouchUpInside, UIControlEvents.TouchDragExit, UIControlEvents.TouchUpOutside, UIControlEvents.TouchCancel, UIControlEvents.TouchDragOutside]
@@ -534,7 +535,6 @@ class KeyboardViewController: UIInputViewController {
                         case Key.KeyType.ModeChange:
                             keyView.addTarget(self, action: Selector("modeChangeTapped:"), forControlEvents: .TouchDown)
                         case Key.KeyType.Settings:
-                            keyView.removeFromSuperview()
                             keyView.addTarget(self, action: #selector(KeyboardViewController.toggleSettings), forControlEvents: .TouchUpInside)
                         default:
                             break
@@ -857,36 +857,36 @@ class KeyboardViewController: UIInputViewController {
     }
     
     @IBAction func toggleSettings() {
-        // lazy load settings
-        if self.settingsView == nil {
-            if let aSettings = self.createSettings() {
-                aSettings.darkMode = self.darkMode()
-                
-                aSettings.hidden = true
-                self.view.addSubview(aSettings)
-                self.settingsView = aSettings
-                
-                aSettings.translatesAutoresizingMaskIntoConstraints = false
-                
-                let widthConstraint = NSLayoutConstraint(item: aSettings, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Width, multiplier: 1, constant: 0)
-                let heightConstraint = NSLayoutConstraint(item: aSettings, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Height, multiplier: 1, constant: 0)
-                let centerXConstraint = NSLayoutConstraint(item: aSettings, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
-                let centerYConstraint = NSLayoutConstraint(item: aSettings, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
-                
-                self.view.addConstraint(widthConstraint)
-                self.view.addConstraint(heightConstraint)
-                self.view.addConstraint(centerXConstraint)
-                self.view.addConstraint(centerYConstraint)
-            }
-        }
-        
-        if let settings = self.settingsView {
-            let hidden = settings.hidden
-            settings.hidden = !hidden
-            self.forwardingView.hidden = hidden
-            self.forwardingView.userInteractionEnabled = !hidden
-            self.bannerView?.hidden = hidden
-        }
+//        // lazy load settings
+//        if self.settingsView == nil {
+//            if let aSettings = self.createSettings() {
+//                aSettings.darkMode = self.darkMode()
+//                
+//                aSettings.hidden = true
+//                self.view.addSubview(aSettings)
+//                self.settingsView = aSettings
+//                
+//                aSettings.translatesAutoresizingMaskIntoConstraints = false
+//                
+//                let widthConstraint = NSLayoutConstraint(item: aSettings, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Width, multiplier: 1, constant: 0)
+//                let heightConstraint = NSLayoutConstraint(item: aSettings, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Height, multiplier: 1, constant: 0)
+//                let centerXConstraint = NSLayoutConstraint(item: aSettings, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
+//                let centerYConstraint = NSLayoutConstraint(item: aSettings, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
+//                
+//                self.view.addConstraint(widthConstraint)
+//                self.view.addConstraint(heightConstraint)
+//                self.view.addConstraint(centerXConstraint)
+//                self.view.addConstraint(centerYConstraint)
+//            }
+//        }
+//        
+//        if let settings = self.settingsView {
+//            let hidden = settings.hidden
+//            settings.hidden = !hidden
+//            self.forwardingView.hidden = hidden
+//            self.forwardingView.userInteractionEnabled = !hidden
+//            self.bannerView?.hidden = hidden
+//        }
     }
     
     func setCapsIfNeeded() -> Bool {
@@ -1039,7 +1039,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func addMorphiiToFavorites (shareView:UIView, morphiiView:MorphiiView) {
-        KeyboardViewController.returnKeyString = "234"
+        KeyboardViewController.returnKeyString = "return"
         self.shareView = shareView
         shareView.hidden = true
         recentView?.hidden = true
