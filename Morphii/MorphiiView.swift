@@ -451,26 +451,61 @@ class MorphiiView: UIView, MorphiiProtocol {
 //        
 //        //end the graphics context
 //        UIGraphicsEndImageContext()
-        clipsToBounds = true
-        let color = backgroundColor
-        backgroundColor = UIColor ( red: 0.3334, green: 0.3333, blue: 0.3334, alpha: 1.0 )
-        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
-        layer.renderInContext(UIGraphicsGetCurrentContext()!)
-        let morphiiPic = UIGraphicsGetImageFromCurrentImageContext()
-        morphiiPic.drawInRect(CGRect(x: 0, y: 0, width: 600, height: 600))
-        UIGraphicsEndImageContext()
-        layer.cornerRadius = 0
-        backgroundColor = UIColor.clearColor()
-        setUpMorphii(morphii, emoodl: emoodl)
-        if var newImage = removeWhiteBackgroundFromImage(morphiiPic) {
-            print("NEW_IMAGE123:",newImage)
-            newImage = newImage.imageWithInsets(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-            return newImage
-        }
-
-        return morphiiPic
-    }
-    
+      
+      
+//        clipsToBounds = true
+//        let color = backgroundColor
+//        backgroundColor = UIColor ( red: 0.3334, green: 0.3333, blue: 0.3334, alpha: 1.0 )
+//        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
+//        layer.renderInContext(UIGraphicsGetCurrentContext()!)
+//        let morphiiPic = UIGraphicsGetImageFromCurrentImageContext()
+//        morphiiPic.drawInRect(CGRect(x: 0, y: 0, width: 600, height: 600))
+//        UIGraphicsEndImageContext()
+//        layer.cornerRadius = 0
+//        backgroundColor = UIColor.clearColor()
+//        setUpMorphii(morphii, emoodl: emoodl)
+//        if var newImage = removeWhiteBackgroundFromImage(morphiiPic) {
+//            print("NEW_IMAGE123:",newImage)
+//            newImage = newImage.imageWithInsets(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+//            return newImage
+//        }
+      backgroundColor = UIColor.clearColor()
+      let screenSize: CGRect = UIScreen.mainScreen().bounds
+      var clipMorphySize = CGSize(width: screenSize.width, height: screenSize.height)
+      UIGraphicsBeginImageContextWithOptions(clipMorphySize, false, 0.0)
+      var context:CGContextRef = UIGraphicsGetCurrentContext()!
+      layer.renderInContext(context)
+      var snapShotImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()
+      
+      //crop the snapshot image of the context to be 300x300
+      //the cropping function
+      func croppedImage(bounds:CGRect) -> UIImage{
+         let imageRef:CGImageRef = CGImageCreateWithImageInRect(snapShotImage.CGImage, bounds)!
+         let croppedImage:UIImage = UIImage(CGImage: imageRef)
+         
+         return croppedImage
+      }
+      
+      //bounding rectangle for cropping morphy's image
+      //must be in pixels because of the conversion from UIImage to CGImageRef
+      //width is longer so morphii will fit in text bubble
+      let cropRect:CGRect = CGRect(x: 0, y: 0, width: frame.size.width * 2, height: frame.size.height * 2)
+      //let cropRect:CGRect = CGRectMake(-10, 0, 545, 525)
+      
+      //crop the snapshot with the bounding rectangle
+      let morphyPic = croppedImage(cropRect)
+      
+      //image insets
+      let morphiiInsets = UIEdgeInsetsMake(10, 20, 10, 20)
+      let morphiiPic = morphyPic.imageWithInsets(morphiiInsets)
+      
+      
+      //end the graphics context
+      UIGraphicsEndImageContext()
+      
+      return morphiiPic
+   }
+   
     func removeWhiteBackgroundFromImage (oldImage:UIImage) -> UIImage? {
         
         let image = UIImage(data: UIImageJPEGRepresentation(oldImage, 1.0)!)!

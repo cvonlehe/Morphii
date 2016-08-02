@@ -21,7 +21,7 @@ class RecentView: ExtraView {
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
         self.loadNib()
-
+         titleLabel.addTextSpacing(1.6)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -25,8 +25,19 @@ class CollectionTableViewCell: UITableViewCell {
     
     func populateForCollectionTitle (title:String, delegate:MorphiiSelectionViewDelegate) {
         titleLabel.text = title
+      titleLabel.textColor = UIColor ( red: 0.2, green: 0.2235, blue: 0.2902, alpha: 1.0 )
+      titleLabel.addTextSpacing(1.6)
+      titleLabel.font = UIFont(name: "SFUIDisplay-Light" , size: 15)
         let morphiis = Morphii.getMorphiisForCollectionTitle(title)
         morphiiScrollView.setMorphiis(morphiis, delegate: delegate)
     }
 
+}
+
+extension UILabel{
+   func addTextSpacing(spacing: CGFloat){
+      let attributedString = NSMutableAttributedString(string: self.text!)
+      attributedString.addAttribute(NSKernAttributeName, value: spacing, range: NSRange(location: 0, length: self.text!.characters.count))
+      self.attributedText = attributedString
+   }
 }

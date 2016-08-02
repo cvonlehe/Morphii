@@ -153,7 +153,8 @@ class KeyboardViewController: UIInputViewController {
         abcButtonLabel = UILabel(frame: CGRect(x: 0, y: 0, width: abcContainerView.frame.size.width, height: abcContainerView.frame.size.height))
         abcButtonLabel.textAlignment = .Center
         abcButtonLabel.text = "ABC"
-        abcButtonLabel.font = UIFont(name: "SFUIText-Regular", size: 14)
+        abcButtonLabel.font = UIFont(name: "SFUIText-Regular", size: 15)
+      abcButtonLabel.addTextSpacing(0.25)
         abcButtonLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(KeyboardViewController.abcButtonPressed(_:))))
         abcButtonLabel.userInteractionEnabled = true
         abcContainerView.addSubview(abcButtonLabel)
@@ -264,7 +265,7 @@ class KeyboardViewController: UIInputViewController {
         }
         if centerView != .Keyboard {
             abcContainerView.backgroundColor = UIColor.whiteColor()
-            abcButtonLabel.textColor = UIColor.darkGrayColor()
+            abcButtonLabel.textColor = UIColor ( red: 0.4477, green: 0.4827, blue: 0.5294, alpha: 1.0 )
         }else {
             self.abcContainerView.backgroundColor = UIColor ( red: 0.0, green: 0.8863, blue: 0.4275, alpha: 1.0 )
             abcButtonLabel.textColor = UIColor.whiteColor()

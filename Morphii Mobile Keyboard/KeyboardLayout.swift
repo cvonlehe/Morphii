@@ -973,29 +973,29 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
             leftSideAreaWidth = leftSideAreaWidth + gapWidth + micButtonWidth
         }
         
-        var spaceWidth = UIScreen.mainScreen().bounds.size.width - 140
+        var spaceWidth = UIScreen.mainScreen().bounds.size.width - 170
         spaceWidth = rounded(spaceWidth)
         
         var currentOrigin = frame.origin.x
         var beforeSpace: Bool = true
         for (k, key) in row.enumerate() {
             if key.type == Key.KeyType.Space {
-                frames.append(CGRectMake(50, frame.origin.y, spaceWidth, frame.height))
+                frames.append(CGRectMake(rightButtonWidth + 10, frame.origin.y, spaceWidth, frame.height))
                 currentOrigin += (spaceWidth + gapWidth)
                 beforeSpace = false
             }
             else if beforeSpace {
                 if hasButtonInMicButtonPosition && k == 2 { //mic button position
-                    frames.append(CGRectMake(rounded(currentOrigin), frame.origin.y, micButtonWidth, frame.height))
+                    frames.append(CGRectMake(rounded(currentOrigin), frame.origin.y, rightButtonWidth, frame.height))
                     currentOrigin += (micButtonWidth + gapWidth)
                 }
                 else {
-                    frames.append(CGRectMake(rounded(currentOrigin), frame.origin.y, leftButtonWidth, frame.height))
+                    frames.append(CGRectMake(rounded(currentOrigin), frame.origin.y, rightButtonWidth, frame.height))
                     currentOrigin += (leftButtonWidth + gapWidth)
                 }
             }
             else {
-                frames.append(CGRectMake(spaceWidth + 60, frame.origin.y, rightButtonWidth, frame.height))
+                frames.append(CGRectMake(spaceWidth + 90, frame.origin.y, rightButtonWidth, frame.height))
                 currentOrigin += (rightButtonWidth + gapWidth)
             }
         }

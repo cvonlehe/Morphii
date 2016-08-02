@@ -43,6 +43,8 @@ class MorphiiTableViewCell: UITableViewCell {
             }
             nameLabel.text = morphii.name
         }
+      nameLabel.addTextSpacing(0.5)
+
     }
 
 }

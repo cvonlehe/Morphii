@@ -6,8 +6,8 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="SFUIDisplay-Regular.ttf">
-            <string>SFUIDisplay-Regular</string>
+        <mutableArray key="SFUIText-Regular.ttf">
+            <string>SFUIText-Regular</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -23,9 +23,9 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="92a-af-xaf">
-                    <rect key="frame" x="8" y="8" width="30" height="30"/>
+                    <rect key="frame" x="8" y="8" width="18" height="30"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="30" id="Hcf-tF-O89"/>
+                        <constraint firstAttribute="width" constant="18" id="Hcf-tF-O89"/>
                         <constraint firstAttribute="height" constant="30" id="bpH-2E-lOJ"/>
                     </constraints>
                     <state key="normal" image="back"/>
@@ -34,11 +34,13 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A6E-vQ-FR3">
-                    <rect key="frame" x="562" y="8" width="30" height="30"/>
+                    <rect key="frame" x="567" y="9" width="25" height="28"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="4qc-AA-2kv"/>
                         <constraint firstAttribute="height" constant="30" id="LHp-HO-Ywu"/>
+                        <constraint firstAttribute="height" constant="28" id="RM2-xA-7dr"/>
                         <constraint firstAttribute="width" constant="46" id="Y6N-ur-caJ"/>
+                        <constraint firstAttribute="width" constant="25" id="l5r-Tv-vgE"/>
                         <constraint firstAttribute="width" constant="30" id="ySt-by-sAz"/>
                     </constraints>
                     <state key="normal" image="share"/>
@@ -55,8 +57,8 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="H71-aM-fDm">
-                    <rect key="frame" x="46" y="8" width="508" height="30"/>
-                    <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="15"/>
+                    <rect key="frame" x="34" y="8" width="525" height="30"/>
+                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="22"/>
                     <color key="textColor" red="0.20000000000000001" green="0.22352941179999999" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -77,6 +79,7 @@
                 <constraint firstItem="H71-aM-fDm" firstAttribute="leading" secondItem="92a-af-xaf" secondAttribute="trailing" constant="8" id="Y36-hX-gDg"/>
                 <constraint firstItem="fbd-gU-OAs" firstAttribute="top" secondItem="H71-aM-fDm" secondAttribute="bottom" constant="8" id="YvK-7L-lTY"/>
                 <constraint firstItem="A6E-vQ-FR3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="cEU-BK-UBy"/>
+                <constraint firstItem="A6E-vQ-FR3" firstAttribute="centerY" secondItem="H71-aM-fDm" secondAttribute="centerY" id="eha-BB-sRM"/>
                 <constraint firstItem="H71-aM-fDm" firstAttribute="height" secondItem="92a-af-xaf" secondAttribute="height" id="gBR-zq-rfa"/>
                 <constraint firstItem="A6E-vQ-FR3" firstAttribute="height" secondItem="92a-af-xaf" secondAttribute="height" id="h0r-Xu-qJ9"/>
                 <constraint firstItem="92a-af-xaf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="jO2-5v-rox"/>
@@ -84,10 +87,17 @@
                 <constraint firstItem="92a-af-xaf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="sTl-f9-e3I"/>
                 <constraint firstItem="A6E-vQ-FR3" firstAttribute="width" secondItem="92a-af-xaf" secondAttribute="width" id="y1O-lw-kmU"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="cEU-BK-UBy"/>
+                    <exclude reference="h0r-Xu-qJ9"/>
+                    <exclude reference="y1O-lw-kmU"/>
+                </mask>
+            </variation>
         </view>
     </objects>
     <resources>
-        <image name="back" width="33" height="33"/>
-        <image name="share" width="33" height="33"/>
+        <image name="back" width="26" height="42"/>
+        <image name="share" width="46" height="50"/>
     </resources>
 </document>

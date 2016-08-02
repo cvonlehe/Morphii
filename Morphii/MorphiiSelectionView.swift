@@ -28,7 +28,7 @@ class MorphiiSelectionView: UIView {
         addSubview(morphiiView)
         nameLabel = UILabel(frame: CGRect(x: 0, y: morphiiView.frame.size.height, width: frame.size.width, height: 30))
         nameLabel.font = UIFont(name: "SFUIText-Regular", size: 12.0)
-        nameLabel.textColor = UIColor ( red: 0.2, green: 0.2235, blue: 0.2902, alpha: 1.0 )
+        nameLabel.textColor = UIColor ( red: 0.3832, green: 0.3832, blue: 0.3832, alpha: 1.0 )
         nameLabel.numberOfLines = 2
         nameLabel.lineBreakMode = .ByWordWrapping
         nameLabel.textAlignment = .Center

@@ -52,8 +52,6 @@ class MorphiiAPI {
     
     
     class func setupAWS () {
-        print("setupAWS1")
-        print("setupAWS2")
         let analytics = AWSMobileAnalytics(forAppId: Config.getCurrentConfig().AWS_APP_ID, identityPoolId: Config.getCurrentConfig().AWS_POOL_ID)
         if analytics != nil {
             if analytics.eventClient != nil {
@@ -61,7 +59,20 @@ class MorphiiAPI {
             }
         }
     }
-    
+   
+   private class func sendEvent (eventClient:AWSMobileAnalyticsEventClient, event:AWSMobileAnalyticsEvent) {
+      MethodHelper.getCurrentLocaiton { (locationO) in
+         if let location = locationO {
+            event.addMetric(location.coordinate.latitude, forKey: AWSAttributes.lat)
+            event.addMetric(location.coordinate.longitude, forKey: AWSAttributes.lng)
+         }
+         eventClient.recordEvent(event)
+         eventClient.submitEvents()
+      }
+
+   }
+   
+   
     class func getCorrectedIntensity (intensity:NSNumber) -> NSNumber {
         var newIntensity = NSNumber(int: 0)
         if intensity.intValue < 0 {
@@ -106,10 +117,9 @@ class MorphiiAPI {
         }
         print("SAVEDINTENSITY:",getCorrectedIntensity(intensity))
         event.addAttribute(area, forKey: AWSAttributes.area)
-        eventClient.recordEvent(event)
-        eventClient.submitEvents()
+         sendEvent(eventClient, event: event)
     }
-    
+
     class func sendIntensityChangeToAWS (morphii:Morphii, beginIntensity:NSNumber, endIntensity:NSNumber, area:String?) {
         guard let eventClient = awsEventClient else {return}
         let event = eventClient.createEventWithEventType(AWSEvents.MorphiiChangeIntensity)
@@ -140,8 +150,8 @@ class MorphiiAPI {
 
         event.addMetric(getCorrectedIntensity(beginIntensity), forKey: AWSAttributes.begin)
         event.addMetric(getCorrectedIntensity(endIntensity), forKey: AWSAttributes.end)
-        eventClient.recordEvent(event)
-        eventClient.submitEvents()
+      sendEvent(eventClient, event: event)
+
     }
     
     class func sendMorphiiFavoriteSavedToAWS (morphii:Morphii, intensity:NSNumber, area:String?, name:String, tags:[String]) {
@@ -167,8 +177,8 @@ class MorphiiAPI {
         let tagString = tags.joinWithSeparator(", ")
         event.addAttribute(tagString, forKey: AWSAttributes.userProvidedTags)
         event.addMetric(getCorrectedIntensity(intensity), forKey: AWSAttributes.intensity)
-        eventClient.recordEvent(event)
-        eventClient.submitEvents()
+      sendEvent(eventClient, event: event)
+
     }
     
     class func sendMorphiiSendToAWS (morphii:Morphii, intensity:NSNumber, area:String?, name:String, share:String) {
@@ -183,8 +193,8 @@ class MorphiiAPI {
             event.addAttribute(a, forKey: AWSAttributes.area)
         }
         event.addMetric(getCorrectedIntensity(intensity), forKey: AWSAttributes.intensity)
-        eventClient.recordEvent(event)
-        eventClient.submitEvents()
+      sendEvent(eventClient, event: event)
+
     }
     
     class func sendUserProfileChangeToAWS (propertyName:String, begin:Bool, end:Bool) {
@@ -202,8 +212,8 @@ class MorphiiAPI {
         }
         event.addAttribute(beginString, forKey: AWSAttributes.begin)
         event.addAttribute(endString, forKey: AWSAttributes.end)
-        eventClient.recordEvent(event)
-        eventClient.submitEvents()
+      sendEvent(eventClient, event: event)
+
     }
     
     class func sendUserProfileActionToAWS (actionName:String) {
@@ -211,8 +221,8 @@ class MorphiiAPI {
         let event = eventClient.createEventWithEventType(AWSEvents.UserProfileAction)
         guard event != nil else {return}
         event.addAttribute(actionName, forKey: AWSAttributes.name)
-        eventClient.recordEvent(event)
-        eventClient.submitEvents()
+         sendEvent(eventClient, event: event)
+
     }
     
     class func syncAWS () {
@@ -238,6 +248,8 @@ class MorphiiAPI {
         static let userProvidedName = "user-provided-name"
         static let userProvidedTags = "user-provided-tags"
         static let share = "share"
+      static let lat = "lat"
+      static let lng = "lng"
     }
     
 

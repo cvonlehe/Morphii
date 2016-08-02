@@ -38,12 +38,21 @@ class TrendingViewcController: UIViewController {
     @IBOutlet weak var hashtagLabel13: UILabel!
     @IBOutlet weak var hashtagLabel14: UILabel!
     @IBOutlet weak var hashtagLabel15: UILabel!
+   @IBOutlet weak var newsHeaderLabel: UILabel!
+   @IBOutlet weak var morphiisHeaderLabel: UILabel!
+
+   @IBOutlet weak var hashtagsHeaderLabel: UILabel!
     
     @IBOutlet weak var trendingHastagContainerView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      newsTitleLabel.addTextSpacing(0.75)
+      newsMessageLabel.addTextSpacing(0.4)
+      newsHeaderLabel.addTextSpacing(1.6)
+      morphiisHeaderLabel.addTextSpacing(1.6)
+      hashtagsHeaderLabel.addTextSpacing(1.6)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         self.newsMessageLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TrendingViewcController.newsTapped(_:))))
         self.newsTitleLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TrendingViewcController.newsTapped(_:))))
@@ -112,6 +121,7 @@ class TrendingViewcController: UIViewController {
                 if let label = hashtagLabel {
                     dispatch_async(dispatch_get_main_queue(), {
                         label.text = "#\(hashtags[i])"
+                     label.addTextSpacing(0.4)
                         label.hidden = false
                         label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TrendingViewcController.hashtagLabelTapped(_:))))
                     })
@@ -151,7 +161,7 @@ class TrendingViewcController: UIViewController {
                 morphiiContainerView = morphiiContainerView8
             }
             dispatch_async(dispatch_get_main_queue(), {
-                let size = CGSize(width: morphiiContainerView.frame.size.width, height: morphiiContainerView.frame.size.height - 4)
+                let size = CGSize(width: morphiiContainerView.frame.size.width, height: morphiiContainerView.frame.size.height - 16)
                 
                 let morphiiView = MorphiiSelectionView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: size), morphii: morphii, delegate: nil, showName: true)
                 morphiiContainerView.addSubview(morphiiView)

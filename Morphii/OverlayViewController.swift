@@ -46,15 +46,18 @@ class OverlayViewController: UIViewController {
         containerView.layer.cornerRadius = 8
         containerView.clipsToBounds = true
         collectionNameContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(OverlayViewController.collectionNameContainerViewTapped(_:))))
-        
+
         favoriteContainerView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(OverlayViewController.favoriteContainerViewSwiped(_:))))
         //tableView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(OverlayViewController.tableViewSwiped(_:))))
     }
     
 
     
-
-    
+   override func viewDidLayoutSubviews() {
+      super.viewDidLayoutSubviews()
+      morphiiNameLabel.addTextSpacing(2.5)
+   }
+   
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -181,6 +184,7 @@ extension OverlayViewController {
         self.morphiiNameLabel.text = self.morphiiO!.name
         if let collectionName = morphiiO?.groupName {
             collectionNameLabel.text = collectionName
+         collectionNameLabel.addTextSpacing(1.6)
             morphiiScrollView.setMorphiis(Morphii.getMorphiisForCollectionTitle(collectionName), delegate: self)
         }
         morphiiView.area = self.area

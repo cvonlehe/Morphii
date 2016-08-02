@@ -31,9 +31,6 @@ class SearchViewController: UIViewController {
             searchLabel.hidden = true
             magnifyingGlassImageView.hidden = true
         }
-        // Do any additional setup after loading the view.
-        magnifyingGlassImageView.layer.cornerRadius = magnifyingGlassImageView.frame.size.width / 2
-        magnifyingGlassImageView.clipsToBounds = true
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 200, right: 0)
     }
     
@@ -185,7 +182,7 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource {
             return UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         }
         let view = UIView(frame: CGRect(x: CGFloat(5), y: CGFloat(0), width: tableView.frame.size.width, height: CGFloat(headerHeight)))
-        view.backgroundColor = UIColor ( red: 0.9059, green: 0.9059, blue: 0.9059, alpha: 1.0 )
+        view.backgroundColor = UIColor ( red: 0.907, green: 0.9068, blue: 0.9118, alpha: 1.0 )
         let label = UILabel(frame: view.frame)
         label.textColor = UIColor ( red: 0.5225, green: 0.5225, blue: 0.5225, alpha: 1.0 )
         if section == 0 {
@@ -195,7 +192,9 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource {
         }else {
             label.text = "Collections"
         }
-        label.font = UIFont(name: "SFUIDisplay-Medium" , size: 17)
+      label.textColor = UIColor ( red: 0.2, green: 0.2235, blue: 0.2902, alpha: 1.0 )
+      label.addTextSpacing(1.6)
+        label.font = UIFont(name: "SFUIDisplay-Light" , size: 15)
         view.addSubview(label)
         return view
     }

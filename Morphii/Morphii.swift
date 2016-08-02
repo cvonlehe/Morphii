@@ -347,6 +347,9 @@ class Morphii: NSManagedObject {
         var morphiis:[Morphii] = []
         let request = NSFetchRequest(entityName: EntityNames.Morphii)
         request.predicate = NSPredicate(format: "isFavorite == %@", NSNumber(bool: false))
+      let sort1 = NSSortDescriptor(key: "groupName", ascending: true)
+      let sort2 = NSSortDescriptor(key: "name", ascending: true)
+      request.sortDescriptors = [sort1, sort2]
         do {
             guard let m = try CDHelper.sharedInstance.managedObjectContext.executeFetchRequest(request) as? [Morphii] else {
                 return []
