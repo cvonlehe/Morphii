@@ -1058,7 +1058,6 @@ class KeyboardViewController: UIInputViewController {
         addFavoriteView?.addToSuperView(addFavoriteContainerView!, morphiiView: morphiiView, delegate: self)
         addFavoriteView?.nameTextField.delegate = self
         addFavoriteView?.tagsTextField.delegate = self
-        view.backgroundColor = UIColor.darkGrayColor()
     }
     
 }
@@ -1070,7 +1069,6 @@ extension KeyboardViewController:AddFavoriteContainerViewDelegate {
         setHeight(280)
         shareView?.hidden = false
         recentView?.hidden = false
-        view.backgroundColor = defaultColor
     }
 }
 

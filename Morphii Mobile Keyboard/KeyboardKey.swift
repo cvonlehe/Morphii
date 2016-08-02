@@ -134,7 +134,7 @@ class KeyboardKey: UIControl {
         self.drawOver = true
         self.drawBorder = false
         self.underOffset = 1
-        
+        self.label.font = UIFont(name: "SFUIDisplay-Light", size: 22)
         self.background = KeyboardKeyBackground(cornerRadius: 4, underOffset: self.underOffset)
         
         self.textColor = UIColor.blackColor()
