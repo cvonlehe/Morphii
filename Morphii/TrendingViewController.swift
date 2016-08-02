@@ -135,6 +135,7 @@ class TrendingViewcController: UIViewController {
         guard let hashtag = label.text else {return}
         let nextView = self.storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.SearchViewController) as! SearchViewController
         nextView.hashtag = hashtag
+      nextView.fromArea = MorphiiAreas.containerTrending
         navigationController?.pushViewController(nextView, animated: true)
     }
     

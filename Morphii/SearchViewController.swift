@@ -39,9 +39,6 @@ class SearchViewController: UIViewController {
         if let hash = hashtag {
             morphiiTagsLabel.text = "  Morphiis matching '\(hash)'"
             morphiiTagsLabelHeightConstraint.constant = 21
-        }else {
-            morphiiTagsLabel.text = ""
-            morphiiTagsLabelHeightConstraint.constant = 0
         }
     }
     
