@@ -23,6 +23,7 @@ class SearchViewController: UIViewController {
     var hashtag:String?
     @IBOutlet weak var morphiiTagsLabel: UILabel!
     @IBOutlet weak var morphiiTagsLabelHeightConstraint: NSLayoutConstraint!
+    var fromArea:String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -164,6 +165,7 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource {
             }else {
                 OverlayViewController.createOverlay(self, morphiiO: morphii, area: MorphiiAreas.keyboardSearch)
             }
+            MorphiiAPI.sendMorphiiSelectedToAWS(morphii, area: fromArea)
         }else if indexPath.section == 2, let cell = tableView.cellForRowAtIndexPath(indexPath) as? MorphiiTableViewCell, let name = cell.nameLabel.text, let nextView = storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.HomeViewController) as?  HomeViewController {
             nextView.collectionO = name
             navigationController?.pushViewController(nextView, animated: true)

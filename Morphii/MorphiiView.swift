@@ -352,6 +352,7 @@ class MorphiiView: UIView, MorphiiProtocol {
                         self.morphii.setLastUsedDate(NSDate())
                     }
                     let type = "\(type)"
+                    print("TYPE:",type)
                     var name = ""
                     if let n = self.morphii.name {
                         name = n
@@ -372,7 +373,6 @@ class MorphiiView: UIView, MorphiiProtocol {
 
         
         //copy that image to the pasteboard
-        backgroundColor = UIColor.whiteColor()
         guard let pasteBoard:UIPasteboard = UIPasteboard(name: UIPasteboardNameGeneral, create: false) else {return false}
         pasteBoard.persistent = true
         let pbData:NSData = UIImagePNGRepresentation(getMorphiiImage())!
@@ -452,6 +452,7 @@ class MorphiiView: UIView, MorphiiProtocol {
 //        //end the graphics context
 //        UIGraphicsEndImageContext()
         clipsToBounds = true
+        let color = backgroundColor
         backgroundColor = UIColor ( red: 0.3334, green: 0.3333, blue: 0.3334, alpha: 1.0 )
         UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
         layer.renderInContext(UIGraphicsGetCurrentContext()!)
@@ -460,11 +461,13 @@ class MorphiiView: UIView, MorphiiProtocol {
         UIGraphicsEndImageContext()
         layer.cornerRadius = 0
         backgroundColor = UIColor.clearColor()
+        setUpMorphii(morphii, emoodl: emoodl)
         if var newImage = removeWhiteBackgroundFromImage(morphiiPic) {
             print("NEW_IMAGE123:",newImage)
             newImage = newImage.imageWithInsets(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
             return newImage
         }
+
         return morphiiPic
     }
     

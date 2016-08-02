@@ -179,6 +179,9 @@ class MorphiiAPI {
         event.addAttribute(id, forKey: AWSAttributes.id)
         event.addAttribute(name, forKey: AWSAttributes.name)
         event.addAttribute(share, forKey: AWSAttributes.share)
+        if let a = area {
+            event.addAttribute(a, forKey: AWSAttributes.area)
+        }
         event.addMetric(getCorrectedIntensity(intensity), forKey: AWSAttributes.intensity)
         eventClient.recordEvent(event)
         eventClient.submitEvents()
@@ -209,6 +212,11 @@ class MorphiiAPI {
         guard event != nil else {return}
         event.addAttribute(actionName, forKey: AWSAttributes.name)
         eventClient.recordEvent(event)
+        eventClient.submitEvents()
+    }
+    
+    class func syncAWS () {
+        guard let eventClient = awsEventClient else {return}
         eventClient.submitEvents()
     }
     

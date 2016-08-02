@@ -95,6 +95,7 @@ class FavoritesViewController: UIViewController {
     
     @IBAction func searchButtonPressed(sender: UIButton) {
         let nextView = self.storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.SearchViewController) as! SearchViewController
+        nextView.fromArea = MorphiiAreas.containerFavorites
         navigationController?.pushViewController(nextView, animated: true)
     }
 

@@ -110,4 +110,8 @@ class ProfileActions {
     static let TermsAndConditions = "Terms and Conditions"
 }
 
+class ShareValues {
+    static let cameraRoll = "com.apple.UIKit.activity.SaveToCameraRoll"
+}
+
 let acceptableCharacters = " #0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"

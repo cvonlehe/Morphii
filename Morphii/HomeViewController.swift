@@ -117,6 +117,7 @@ class HomeViewController: UIViewController {
     
     @IBAction func searchButtonPressed(sender: UIButton) {
         let nextView = self.storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.SearchViewController) as! SearchViewController
+        nextView.fromArea = MorphiiAreas.containerHome
         navigationController?.pushViewController(nextView, animated: true)
         
     }
