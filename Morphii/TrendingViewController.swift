@@ -198,7 +198,7 @@ class TrendingViewcController: UIViewController {
     }
     
     func setScrollViewHeight () {
-        self.scrollView.contentSize = CGSize(width: UIScreen.mainScreen().bounds.size.width, height: trendingHastagContainerView.frame.origin.y + trendingHastagContainerView.frame.size.height)
+        self.scrollView.contentSize = CGSize(width: UIScreen.mainScreen().bounds.size.width, height: trendingHastagContainerView.frame.origin.y + trendingHastagContainerView.frame.size.height + 50)
         self.scrollView.scrollEnabled = true
     }
     

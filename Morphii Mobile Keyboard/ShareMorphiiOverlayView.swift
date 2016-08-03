@@ -71,6 +71,7 @@ class ShareMorphiiOverlayView: ExtraView {
         }
         let newMorphiiView = MorphiiView(frame: morphiiView.frame)
         newMorphiiView.setUpMorphii(morphiiView.morphii, emoodl: morphiiView.emoodl)
+        newMorphiiView.backgroundColor = UIColor.clearColor()
         if newMorphiiView.copyMorphyToClipboard() {
             delegate.copiedMorphii()
         }else {
