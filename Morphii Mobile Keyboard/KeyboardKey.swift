@@ -134,7 +134,7 @@ class KeyboardKey: UIControl {
         self.drawOver = true
         self.drawBorder = false
         self.underOffset = 1
-        self.label.font = UIFont(name: "SFUIDisplay-Light", size: 22)
+        self.label.font = Fonts.keyboardKeys
         self.background = KeyboardKeyBackground(cornerRadius: 4, underOffset: self.underOffset)
         
         self.textColor = UIColor.blackColor()
@@ -170,7 +170,7 @@ class KeyboardKey: UIControl {
             
             self.label.textAlignment = NSTextAlignment.Center
             self.label.baselineAdjustment = UIBaselineAdjustment.AlignCenters
-            self.label.font = self.label.font.fontWithSize(22)
+            self.label.font = Fonts.keyboardKeys
             self.label.adjustsFontSizeToFitWidth = true
             self.label.minimumScaleFactor = CGFloat(0.1)
             self.label.userInteractionEnabled = false
@@ -436,7 +436,7 @@ class KeyboardKey: UIControl {
             let popupLabel = UILabel()
             popupLabel.textAlignment = self.label.textAlignment
             popupLabel.baselineAdjustment = self.label.baselineAdjustment
-            popupLabel.font = self.label.font.fontWithSize(22 * 2)
+            popupLabel.font = Fonts.keyboardKeys
             popupLabel.adjustsFontSizeToFitWidth = self.label.adjustsFontSizeToFitWidth
             popupLabel.minimumScaleFactor = CGFloat(0.1)
             popupLabel.userInteractionEnabled = false

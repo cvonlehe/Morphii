@@ -162,7 +162,8 @@ class GlobalColors: NSObject {
     class var darkModeRegularKey: UIColor { get { return UIColor.whiteColor().colorWithAlphaComponent(CGFloat(0.3)) }}
     class var darkModeSolidColorRegularKey: UIColor { get { return UIColor(red: CGFloat(83)/CGFloat(255), green: CGFloat(83)/CGFloat(255), blue: CGFloat(83)/CGFloat(255), alpha: 1) }}
     class var lightModeSpecialKey: UIColor { get { return GlobalColors.lightModeSolidColorSpecialKey }}
-    class var lightModeSolidColorSpecialKey: UIColor { get { return UIColor(red: CGFloat(177)/CGFloat(255), green: CGFloat(177)/CGFloat(255), blue: CGFloat(177)/CGFloat(255), alpha: 1) }}
+    class var lightModeSolidColorSpecialKey: UIColor { get { return UIColor ( red: 0.812, green: 0.8298, blue: 0.8588, alpha: 1.0 ) }}
+
     class var darkModeSpecialKey: UIColor { get { return UIColor.grayColor().colorWithAlphaComponent(CGFloat(0.3)) }}
     class var darkModeSolidColorSpecialKey: UIColor { get { return UIColor(red: CGFloat(45)/CGFloat(255), green: CGFloat(45)/CGFloat(255), blue: CGFloat(45)/CGFloat(255), alpha: 1) }}
     class var darkModeShiftKeyDown: UIColor { get { return UIColor(red: CGFloat(214)/CGFloat(255), green: CGFloat(220)/CGFloat(255), blue: CGFloat(208)/CGFloat(255), alpha: 1) }}
@@ -427,9 +428,9 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
             Key.KeyType.Space,
             Key.KeyType.Return:
                 key.label.adjustsFontSizeToFitWidth = true
-                key.label.font = key.label.font.fontWithSize(16)
+                key.label.font = Fonts.keyboardKeys
             default:
-                key.label.font = key.label.font.fontWithSize(22)
+                key.label.font = Fonts.keyboardKeys
             }
             
             // label inset
@@ -973,7 +974,7 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
             leftSideAreaWidth = leftSideAreaWidth + gapWidth + micButtonWidth
         }
         
-        var spaceWidth = UIScreen.mainScreen().bounds.size.width - 170
+        var spaceWidth = UIScreen.mainScreen().bounds.size.width - leftSideAreaWidth * 2 - 30
         spaceWidth = rounded(spaceWidth)
         
         var currentOrigin = frame.origin.x
@@ -995,7 +996,8 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
                 }
             }
             else {
-                frames.append(CGRectMake(spaceWidth + 90, frame.origin.y, rightButtonWidth, frame.height))
+                
+                frames.append(CGRectMake(UIScreen.mainScreen().bounds.size.width - rightButtonWidth - 8.0, frame.origin.y, rightButtonWidth, frame.height))
                 currentOrigin += (rightButtonWidth + gapWidth)
             }
         }

@@ -22,7 +22,6 @@ let kSmallLowercase = "kSmallLowercase"
 class KeyboardViewController: UIInputViewController {
     static var sViewController:KeyboardViewController!
     static var returnKeyString = "return"
-    var defaultColor:UIColor!
     var globeContainerView:UIView!
     var recentContainerView:UIView!
     var favoriteContainerView:UIView!
@@ -54,7 +53,6 @@ class KeyboardViewController: UIInputViewController {
 
     override func loadView() {
         super.loadView()
-        defaultColor = UIColor ( red: 0.7077, green: 0.7309, blue: 0.7677, alpha: 1.0 )
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: kSmallLowercase)
 
         KeyboardViewController.sViewController = self
@@ -64,7 +62,7 @@ class KeyboardViewController: UIInputViewController {
             self.bannerView = aBanner
         }
         MorphiiAPI.setupAWS()
-
+        view.backgroundColor = UIColor ( red: 0.9176, green: 0.9333, blue: 0.9451, alpha: 1.0 )
     }
     
     override func viewWillAppear(animated: Bool) {

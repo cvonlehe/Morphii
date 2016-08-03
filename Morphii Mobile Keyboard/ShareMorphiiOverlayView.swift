@@ -69,8 +69,9 @@ class ShareMorphiiOverlayView: ExtraView {
             MethodHelper.showSuccessErrorHUD(false, message: "Full Access Required", inView: self)
             return
         }
-
-        if morphiiView.copyMorphyToClipboard() {
+        let newMorphiiView = MorphiiView(frame: morphiiView.frame)
+        newMorphiiView.setUpMorphii(morphiiView.morphii, emoodl: morphiiView.emoodl)
+        if newMorphiiView.copyMorphyToClipboard() {
             delegate.copiedMorphii()
         }else {
             MethodHelper.showSuccessErrorHUD(false, message: "Error Copying. Try again", inView: self)

@@ -370,15 +370,16 @@ class MorphiiAPI {
    class func sendFavoriteData (morphiiO:Morphii?, favoriteNameO:String?, emoodl:Double, tags:[String]) {
         guard let favoriteName = favoriteNameO, let morphii = morphiiO, let deviceId = UIDevice.currentDevice().identifierForVendor?.UUIDString, let morphiiId = morphii.id, let morphiiName = morphii.name, let intensity = morphii.emoodl?.doubleValue else {return}
         let accountIdString = Config.getCurrentConfig().MORPHII_API_ACCOUNT_ID.stringByReplacingOccurrencesOfString(" ", withString: "")
-        var index = 0
-        var characters:[String] = []
-        for character in accountIdString.characters {
-            if index != 4{
-                characters.append("\(character)")
-            }
-            index += 1
-        }
-        let accountId = characters.joinWithSeparator("")
+//        var index = 0
+//        var characters:[String] = []
+//        for character in accountIdString.characters {
+//            if index != 4{
+//                characters.append("\(character)")
+//            }
+//            index += 1
+//        }
+//        let accountId = characters.joinWithSeparator("")
+    let accountId = accountIdString
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.SSSZ"
         let dateString = dateFormatter.stringFromDate(NSDate())

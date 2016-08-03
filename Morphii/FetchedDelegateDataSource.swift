@@ -166,6 +166,7 @@ extension FetchedDelegateDataSource:UICollectionViewDelegateFlowLayout {
         if let sections = fetchedResultsController?.sections {
             let currentSection = sections[indexPath.section]
             header.titleLabel.text = currentSection.name
+            header.titleLabel.font = UIFont(name: "SFUIDisplay-Light" , size: 15)
          header.titleLabel.addTextSpacing(1.6)
         }
         

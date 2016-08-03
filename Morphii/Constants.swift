@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class ViewControllerIDs {
     static let TabBarController = "TabBarController"
@@ -112,6 +113,12 @@ class ProfileActions {
 
 class ShareValues {
     static let cameraRoll = "com.apple.UIKit.activity.SaveToCameraRoll"
+}
+
+class Fonts {
+    static let keyboardKeys = UIFont(name: "SFUIDisplay-Light", size: 17)!
+    static let keyboardKeysCharacterSpacing = 0.5
+    static let specialKeys = UIFont(name: "SFUIDisplay-Light", size: 19)!
 }
 
 let acceptableCharacters = " #0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"

@@ -65,6 +65,8 @@ class RecentView: ExtraView {
                 self.noMorphiisView.hidden = true
             }
             titleLabel.text = "Your Saved Morphiis"
+            titleLabel.font = UIFont(name: "SFUIDisplay-Light" , size: 15)
+            titleLabel.addTextSpacing(1.5)
             break
         }
         performSelector(#selector(RecentView.loadMorphiis as (RecentView) -> () -> ()), withObject: nil, afterDelay: 0.5)
