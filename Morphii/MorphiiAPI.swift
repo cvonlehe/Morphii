@@ -340,6 +340,7 @@ class MorphiiAPI {
         let parameters = ["username":Config.getCurrentConfig().MORPHII_API_USER_NAME,
                           "password":Config.getCurrentConfig().MORPHII_API_PASSWORD]
         do {
+            print("PARAMETERS:",parameters)
             let jsonData = try NSJSONSerialization.dataWithJSONObject(parameters, options: NSJSONWritingOptions.PrettyPrinted)
             // here "jsonData" is the dictionary encoded in JSON data
             let request = NSMutableURLRequest(URL: NSURL(string: LOGINURL)!)
@@ -353,13 +354,17 @@ class MorphiiAPI {
                 do {
                     try jsonDict = NSJSONSerialization.JSONObjectWithData(d, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary
                 }catch {
-                    print("Handle \(error) here")
+                    print("loginHandle \(error) here")
                 }
                 guard let JSONDict = jsonDict else {return}
+                print("login1:",JSONDict)
                 if let token = JSONDict.objectForKey("token") as? String {
+                    print("login2")
                     NSUserDefaults.standardUserDefaults().setObject(token, forKey: NSUserDefaultKeys.token)
                     NSUserDefaults.standardUserDefaults().synchronize()
 
+                }else {
+                    print("login3")
                 }
             })
         } catch let error as NSError {
