@@ -428,7 +428,7 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
             Key.KeyType.Space,
             Key.KeyType.Return:
                 key.label.adjustsFontSizeToFitWidth = true
-                key.label.font = Fonts.keyboardKeys
+                key.label.font = Fonts.specialKeys
             default:
                 key.label.font = Fonts.keyboardKeys
             }
@@ -981,7 +981,7 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
         var beforeSpace: Bool = true
         for (k, key) in row.enumerate() {
             if key.type == Key.KeyType.Space {
-                frames.append(CGRectMake(rightButtonWidth + 10, frame.origin.y, spaceWidth, frame.height))
+                frames.append(CGRectMake(rightButtonWidth + 14, frame.origin.y, spaceWidth, frame.height))
                 currentOrigin += (spaceWidth + gapWidth)
                 beforeSpace = false
             }

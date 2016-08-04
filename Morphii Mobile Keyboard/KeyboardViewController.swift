@@ -213,14 +213,17 @@ class KeyboardViewController: UIInputViewController {
         case .Recents:
             setHeight(280)
             setRecentView(.Recents)
+            recentView?.titleLabel.addSpacing(1.6)
             break
         case .Favorites:
             setHeight(280)
             setRecentView(.Favorites)
+            recentView?.titleLabel.addSpacing(1.6)
             break
         case .Home:
             setHeight(280)
             setRecentView(.Home)
+            recentView?.titleLabel.addSpacing(1.6)
             break
         case .Keyboard:
             returnToKeybord()
@@ -1076,6 +1079,8 @@ extension KeyboardViewController:UITextFieldDelegate {
         if string == "" {
             return true
         }
+      textField.addTextSpacing(-0.4)
+         textField.textColor = UIColor ( red: 0.2, green: 0.2235, blue: 0.2902, alpha: 1.0 )
         if favoriteView.tagsTextField == textField && string == " " {
             guard let wordsArray = favoriteView.tagsTextField.text?.componentsSeparatedByString(" ") else {return true}
             var newWords:[String] = []

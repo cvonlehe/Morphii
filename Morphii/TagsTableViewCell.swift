@@ -36,7 +36,7 @@ class TagsTableViewCell: UITableViewCell {
         var x = 4.0
         var y = 4.0
         let width = Double(UIScreen.mainScreen().bounds.size.width / 3) - 8
-        let height = 36.0 - 8.0
+        let height = 25.0
         
         for tag in tags {
             let tagView = UILabel(frame: CGRect(x: x, y: y, width: width, height: height))
@@ -44,9 +44,11 @@ class TagsTableViewCell: UITableViewCell {
             tagView.userInteractionEnabled = true
             tagView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TagsTableViewCell.tagViewTapped(_:))))
             tagView.textAlignment = .Center
-            tagView.textColor = UIColor.darkGrayColor()
-            tagView.backgroundColor = UIColor ( red: 0.8836, green: 0.8836, blue: 0.8836, alpha: 1.0 )
-            tagView.font = UIFont(name: "SFUIText-Regular", size: 12.0)
+            tagView.textColor = UIColor ( red: 0.2, green: 0.2235, blue: 0.2902, alpha: 1.0 )
+            tagView.addTextSpacing(0.4)
+
+            tagView.backgroundColor = UIColor ( red: 0.9167, green: 0.9168, blue: 0.9118, alpha: 1.0 )
+            tagView.font = UIFont(name: "SFUIDisplay-Light", size: 16.0)
             tagView.layer.cornerRadius = 2
             tagView.layer.masksToBounds = true
             self.tagsContainerView.addSubview(tagView)

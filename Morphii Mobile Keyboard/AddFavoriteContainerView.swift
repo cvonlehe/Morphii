@@ -22,14 +22,9 @@ class AddFavoriteContainerView: ExtraView {
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
         self.loadNib()
-        nameTextField.layer.cornerRadius = 4
-        tagsTextField.layer.cornerRadius = 4
-        nameTextField.layer.borderColor = UIColor.whiteColor().CGColor
-        tagsTextField.layer.borderColor = UIColor.whiteColor().CGColor
-        nameTextField.layer.borderWidth = 1
-        tagsTextField.layer.borderWidth = 1
          addPaddingToTextField(nameTextField)
          addPaddingToTextField(tagsTextField)
+         
     }
    
    func addPaddingToTextField (textField:UITextField) {
@@ -88,4 +83,12 @@ class AddFavoriteContainerView: ExtraView {
         delegate.closeButtonPressed()
     }
 
+}
+
+extension UITextField{
+   func addTextSpacing(spacing: CGFloat){
+      let attributedString = NSMutableAttributedString(string: self.text!)
+      attributedString.addAttribute(NSKernAttributeName, value: spacing, range: NSRange(location: 0, length: self.text!.characters.count))
+      self.attributedText = attributedString
+   }
 }

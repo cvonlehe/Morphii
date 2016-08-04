@@ -20,7 +20,7 @@ class MorphiiSelectionView: UIView {
     
     init(frame:CGRect, morphii:Morphii, delegate:MorphiiSelectionViewDelegate?, showName:Bool) {
         super.init(frame: frame)
-        let labelHeight = CGFloat(20)
+        let labelHeight = CGFloat(24)
         let morphiiViewSideLength = CGFloat(frame.size.height - labelHeight - 4)
         morphiiView = MorphiiView(frame: CGRect(x: (frame.size.width / 2) - (morphiiViewSideLength / 2), y: 4, width: morphiiViewSideLength, height: morphiiViewSideLength))
         morphiiView.backgroundColor = UIColor.whiteColor()

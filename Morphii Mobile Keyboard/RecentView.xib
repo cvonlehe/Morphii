@@ -5,11 +5,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="SFUIDisplay-Light.ttf">
+            <string>SFUIDisplay-Light</string>
+        </mutableArray>
         <mutableArray key="SFUIDisplay-Regular.ttf">
             <string>SFUIDisplay-Regular</string>
-        </mutableArray>
-        <mutableArray key="SFUIText-Light.ttf">
-            <string>SFUIText-Light</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -31,7 +31,7 @@
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ndf-aV-HDi">
                             <rect key="frame" x="8" y="0.0" width="584" height="20"/>
-                            <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
+                            <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="15"/>
                             <color key="textColor" red="0.20000000000000001" green="0.22352941179999999" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>

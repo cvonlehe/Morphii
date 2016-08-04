@@ -21,7 +21,7 @@ class RecentView: ExtraView {
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
         self.loadNib()
-         titleLabel.addTextSpacing(1.6)
+         titleLabel.addSpacing(1.6)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -166,8 +166,9 @@ class RecentView: ExtraView {
         superView.addConstraint(top)
         superView.addConstraint(centerXConstraint)
         superView.addConstraint(bottom)
+
     }
-    
+   
     func displayMorphiiOverylay (morphii:Morphii) {
         if morphiiOverlay == nil {
             var area = ""
@@ -196,6 +197,14 @@ extension RecentView:KeyboardMorphiiOverlayViewDelegate {
         morphiiOverlay = nil
     }
     
+}
+
+extension UILabel{
+   func addSpacing(spacing: CGFloat){
+      let attributedString = NSMutableAttributedString(string: self.text!)
+      attributedString.addAttribute(NSKernAttributeName, value: spacing, range: NSRange(location: 0, length: self.text!.characters.count))
+      self.attributedText = attributedString
+   }
 }
 
 enum MorphiiFetchType {

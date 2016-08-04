@@ -162,7 +162,7 @@ class TrendingViewcController: UIViewController {
                 morphiiContainerView = morphiiContainerView8
             }
             dispatch_async(dispatch_get_main_queue(), {
-                let size = CGSize(width: morphiiContainerView.frame.size.width, height: morphiiContainerView.frame.size.height - 16)
+                let size = CGSize(width: morphiiContainerView.frame.size.width, height: morphiiContainerView.frame.size.height)
                 
                 let morphiiView = MorphiiSelectionView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: size), morphii: morphii, delegate: nil, showName: true)
                 morphiiContainerView.addSubview(morphiiView)

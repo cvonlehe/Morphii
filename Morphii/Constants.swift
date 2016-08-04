@@ -116,9 +116,9 @@ class ShareValues {
 }
 
 class Fonts {
-    static let keyboardKeys = UIFont(name: "SFUIDisplay-Light", size: 17)!
+    static let keyboardKeys = UIFont(name: "SFUIDisplay-Light", size: 24)!
     static let keyboardKeysCharacterSpacing = 0.5
-    static let specialKeys = UIFont(name: "SFUIDisplay-Light", size: 19)!
+    static let specialKeys = UIFont(name: "SFUIDisplay-Light", size: 16)!
 }
 
 let acceptableCharacters = " #0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"

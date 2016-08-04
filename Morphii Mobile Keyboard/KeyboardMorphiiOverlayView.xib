@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -23,10 +23,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="92a-af-xaf">
-                    <rect key="frame" x="8" y="8" width="18" height="30"/>
+                    <rect key="frame" x="8" y="10" width="13" height="21"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="18" id="Hcf-tF-O89"/>
-                        <constraint firstAttribute="height" constant="30" id="bpH-2E-lOJ"/>
+                        <constraint firstAttribute="width" constant="13" id="Hcf-tF-O89"/>
+                        <constraint firstAttribute="height" constant="21" id="bpH-2E-lOJ"/>
                     </constraints>
                     <state key="normal" image="back"/>
                     <connections>
@@ -34,13 +34,13 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A6E-vQ-FR3">
-                    <rect key="frame" x="567" y="9" width="25" height="28"/>
+                    <rect key="frame" x="575" y="11" width="17" height="19"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="4qc-AA-2kv"/>
                         <constraint firstAttribute="height" constant="30" id="LHp-HO-Ywu"/>
-                        <constraint firstAttribute="height" constant="28" id="RM2-xA-7dr"/>
+                        <constraint firstAttribute="height" constant="19" id="RM2-xA-7dr"/>
                         <constraint firstAttribute="width" constant="46" id="Y6N-ur-caJ"/>
-                        <constraint firstAttribute="width" constant="25" id="l5r-Tv-vgE"/>
+                        <constraint firstAttribute="width" constant="17" id="l5r-Tv-vgE"/>
                         <constraint firstAttribute="width" constant="30" id="ySt-by-sAz"/>
                     </constraints>
                     <state key="normal" image="share"/>
@@ -57,13 +57,16 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="H71-aM-fDm">
-                    <rect key="frame" x="34" y="8" width="525" height="30"/>
+                    <rect key="frame" x="29" y="8" width="538" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="du4-Ag-tpa"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="22"/>
                     <color key="textColor" red="0.20000000000000001" green="0.22352941179999999" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbd-gU-OAs" customClass="MorphiiView" customModule="Morphii_Mobile_Keyboard" customModuleProvider="target">
-                    <rect key="frame" x="27" y="46" width="546" height="546"/>
+                    <rect key="frame" x="25" y="41" width="551" height="551"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="fbd-gU-OAs" secondAttribute="height" multiplier="1:1" id="w03-wb-9dT"/>
@@ -72,6 +75,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="92a-af-xaf" firstAttribute="centerY" secondItem="H71-aM-fDm" secondAttribute="centerY" id="4YS-xc-Pf2"/>
                 <constraint firstAttribute="trailing" secondItem="A6E-vQ-FR3" secondAttribute="trailing" constant="8" id="5wB-Ur-Rl0"/>
                 <constraint firstItem="fbd-gU-OAs" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="92c-TU-Elk"/>
                 <constraint firstItem="A6E-vQ-FR3" firstAttribute="leading" secondItem="H71-aM-fDm" secondAttribute="trailing" constant="8" id="Bib-DC-kvw"/>
@@ -89,6 +93,8 @@
             </constraints>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="jO2-5v-rox"/>
+                    <exclude reference="gBR-zq-rfa"/>
                     <exclude reference="cEU-BK-UBy"/>
                     <exclude reference="h0r-Xu-qJ9"/>
                     <exclude reference="y1O-lw-kmU"/>
