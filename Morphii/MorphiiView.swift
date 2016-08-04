@@ -342,6 +342,7 @@ class MorphiiView: UIView, MorphiiProtocol {
             let string = "Sent by Morphii Keyboard: "+Config.getCurrentConfig().appStoreUrl
             shareText = string
         }
+        backgroundColor = UIColor.clearColor()
         let vc = UIActivityViewController(activityItems: [shareText, getMorphiiImage()], applicationActivities: [])
         viewController.presentViewController(vc, animated: true, completion: nil)
         vc.completionWithItemsHandler = {(activityType, completed:Bool, returnedItems:[AnyObject]?, error: NSError?) in
@@ -470,6 +471,7 @@ class MorphiiView: UIView, MorphiiProtocol {
 //            newImage = newImage.imageWithInsets(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
 //            return newImage
 //        }
+        backgroundColor = UIColor.clearColor()
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         var clipMorphySize = CGSize(width: screenSize.width, height: screenSize.height)
         UIGraphicsBeginImageContextWithOptions(clipMorphySize, false, 0.0)

@@ -490,7 +490,7 @@
                                                         </constraints>
                                                     </scrollView>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="YcQ-tN-0EW" firstAttribute="leading" secondItem="jQ4-iG-2DL" secondAttribute="leading" id="0TU-Lo-jd8"/>
                                                     <constraint firstAttribute="bottom" secondItem="ph6-lN-gk8" secondAttribute="bottom" id="0g5-ce-eBF"/>
