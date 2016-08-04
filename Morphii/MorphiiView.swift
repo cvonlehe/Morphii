@@ -492,8 +492,8 @@ class MorphiiView: UIView, MorphiiProtocol {
         //width is longer so morphii will fit in text bubble
         
         //check for iphone 6+ and set scale to 3 or 2 for all other devices
-        let scaleVal = (UIScreen.mainScreen().nativeScale == 3.0 ? 3.0 : 2.0) 
-        let cropRect: CGRect = CGRectMake(0, 0, self.frame.width * CGFloat(scaleVal), self.frame.width * CGFloat(scaleVal))
+      let scaleVal = (UIScreen.mainScreen().nativeScale >= 2.6 ? 3.0 : 2.0) as! CGFloat
+      let cropRect: CGRect = CGRectMake(0, 0, self.frame.width * CGFloat(scaleVal), self.frame.width * CGFloat(scaleVal))
         
         //crop the snapshot with the bounding rectangle
         let morphyPic = croppedImage(cropRect)

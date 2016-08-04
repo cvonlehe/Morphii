@@ -238,6 +238,7 @@ extension OverlayViewController:UITextFieldDelegate {
         if string == "" {
             return true
         }
+      textField.addTextSpacing(-0.15)
         if favoriteTagsTextField == textField && string == " " {
             guard let wordsArray = favoriteTagsTextField.text?.componentsSeparatedByString(" ") else {return true}
             var newWords:[String] = []
@@ -265,4 +266,12 @@ extension OverlayViewController:UITextFieldDelegate {
         }
         return true
     }
+}
+
+extension UITextField{
+   func addTextSpacing(spacing: CGFloat){
+      let attributedString = NSMutableAttributedString(string: self.text!)
+      attributedString.addAttribute(NSKernAttributeName, value: spacing, range: NSRange(location: 0, length: self.text!.characters.count))
+      self.attributedText = attributedString
+   }
 }

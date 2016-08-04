@@ -231,20 +231,20 @@
                                                         </mask>
                                                     </variation>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Morphii Name" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="cxS-XM-O7H">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Morphii Name" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="RXH-xy-bnb">
                                                     <rect key="frame" x="4" y="85" width="98" height="26"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="26" id="9fY-d8-Gwc"/>
-                                                        <constraint firstAttribute="height" constant="25" id="SOJ-wg-SkQ"/>
+                                                        <constraint firstAttribute="height" constant="25" id="Pzi-il-tSV"/>
+                                                        <constraint firstAttribute="height" constant="26" id="snu-Dy-FxX"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
-                                                    <color key="textColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="9fY-d8-Gwc"/>
-                                                            <exclude reference="SOJ-wg-SkQ"/>
+                                                            <exclude reference="snu-Dy-FxX"/>
+                                                            <exclude reference="Pzi-il-tSV"/>
                                                         </mask>
                                                     </variation>
                                                 </label>
@@ -253,26 +253,23 @@
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="cxS-XM-O7H" secondAttribute="bottom" constant="-5" id="BBv-wF-Ndq"/>
+                                            <constraint firstItem="RXH-xy-bnb" firstAttribute="top" secondItem="AXs-cD-Er4" secondAttribute="bottom" constant="-5" id="9M2-zP-cGZ"/>
                                             <constraint firstAttribute="bottom" secondItem="AXs-cD-Er4" secondAttribute="bottom" constant="24" id="BHa-g2-kXL"/>
+                                            <constraint firstAttribute="bottom" secondItem="RXH-xy-bnb" secondAttribute="bottom" constant="-5" id="BS3-pE-SR8"/>
                                             <constraint firstItem="AXs-cD-Er4" firstAttribute="centerY" secondItem="Mau-Zd-1W2" secondAttribute="centerY" constant="-8" id="Bg1-he-4p2"/>
                                             <constraint firstItem="AXs-cD-Er4" firstAttribute="leading" secondItem="Mau-Zd-1W2" secondAttribute="leading" constant="8" id="Kdj-lt-tlE"/>
-                                            <constraint firstItem="cxS-XM-O7H" firstAttribute="top" secondItem="AXs-cD-Er4" secondAttribute="bottom" constant="-5" id="Qx6-HN-F49"/>
-                                            <constraint firstItem="cxS-XM-O7H" firstAttribute="top" secondItem="AXs-cD-Er4" secondAttribute="bottom" constant="-2" id="R5B-zE-aH2"/>
+                                            <constraint firstAttribute="trailing" secondItem="RXH-xy-bnb" secondAttribute="trailing" constant="4" id="XuI-yB-zg5"/>
+                                            <constraint firstItem="RXH-xy-bnb" firstAttribute="leading" secondItem="Mau-Zd-1W2" secondAttribute="leading" constant="4" id="d1J-T9-gpv"/>
                                             <constraint firstItem="AXs-cD-Er4" firstAttribute="top" secondItem="Mau-Zd-1W2" secondAttribute="top" id="g2j-W8-Yzg"/>
-                                            <constraint firstAttribute="trailing" secondItem="cxS-XM-O7H" secondAttribute="trailing" constant="4" id="mHr-Nh-seG"/>
                                             <constraint firstAttribute="trailing" secondItem="AXs-cD-Er4" secondAttribute="trailing" constant="8" id="ptp-va-owL"/>
-                                            <constraint firstItem="cxS-XM-O7H" firstAttribute="leading" secondItem="Mau-Zd-1W2" secondAttribute="leading" constant="4" id="vX4-RV-lcv"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="BHa-g2-kXL"/>
                                                 <exclude reference="g2j-W8-Yzg"/>
-                                                <exclude reference="R5B-zE-aH2"/>
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <outlet property="morphiiNameLabel" destination="cxS-XM-O7H" id="18Q-ka-uhu"/>
                                             <outlet property="morphiiView" destination="AXs-cD-Er4" id="IvJ-vs-aoM"/>
                                         </connections>
                                     </collectionViewCell>
@@ -582,8 +579,8 @@
                                                     <outlet property="delegate" destination="Aqg-M8-e7q" id="je2-2W-0gC"/>
                                                 </connections>
                                             </tableView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9cL-lq-Ols">
-                                                <rect key="frame" x="-304" y="47" width="304" height="347"/>
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9cL-lq-Ols">
+                                                <rect key="frame" x="0.0" y="47" width="304" height="347"/>
                                                 <subviews>
                                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IxY-qy-BJO">
                                                         <rect key="frame" x="57" y="0.0" width="190" height="190"/>
@@ -637,13 +634,14 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="42" id="cvN-oB-2xl"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
-                                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
+                                                                <color key="textColor" red="0.30980392156862746" green="0.42745098039215684" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter name here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ILG-qX-9G7">
                                                                 <rect key="frame" x="88" y="0.0" width="208" height="44"/>
-                                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
+                                                                <color key="textColor" red="0.20000000000000001" green="0.22352941179999999" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
                                                                 <connections>
                                                                     <outlet property="delegate" destination="Aqg-M8-e7q" id="6Nb-0B-I9j"/>
@@ -676,13 +674,13 @@
                                                                 </constraints>
                                                             </view>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tags" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="iYE-AV-4XT">
-                                                                <rect key="frame" x="48" y="0.0" width="32" height="44"/>
+                                                                <rect key="frame" x="44" y="0.0" width="32" height="44"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="42" id="ESR-um-wCU"/>
                                                                     <constraint firstAttribute="width" constant="32" id="OqA-0W-e0J"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
-                                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
+                                                                <color key="textColor" red="0.30980392156862746" green="0.42745098039215684" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                                 <variation key="default">
                                                                     <mask key="constraints">
@@ -690,21 +688,22 @@
                                                                     </mask>
                                                                 </variation>
                                                             </label>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter tags seperated by spaces" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tUT-U6-IJu">
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter tags" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tUT-U6-IJu">
                                                                 <rect key="frame" x="88" y="0.0" width="208" height="44"/>
-                                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
+                                                                <color key="textColor" red="0.20000000000000001" green="0.22352941179999999" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
                                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                                                 <connections>
                                                                     <outlet property="delegate" destination="Aqg-M8-e7q" id="Z9I-Xk-JmL"/>
                                                                 </connections>
                                                             </textField>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tag" translatesAutoresizingMaskIntoConstraints="NO" id="saW-Ea-3KH">
-                                                                <rect key="frame" x="29" y="13" width="19" height="17"/>
+                                                                <rect key="frame" x="29" y="14" width="15" height="15"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <color key="tintColor" red="0.22745098039215686" green="0.35294117647058826" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="17" id="RJi-Aw-U9g"/>
-                                                                    <constraint firstAttribute="width" constant="19" id="y0u-HY-HlB"/>
+                                                                    <constraint firstAttribute="height" constant="15" id="RJi-Aw-U9g"/>
+                                                                    <constraint firstAttribute="width" constant="15" id="y0u-HY-HlB"/>
                                                                 </constraints>
                                                             </imageView>
                                                         </subviews>
@@ -715,7 +714,7 @@
                                                             <constraint firstAttribute="bottom" secondItem="iYE-AV-4XT" secondAttribute="bottom" id="GjK-VS-HZg"/>
                                                             <constraint firstAttribute="bottom" secondItem="tUT-U6-IJu" secondAttribute="bottom" id="Gs7-G7-TOl"/>
                                                             <constraint firstAttribute="trailing" secondItem="tUT-U6-IJu" secondAttribute="trailing" constant="8" id="IkF-7d-dMr"/>
-                                                            <constraint firstItem="tUT-U6-IJu" firstAttribute="leading" secondItem="iYE-AV-4XT" secondAttribute="trailing" constant="8" id="V75-75-MNa"/>
+                                                            <constraint firstItem="tUT-U6-IJu" firstAttribute="leading" secondItem="iYE-AV-4XT" secondAttribute="trailing" constant="12" id="V75-75-MNa"/>
                                                             <constraint firstAttribute="height" constant="44" id="Yaj-7o-Vik"/>
                                                             <constraint firstItem="saW-Ea-3KH" firstAttribute="leading" secondItem="7Gt-VW-o81" secondAttribute="leading" constant="29" id="ZBn-3q-gnr"/>
                                                             <constraint firstAttribute="trailing" secondItem="gxU-YR-mJx" secondAttribute="trailing" id="lWR-Ig-YFa"/>
@@ -2430,12 +2429,12 @@
                                         <exclude reference="V6v-sb-nbz"/>
                                         <exclude reference="ZAZ-98-YmR"/>
                                         <exclude reference="bNJ-Oh-G3Y"/>
-                                        <exclude reference="J3c-Hx-2k7"/>
-                                        <exclude reference="n5b-cz-dw6"/>
                                         <exclude reference="3qR-Nn-lZM"/>
                                         <exclude reference="6jW-N3-5Vq"/>
                                         <exclude reference="PM6-Mw-NyN"/>
                                         <exclude reference="zQx-Hd-vn9"/>
+                                        <exclude reference="J3c-Hx-2k7"/>
+                                        <exclude reference="n5b-cz-dw6"/>
                                     </mask>
                                 </variation>
                             </scrollView>

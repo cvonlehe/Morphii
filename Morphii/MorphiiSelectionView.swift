@@ -15,7 +15,7 @@ protocol MorphiiSelectionViewDelegate {
 class MorphiiSelectionView: UIView {
     var morphii:Morphii?
     var delegate:MorphiiSelectionViewDelegate?
-    var nameLabel:UILabel!
+    var nameLabel:UIButton!
     var morphiiView:MorphiiView!
     
     init(frame:CGRect, morphii:Morphii, delegate:MorphiiSelectionViewDelegate?, showName:Bool) {
@@ -26,12 +26,15 @@ class MorphiiSelectionView: UIView {
         morphiiView.backgroundColor = UIColor.whiteColor()
         morphiiView.userInteractionEnabled = false
         addSubview(morphiiView)
-        nameLabel = UILabel(frame: CGRect(x: 0, y: morphiiView.frame.size.height, width: frame.size.width, height: 30))
-        nameLabel.font = UIFont(name: "SFUIText-Regular", size: 12.0)
-        nameLabel.textColor = UIColor ( red: 0.3832, green: 0.3832, blue: 0.3832, alpha: 1.0 )
-        nameLabel.numberOfLines = 2
-        nameLabel.lineBreakMode = .ByWordWrapping
-        nameLabel.textAlignment = .Center
+        nameLabel = UIButton(frame: CGRect(x: 0, y: morphiiView.frame.size.height + 4, width: frame.size.width, height: 30))
+        nameLabel.titleLabel?.font = UIFont(name: "SFUIText-Regular", size: 12.0)
+        nameLabel.setTitleColor(UIColor ( red: 0.3832, green: 0.3832, blue: 0.3832, alpha: 1.0 ), forState: .Normal)
+         nameLabel.userInteractionEnabled = false
+        nameLabel.titleLabel?.numberOfLines = 2
+        nameLabel.titleLabel?.lineBreakMode = .ByWordWrapping
+        nameLabel.titleLabel?.textAlignment = .Center
+      nameLabel.contentHorizontalAlignment = .Center
+      nameLabel.contentVerticalAlignment = .Top
         addSubview(nameLabel)
         setNewMorphii(morphii, emoodl: morphii.emoodl?.doubleValue, showName: showName)
         backgroundColor = UIColor.whiteColor()
@@ -46,7 +49,7 @@ class MorphiiSelectionView: UIView {
             shouldShow = show
         }
         if shouldShow {
-            nameLabel.text = morphii.name
+            nameLabel.setTitle(morphii.name, forState: .Normal)
         }
         morphiiView.setUpMorphii(morphii, emoodl: emoodl)
         self.morphii = morphii
