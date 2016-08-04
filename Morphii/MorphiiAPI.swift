@@ -64,12 +64,10 @@ class MorphiiAPI {
    private class func sendEvent (eventClient:AWSMobileAnalyticsEventClient, event:AWSMobileAnalyticsEvent) {
       MethodHelper.getCurrentLocaiton { (locationO) in
          if let location = locationO {
-            if APTimeZones.sharedInstance() != nil {
-               let timeZone = APTimeZones.sharedInstance().timeZoneWithLocation(location)
-               if timeZone != nil {
-                  if let abbrev = timeZone.abbreviation {
-                     event.addAttribute(abbrev, forKey: AWSAttributes.deviceId)
-                  }
+            if location.timeZone() != nil {
+               if let abbrev = location.timeZone().abbreviation {
+                  print("TIME_ZONE:",abbrev)
+                  event.addAttribute(abbrev, forKey: AWSAttributes.deviceId)
                }
             }
             event.addMetric(location.coordinate.latitude, forKey: AWSAttributes.lat)
