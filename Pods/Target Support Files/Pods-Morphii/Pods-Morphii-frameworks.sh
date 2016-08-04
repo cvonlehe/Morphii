@@ -84,6 +84,7 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods-Morphii/APTimeZones.framework"
   install_framework "Pods-Morphii/AWSCore.framework"
   install_framework "Pods-Morphii/AWSMobileAnalytics.framework"
   install_framework "Pods-Morphii/Alamofire.framework"
@@ -95,6 +96,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Morphii/TPKeyboardAvoiding.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods-Morphii/APTimeZones.framework"
   install_framework "Pods-Morphii/AWSCore.framework"
   install_framework "Pods-Morphii/AWSMobileAnalytics.framework"
   install_framework "Pods-Morphii/Alamofire.framework"

@@ -6,78 +6,73 @@
 	<dict>
 		<key>AOTutorial.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>APTimeZones.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>AWSCore.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>10</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>AWSMobileAnalytics.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>11</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Alamofire.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Bolts.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>DeviceKit.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>12</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>JGProgressHUD.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>5</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Parse.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>6</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-Morphii.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>8</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>7</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>TPKeyboardAvoiding.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>9</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>22D17C987A1ED5F2063B3E50AE6E3EBD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2A9BD49BCE80A3A8BBD64004FA6459DD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2AE14E40D653E187BF6E224FBE83A1FE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>2C8AA1BAF35413BDB954A1DF93576ED1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5FA2C944E7F244028BF5FC00816EDEC5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -87,37 +82,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>6E552A86DD7C4C244C42E73A573C4A22</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>6FD3CCBBEF3EB7E85F602344C6289F7B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7129FAB61478FA70223DADF4921468CD</key>
+		<key>78D0ECB1E8207F65F5BE6C53E4A02563</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7D7577DDD1853CCF2115674F4D1644EA</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>827C7086376EFF7A24C18C0744C3883E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>82B864424069D7B1F01314C98616B949</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AA6A0968F3CFA7234784FC6E71F3CE7E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -137,17 +117,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>E6A314B74EEE35059695B87AB3FA3184</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>EF78824223C74AA13AE655CD2ACF32A3</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F27C968D9CEF919B9E355DBBF81F3B48</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FC3557B6FFEE0E181E2C23F866C4DADC</key>
 		<dict>
 			<key>primary</key>
 			<true/>

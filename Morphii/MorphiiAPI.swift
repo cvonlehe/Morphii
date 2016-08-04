@@ -11,6 +11,7 @@ import Alamofire
 import AWSMobileAnalytics
 import CoreLocation
 import DeviceKit
+import APTimeZones
 
 class MorphiiAPI {
     static var lastDate = "2015-05-15"
@@ -63,8 +64,19 @@ class MorphiiAPI {
    private class func sendEvent (eventClient:AWSMobileAnalyticsEventClient, event:AWSMobileAnalyticsEvent) {
       MethodHelper.getCurrentLocaiton { (locationO) in
          if let location = locationO {
+            if APTimeZones.sharedInstance() != nil {
+               let timeZone = APTimeZones.sharedInstance().timeZoneWithLocation(location)
+               if timeZone != nil {
+                  if let abbrev = timeZone.abbreviation {
+                     event.addAttribute(abbrev, forKey: AWSAttributes.deviceId)
+                  }
+               }
+            }
             event.addMetric(location.coordinate.latitude, forKey: AWSAttributes.lat)
             event.addMetric(location.coordinate.longitude, forKey: AWSAttributes.lng)
+         }
+         if let deviceId = UIDevice.currentDevice().identifierForVendor?.UUIDString {
+            event.addAttribute(deviceId, forKey: AWSAttributes.deviceId)
          }
          eventClient.recordEvent(event)
          eventClient.submitEvents()
@@ -250,6 +262,8 @@ class MorphiiAPI {
         static let share = "share"
       static let lat = "lat"
       static let lng = "lng"
+      static let deviceId = "deviceId"
+      static let timeZone = "timeZone"
     }
     
 

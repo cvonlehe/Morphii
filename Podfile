@@ -12,6 +12,7 @@ pod 'Alamofire', '~> 3.4'
 pod 'AWSMobileAnalytics', '~> 2.4'
 pod 'DeviceKit', '~> 0.3.2'
 pod 'Parse'
+pod 'APTimeZones', '~> 1.1'
 
 post_install do |installer|
     installer.pods_project.build_configuration_list.build_configurations.each do |configuration|

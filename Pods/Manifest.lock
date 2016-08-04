@@ -1,19 +1,21 @@
 PODS:
-  - Alamofire (3.4.1)
+  - Alamofire (3.4.0)
   - AOTutorial (1.7)
-  - AWSCore (2.4.5)
-  - AWSMobileAnalytics (2.4.5):
-    - AWSCore (= 2.4.5)
-  - Bolts/Tasks (1.8.4)
+  - APTimeZones (1.1)
+  - AWSCore (2.4.3)
+  - AWSMobileAnalytics (2.4.3):
+    - AWSCore (= 2.4.3)
+  - Bolts/Tasks (1.7.0)
   - DeviceKit (0.3.2)
-  - JGProgressHUD (1.3.3)
-  - Parse (1.14.2):
-    - Bolts/Tasks (~> 1.8)
+  - JGProgressHUD (1.3.2)
+  - Parse (1.13.0):
+    - Bolts/Tasks (~> 1.6)
   - TPKeyboardAvoiding (1.3)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
   - AOTutorial (~> 1.7)
+  - APTimeZones (~> 1.1)
   - AWSMobileAnalytics (~> 2.4)
   - DeviceKit (~> 0.3.2)
   - JGProgressHUD (~> 1.3)
@@ -21,14 +23,15 @@ DEPENDENCIES:
   - TPKeyboardAvoiding (~> 1.3)
 
 SPEC CHECKSUMS:
-  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
   AOTutorial: 9db913c4f1c51f6e21f08abed8baf257647268df
-  AWSCore: 2f356385bcea9b81ea47f9be0228c71697d9597d
-  AWSMobileAnalytics: 8546db78fa7f3ff66099902199fed47c68f148e3
-  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  APTimeZones: ddb9aca50fff41d6313eb29d86d37b1edf9d2942
+  AWSCore: 1b1edbf65f948804c9d522f1c49e29f51f72c6d8
+  AWSMobileAnalytics: 0242c2d0206dcf2231dbd0f62e15f0c61675d023
+  Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
   DeviceKit: 79182140c0aa8daaf4f4b3920e0b079f5fa9db79
-  JGProgressHUD: c89d1a8369a6253967a2c4194be06661033f83ed
-  Parse: 4335d65f40cb3d43190d723144bbe1afb9c38230
+  JGProgressHUD: ccac0ead9b771eac0ebcc2b0800efd7f1e1784dc
+  Parse: f51c24d2feb412e4b2d6cc73d37cb24e8d0089bc
   TPKeyboardAvoiding: a5138f318c06fb3e151f886e18ce4a72695d9cbe
 
 COCOAPODS: 0.39.0

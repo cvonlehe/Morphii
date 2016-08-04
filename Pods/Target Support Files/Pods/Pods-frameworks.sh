@@ -84,6 +84,7 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods/APTimeZones.framework"
   install_framework "Pods/AWSCore.framework"
   install_framework "Pods/AWSMobileAnalytics.framework"
   install_framework "Pods/Alamofire.framework"
@@ -93,6 +94,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/Parse.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods/APTimeZones.framework"
   install_framework "Pods/AWSCore.framework"
   install_framework "Pods/AWSMobileAnalytics.framework"
   install_framework "Pods/Alamofire.framework"
