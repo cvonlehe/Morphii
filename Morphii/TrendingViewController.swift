@@ -113,10 +113,22 @@ class TrendingViewcController: UIViewController {
                     hashtagLabel = hashtagLabel12
                 }else if i == 12 {
                     hashtagLabel = hashtagLabel13
+                    if let superView = hashtagLabel?.superview {
+                        superView.hidden = false
+                        superView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "labelSuperViewTapped:"))
+                    }
                 }else if i == 13 {
                     hashtagLabel = hashtagLabel14
+                    if let superView = hashtagLabel?.superview {
+                        superView.hidden = false
+                        superView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "labelSuperViewTapped:"))
+                    }
                 }else if i == 14 {
                     hashtagLabel = hashtagLabel15
+                    if let superView = hashtagLabel?.superview {
+                        superView.hidden = false
+                        superView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "labelSuperViewTapped:"))
+                    }
                 }
                 if let label = hashtagLabel {
                     dispatch_async(dispatch_get_main_queue(), {
@@ -128,6 +140,15 @@ class TrendingViewcController: UIViewController {
                 }
             }
         }
+    }
+    
+    func labelSuperViewTapped (tap:UITapGestureRecognizer) {
+        guard let label = tap.view?.subviews.first as? UILabel else {return}
+        guard let hashtag = label.text else {return}
+        let nextView = self.storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.SearchViewController) as! SearchViewController
+        nextView.hashtag = hashtag
+        nextView.fromArea = MorphiiAreas.containerTrending
+        navigationController?.pushViewController(nextView, animated: true)
     }
     
     func hashtagLabelTapped (tap:UITapGestureRecognizer) {

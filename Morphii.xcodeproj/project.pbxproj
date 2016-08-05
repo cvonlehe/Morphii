@@ -22,6 +22,8 @@
 		43217B991D480F97000DF2A5 /* kb-app-morphiis.json in Resources */ = {isa = PBXBuildFile; fileRef = 43217B981D480F97000DF2A5 /* kb-app-morphiis.json */; };
 		43217B9B1D4918B1000DF2A5 /* prod-credentials.txt in Resources */ = {isa = PBXBuildFile; fileRef = 43217B9A1D4918B1000DF2A5 /* prod-credentials.txt */; };
 		43217B9C1D491989000DF2A5 /* prod-credentials.txt in Resources */ = {isa = PBXBuildFile; fileRef = 43217B9A1D4918B1000DF2A5 /* prod-credentials.txt */; };
+		43305D631D550879008B1E85 /* MorphiiTouchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43305D621D550879008B1E85 /* MorphiiTouchView.swift */; };
+		43305D641D550879008B1E85 /* MorphiiTouchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43305D621D550879008B1E85 /* MorphiiTouchView.swift */; };
 		435C8EEA1D1C89FB0036B292 /* Morphii+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435C8EE81D1C89FB0036B292 /* Morphii+CoreDataProperties.swift */; };
 		435C8EEB1D1C89FB0036B292 /* Morphii+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435C8EE81D1C89FB0036B292 /* Morphii+CoreDataProperties.swift */; };
 		435C8EEC1D1C89FB0036B292 /* Morphii.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435C8EE91D1C89FB0036B292 /* Morphii.swift */; };
@@ -258,6 +260,7 @@
 		431A75DC1D0896EE0079F9BD /* MorphiiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorphiiView.swift; sourceTree = "<group>"; };
 		43217B981D480F97000DF2A5 /* kb-app-morphiis.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "kb-app-morphiis.json"; sourceTree = "<group>"; };
 		43217B9A1D4918B1000DF2A5 /* prod-credentials.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "prod-credentials.txt"; sourceTree = "<group>"; };
+		43305D621D550879008B1E85 /* MorphiiTouchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorphiiTouchView.swift; sourceTree = "<group>"; };
 		435C8EE81D1C89FB0036B292 /* Morphii+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Morphii+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		435C8EE91D1C89FB0036B292 /* Morphii.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Morphii.swift; sourceTree = "<group>"; };
 		436553101D3D33C500DD98B7 /* ForwardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardingView.swift; sourceTree = "<group>"; };
@@ -477,6 +480,7 @@
 			children = (
 				4300E8761D074F0000930766 /* MorphiiAPI.swift */,
 				431A75DC1D0896EE0079F9BD /* MorphiiView.swift */,
+				43305D621D550879008B1E85 /* MorphiiTouchView.swift */,
 			);
 			name = "Morphii Helpers";
 			sourceTree = "<group>";
@@ -1157,6 +1161,7 @@
 				431A75DD1D0896EE0079F9BD /* MorphiiView.swift in Sources */,
 				43F2A30D1D1C6B6900B9AA9C /* CollectionTableViewCell.swift in Sources */,
 				43AB60601D0F2DB900D2D185 /* TutorialViewController.swift in Sources */,
+				43305D631D550879008B1E85 /* MorphiiTouchView.swift in Sources */,
 				43A9DFF41D10888F001F3A1B /* FetchedDelegateDataSource.swift in Sources */,
 				431A75DB1D0870980079F9BD /* OverlayViewController.swift in Sources */,
 				43A9DFA51D107915001F3A1B /* HeaderCollectionReusableView.swift in Sources */,
@@ -1205,6 +1210,7 @@
 				43F2A30B1D1C5F7400B9AA9C /* User.swift in Sources */,
 				436553161D3D33C500DD98B7 /* KeyboardLayout.swift in Sources */,
 				43F2A3031D1C322000B9AA9C /* Config.swift in Sources */,
+				43305D641D550879008B1E85 /* MorphiiTouchView.swift in Sources */,
 				436553321D3D344000DD98B7 /* Utilities.swift in Sources */,
 				43CB11821D36BFFB00964C38 /* TrendingData.swift in Sources */,
 				43A9DFA61D107915001F3A1B /* HeaderCollectionReusableView.swift in Sources */,

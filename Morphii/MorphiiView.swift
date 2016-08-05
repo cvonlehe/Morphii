@@ -343,7 +343,8 @@ class MorphiiView: UIView, MorphiiProtocol {
             shareText = string
         }
         backgroundColor = UIColor.clearColor()
-        let vc = UIActivityViewController(activityItems: [shareText, getMorphiiImage()], applicationActivities: [])
+        let pbData:NSData = UIImagePNGRepresentation(getMorphiiImage())!
+        let vc = UIActivityViewController(activityItems: [shareText, pbData], applicationActivities: [])
         viewController.presentViewController(vc, animated: true, completion: nil)
         vc.completionWithItemsHandler = {(activityType, completed:Bool, returnedItems:[AnyObject]?, error: NSError?) in
             
@@ -395,10 +396,17 @@ class MorphiiView: UIView, MorphiiProtocol {
             switch status {
             case .Authorized:
                 self.completion = completion
-                UIImageWriteToSavedPhotosAlbum(self.getMorphiiImage(), self, #selector(MorphiiView.image(_:didFinishSavingWithError:contextInfo:)), nil)
+                let pbData:NSData = UIImagePNGRepresentation(self.getMorphiiImage())!
+                if let image = UIImage(data: pbData) {
+                    UIImageWriteToSavedPhotosAlbum(image, self, #selector(MorphiiView.image(_:didFinishSavingWithError:contextInfo:)), nil)
+                }
+
                 break
             case .Restricted:
                 print("Restricted")
+                if let comp = completion {
+                    comp(hasAccess: false, success: false)
+                }
                 break
             case .Denied:
                 print("Denied")

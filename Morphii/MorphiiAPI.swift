@@ -64,18 +64,19 @@ class MorphiiAPI {
    private class func sendEvent (eventClient:AWSMobileAnalyticsEventClient, event:AWSMobileAnalyticsEvent) {
       MethodHelper.getCurrentLocaiton { (locationO) in
          if let location = locationO {
-            if location.timeZone() != nil {
-               if let abbrev = location.timeZone().abbreviation {
-                  print("TIME_ZONE:",abbrev)
-                  event.addAttribute(abbrev, forKey: AWSAttributes.deviceId)
-               }
-            }
+
             event.addMetric(location.coordinate.latitude, forKey: AWSAttributes.lat)
             event.addMetric(location.coordinate.longitude, forKey: AWSAttributes.lng)
          }
+        let timeZone = NSTimeZone.localTimeZone().name
+        event.addAttribute(timeZone, forKey: AWSAttributes.timeZone)
+        print("TIMEZONE:",timeZone)
          if let deviceId = UIDevice.currentDevice().identifierForVendor?.UUIDString {
+            print("UDID:",deviceId)
             event.addAttribute(deviceId, forKey: AWSAttributes.deviceId)
-         }
+         }else {
+            event.addAttribute("unavailable", forKey: AWSAttributes.deviceId)
+        }
          eventClient.recordEvent(event)
          eventClient.submitEvents()
       }
@@ -118,14 +119,16 @@ class MorphiiAPI {
             event.addAttribute(name, forKey: AWSAttributes.name)
         }
         if area != MorphiiAreas.containerHome && area != MorphiiAreas.keyboardHome && area != MorphiiAreas.containerTrending {
-            event.addMetric(0.5, forKey: AWSAttributes.intensity)
+            event.addMetric(getCorrectedIntensity(intensity), forKey: AWSAttributes.intensity)
+            print("SAVEDINTENSITY - 1:",getCorrectedIntensity(intensity))
             if let tags = morphii.tags {
                 event.addAttribute(tags.componentsJoinedByString(", "), forKey: AWSAttributes.userProvidedTags)
             }
         }else {
-            event.addMetric(getCorrectedIntensity(intensity), forKey: AWSAttributes.intensity)
+            print("SAVEDINTENSITY - 2:",0.5)
+            event.addMetric(0.5, forKey: AWSAttributes.intensity)
         }
-        print("SAVEDINTENSITY:",getCorrectedIntensity(intensity))
+
         event.addAttribute(area, forKey: AWSAttributes.area)
          sendEvent(eventClient, event: event)
     }

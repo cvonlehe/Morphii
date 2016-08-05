@@ -150,6 +150,7 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 0 {
             let morphii = self.morphiis[indexPath.row]
+            MorphiiAPI.sendMorphiiSelectedToAWS(morphii, area: fromArea)
             guard let isFavorite  = morphii.isFavorite?.boolValue else {
                 OverlayViewController.createOverlay(self, morphiiO: morphii, area: MorphiiAreas.keyboardSearch)
                 return
@@ -159,7 +160,6 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource {
             }else {
                 OverlayViewController.createOverlay(self, morphiiO: morphii, area: MorphiiAreas.keyboardSearch)
             }
-            MorphiiAPI.sendMorphiiSelectedToAWS(morphii, area: fromArea)
         }else if indexPath.section == 2, let cell = tableView.cellForRowAtIndexPath(indexPath) as? MorphiiTableViewCell, let name = cell.nameLabel.text, let nextView = storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.HomeViewController) as?  HomeViewController {
             nextView.collectionO = name
             navigationController?.pushViewController(nextView, animated: true)

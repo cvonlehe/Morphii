@@ -1104,7 +1104,7 @@ extension KeyboardViewController:UITextFieldDelegate {
         guard let favoriteView = addFavoriteView else {return false}
         guard let morphii = favoriteView.morphiiView.morphii else {return false}
       let tags = Morphii.getTagsFromString(favoriteView.tagsTextField.text)
-        if let _ = Morphii.createNewMorphii(favoriteView.nameTextField.text,
+        if let newMorphii = Morphii.createNewMorphii(favoriteView.nameTextField.text,
                                             name: favoriteView.nameTextField.text,
                                             scaleType: Int((morphii.scaleType!)),
                                             sequence: Int((morphii.sequence)!),
@@ -1123,7 +1123,7 @@ extension KeyboardViewController:UITextFieldDelegate {
             recentView?.hidden = false
             setCenterView(.Favorites)
             MethodHelper.showSuccessErrorHUD(true, message: "Saved to Favorites", inView: self.view)
-            MorphiiAPI.sendFavoriteData(morphii, favoriteNameO: favoriteView.nameTextField.text, emoodl: favoriteView.morphiiView.emoodl, tags: tags)
+            MorphiiAPI.sendFavoriteData(morphii, favoriteNameO: favoriteView.nameTextField.text, emoodl: newMorphii.emoodl!.doubleValue, tags: tags)
             //HERE
             var area = ""
             switch centerView {

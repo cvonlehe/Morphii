@@ -113,6 +113,11 @@ extension OverlayViewController:MorphiiSelectionViewDelegate {
     func selectedMorphii(morphii: Morphii) {
         self.morphiiO = morphii
         setMorphii()
+        var a = ""
+        if let ar = area {
+            a = ar
+        }
+        MorphiiAPI.sendMorphiiSelectedToAWS(morphii, area: a)
         setCenterView(.MorphiiModifyView)
     }
 }
@@ -154,11 +159,12 @@ extension OverlayViewController {
         favoriteNameTextField.resignFirstResponder()
         favoriteTagsTextField.resignFirstResponder()
       let tags = Morphii.getTagsFromString(favoriteTagsTextField.text)
-        if let _ = Morphii.createNewMorphii(favoriteNameTextField.text, name: favoriteNameTextField.text, scaleType: Int((morphiiO?.scaleType!)!), sequence: Int((morphiiO?.sequence)!), groupName: "Your Saved Morphiis", metaData: morphiiO?.metaData, emoodl: morphiiView?.emoodl, isFavorite: true, tags: tags, order: 5000, originalId: morphiiO?.id, originalName: morphiiO?.name, showName: true) {
+        if let morphii = Morphii.createNewMorphii(favoriteNameTextField.text, name: favoriteNameTextField.text, scaleType: Int((morphiiO?.scaleType!)!), sequence: Int((morphiiO?.sequence)!), groupName: "Your Saved Morphiis", metaData: morphiiO?.metaData, emoodl: morphiiView?.emoodl, isFavorite: true, tags: tags, order: 5000, originalId: morphiiO?.id, originalName: morphiiO?.name, showName: true) {
             
             MethodHelper.showSuccessErrorHUD(true, message: "Saved to Favorites", inView: self.view)
             MorphiiAPI.sendFavoriteData(morphiiO, favoriteNameO: favoriteNameTextField.text, emoodl: favoriteMorphiiView!.morphiiView.emoodl, tags: tags)
-            MorphiiAPI.sendMorphiiFavoriteSavedToAWS(morphiiO!, intensity: favoriteMorphiiView!.morphiiView.emoodl, area: self.area, name: favoriteNameTextField.text!, tags: tags)
+            print("MORPHIIS_INTENSITY:",morphii.emoodl!.doubleValue)
+            MorphiiAPI.sendMorphiiFavoriteSavedToAWS(morphiiO!, intensity: morphii.emoodl!.doubleValue, area: self.area, name: favoriteNameTextField.text!, tags: tags)
         }else {
             MethodHelper.showAlert("Error", message: "There was an error saving this morphii. Please try again")
         }
