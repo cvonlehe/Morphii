@@ -113,6 +113,7 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
         morphiiO?.emoodl = morphiiView.emoodl
         CDHelper.sharedInstance.saveContext { (success) in
             if success {
+                MorphiiAPI.sendMorphiiFavoriteSavedToAWS(self.morphiiO!, intensity: self.morphiiView.emoodl, area: self.area, name: self.favoriteNameTextField.text!, originalName: self.morphiiO!.originalName, tags: tags)
 
                 MorphiiAPI.sendFavoriteData(self.morphiiO, favoriteNameO: self.favoriteNameTextField.text, emoodl: self.favoriteMorphiiView.emoodl, tags: tags)
             }else {

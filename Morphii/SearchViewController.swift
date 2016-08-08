@@ -152,13 +152,13 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource {
             let morphii = self.morphiis[indexPath.row]
             MorphiiAPI.sendMorphiiSelectedToAWS(morphii, area: fromArea)
             guard let isFavorite  = morphii.isFavorite?.boolValue else {
-                OverlayViewController.createOverlay(self, morphiiO: morphii, area: MorphiiAreas.keyboardSearch)
+                OverlayViewController.createOverlay(self, morphiiO: morphii, area: MorphiiAreas.containerSearch)
                 return
             }
             if isFavorite {
-                ModifiedMorphiiOverlayViewController.createModifiedMorphiiOverlay(self, morphiiO: morphii, area: MorphiiAreas.keyboardSearch)
+                ModifiedMorphiiOverlayViewController.createModifiedMorphiiOverlay(self, morphiiO: morphii, area: MorphiiAreas.containerSearch)
             }else {
-                OverlayViewController.createOverlay(self, morphiiO: morphii, area: MorphiiAreas.keyboardSearch)
+                OverlayViewController.createOverlay(self, morphiiO: morphii, area: MorphiiAreas.containerSearch)
             }
         }else if indexPath.section == 2, let cell = tableView.cellForRowAtIndexPath(indexPath) as? MorphiiTableViewCell, let name = cell.nameLabel.text, let nextView = storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.HomeViewController) as?  HomeViewController {
             nextView.collectionO = name

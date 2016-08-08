@@ -16,7 +16,7 @@ class Config: NSObject {
     var MORPHII_API_ACCOUNT_ID = ""
     var MORPHII_API_USER_NAME = ""
     var MORPHII_API_PASSWORD = ""
-    var appStoreUrl = "https://itunes.apple.com/us/app/morphii-keyboard/id1141006817?ls=1&mt=8"
+    var appStoreUrl = "http://apple.co/2aZwuIx"
     var AWS_APP_ID = ""
     var AWS_POOL_ID = ""
 

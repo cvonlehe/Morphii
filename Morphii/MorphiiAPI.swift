@@ -22,7 +22,7 @@ class MorphiiAPI {
     static let APPVERSIONURL = "\(Config.getCurrentConfig().MORPHII_API_BASE_URL)/admin/v1/mobileApp/kb?type=ios"
     private static var awsEventClient:AWSMobileAnalyticsEventClient?
    static var currentLocation:CLLocation?
-
+    static var keyboardActive = false
 
     class func fetchNewMorphiis(completion: (morphiisArray: [ Morphii ], success:Bool) -> Void ) -> Void {
         if alreadyCheckedForMorphiisToday() {
@@ -62,31 +62,51 @@ class MorphiiAPI {
     }
    
    private class func sendEvent (eventClient:AWSMobileAnalyticsEventClient, event:AWSMobileAnalyticsEvent) {
-      MethodHelper.getCurrentLocaiton { (locationO) in
-         if let location = locationO {
-
-            event.addMetric(location.coordinate.latitude, forKey: AWSAttributes.lat)
-            event.addMetric(location.coordinate.longitude, forKey: AWSAttributes.lng)
-         }
+    if !keyboardActive {
+        MethodHelper.getCurrentLocaiton { (locationO) in
+            print("sendEventAfterLocation")
+            if let location = locationO {
+                
+                event.addMetric(location.coordinate.latitude, forKey: AWSAttributes.lat)
+                event.addMetric(location.coordinate.longitude, forKey: AWSAttributes.lng)
+            }
+            let timeZone = NSTimeZone.localTimeZone().name
+            event.addAttribute(timeZone, forKey: AWSAttributes.timeZone)
+            print("TIMEZONE:",timeZone)
+            if let deviceId = UIDevice.currentDevice().identifierForVendor?.UUIDString {
+                print("UDID:",deviceId)
+                event.addAttribute(deviceId, forKey: AWSAttributes.deviceId)
+            }else {
+                event.addAttribute("unavailable", forKey: AWSAttributes.deviceId)
+            }
+            eventClient.recordEvent(event)
+            eventClient.submitEvents()
+        }
+    }else {
+        if NSUserDefaults.standardUserDefaults().doubleForKey(NSUserDefaultKeys.latitude) != 0 && NSUserDefaults.standardUserDefaults().doubleForKey(NSUserDefaultKeys.longitude) != 0 {
+            
+            event.addMetric(NSUserDefaults.standardUserDefaults().doubleForKey(NSUserDefaultKeys.latitude), forKey: AWSAttributes.lat)
+            event.addMetric(NSUserDefaults.standardUserDefaults().doubleForKey(NSUserDefaultKeys.longitude), forKey: AWSAttributes.lng)
+        }
         let timeZone = NSTimeZone.localTimeZone().name
         event.addAttribute(timeZone, forKey: AWSAttributes.timeZone)
         print("TIMEZONE:",timeZone)
-         if let deviceId = UIDevice.currentDevice().identifierForVendor?.UUIDString {
+        if let deviceId = UIDevice.currentDevice().identifierForVendor?.UUIDString {
             print("UDID:",deviceId)
             event.addAttribute(deviceId, forKey: AWSAttributes.deviceId)
-         }else {
+        }else {
             event.addAttribute("unavailable", forKey: AWSAttributes.deviceId)
         }
-         eventClient.recordEvent(event)
-         eventClient.submitEvents()
-      }
+        eventClient.recordEvent(event)
+        eventClient.submitEvents()
+    }
 
    }
    
    
     class func getCorrectedIntensity (intensity:NSNumber) -> NSNumber {
         var newIntensity = NSNumber(int: 0)
-        if intensity.intValue < 0 {
+        if intensity.intValue <= 0 {
             newIntensity = NSNumber(int: 0)
         }else if intensity.intValue > 100 {
             newIntensity = NSNumber(int: 100)
@@ -121,8 +141,10 @@ class MorphiiAPI {
         if area != MorphiiAreas.containerHome && area != MorphiiAreas.keyboardHome && area != MorphiiAreas.containerTrending {
             event.addMetric(getCorrectedIntensity(intensity), forKey: AWSAttributes.intensity)
             print("SAVEDINTENSITY - 1:",getCorrectedIntensity(intensity))
-            if let tags = morphii.tags {
-                event.addAttribute(tags.componentsJoinedByString(", "), forKey: AWSAttributes.userProvidedTags)
+            if let tags = morphii.tags, let isFavroite = morphii.isFavorite?.boolValue {
+                if isFavroite {
+                    event.addAttribute(tags.componentsJoinedByString(", "), forKey: AWSAttributes.userProvidedTags)
+                }
             }
         }else {
             print("SAVEDINTENSITY - 2:",0.5)
@@ -154,8 +176,10 @@ class MorphiiAPI {
             event.addAttribute(a, forKey: AWSAttributes.area)
         }
         if area != MorphiiAreas.containerHome && area != MorphiiAreas.keyboardHome && area != MorphiiAreas.containerTrending {
-            if let tags = morphii.tags {
-                event.addAttribute(tags.componentsJoinedByString(", "), forKey: AWSAttributes.userProvidedTags)
+            if let tags = morphii.tags, let isFavroite = morphii.isFavorite?.boolValue {
+                if isFavroite {
+                    event.addAttribute(tags.componentsJoinedByString(", "), forKey: AWSAttributes.userProvidedTags)
+                }
             }
         }
         print("INTENSITYCHANGE:",getCorrectedIntensity(beginIntensity))
@@ -167,7 +191,7 @@ class MorphiiAPI {
 
     }
     
-    class func sendMorphiiFavoriteSavedToAWS (morphii:Morphii, intensity:NSNumber, area:String?, name:String, tags:[String]) {
+    class func sendMorphiiFavoriteSavedToAWS (morphii:Morphii, intensity:NSNumber, area:String?, name:String, originalName:String?, tags:[String]) {
         guard let eventClient = awsEventClient else {return}
         let event = eventClient.createEventWithEventType(AWSEvents.MorphiiFavoriteSave)
         guard event != nil else {return}
@@ -178,10 +202,12 @@ class MorphiiAPI {
             event.addAttribute(id, forKey: AWSAttributes.id)
         }
         
-        if let originalName = morphii.originalName {
+        if let originalName = originalName {
+            print("sendMorphiiFavoriteSavedToAWS1")
             event.addAttribute(originalName, forKey: AWSAttributes.name)
             event.addAttribute(name, forKey: AWSAttributes.userProvidedName)
         }else {
+            print("sendMorphiiFavoriteSavedToAWS2")
             event.addAttribute(name, forKey: AWSAttributes.name)
         }
         if let a = area {
@@ -388,8 +414,12 @@ class MorphiiAPI {
     }
     
    class func sendFavoriteData (morphiiO:Morphii?, favoriteNameO:String?, emoodl:Double, tags:[String]) {
-        guard let favoriteName = favoriteNameO, let morphii = morphiiO, let deviceId = UIDevice.currentDevice().identifierForVendor?.UUIDString, let morphiiId = morphii.id, let morphiiName = morphii.name, let intensity = morphii.emoodl?.doubleValue else {return}
+        guard let favoriteName = favoriteNameO, let morphii = morphiiO, let deviceId = UIDevice.currentDevice().identifierForVendor?.UUIDString, var morphiiId = morphii.id, var morphiiName = morphii.name, let intensity = morphii.emoodl?.doubleValue else {return}
         let accountIdString = Config.getCurrentConfig().MORPHII_API_ACCOUNT_ID.stringByReplacingOccurrencesOfString(" ", withString: "")
+    if let id = morphii.originalId, let name = morphii.originalName {
+        morphiiName = name
+        morphiiId = id
+    }
 //        var index = 0
 //        var characters:[String] = []
 //        for character in accountIdString.characters {

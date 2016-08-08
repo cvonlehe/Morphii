@@ -42,6 +42,8 @@ class NSUserDefaultKeys {
     static let shouldNotAddURLToMessages = "shouldNotAddURLToMessages"
     static let lastDate = "lastDate"
     static let token = "token"
+    static let latitude = "latitude"
+    static let longitude = "longitude"
 }
 
 class URLs {
@@ -94,7 +96,7 @@ class MorphiiAreas {
     static let keyboardHome = "keyboard-home"
     static let keyboardRecent = "keyboard-recent"
     static let keyboardFavorites = "keyboard-favorites"
-    static let keyboardSearch = "keyboard-search"
+    static let containerSearch = "container-search"
 }
 
 class ProfileChanges {

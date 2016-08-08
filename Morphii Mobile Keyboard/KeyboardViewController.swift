@@ -53,6 +53,7 @@ class KeyboardViewController: UIInputViewController {
 
     override func loadView() {
         super.loadView()
+        MorphiiAPI.keyboardActive = true
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: kSmallLowercase)
 
         KeyboardViewController.sViewController = self
@@ -1140,8 +1141,8 @@ extension KeyboardViewController:UITextFieldDelegate {
                 area = "Other"
                 break
             }
-            
-            MorphiiAPI.sendMorphiiFavoriteSavedToAWS(favoriteView.morphiiView.morphii, intensity: favoriteView.morphiiView.emoodl, area: area, name: favoriteView.nameTextField.text!, tags: tags)
+            print("MorphiiAPI.send")
+            MorphiiAPI.sendMorphiiFavoriteSavedToAWS(favoriteView.morphiiView.morphii, intensity: favoriteView.morphiiView.emoodl, area: area, name: favoriteView.nameTextField.text!, originalName: favoriteView.morphiiView.morphii.originalName, tags: tags)
         }
         return true
     }

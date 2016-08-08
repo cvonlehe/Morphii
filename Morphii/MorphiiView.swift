@@ -398,6 +398,11 @@ class MorphiiView: UIView, MorphiiProtocol {
                 self.completion = completion
                 let pbData:NSData = UIImagePNGRepresentation(self.getMorphiiImage())!
                 if let image = UIImage(data: pbData) {
+                    var name = ""
+                    if let n = self.morphii.name {
+                        name = n
+                    }
+                    MorphiiAPI.sendMorphiiSendToAWS(self.morphii, intensity: self.emoodl, area: self.area, name: name, share: "UIActivityTypeSaveToCameraRoll")
                     UIImageWriteToSavedPhotosAlbum(image, self, #selector(MorphiiView.image(_:didFinishSavingWithError:contextInfo:)), nil)
                 }
 

@@ -90,12 +90,18 @@ class MethodHelper {
    
    class func getCurrentLocaiton (completion:(locationO:CLLocation?)->Void) {
       if let location = MorphiiAPI.currentLocation {
+        NSUserDefaults.standardUserDefaults().setDouble(location.coordinate.latitude, forKey: NSUserDefaultKeys.latitude)
+        NSUserDefaults.standardUserDefaults().setDouble(location.coordinate.longitude, forKey: NSUserDefaultKeys.longitude)
+        NSUserDefaults.standardUserDefaults().synchronize()
          completion(locationO: location)
       }else {
          PFGeoPoint.geoPointForCurrentLocationInBackground({ (geoPointO, error) -> Void in
             if let geoPoint = geoPointO {
                let location = CLLocation(latitude: geoPoint.latitude, longitude: geoPoint.longitude)
                MorphiiAPI.currentLocation = location
+                NSUserDefaults.standardUserDefaults().setDouble(geoPoint.latitude, forKey: NSUserDefaultKeys.latitude)
+                NSUserDefaults.standardUserDefaults().setDouble(geoPoint.longitude, forKey: NSUserDefaultKeys.longitude)
+                NSUserDefaults.standardUserDefaults().synchronize()
             }
             completion(locationO: MorphiiAPI.currentLocation)
             

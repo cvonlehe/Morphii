@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         displayMainView()
         MorphiiAPI.login()
         Config.getCurrentConfig()
-        
+        MorphiiAPI.keyboardActive = false
 
         return true
     }

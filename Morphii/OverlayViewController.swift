@@ -164,7 +164,7 @@ extension OverlayViewController {
             MethodHelper.showSuccessErrorHUD(true, message: "Saved to Favorites", inView: self.view)
             MorphiiAPI.sendFavoriteData(morphiiO, favoriteNameO: favoriteNameTextField.text, emoodl: favoriteMorphiiView!.morphiiView.emoodl, tags: tags)
             print("MORPHIIS_INTENSITY:",morphii.emoodl!.doubleValue)
-            MorphiiAPI.sendMorphiiFavoriteSavedToAWS(morphiiO!, intensity: morphii.emoodl!.doubleValue, area: self.area, name: favoriteNameTextField.text!, tags: tags)
+            MorphiiAPI.sendMorphiiFavoriteSavedToAWS(morphiiO!, intensity: morphii.emoodl!.doubleValue, area: self.area, name: favoriteNameTextField.text!, originalName: morphiiO!.name, tags: tags)
         }else {
             MethodHelper.showAlert("Error", message: "There was an error saving this morphii. Please try again")
         }
