@@ -24,7 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         MorphiiAPI.login()
         Config.getCurrentConfig()
         MorphiiAPI.keyboardActive = false
-
+        MorphiiAPI.getUserDefaults().setObject("Bar", forKey: "Foo")
+        MorphiiAPI.getUserDefaults().synchronize()
         return true
     }
     

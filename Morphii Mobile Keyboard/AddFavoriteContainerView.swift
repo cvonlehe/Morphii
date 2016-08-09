@@ -18,14 +18,16 @@ class AddFavoriteContainerView: ExtraView {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var morphiiView: MorphiiView!
     var delegate:AddFavoriteContainerViewDelegate!
+
     
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
         self.loadNib()
          addPaddingToTextField(nameTextField)
          addPaddingToTextField(tagsTextField)
-         
+
     }
+    
    
    func addPaddingToTextField (textField:UITextField) {
       let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 20))
@@ -76,7 +78,6 @@ class AddFavoriteContainerView: ExtraView {
         self.delegate = delegate
         self.morphiiView.setUpMorphii(morphiiView.morphii, emoodl: morphiiView.emoodl)
         morphiiView.userInteractionEnabled = false
-        nameTextField.becomeFirstResponder()
     }
 
     @IBAction func closeButtonPressed(sender: UIButton) {

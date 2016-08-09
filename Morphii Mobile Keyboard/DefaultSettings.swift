@@ -127,7 +127,7 @@ class DefaultSettings: ExtraView, UITableViewDataSource, UITableViewDelegate {
                 cell.sw.addTarget(self, action: Selector("toggleSetting:"), forControlEvents: UIControlEvents.ValueChanged)
             }
             
-            cell.sw.on = NSUserDefaults.standardUserDefaults().boolForKey(key)
+            cell.sw.on = MorphiiAPI.getUserDefaults().boolForKey(key)
             cell.label.text = self.settingsNames[key]
             cell.longLabel.text = self.settingsNotes[key]
             
@@ -185,7 +185,7 @@ class DefaultSettings: ExtraView, UITableViewDataSource, UITableViewDelegate {
         if let cell = sender.superview as? UITableViewCell {
             if let indexPath = self.tableView?.indexPathForCell(cell) {
                 let key = self.settingsList[indexPath.section].1[indexPath.row]
-                NSUserDefaults.standardUserDefaults().setBool(sender.on, forKey: key)
+                MorphiiAPI.getUserDefaults().setBool(sender.on, forKey: key)
             }
         }
     }

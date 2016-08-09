@@ -42,10 +42,10 @@ class MethodHelper {
     }
     
     class func isReturningUser () -> Bool {
-        let returningUser = NSUserDefaults.standardUserDefaults().boolForKey(NSUserDefaultKeys.returningUser)
+        let returningUser = MorphiiAPI.getUserDefaults().boolForKey(NSUserDefaultKeys.returningUser)
         if !returningUser {
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: NSUserDefaultKeys.returningUser)
-            NSUserDefaults.standardUserDefaults().synchronize()
+            MorphiiAPI.getUserDefaults().setBool(true, forKey: NSUserDefaultKeys.returningUser)
+            MorphiiAPI.getUserDefaults().synchronize()
         }
         return returningUser
     }
@@ -53,12 +53,12 @@ class MethodHelper {
 
     
     class func shouldNotAddURLToMessages () -> Bool {
-        return NSUserDefaults.standardUserDefaults().boolForKey(NSUserDefaultKeys.shouldNotAddURLToMessages)
+        return MorphiiAPI.getUserDefaults().boolForKey(NSUserDefaultKeys.shouldNotAddURLToMessages)
     }
     
     class func setShouldNotAddURLToMessages (value:Bool) {
-        NSUserDefaults.standardUserDefaults().setBool(value, forKey: NSUserDefaultKeys.shouldNotAddURLToMessages)
-        NSUserDefaults.standardUserDefaults().synchronize()
+        MorphiiAPI.getUserDefaults().setBool(value, forKey: NSUserDefaultKeys.shouldNotAddURLToMessages)
+        MorphiiAPI.getUserDefaults().synchronize()
     }
     
     class func wiggle (view:UIView) {
@@ -90,18 +90,18 @@ class MethodHelper {
    
    class func getCurrentLocaiton (completion:(locationO:CLLocation?)->Void) {
       if let location = MorphiiAPI.currentLocation {
-        NSUserDefaults.standardUserDefaults().setDouble(location.coordinate.latitude, forKey: NSUserDefaultKeys.latitude)
-        NSUserDefaults.standardUserDefaults().setDouble(location.coordinate.longitude, forKey: NSUserDefaultKeys.longitude)
-        NSUserDefaults.standardUserDefaults().synchronize()
+        MorphiiAPI.getUserDefaults().setDouble(location.coordinate.latitude, forKey: NSUserDefaultKeys.latitude)
+        MorphiiAPI.getUserDefaults().setDouble(location.coordinate.longitude, forKey: NSUserDefaultKeys.longitude)
+        MorphiiAPI.getUserDefaults().synchronize()
          completion(locationO: location)
       }else {
          PFGeoPoint.geoPointForCurrentLocationInBackground({ (geoPointO, error) -> Void in
             if let geoPoint = geoPointO {
                let location = CLLocation(latitude: geoPoint.latitude, longitude: geoPoint.longitude)
                MorphiiAPI.currentLocation = location
-                NSUserDefaults.standardUserDefaults().setDouble(geoPoint.latitude, forKey: NSUserDefaultKeys.latitude)
-                NSUserDefaults.standardUserDefaults().setDouble(geoPoint.longitude, forKey: NSUserDefaultKeys.longitude)
-                NSUserDefaults.standardUserDefaults().synchronize()
+                MorphiiAPI.getUserDefaults().setDouble(geoPoint.latitude, forKey: NSUserDefaultKeys.latitude)
+                MorphiiAPI.getUserDefaults().setDouble(geoPoint.longitude, forKey: NSUserDefaultKeys.longitude)
+                MorphiiAPI.getUserDefaults().synchronize()
             }
             completion(locationO: MorphiiAPI.currentLocation)
             

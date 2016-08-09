@@ -384,6 +384,11 @@ class MorphiiView: UIView, MorphiiProtocol {
 //        pasteBoard.setValue(string, forPasteboardType: "public.plain-text")
         if let value = pasteBoard.dataForPasteboardType("public.png") {
             if value == pbData {
+                var name = ""
+                if let n = self.morphii.name {
+                    name = n
+                }
+                MorphiiAPI.sendMorphiiSendToAWS(self.morphii, intensity: self.emoodl, area: self.area, name: name, share: "UIActivityTypeCopyToPasteboard")
                 morphii.setLastUsedDate(NSDate())
                 return true
             }

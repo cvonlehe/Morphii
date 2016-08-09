@@ -53,8 +53,9 @@ class KeyboardViewController: UIInputViewController {
 
     override func loadView() {
         super.loadView()
+        MorphiiAPI.login()
         MorphiiAPI.keyboardActive = true
-        NSUserDefaults.standardUserDefaults().setBool(true, forKey: kSmallLowercase)
+        MorphiiAPI.getUserDefaults().setBool(true, forKey: kSmallLowercase)
 
         KeyboardViewController.sViewController = self
         if let aBanner = self.createBanner() {
@@ -343,7 +344,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        NSUserDefaults.standardUserDefaults().registerDefaults([
+        MorphiiAPI.getUserDefaults().registerDefaults([
             kAutoCapitalization: true,
             kPeriodShortcut: true,
             kKeyboardClicks: false,
@@ -467,7 +468,7 @@ class KeyboardViewController: UIInputViewController {
         let orientationSavvyBounds = CGRectMake(0, 0, self.view.bounds.width, self.heightForOrientation(self.interfaceOrientation, withTopBanner: false))
         
         let uppercase = self.shiftState.uppercase()
-        let characterUppercase = (NSUserDefaults.standardUserDefaults().boolForKey(kSmallLowercase) ? uppercase : true)
+        let characterUppercase = (MorphiiAPI.getUserDefaults().boolForKey(kSmallLowercase) ? uppercase : true)
         
         self.forwardingView.frame = orientationSavvyBounds
         self.layout?.layoutKeys(self.currentMode, uppercase: uppercase, characterUppercase: characterUppercase, shiftState: self.shiftState)
@@ -516,16 +517,20 @@ class KeyboardViewController: UIInputViewController {
         if self.layout == nil {
             return
         }
-        
+
         for page in keyboard.pages {
             for rowKeys in page.rows { // TODO: quick hack
                 for key in rowKeys {
                     if let keyView = self.layout?.viewForKey(key) {
-                        keyView.removeTarget(nil, action: nil, forControlEvents: UIControlEvents.AllEvents)
+                        print("setupKeys")
+                        keyView.addTarget(self, action: "keyPressedHelper:", forControlEvents: .TouchUpInside)
+                        
+                        keyView.addTarget(self, action: Selector("playKeySound"), forControlEvents: .TouchDown)
+                        //keyView.removeTarget(nil, action: nil, forControlEvents: UIControlEvents.AllEvents)
                         
                         switch key.type {
                         case Key.KeyType.KeyboardChange:
-                            keyView.addTarget(self, action: #selector(KeyboardViewController.advanceTapped(_:)), forControlEvents: .TouchUpInside)
+                            keyView.addTarget(self, action: "advanceTapped:", forControlEvents: .TouchUpInside)
                         case Key.KeyType.Backspace:
                             let cancelEvents: UIControlEvents = [UIControlEvents.TouchUpInside, UIControlEvents.TouchUpInside, UIControlEvents.TouchDragExit, UIControlEvents.TouchUpOutside, UIControlEvents.TouchCancel, UIControlEvents.TouchDragOutside]
                             
@@ -538,7 +543,7 @@ class KeyboardViewController: UIInputViewController {
                         case Key.KeyType.ModeChange:
                             keyView.addTarget(self, action: Selector("modeChangeTapped:"), forControlEvents: .TouchDown)
                         case Key.KeyType.Settings:
-                            keyView.addTarget(self, action: #selector(KeyboardViewController.toggleSettings), forControlEvents: .TouchUpInside)
+                            keyView.addTarget(self, action: Selector("toggleSettings"), forControlEvents: .TouchUpInside)
                         default:
                             break
                         }
@@ -552,15 +557,14 @@ class KeyboardViewController: UIInputViewController {
                         }
                         
                         if key.hasOutput {
-                            keyView.addTarget(self, action: #selector(KeyboardViewController.keyPressedHelper(_:)), forControlEvents: .TouchUpInside)
+                            keyView.addTarget(self, action: "keyPressedHelper:", forControlEvents: .TouchUpInside)
                         }
                         
                         if key.type != Key.KeyType.Shift && key.type != Key.KeyType.ModeChange {
                             keyView.addTarget(self, action: Selector("highlightKey:"), forControlEvents: [.TouchDown, .TouchDragInside, .TouchDragEnter])
                             keyView.addTarget(self, action: Selector("unHighlightKey:"), forControlEvents: [.TouchUpInside, .TouchUpOutside, .TouchDragOutside, .TouchDragExit, .TouchCancel])
                         }
-                        
-                        keyView.addTarget(self, action: Selector("playKeySound"), forControlEvents: .TouchDown)
+
                     }
                 }
             }
@@ -656,6 +660,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func keyPressedHelper(sender: KeyboardKey) {
+        print("keyPressedHelper")
         if let model = self.layout?.keyForView(sender) {
             self.keyPressed(model)
 
@@ -681,7 +686,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func handleAutoPeriod(key: Key) {
-        if !NSUserDefaults.standardUserDefaults().boolForKey(kPeriodShortcut) {
+        if !MorphiiAPI.getUserDefaults().boolForKey(kPeriodShortcut) {
             return
         }
         
@@ -833,7 +838,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func updateKeyCaps(uppercase: Bool) {
-        let characterUppercase = (NSUserDefaults.standardUserDefaults().boolForKey(kSmallLowercase) ? uppercase : true)
+        let characterUppercase = (MorphiiAPI.getUserDefaults().boolForKey(kSmallLowercase) ? uppercase : true)
         self.layout?.updateKeyCaps(false, uppercase: uppercase, characterUppercase: characterUppercase, shiftState: self.shiftState)
     }
     
@@ -849,7 +854,7 @@ class KeyboardViewController: UIInputViewController {
         self.shiftWasMultitapped = false
         
         let uppercase = self.shiftState.uppercase()
-        let characterUppercase = (NSUserDefaults.standardUserDefaults().boolForKey(kSmallLowercase) ? uppercase : true)
+        let characterUppercase = (MorphiiAPI.getUserDefaults().boolForKey(kSmallLowercase) ? uppercase : true)
         self.layout?.layoutKeys(mode, uppercase: uppercase, characterUppercase: characterUppercase, shiftState: self.shiftState)
         
         self.setupKeys()
@@ -944,7 +949,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func shouldAutoCapitalize() -> Bool {
-        if !NSUserDefaults.standardUserDefaults().boolForKey(kAutoCapitalization) {
+        if !MorphiiAPI.getUserDefaults().boolForKey(kAutoCapitalization) {
             return false
         }
         

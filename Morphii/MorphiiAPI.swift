@@ -21,16 +21,16 @@ class MorphiiAPI {
     static let TRENDINGURL = "\(Config.getCurrentConfig().MORPHII_API_BASE_URL)/kbapp/v1/stats"
     static let APPVERSIONURL = "\(Config.getCurrentConfig().MORPHII_API_BASE_URL)/admin/v1/mobileApp/kb?type=ios"
     private static var awsEventClient:AWSMobileAnalyticsEventClient?
-   static var currentLocation:CLLocation?
+    static var currentLocation:CLLocation?
     static var keyboardActive = false
-
+    
     class func fetchNewMorphiis(completion: (morphiisArray: [ Morphii ], success:Bool) -> Void ) -> Void {
         if alreadyCheckedForMorphiisToday() {
             let morphiis = Morphii.fetchAllMorphiis()
             completion(morphiisArray: morphiis, success: true)
             return
         }
-        if let last = NSUserDefaults.standardUserDefaults().stringForKey(NSUserDefaultKeys.lastDate) {
+        if let last = MorphiiAPI.getUserDefaults().stringForKey(NSUserDefaultKeys.lastDate) {
             lastDate = last
         }
         guard let _ = NSURL(string: GETURL) else {
@@ -51,6 +51,10 @@ class MorphiiAPI {
         }
     }
     
+    class func getUserDefaults () -> NSUserDefaults {
+        return NSUserDefaults(suiteName: "group.morphii")!
+    }
+    
     
     class func setupAWS () {
         let analytics = AWSMobileAnalytics(forAppId: Config.getCurrentConfig().AWS_APP_ID, identityPoolId: Config.getCurrentConfig().AWS_POOL_ID)
@@ -60,15 +64,33 @@ class MorphiiAPI {
             }
         }
     }
-   
-   private class func sendEvent (eventClient:AWSMobileAnalyticsEventClient, event:AWSMobileAnalyticsEvent) {
-    if !keyboardActive {
-        MethodHelper.getCurrentLocaiton { (locationO) in
-            print("sendEventAfterLocation")
-            if let location = locationO {
+    
+    private class func sendEvent (eventClient:AWSMobileAnalyticsEventClient, event:AWSMobileAnalyticsEvent) {
+        if !keyboardActive {
+            MethodHelper.getCurrentLocaiton { (locationO) in
+                print("sendEventAfterLocation")
+                if let location = locationO {
+                    
+                    event.addMetric(location.coordinate.latitude, forKey: AWSAttributes.lat)
+                    event.addMetric(location.coordinate.longitude, forKey: AWSAttributes.lng)
+                }
+                let timeZone = NSTimeZone.localTimeZone().name
+                event.addAttribute(timeZone, forKey: AWSAttributes.timeZone)
+                print("TIMEZONE:",timeZone)
+                if let deviceId = UIDevice.currentDevice().identifierForVendor?.UUIDString {
+                    print("UDID:",deviceId)
+                    event.addAttribute(deviceId, forKey: AWSAttributes.deviceId)
+                }else {
+                    event.addAttribute("unavailable", forKey: AWSAttributes.deviceId)
+                }
+                eventClient.recordEvent(event)
+                eventClient.submitEvents()
+            }
+        }else {
+            if MorphiiAPI.getUserDefaults().doubleForKey(NSUserDefaultKeys.latitude) != 0 && MorphiiAPI.getUserDefaults().doubleForKey(NSUserDefaultKeys.longitude) != 0 {
                 
-                event.addMetric(location.coordinate.latitude, forKey: AWSAttributes.lat)
-                event.addMetric(location.coordinate.longitude, forKey: AWSAttributes.lng)
+                event.addMetric(MorphiiAPI.getUserDefaults().doubleForKey(NSUserDefaultKeys.latitude), forKey: AWSAttributes.lat)
+                event.addMetric(MorphiiAPI.getUserDefaults().doubleForKey(NSUserDefaultKeys.longitude), forKey: AWSAttributes.lng)
             }
             let timeZone = NSTimeZone.localTimeZone().name
             event.addAttribute(timeZone, forKey: AWSAttributes.timeZone)
@@ -82,28 +104,10 @@ class MorphiiAPI {
             eventClient.recordEvent(event)
             eventClient.submitEvents()
         }
-    }else {
-        if NSUserDefaults.standardUserDefaults().doubleForKey(NSUserDefaultKeys.latitude) != 0 && NSUserDefaults.standardUserDefaults().doubleForKey(NSUserDefaultKeys.longitude) != 0 {
-            
-            event.addMetric(NSUserDefaults.standardUserDefaults().doubleForKey(NSUserDefaultKeys.latitude), forKey: AWSAttributes.lat)
-            event.addMetric(NSUserDefaults.standardUserDefaults().doubleForKey(NSUserDefaultKeys.longitude), forKey: AWSAttributes.lng)
-        }
-        let timeZone = NSTimeZone.localTimeZone().name
-        event.addAttribute(timeZone, forKey: AWSAttributes.timeZone)
-        print("TIMEZONE:",timeZone)
-        if let deviceId = UIDevice.currentDevice().identifierForVendor?.UUIDString {
-            print("UDID:",deviceId)
-            event.addAttribute(deviceId, forKey: AWSAttributes.deviceId)
-        }else {
-            event.addAttribute("unavailable", forKey: AWSAttributes.deviceId)
-        }
-        eventClient.recordEvent(event)
-        eventClient.submitEvents()
+        
     }
-
-   }
-   
-   
+    
+    
     class func getCorrectedIntensity (intensity:NSNumber) -> NSNumber {
         var newIntensity = NSNumber(int: 0)
         if intensity.intValue <= 0 {
@@ -150,11 +154,11 @@ class MorphiiAPI {
             print("SAVEDINTENSITY - 2:",0.5)
             event.addMetric(0.5, forKey: AWSAttributes.intensity)
         }
-
+        
         event.addAttribute(area, forKey: AWSAttributes.area)
-         sendEvent(eventClient, event: event)
+        sendEvent(eventClient, event: event)
     }
-
+    
     class func sendIntensityChangeToAWS (morphii:Morphii, beginIntensity:NSNumber, endIntensity:NSNumber, area:String?) {
         guard let eventClient = awsEventClient else {return}
         let event = eventClient.createEventWithEventType(AWSEvents.MorphiiChangeIntensity)
@@ -184,18 +188,18 @@ class MorphiiAPI {
         }
         print("INTENSITYCHANGE:",getCorrectedIntensity(beginIntensity))
         print("INTENSITYCHANGE:",getCorrectedIntensity(endIntensity))
-
+        
         event.addMetric(getCorrectedIntensity(beginIntensity), forKey: AWSAttributes.begin)
         event.addMetric(getCorrectedIntensity(endIntensity), forKey: AWSAttributes.end)
-      sendEvent(eventClient, event: event)
-
+        sendEvent(eventClient, event: event)
+        
     }
     
     class func sendMorphiiFavoriteSavedToAWS (morphii:Morphii, intensity:NSNumber, area:String?, name:String, originalName:String?, tags:[String]) {
         guard let eventClient = awsEventClient else {return}
         let event = eventClient.createEventWithEventType(AWSEvents.MorphiiFavoriteSave)
         guard event != nil else {return}
-        guard let id = morphii.id, let name = morphii.name else {return}
+        guard let id = morphii.id else {return}
         if let originalId = morphii.originalId {
             event.addAttribute(originalId, forKey: AWSAttributes.id)
         }else {
@@ -203,7 +207,7 @@ class MorphiiAPI {
         }
         
         if let originalName = originalName {
-            print("sendMorphiiFavoriteSavedToAWS1")
+            print("sendMorphiiFavoriteSavedToAWS1:",originalName,name)
             event.addAttribute(originalName, forKey: AWSAttributes.name)
             event.addAttribute(name, forKey: AWSAttributes.userProvidedName)
         }else {
@@ -216,11 +220,12 @@ class MorphiiAPI {
         let tagString = tags.joinWithSeparator(", ")
         event.addAttribute(tagString, forKey: AWSAttributes.userProvidedTags)
         event.addMetric(getCorrectedIntensity(intensity), forKey: AWSAttributes.intensity)
-      sendEvent(eventClient, event: event)
-
+        sendEvent(eventClient, event: event)
+        
     }
     
     class func sendMorphiiSendToAWS (morphii:Morphii, intensity:NSNumber, area:String?, name:String, share:String) {
+        print("sendMorphiiSendToAWS")
         guard let eventClient = awsEventClient else {return}
         let event = eventClient.createEventWithEventType(AWSEvents.MorphiiShareSelect)
         guard event != nil else {return}
@@ -232,8 +237,8 @@ class MorphiiAPI {
             event.addAttribute(a, forKey: AWSAttributes.area)
         }
         event.addMetric(getCorrectedIntensity(intensity), forKey: AWSAttributes.intensity)
-      sendEvent(eventClient, event: event)
-
+        sendEvent(eventClient, event: event)
+        
     }
     
     class func sendUserProfileChangeToAWS (propertyName:String, begin:Bool, end:Bool) {
@@ -251,8 +256,8 @@ class MorphiiAPI {
         }
         event.addAttribute(beginString, forKey: AWSAttributes.begin)
         event.addAttribute(endString, forKey: AWSAttributes.end)
-      sendEvent(eventClient, event: event)
-
+        sendEvent(eventClient, event: event)
+        
     }
     
     class func sendUserProfileActionToAWS (actionName:String) {
@@ -260,8 +265,8 @@ class MorphiiAPI {
         let event = eventClient.createEventWithEventType(AWSEvents.UserProfileAction)
         guard event != nil else {return}
         event.addAttribute(actionName, forKey: AWSAttributes.name)
-         sendEvent(eventClient, event: event)
-
+        sendEvent(eventClient, event: event)
+        
     }
     
     class func syncAWS () {
@@ -287,13 +292,13 @@ class MorphiiAPI {
         static let userProvidedName = "user-provided-name"
         static let userProvidedTags = "user-provided-tags"
         static let share = "share"
-      static let lat = "lat"
-      static let lng = "lng"
-      static let deviceId = "deviceId"
-      static let timeZone = "timeZone"
+        static let lat = "lat"
+        static let lng = "lng"
+        static let deviceId = "deviceId"
+        static let timeZone = "timeZone"
     }
     
-
+    
     
     class func convertJSONToMorphiis (json:NSData?) -> [Morphii] {
         guard let JSON = json else {return []}
@@ -314,12 +319,12 @@ class MorphiiAPI {
     private class func setLastDateToCurrentDate () {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        NSUserDefaults.standardUserDefaults().setObject(dateFormatter.stringFromDate(NSDate()), forKey: NSUserDefaultKeys.lastDate)
-        NSUserDefaults.standardUserDefaults().synchronize()
+        MorphiiAPI.getUserDefaults().setObject(dateFormatter.stringFromDate(NSDate()), forKey: NSUserDefaultKeys.lastDate)
+        MorphiiAPI.getUserDefaults().synchronize()
     }
     
     private class func alreadyCheckedForMorphiisToday () -> Bool {
-        guard let last = NSUserDefaults.standardUserDefaults().stringForKey(NSUserDefaultKeys.lastDate) else {
+        guard let last = MorphiiAPI.getUserDefaults().stringForKey(NSUserDefaultKeys.lastDate) else {
             return false
         }
         let dateFormatter = NSDateFormatter()
@@ -373,7 +378,7 @@ class MorphiiAPI {
     }
     
     class func getToken () -> String {
-        guard let token = NSUserDefaults.standardUserDefaults().stringForKey(NSUserDefaultKeys.token) else {return ""}
+        guard let token = MorphiiAPI.getUserDefaults().stringForKey(NSUserDefaultKeys.token) else {return ""}
         return token
     }
     
@@ -401,9 +406,9 @@ class MorphiiAPI {
                 print("login1:",JSONDict)
                 if let token = JSONDict.objectForKey("token") as? String {
                     print("login2")
-                    NSUserDefaults.standardUserDefaults().setObject(token, forKey: NSUserDefaultKeys.token)
-                    NSUserDefaults.standardUserDefaults().synchronize()
-
+                    MorphiiAPI.getUserDefaults().setObject(token, forKey: NSUserDefaultKeys.token)
+                    MorphiiAPI.getUserDefaults().synchronize()
+                    
                 }else {
                     print("login3")
                 }
@@ -413,72 +418,91 @@ class MorphiiAPI {
         }
     }
     
-   class func sendFavoriteData (morphiiO:Morphii?, favoriteNameO:String?, emoodl:Double, tags:[String]) {
-        guard let favoriteName = favoriteNameO, let morphii = morphiiO, let deviceId = UIDevice.currentDevice().identifierForVendor?.UUIDString, var morphiiId = morphii.id, var morphiiName = morphii.name, let intensity = morphii.emoodl?.doubleValue else {return}
-        let accountIdString = Config.getCurrentConfig().MORPHII_API_ACCOUNT_ID.stringByReplacingOccurrencesOfString(" ", withString: "")
-    if let id = morphii.originalId, let name = morphii.originalName {
-        morphiiName = name
-        morphiiId = id
+    class func sendFavoriteData (morphiiO:Morphii?, favoriteNameO:String?, emoodl:Double, tags:[String]) {
+
+        if keyboardActive {
+            sendFavoritePOST(nil, morphiiO: morphiiO, favoriteNameO: favoriteNameO, emoodl: emoodl, tags: tags)
+        }else {
+            MethodHelper.getCurrentLocaiton { (locationO) in
+                sendFavoritePOST(locationO, morphiiO: morphiiO, favoriteNameO: favoriteNameO, emoodl: emoodl, tags: tags)
+            }
+        }
+
     }
-//        var index = 0
-//        var characters:[String] = []
-//        for character in accountIdString.characters {
-//            if index != 4{
-//                characters.append("\(character)")
-//            }
-//            index += 1
-//        }
-//        let accountId = characters.joinWithSeparator("")
-    let accountId = accountIdString
+    
+    private class func sendFavoritePOST (locationO:CLLocation?, morphiiO:Morphii?, favoriteNameO:String?, emoodl:Double, tags:[String]) {
+        print("sendFavoriteData1")
+        guard let favoriteName = favoriteNameO, let morphii = morphiiO, let deviceId = UIDevice.currentDevice().identifierForVendor?.UUIDString, var morphiiId = morphii.id, var morphiiName = morphii.name, let intensity = morphii.emoodl?.doubleValue else {return}
+        print("sendFavoriteData2")
+        let accountIdString = Config.getCurrentConfig().MORPHII_API_ACCOUNT_ID.stringByReplacingOccurrencesOfString(" ", withString: "")
+        if let id = morphii.originalId, let name = morphii.originalName {
+            morphiiName = name
+            morphiiId = id
+        }
+        //        var index = 0
+        //        var characters:[String] = []
+        //        for character in accountIdString.characters {
+        //            if index != 4{
+        //                characters.append("\(character)")
+        //            }
+        //            index += 1
+        //        }
+        //        let accountId = characters.joinWithSeparator("")
+        let accountId = accountIdString
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.SSSZ"
         let dateString = dateFormatter.stringFromDate(NSDate())
         dateFormatter.dateFormat = "Z"
         let timeZoneOffsetString = dateFormatter.stringFromDate(NSDate())
-      MethodHelper.getCurrentLocaiton { (locationO) in
-         print("LOCATION:",locationO)
-         var lat:Double = 0
-         var lng:Double = 0
-         if let location = locationO {
+        var lat:Double = 0
+        var lng:Double = 0
+        if let location = locationO {
             lat = location.coordinate.latitude
             lng = location.coordinate.longitude
-         }
-         let make = getMake()
+        }else {
+            if MorphiiAPI.getUserDefaults().doubleForKey(NSUserDefaultKeys.latitude) != 0 && MorphiiAPI.getUserDefaults().doubleForKey(NSUserDefaultKeys.longitude) != 0 {
+                
+                lat = MorphiiAPI.getUserDefaults().doubleForKey(NSUserDefaultKeys.latitude)
+                lng = MorphiiAPI.getUserDefaults().doubleForKey(NSUserDefaultKeys.longitude)
+            }
+        }
+        let make = getMake()
         let model = "\(Device())"
-         let parameters = ["account":
+        let parameters = ["account":
             ["id":accountId],
-            "device":
-               ["id":deviceId,
-                  "manufacturer":"Apple",
-                  "make":make,
-                  "model":model,
-                  "firmware":Device().systemVersion],
-            "client":[
-               "lat":lat,
-               "lng":lng],
-            "timestamp":
-               ["utc":dateString,
-                  "offset":timeZoneOffsetString],
-            "morphii":
-               ["id":morphiiId,
-                  "name":morphiiName,
-                "intensity":getCorrectedIntensity(NSNumber(double:emoodl))],
-            "favorite":
-               ["name":favoriteName,
-                  "tags":tags]
-         ]
-         print("PARAMETERS:",parameters)
-         print("FAVORITE - devicedId:",deviceId,"favoriteName:",favoriteName,"morphiiId:",morphiiId,"morphiiName:",morphiiName,"intensity:",intensity/100.0,"dateString:",dateString,"timeZoneOffset:",timeZoneOffsetString,"AccountId:",accountId)
-         
-         do {
+                          "device":
+                            ["id":deviceId,
+                                "manufacturer":"Apple",
+                                "make":make,
+                                "model":model,
+                                "firmware":Device().systemVersion],
+                          "client":[
+                            "lat":lat,
+                            "lng":lng],
+                          "timestamp":
+                            ["utc":dateString,
+                                "offset":timeZoneOffsetString],
+                          "morphii":
+                            ["id":morphiiId,
+                                "name":morphiiName,
+                                "intensity":getCorrectedIntensity(NSNumber(double:emoodl))],
+                          "favorite":
+                            ["name":favoriteName,
+                                "tags":tags]
+        ]
+        print("PARAMETERS:",parameters)
+        print("FAVORITE - devicedId:",deviceId,"favoriteName:",favoriteName,"morphiiId:",morphiiId,"morphiiName:",morphiiName,"intensity:",intensity/100.0,"dateString:",dateString,"timeZoneOffset:",timeZoneOffsetString,"AccountId:",accountId)
+        
+        do {
+            print("sendFavoriteData3")
             
             let data = try NSJSONSerialization.dataWithJSONObject(parameters, options: NSJSONWritingOptions.init(rawValue: 0))
             let asciiCode = ("-" as NSString).characterAtIndex(0)
-            print("sendFavoriteData1:",asciiCode)
+            print("sendFavoriteData4")
             guard let string = NSString(data: data, encoding: NSUTF8StringEncoding) else {return}
-            print("sendFavoriteData2")
+            print("sendFavoriteData5")
             guard let jsonData = string.dataUsingEncoding(NSUTF8StringEncoding) else {return}
-            print("sendFavoriteData3")
+            print("sendFavoriteData6")
             // here "jsonData" is the dictionary encoded in JSON data
             let request = NSMutableURLRequest(URL: NSURL(string: FAVORITEURL)!)
             request.HTTPBody = jsonData
@@ -490,21 +514,25 @@ class MorphiiAPI {
             
             let queue:NSOperationQueue = NSOperationQueue()
             NSURLConnection.sendAsynchronousRequest(request, queue: queue, completionHandler: { (response, data, error) in
-               guard let d = data else {return}
-               var jsonDict:NSDictionary?
-               do {
-                  try jsonDict = NSJSONSerialization.JSONObjectWithData(d, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary
-                  print("JSONDICT:",jsonDict)
-                  
-               }catch {
-                  print("Handle \(error) here")
-               }
-               
+                print("sendFavoriteData7")
+                guard let d = data else {return}
+                print("sendFavoriteData8")
+                var jsonDict:NSDictionary?
+                do {
+                    print("sendFavoriteData9")
+                    try jsonDict = NSJSONSerialization.JSONObjectWithData(d, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary
+                    print("sendFavoriteData10")
+                    
+                    print("JSONDICT:",jsonDict)
+                    
+                }catch {
+                    print("Handle \(error) here")
+                }
+                
             })
-         } catch let error as NSError {
+        } catch let error as NSError {
             print(error)
-         }
-      }
+        }
     }
     
     class func getMake () -> String {
@@ -519,13 +547,13 @@ class MorphiiAPI {
         }
         return make
     }
-   
+    
     enum Headers {
         case GET
         case LOGIN
         case FAVORITES
     }
-   
+    
     class func getTrendingData (completion:(dictO:NSDictionary?)->Void) {
         let request = NSMutableURLRequest(URL: NSURL(string: TRENDINGURL)!)
         request.HTTPMethod = "GET"
@@ -556,7 +584,7 @@ class MorphiiAPI {
             return
         }
         print("checkIfAppIsUpdated2")
-
+        
         print("checkIfAppIsUpdated3")
         let request = NSMutableURLRequest(URL: NSURL(string: APPVERSIONURL)!)
         request.HTTPMethod = "GET"
@@ -586,7 +614,7 @@ class MorphiiAPI {
             }catch {
                 print("Handle \(error) here")
                 completion(updated: true)
-
+                
             }
         }
     }

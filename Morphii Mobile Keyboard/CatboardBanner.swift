@@ -43,7 +43,7 @@ class CatboardBanner: ExtraView {
     }
     
     func respondToSwitch() {
-        NSUserDefaults.standardUserDefaults().setBool(self.catSwitch.on, forKey: kCatTypeEnabled)
+        MorphiiAPI.getUserDefaults().setBool(self.catSwitch.on, forKey: kCatTypeEnabled)
         self.updateAppearance()
     }
     

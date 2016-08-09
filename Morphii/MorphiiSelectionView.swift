@@ -43,7 +43,6 @@ class MorphiiSelectionView: UIView {
     }
     
     func setNewMorphii (morphii:Morphii, emoodl:Double?, showName:Bool) {
-        print("setNewMorphii")
         var shouldShow = showName
         if let show = morphii.showName?.boolValue {
             shouldShow = show

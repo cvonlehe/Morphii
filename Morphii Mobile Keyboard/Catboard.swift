@@ -20,7 +20,7 @@ class Catboard: KeyboardViewController {
     let takeDebugScreenshot: Bool = false
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        NSUserDefaults.standardUserDefaults().registerDefaults([kCatTypeEnabled: false])
+        MorphiiAPI.getUserDefaults().registerDefaults([kCatTypeEnabled: false])
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
@@ -28,70 +28,70 @@ class Catboard: KeyboardViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func keyPressed(key: Key) {
-        let textDocumentProxy = self.textDocumentProxy
-        
-        let keyOutput = key.outputForCase(self.shiftState.uppercase())
-        
-        textDocumentProxy.insertText(keyOutput)
-        return
-        
-        if key.type == .Character || key.type == .SpecialCharacter {
-            if let context = textDocumentProxy.documentContextBeforeInput {
-                if context.characters.count < 2 {
-                    textDocumentProxy.insertText(keyOutput)
-                    return
-                }
-                
-                var index = context.endIndex
-                
-                index = index.predecessor()
-                if context[index] != " " {
-                    textDocumentProxy.insertText(keyOutput)
-                    return
-                }
-                
-                index = index.predecessor()
-                if context[index] == " " {
-                    textDocumentProxy.insertText(keyOutput)
-                    return
-                }
-
-                textDocumentProxy.insertText("\(randomCat())")
-                textDocumentProxy.insertText(" ")
-                textDocumentProxy.insertText(keyOutput)
-                return
-            }
-            else {
-                textDocumentProxy.insertText(keyOutput)
-                return
-            }
-        }
-        else {
-            textDocumentProxy.insertText(keyOutput)
-            return
-        }
-    }
+//    override func keyPressed(key: Key) {
+//        let textDocumentProxy = self.textDocumentProxy
+//        
+//        let keyOutput = key.outputForCase(self.shiftState.uppercase())
+//        
+//        textDocumentProxy.insertText(keyOutput)
+//        return
+//        
+//        if key.type == .Character || key.type == .SpecialCharacter {
+//            if let context = textDocumentProxy.documentContextBeforeInput {
+//                if context.characters.count < 2 {
+//                    textDocumentProxy.insertText(keyOutput)
+//                    return
+//                }
+//                
+//                var index = context.endIndex
+//                
+//                index = index.predecessor()
+//                if context[index] != " " {
+//                    textDocumentProxy.insertText(keyOutput)
+//                    return
+//                }
+//                
+//                index = index.predecessor()
+//                if context[index] == " " {
+//                    textDocumentProxy.insertText(keyOutput)
+//                    return
+//                }
+//
+//                textDocumentProxy.insertText("\(randomCat())")
+//                textDocumentProxy.insertText(" ")
+//                textDocumentProxy.insertText(keyOutput)
+//                return
+//            }
+//            else {
+//                textDocumentProxy.insertText(keyOutput)
+//                return
+//            }
+//        }
+//        else {
+//            textDocumentProxy.insertText(keyOutput)
+//            return
+//        }
+//    }
     
-    override func setupKeys() {
-        super.setupKeys()
-        
-        if takeDebugScreenshot {
-            if self.layout == nil {
-                return
-            }
-            
-            for page in keyboard.pages {
-                for rowKeys in page.rows {
-                    for key in rowKeys {
-                        if let keyView = self.layout!.viewForKey(key) {
-                            keyView.addTarget(self, action: "takeScreenshotDelay", forControlEvents: .TouchDown)
-                        }
-                    }
-                }
-            }
-        }
-    }
+//    override func setupKeys() {
+//        super.setupKeys()
+//        
+//        if takeDebugScreenshot {
+//            if self.layout == nil {
+//                return
+//            }
+//            
+//            for page in keyboard.pages {
+//                for rowKeys in page.rows {
+//                    for key in rowKeys {
+//                        if let keyView = self.layout!.viewForKey(key) {
+//                            keyView.addTarget(self, action: "takeScreenshotDelay", forControlEvents: .TouchDown)
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
     
     override func createBanner() -> ExtraView? {
         return CatboardBanner(globalColors: self.dynamicType.globalColors, darkMode: false, solidColorMode: self.solidColorMode())
