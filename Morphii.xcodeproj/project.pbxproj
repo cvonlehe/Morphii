@@ -49,6 +49,8 @@
 		4365533E1D3D354800DD98B7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4365533C1D3D354800DD98B7 /* Info.plist */; };
 		436553401D3E6E1300DD98B7 /* RecentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4365533F1D3E6E1300DD98B7 /* RecentView.xib */; };
 		436553421D3E6E2B00DD98B7 /* RecentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436553411D3E6E2B00DD98B7 /* RecentView.swift */; };
+		436BE8241D5B87ED00E29745 /* MorphiiWideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436BE8231D5B87ED00E29745 /* MorphiiWideView.swift */; };
+		436BE8251D5B87ED00E29745 /* MorphiiWideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436BE8231D5B87ED00E29745 /* MorphiiWideView.swift */; };
 		438162501D00A25E00C5BB5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4381624F1D00A25E00C5BB5B /* AppDelegate.swift */; };
 		438162551D00A25E00C5BB5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 438162531D00A25E00C5BB5B /* Main.storyboard */; };
 		4381625A1D00A25E00C5BB5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 438162591D00A25E00C5BB5B /* Assets.xcassets */; };
@@ -285,6 +287,7 @@
 		4365533D1D3D354800DD98B7 /* KeyboardFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardFramework.h; sourceTree = "<group>"; };
 		4365533F1D3E6E1300DD98B7 /* RecentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecentView.xib; sourceTree = "<group>"; };
 		436553411D3E6E2B00DD98B7 /* RecentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentView.swift; sourceTree = "<group>"; };
+		436BE8231D5B87ED00E29745 /* MorphiiWideView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorphiiWideView.swift; sourceTree = "<group>"; };
 		4381624C1D00A25E00C5BB5B /* Morphii.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Morphii.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4381624F1D00A25E00C5BB5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		438162541D00A25E00C5BB5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -481,6 +484,7 @@
 				4300E8761D074F0000930766 /* MorphiiAPI.swift */,
 				431A75DC1D0896EE0079F9BD /* MorphiiView.swift */,
 				43305D621D550879008B1E85 /* MorphiiTouchView.swift */,
+				436BE8231D5B87ED00E29745 /* MorphiiWideView.swift */,
 			);
 			name = "Morphii Helpers";
 			sourceTree = "<group>";
@@ -1150,6 +1154,7 @@
 				4398CBB71D05F33F00074BC7 /* SettingsWebViewController.swift in Sources */,
 				43C4212F1D1DDBB300A282A0 /* FavoritesViewController.swift in Sources */,
 				4398CBB01D05BFE500074BC7 /* MethodHelper.swift in Sources */,
+				436BE8241D5B87ED00E29745 /* MorphiiWideView.swift in Sources */,
 				43A9A60F1D0A15D400AB90E4 /* Config.swift in Sources */,
 				438162501D00A25E00C5BB5B /* AppDelegate.swift in Sources */,
 				4300E8751D0746F600930766 /* SearchViewController.swift in Sources */,
@@ -1210,6 +1215,7 @@
 				43F2A30B1D1C5F7400B9AA9C /* User.swift in Sources */,
 				436553161D3D33C500DD98B7 /* KeyboardLayout.swift in Sources */,
 				43F2A3031D1C322000B9AA9C /* Config.swift in Sources */,
+				436BE8251D5B87ED00E29745 /* MorphiiWideView.swift in Sources */,
 				43305D641D550879008B1E85 /* MorphiiTouchView.swift in Sources */,
 				436553321D3D344000DD98B7 /* Utilities.swift in Sources */,
 				43CB11821D36BFFB00964C38 /* TrendingData.swift in Sources */,

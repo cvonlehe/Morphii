@@ -15,10 +15,12 @@ protocol OverlayViewControllerDelegate {
 
 class OverlayViewController: UIViewController {
     
+    @IBOutlet weak var morphiiTouchView: MorphiiTouchView!
     @IBOutlet weak var favoriteContainerView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var morphiiContainerView: UIView!
 
+    @IBOutlet weak var morphiiWideView: MorphiiWideView!
     @IBOutlet weak var tagImageView: UIImageView!
     @IBOutlet weak var favoriteTagsTextField: UITextField!
     @IBOutlet weak var favoriteNameTextField: UITextField!
@@ -28,7 +30,6 @@ class OverlayViewController: UIViewController {
     @IBOutlet weak var collectionNameContainerView: UIView!
     @IBOutlet weak var collectionNameLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var morphiiView: MorphiiView!
     var morphiiO:Morphii?
     var delegateO:OverlayViewControllerDelegate?
     @IBOutlet weak var morphiiScrollView: MorphiiScrollView!
@@ -159,7 +160,7 @@ extension OverlayViewController {
         favoriteNameTextField.resignFirstResponder()
         favoriteTagsTextField.resignFirstResponder()
       let tags = Morphii.getTagsFromString(favoriteTagsTextField.text)
-        if let morphii = Morphii.createNewMorphii(favoriteNameTextField.text, name: favoriteNameTextField.text, scaleType: Int((morphiiO?.scaleType!)!), sequence: Int((morphiiO?.sequence)!), groupName: "Your Saved Morphiis", metaData: morphiiO?.metaData, emoodl: morphiiView?.emoodl, isFavorite: true, tags: tags, order: 5000, originalId: morphiiO?.id, originalName: morphiiO?.name, showName: true) {
+        if let morphii = Morphii.createNewMorphii(favoriteNameTextField.text, name: favoriteNameTextField.text, scaleType: Int((morphiiO?.scaleType!)!), sequence: Int((morphiiO?.sequence)!), groupName: "Your Saved Morphiis", metaData: morphiiO?.metaData, emoodl: morphiiWideView?.emoodl, isFavorite: true, tags: tags, order: 5000, originalId: morphiiO?.id, originalName: morphiiO?.name, showName: true) {
             
             MethodHelper.showSuccessErrorHUD(true, message: "Saved to Favorites", inView: self.view)
             MorphiiAPI.sendFavoriteData(morphiiO, favoriteNameO: favoriteNameTextField.text, emoodl: favoriteMorphiiView!.morphiiView.emoodl, tags: tags)
@@ -185,7 +186,7 @@ extension OverlayViewController {
     }
     
     func setMorphii() {
-        self.morphiiView.setUpMorphii(self.morphiiO!, emoodl: 50.0)
+        self.morphiiWideView.setUpMorphii(self.morphiiO!, emoodl: 50.0, morphiiTouchView: self.morphiiTouchView)
 
         self.morphiiNameLabel.text = self.morphiiO!.name
         if let collectionName = morphiiO?.groupName {
@@ -193,12 +194,12 @@ extension OverlayViewController {
          collectionNameLabel.addTextSpacing(1.6)
             morphiiScrollView.setMorphiis(Morphii.getMorphiisForCollectionTitle(collectionName), delegate: self)
         }
-        morphiiView.area = self.area
+        morphiiWideView.area = self.area
         print("MORPHII_GROUP:",self.morphiiO!.groupName)
     }
     
     @IBAction func saveMorphiiButtonPressed(sender: UIButton) {
-        morphiiView.saveMorphiiToSavedPhotos { (hasAccess, success) in
+        morphiiWideView.saveMorphiiToSavedPhotos { (hasAccess, success) in
             if !hasAccess {
                 let alert = UIAlertController(title: "Photo Library Access Required", message: "Access to your photos is required to save Morphiis to your camera roll. Please go to your phone's settings to enable access.", preferredStyle: .Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
@@ -212,18 +213,18 @@ extension OverlayViewController {
     }
     
     @IBAction func shareButtonPressed(sender: UIButton) {
-        morphiiView.shareMorphii(self)
+        morphiiWideView.shareMorphii(self)
     }
     
     @IBAction func favoriteMorphiiButtonPressed(sender: UIButton) {
         favoriteNameTextField.text = ""
         favoriteTagsTextField.text = ""
         if let mView = favoriteMorphiiView {
-            mView.setNewMorphii(morphiiView.morphii, emoodl: morphiiView.emoodl, showName: true)
+            mView.setNewMorphii(morphiiWideView.morphii, emoodl: morphiiWideView.emoodl, showName: true)
         }else {
-            favoriteMorphiiView = MorphiiSelectionView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: favoriteMorphiiContainerView.frame.size), morphii: morphiiView.morphii, delegate: nil, showName: true)
+            favoriteMorphiiView = MorphiiSelectionView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: favoriteMorphiiContainerView.frame.size), morphii: morphiiWideView.morphii, delegate: nil, showName: true)
             favoriteMorphiiContainerView.addSubview(favoriteMorphiiView!)
-            favoriteMorphiiView?.morphiiView.emoodl = morphiiView.emoodl
+            favoriteMorphiiView?.morphiiView.emoodl = morphiiWideView.emoodl
         }
         setCenterView(.FavoriteView)
     }

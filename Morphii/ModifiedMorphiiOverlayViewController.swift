@@ -19,10 +19,11 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
     @IBOutlet weak var morphiiContainerLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var tagImageView: UIImageView!
 
+    @IBOutlet weak var morphiiTouchView: MorphiiTouchView!
+    @IBOutlet weak var favoriteMorphiiWideView: MorphiiWideView!
     @IBOutlet weak var scrollView: TPKeyboardAvoidingScrollView!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var morphiiContainerView: UIView!
-    @IBOutlet weak var favoriteMorphiiView: MorphiiView!
     @IBOutlet weak var morphiiView: MorphiiView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var favoriteTagsTextField: UITextField!
@@ -74,8 +75,8 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
             }
         }
         favoriteNameTextField.text = morphiiO?.name
-        self.favoriteMorphiiView.setUpMorphii(self.morphiiO!, emoodl: morphiiO!.emoodl?.doubleValue)
-        favoriteMorphiiView.area = area
+        self.favoriteMorphiiWideView.setUpMorphii(self.morphiiO!, emoodl: morphiiO!.emoodl?.doubleValue, morphiiTouchView: morphiiTouchView)
+        favoriteMorphiiWideView.area = area
 
         
     }
@@ -105,7 +106,7 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
         MethodHelper.showSuccessErrorHUD(true, message: "Saved", inView: self.view)
          let tags = Morphii.getTagsFromString(favoriteTagsTextField.text)
         morhpiiNameLabel.text = favoriteNameTextField.text
-        morphiiView.emoodl = favoriteMorphiiView.emoodl
+        morphiiView.emoodl = favoriteMorphiiWideView.emoodl
         favoriteNameTextField.resignFirstResponder()
         favoriteTagsTextField.resignFirstResponder()
         morphiiO?.name = morhpiiNameLabel.text
@@ -115,7 +116,7 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
             if success {
                 MorphiiAPI.sendMorphiiFavoriteSavedToAWS(self.morphiiO!, intensity: self.morphiiView.emoodl, area: self.area, name: self.favoriteNameTextField.text!, originalName: self.morphiiO!.originalName, tags: tags)
 
-                MorphiiAPI.sendFavoriteData(self.morphiiO, favoriteNameO: self.favoriteNameTextField.text, emoodl: self.favoriteMorphiiView.emoodl, tags: tags)
+                MorphiiAPI.sendFavoriteData(self.morphiiO, favoriteNameO: self.favoriteNameTextField.text, emoodl: self.favoriteMorphiiWideView.emoodl, tags: tags)
             }else {
                 MethodHelper.showAlert("Error", message: "There was an error saving your morphii. Please try again")
             }

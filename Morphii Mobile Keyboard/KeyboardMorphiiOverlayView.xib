@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -14,7 +14,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KeyboardMorphiiOverlayView" customModule="Morphii_Mobile_Keyboard" customModuleProvider="target">
             <connections>
                 <outlet property="morphiiNameLabel" destination="H71-aM-fDm" id="G5Q-rg-Nhl"/>
-                <outlet property="morphiiView" destination="fbd-gU-OAs" id="UWQ-g3-ibd"/>
+                <outlet property="morphiiTouchView" destination="Th0-FG-jSu" id="pxk-Qr-0DP"/>
+                <outlet property="morphiiWideView" destination="fbd-gU-OAs" id="j15-IQ-4Ze"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -65,21 +66,28 @@
                     <color key="textColor" red="0.20000000000000001" green="0.22352941179999999" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbd-gU-OAs" customClass="MorphiiView" customModule="Morphii_Mobile_Keyboard" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbd-gU-OAs" customClass="MorphiiWideView" customModule="Morphii_Mobile_Keyboard" customModuleProvider="target">
                     <rect key="frame" x="25" y="41" width="551" height="551"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="fbd-gU-OAs" secondAttribute="height" multiplier="1:1" id="w03-wb-9dT"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Th0-FG-jSu" customClass="MorphiiTouchView" customModule="Morphii_Mobile_Keyboard" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="41" width="600" height="559"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="Th0-FG-jSu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="2jH-RB-bxz"/>
                 <constraint firstItem="92a-af-xaf" firstAttribute="centerY" secondItem="H71-aM-fDm" secondAttribute="centerY" id="4YS-xc-Pf2"/>
                 <constraint firstAttribute="trailing" secondItem="A6E-vQ-FR3" secondAttribute="trailing" constant="8" id="5wB-Ur-Rl0"/>
                 <constraint firstItem="fbd-gU-OAs" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="92c-TU-Elk"/>
                 <constraint firstItem="A6E-vQ-FR3" firstAttribute="leading" secondItem="H71-aM-fDm" secondAttribute="trailing" constant="8" id="Bib-DC-kvw"/>
                 <constraint firstAttribute="bottom" secondItem="fbd-gU-OAs" secondAttribute="bottom" constant="8" id="GE6-hz-lCe"/>
+                <constraint firstAttribute="trailing" secondItem="Th0-FG-jSu" secondAttribute="trailing" id="Nv4-Fw-ScC"/>
+                <constraint firstAttribute="bottom" secondItem="Th0-FG-jSu" secondAttribute="bottom" id="Oah-Lk-Nfa"/>
                 <constraint firstItem="H71-aM-fDm" firstAttribute="leading" secondItem="92a-af-xaf" secondAttribute="trailing" constant="8" id="Y36-hX-gDg"/>
                 <constraint firstItem="fbd-gU-OAs" firstAttribute="top" secondItem="H71-aM-fDm" secondAttribute="bottom" constant="8" id="YvK-7L-lTY"/>
                 <constraint firstItem="A6E-vQ-FR3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="cEU-BK-UBy"/>
@@ -90,6 +98,7 @@
                 <constraint firstItem="H71-aM-fDm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="pS6-1w-knC"/>
                 <constraint firstItem="92a-af-xaf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="sTl-f9-e3I"/>
                 <constraint firstItem="A6E-vQ-FR3" firstAttribute="width" secondItem="92a-af-xaf" secondAttribute="width" id="y1O-lw-kmU"/>
+                <constraint firstItem="Th0-FG-jSu" firstAttribute="top" secondItem="H71-aM-fDm" secondAttribute="bottom" constant="8" id="zs4-FR-iyD"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">

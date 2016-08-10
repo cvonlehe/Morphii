@@ -22,7 +22,8 @@ class ShareMorphiiOverlayView: ExtraView {
     @IBOutlet weak var addToFavoritesContainerView: UIView!
     @IBOutlet weak var copyMorphiiContainerView: UIView!
     var delegate:ShareMorphiiOverlayViewDelegate!
-    var morphiiView:MorphiiView!
+    var morphiiView:MorphiiWideView!
+    var area:String?
     
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
@@ -72,7 +73,8 @@ class ShareMorphiiOverlayView: ExtraView {
         let newMorphiiView = MorphiiView(frame: morphiiView.frame)
         newMorphiiView.setUpMorphii(morphiiView.morphii, emoodl: morphiiView.emoodl)
         newMorphiiView.backgroundColor = UIColor.clearColor()
-        if newMorphiiView.copyMorphyToClipboard() {
+        print("AREA4:",self.area)
+        if newMorphiiView.copyMorphyToClipboard(self.area) {
             delegate.copiedMorphii()
         }else {
             MethodHelper.showSuccessErrorHUD(false, message: "Error Copying. Try again", inView: self)
@@ -82,7 +84,9 @@ class ShareMorphiiOverlayView: ExtraView {
     func saveToCameraRollContainerViewTapped (tap:UITapGestureRecognizer) {
         morphiiView.saveMorphiiToSavedPhotos { (hasAccess, success) in
             if !hasAccess {
-                self.accessRequiredView.hidden = false
+                dispatch_async(dispatch_get_main_queue(), { 
+                    self.accessRequiredView.hidden = false
+                })
             }else if success {
                 self.delegate.savedMorphiiToCameraRoll()
             }
@@ -93,10 +97,11 @@ class ShareMorphiiOverlayView: ExtraView {
         KeyboardViewController.sViewController.addMorphiiToFavorites(self, morphiiView: morphiiView)
     }
     
-    func addToSuperView(superView:UIView?, delegate:ShareMorphiiOverlayViewDelegate, morphiiView:MorphiiView) {
+    func addToSuperView(superView:UIView?, delegate:ShareMorphiiOverlayViewDelegate, morphiiView:MorphiiWideView, area:String?) {
         guard let sView = superView else {return}
         sView.addSubview(self)
         self.delegate = delegate
+        self.area = area
         translatesAutoresizingMaskIntoConstraints = false
         self.morphiiView = morphiiView
         let widthConstraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: superView, attribute: NSLayoutAttribute.Width, multiplier: 1, constant: 0)

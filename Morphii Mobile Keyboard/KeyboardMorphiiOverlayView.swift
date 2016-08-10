@@ -14,11 +14,12 @@ protocol KeyboardMorphiiOverlayViewDelegate {
 
 class KeyboardMorphiiOverlayView: ExtraView {
     
+    @IBOutlet weak var morphiiTouchView: MorphiiTouchView!
     @IBOutlet weak var morphiiNameLabel: UILabel!
-    @IBOutlet weak var morphiiView: MorphiiView!
     var delegate:KeyboardMorphiiOverlayViewDelegate!
     var shareOverlay:ShareMorphiiOverlayView?
 
+    @IBOutlet weak var morphiiWideView: MorphiiWideView!
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
         self.loadNib()
@@ -65,9 +66,9 @@ class KeyboardMorphiiOverlayView: ExtraView {
         superView.addConstraint(centerXConstraint)
         superView.addConstraint(bottom)
         if area == MorphiiAreas.keyboardHome {
-            morphiiView.setUpMorphii(morphii, emoodl: 50.0)
+            morphiiWideView.setUpMorphii(morphii, emoodl: 50.0, morphiiTouchView: morphiiTouchView)
         }else {
-            morphiiView.setUpMorphii(morphii, emoodl: morphii.emoodl?.doubleValue)
+            morphiiWideView.setUpMorphii(morphii, emoodl: morphii.emoodl?.doubleValue, morphiiTouchView: morphiiTouchView)
         }
         var showName = true
         if let show = morphii.showName?.boolValue {
@@ -78,7 +79,7 @@ class KeyboardMorphiiOverlayView: ExtraView {
         }else {
             morphiiNameLabel.text = ""
         }
-        morphiiView.area = area
+        morphiiWideView.area = area
         
     }
     
@@ -88,8 +89,9 @@ class KeyboardMorphiiOverlayView: ExtraView {
     
     @IBAction func shareButtonPressed(sender: UIButton) {
         if shareOverlay == nil {
+            print("AREA3:",morphiiWideView.area)  
             shareOverlay = ShareMorphiiOverlayView(globalColors: globalColors, darkMode: false, solidColorMode: solidColorMode)
-            shareOverlay?.addToSuperView(superview?.superview, delegate:self, morphiiView: morphiiView)
+            shareOverlay?.addToSuperView(superview?.superview, delegate:self, morphiiView: morphiiWideView, area: self.morphiiWideView.area)
         }
     }
 
@@ -103,13 +105,13 @@ extension KeyboardMorphiiOverlayView:ShareMorphiiOverlayViewDelegate {
     
     func copiedMorphii() {
         cancelPressed()
-        morphiiView.backgroundColor = UIColor.clearColor()
+        morphiiWideView.backgroundColor = UIColor.clearColor()
         MethodHelper.showSuccessErrorHUD(true, message: "Copied to Clipboard", inView: self)
     }
     
     func savedMorphiiToCameraRoll() {
         cancelPressed()
-        morphiiView.backgroundColor = UIColor.clearColor()
+        morphiiWideView.backgroundColor = UIColor.clearColor()
         MethodHelper.showSuccessErrorHUD(true, message: "Saved to Camera Roll", inView: self)
     }
     

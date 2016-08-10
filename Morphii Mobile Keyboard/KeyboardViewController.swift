@@ -50,7 +50,10 @@ class KeyboardViewController: UIInputViewController {
     var addFavoriteContainerView:UIView?
     var shareView:UIView?
     var addFavoriteView:AddFavoriteContainerView?
-
+    var abcDisplayed = true
+    var orientation = UIInterfaceOrientation.Portrait
+    var coverView:UIView?
+    
     override func loadView() {
         super.loadView()
         MorphiiAPI.login()
@@ -69,6 +72,9 @@ class KeyboardViewController: UIInputViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        coverView = UIView(frame: view.frame)
+        coverView?.backgroundColor = UIColor.whiteColor()
+        view.addSubview(coverView!)
         self.bannerView?.hidden = false
         self.keyboardHeight = self.heightForOrientation(self.interfaceOrientation, withTopBanner: true)
         if Morphii.getMostRecentlyUsedMorphiis().count <= 0 {
@@ -83,8 +89,7 @@ class KeyboardViewController: UIInputViewController {
         self.forwardingView.resetTrackedViews()
         self.shiftStartingState = nil
         self.shiftWasMultitapped = false
-        setCenterView(centerView)
-        
+        orientation = toInterfaceOrientation
         // optimization: ensures smooth animation
         if let keyPool = self.layout?.keyPool {
             for view in keyPool {
@@ -97,6 +102,7 @@ class KeyboardViewController: UIInputViewController {
         
     }
     
+    
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
         // optimization: ensures quick mode and shift transitions
         if let keyPool = self.layout?.keyPool {
@@ -104,6 +110,7 @@ class KeyboardViewController: UIInputViewController {
                 view.shouldRasterize = false
             }
         }
+        setCenterView(centerView)
         closeButtonPressed()
         
     }
@@ -205,7 +212,11 @@ class KeyboardViewController: UIInputViewController {
         centerView = center
         setAllContainerViewBackgrounds()
         recentView?.backButtonPressed()
-        switch center {
+        performSelector(#selector(KeyboardViewController.displayCenter), withObject: nil, afterDelay: 0.05)
+    }
+    
+    func displayCenter () {
+        switch centerView {
         case .Globe:
             self.forwardingView.resetTrackedViews()
             self.shiftStartingState = nil
@@ -231,6 +242,8 @@ class KeyboardViewController: UIInputViewController {
             returnToKeybord()
             break
         }
+        coverView?.removeFromSuperview()
+        coverView = nil
     }
     
     func setRecentView (fetchType:MorphiiFetchType) {
@@ -242,7 +255,11 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func returnToKeybord () {
-        setHeight(270)
+        if UIInterfaceOrientationIsPortrait(orientation) {
+            setHeight(270)
+        }else {
+            setHeight(210)
+        }
         recentView?.removeFromSuperview()
         recentView = nil
     }
@@ -420,15 +437,14 @@ class KeyboardViewController: UIInputViewController {
     
     var constraintsAdded: Bool = false
     func setupLayout() {
-        constraintsAdded = false
-        for subview in forwardingView.subviews {
-            subview.removeFromSuperview()
-        }
+//        constraintsAdded = false
+//        for subview in forwardingView.subviews {
+//            subview.removeFromSuperview()
+//        }
         if !constraintsAdded {
             self.layout = self.dynamicType.layoutClass.init(model: self.keyboard, superview: self.forwardingView, layoutConstants: self.dynamicType.layoutConstants, globalColors: self.dynamicType.globalColors, darkMode: self.darkMode(), solidColorMode: self.solidColorMode())
             
             self.layout?.initialize()
-            self.setMode(0)
             
             self.setupKludge()
             
@@ -481,7 +497,13 @@ class KeyboardViewController: UIInputViewController {
             addNavigationToBannerView(banner)
         }
         
-        let newOrigin = CGPointMake(0, CGFloat(Int(view.frame.height - 260)))
+        var newOrigin = CGPointMake(0, CGFloat(Int(view.frame.height - metric("topBanner") - orientationSavvyBounds.size.height - 5)))
+//        if UIInterfaceOrientationIsPortrait(orientation) {
+//            print("returnToKeybord1")
+//        }else {
+//            print("returnToKeybord2")
+//            newOrigin = CGPointMake(0, 0)
+//        }
         self.forwardingView.frame.origin = newOrigin
     }
     
@@ -522,7 +544,6 @@ class KeyboardViewController: UIInputViewController {
             for rowKeys in page.rows { // TODO: quick hack
                 for key in rowKeys {
                     if let keyView = self.layout?.viewForKey(key) {
-                        print("setupKeys")
                         keyView.addTarget(self, action: "keyPressedHelper:", forControlEvents: .TouchUpInside)
                         
                         keyView.addTarget(self, action: Selector("playKeySound"), forControlEvents: .TouchDown)
@@ -660,8 +681,12 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func keyPressedHelper(sender: KeyboardKey) {
-        print("keyPressedHelper")
+        print("keyPressedHelper1:",self.layout)
+        if self.layout == nil {
+            self.layout = self.dynamicType.layoutClass.init(model: self.keyboard, superview: self.forwardingView, layoutConstants: self.dynamicType.layoutConstants, globalColors: self.dynamicType.globalColors, darkMode: self.darkMode(), solidColorMode: self.solidColorMode())
+        }
         if let model = self.layout?.keyForView(sender) {
+            print("keyPressedHelper2")
             self.keyPressed(model)
 
             // auto exit from special char subkeyboard
@@ -849,6 +874,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func setMode(mode: Int) {
+        print("setMode")
         self.forwardingView.resetTrackedViews()
         self.shiftStartingState = nil
         self.shiftWasMultitapped = false
@@ -1046,13 +1072,17 @@ class KeyboardViewController: UIInputViewController {
         return settingsView
     }
     
-    func addMorphiiToFavorites (shareView:UIView, morphiiView:MorphiiView) {
+    func addMorphiiToFavorites (shareView:UIView, morphiiView:MorphiiWideView) {
         KeyboardViewController.returnKeyString = "return"
         self.shareView = shareView
         shareView.hidden = true
         recentView?.hidden = true
        // updateAppearances(true)
-        setHeight(350)
+        if UIInterfaceOrientationIsPortrait(orientation) {
+            setHeight(350)
+        }else {
+            setHeight(290)
+        }
         viewDidLayoutSubviews()
         addFavoriteContainerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.size.width, height: 100))
         view.insertSubview(addFavoriteContainerView!, belowSubview: forwardingView)
@@ -1130,6 +1160,7 @@ extension KeyboardViewController:UITextFieldDelegate {
             setCenterView(.Favorites)
             MethodHelper.showSuccessErrorHUD(true, message: "Saved to Favorites", inView: self.view)
             MorphiiAPI.sendFavoriteData(morphii, favoriteNameO: favoriteView.nameTextField.text, emoodl: newMorphii.emoodl!.doubleValue, tags: tags)
+            
             //HERE
             var area = ""
             switch centerView {
@@ -1146,8 +1177,9 @@ extension KeyboardViewController:UITextFieldDelegate {
                 area = "Other"
                 break
             }
-            print("MorphiiAPI.send")
             MorphiiAPI.sendMorphiiFavoriteSavedToAWS(favoriteView.morphiiView.morphii, intensity: favoriteView.morphiiView.emoodl, area: area, name: favoriteView.nameTextField.text!, originalName: favoriteView.morphiiView.morphii.originalName, tags: tags)
+            print("MorphiiAPI.send")
+
         }
         return true
     }

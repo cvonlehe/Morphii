@@ -121,7 +121,7 @@ class RecentView: ExtraView {
             return
         }
         
-        if morphiiSelectionView.morphiiView.copyMorphyToClipboard() {
+        if morphiiSelectionView.morphiiView.copyMorphyToClipboard(MorphiiAreas.keyboardFavorites) {
             print("COPIED")
             MethodHelper.showSuccessErrorHUD(true, message: "Copied to Clipboard", inView: self)
         }else {

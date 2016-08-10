@@ -349,7 +349,7 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
         if var keyMap = self.generateKeyFrames(self.model, bounds: self.superview.bounds, page: pageNum) {
             if self.dynamicType.shouldPoolKeys {
                 self.modelToView.removeAll(keepCapacity: true)
-                self.viewToModel.removeAll(keepCapacity: true)
+//                self.viewToModel.removeAll(keepCapacity: true)
                 
                 self.resetKeyPool()
                 

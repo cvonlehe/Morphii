@@ -384,7 +384,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQ4-iG-2DL">
                                                 <rect key="frame" x="0.0" y="47" width="304" height="347"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mVu-H8-G7m" customClass="MorphiiView" customModule="Morphii" customModuleProvider="target">
+                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mVu-H8-G7m" customClass="MorphiiWideView" customModule="Morphii" customModuleProvider="target">
                                                         <rect key="frame" x="72" y="0.0" width="162" height="162"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
@@ -495,6 +495,10 @@
                                                             <constraint firstAttribute="height" constant="99" id="kJj-n7-bHK"/>
                                                         </constraints>
                                                     </scrollView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jbA-JY-ssX" customClass="MorphiiTouchView" customModule="Morphii" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="304" height="162"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -507,13 +511,17 @@
                                                     <constraint firstItem="YcQ-tN-0EW" firstAttribute="top" secondItem="mVu-H8-G7m" secondAttribute="bottom" constant="8" id="8ef-ey-KGd"/>
                                                     <constraint firstAttribute="trailing" secondItem="mVu-H8-G7m" secondAttribute="trailing" constant="8" id="C2s-0p-uwf"/>
                                                     <constraint firstItem="B0P-hf-1r8" firstAttribute="leading" secondItem="jQ4-iG-2DL" secondAttribute="leading" id="Ifw-n5-NdL"/>
+                                                    <constraint firstItem="jbA-JY-ssX" firstAttribute="top" secondItem="jQ4-iG-2DL" secondAttribute="top" id="K9j-UE-ST0"/>
                                                     <constraint firstAttribute="trailing" secondItem="YcQ-tN-0EW" secondAttribute="trailing" id="Ng4-Xd-C58"/>
                                                     <constraint firstAttribute="trailing" secondItem="ph6-lN-gk8" secondAttribute="trailing" id="XBL-aL-cdx"/>
                                                     <constraint firstItem="mVu-H8-G7m" firstAttribute="centerX" secondItem="jQ4-iG-2DL" secondAttribute="centerX" id="eVk-YU-JOj"/>
+                                                    <constraint firstAttribute="trailing" secondItem="jbA-JY-ssX" secondAttribute="trailing" id="gQL-97-amL"/>
                                                     <constraint firstAttribute="width" constant="304" id="iuy-Mf-Ezx"/>
                                                     <constraint firstItem="mVu-H8-G7m" firstAttribute="leading" secondItem="jQ4-iG-2DL" secondAttribute="leading" constant="8" id="lbS-eg-dO1"/>
+                                                    <constraint firstItem="jbA-JY-ssX" firstAttribute="leading" secondItem="jQ4-iG-2DL" secondAttribute="leading" id="mbP-lf-xTU"/>
                                                     <constraint firstItem="ph6-lN-gk8" firstAttribute="top" secondItem="B0P-hf-1r8" secondAttribute="bottom" id="rR1-jF-LaK"/>
                                                     <constraint firstItem="YcQ-tN-0EW" firstAttribute="top" secondItem="mVu-H8-G7m" secondAttribute="bottom" constant="8" id="rUA-zN-Weq"/>
+                                                    <constraint firstItem="YcQ-tN-0EW" firstAttribute="top" secondItem="jbA-JY-ssX" secondAttribute="bottom" constant="8" id="tD2-fi-IBo"/>
                                                     <constraint firstItem="mVu-H8-G7m" firstAttribute="centerX" secondItem="jQ4-iG-2DL" secondAttribute="centerX" id="xwZ-CU-ITq"/>
                                                 </constraints>
                                                 <variation key="default">
@@ -830,7 +838,8 @@
                         <outlet property="morphiiContainerView" destination="jQ4-iG-2DL" id="2MJ-pM-p56"/>
                         <outlet property="morphiiNameLabel" destination="EQk-SB-40c" id="ssM-Ue-FTG"/>
                         <outlet property="morphiiScrollView" destination="ph6-lN-gk8" id="4aV-fM-Brd"/>
-                        <outlet property="morphiiView" destination="mVu-H8-G7m" id="JAS-eA-7Lh"/>
+                        <outlet property="morphiiTouchView" destination="jbA-JY-ssX" id="HSu-pb-0ZN"/>
+                        <outlet property="morphiiWideView" destination="mVu-H8-G7m" id="Pf2-J5-7Uh"/>
                         <outlet property="scrollView" destination="p3G-3X-nDy" id="7Qo-mU-FAh"/>
                         <outlet property="tableView" destination="bVN-4f-0vo" id="N7A-Ji-rPa"/>
                         <outlet property="tagImageView" destination="saW-Ea-3KH" id="5wa-Xv-l2E"/>
@@ -1639,7 +1648,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R3H-14-wgq">
                                                 <rect key="frame" x="-304" y="41" width="304" height="353"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OhR-Ir-Ajp" customClass="MorphiiView" customModule="Morphii" customModuleProvider="target">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OhR-Ir-Ajp" customClass="MorphiiWideView" customModule="Morphii" customModuleProvider="target">
                                                         <rect key="frame" x="62" y="0.0" width="180" height="180"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
@@ -1779,6 +1788,10 @@
                                                             </mask>
                                                         </variation>
                                                     </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ljG-dB-OlP" customClass="MorphiiTouchView" customModule="Morphii" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="304" height="180"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -1793,8 +1806,12 @@
                                                     <constraint firstItem="0pm-Sb-bsn" firstAttribute="centerX" secondItem="MQz-Mp-JNY" secondAttribute="centerX" id="fu4-wx-ehZ"/>
                                                     <constraint firstItem="MQz-Mp-JNY" firstAttribute="top" secondItem="OhR-Ir-Ajp" secondAttribute="bottom" constant="8" id="gxY-5y-GKW"/>
                                                     <constraint firstItem="MQz-Mp-JNY" firstAttribute="leading" secondItem="R3H-14-wgq" secondAttribute="leading" id="k13-Ps-ueD"/>
+                                                    <constraint firstItem="ljG-dB-OlP" firstAttribute="top" secondItem="R3H-14-wgq" secondAttribute="top" id="khq-wk-qry"/>
+                                                    <constraint firstItem="ljG-dB-OlP" firstAttribute="leading" secondItem="R3H-14-wgq" secondAttribute="leading" id="kkf-QV-Adl"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ljG-dB-OlP" secondAttribute="trailing" id="lpP-Sw-hgJ"/>
                                                     <constraint firstItem="0pm-Sb-bsn" firstAttribute="height" secondItem="MQz-Mp-JNY" secondAttribute="height" id="qGo-tZ-uze"/>
                                                     <constraint firstItem="MQz-Mp-JNY" firstAttribute="top" secondItem="OhR-Ir-Ajp" secondAttribute="bottom" constant="8" id="rzG-29-gpC"/>
+                                                    <constraint firstItem="MQz-Mp-JNY" firstAttribute="top" secondItem="ljG-dB-OlP" secondAttribute="bottom" constant="8" id="vOg-Uo-gOm"/>
                                                     <constraint firstItem="OhR-Ir-Ajp" firstAttribute="centerX" secondItem="R3H-14-wgq" secondAttribute="centerX" id="wUH-23-C3O"/>
                                                     <constraint firstItem="OhR-Ir-Ajp" firstAttribute="top" secondItem="R3H-14-wgq" secondAttribute="top" id="xfc-b3-L92"/>
                                                     <constraint firstAttribute="trailing" secondItem="MQz-Mp-JNY" secondAttribute="trailing" id="yDw-EV-raL"/>
@@ -1877,12 +1894,13 @@
                     <connections>
                         <outlet property="containerView" destination="zFa-hs-nnT" id="Nll-NN-obC"/>
                         <outlet property="editButton" destination="Mdk-T0-n1l" id="sMd-mT-ieW"/>
-                        <outlet property="favoriteMorphiiView" destination="OhR-Ir-Ajp" id="ug3-Px-Ova"/>
+                        <outlet property="favoriteMorphiiWideView" destination="OhR-Ir-Ajp" id="E17-Kr-bzE"/>
                         <outlet property="favoriteNameTextField" destination="Uor-x7-XGk" id="rQ1-EX-b5f"/>
                         <outlet property="favoriteTagsTextField" destination="Atj-DL-ce7" id="xcr-b9-RXO"/>
                         <outlet property="morhpiiNameLabel" destination="3pa-JL-P32" id="iA5-Yb-BR0"/>
                         <outlet property="morphiiContainerLeadingConstraint" destination="56V-kT-i4j" id="V5B-EC-gVm"/>
                         <outlet property="morphiiContainerView" destination="5Q0-Zb-ON1" id="nhw-a5-wiq"/>
+                        <outlet property="morphiiTouchView" destination="ljG-dB-OlP" id="4uU-R3-Lzf"/>
                         <outlet property="morphiiView" destination="yjA-ex-w0s" id="nVo-AD-Yqb"/>
                         <outlet property="scrollView" destination="TZL-CL-VS9" id="zKI-PJ-cdh"/>
                         <outlet property="tagImageView" destination="Jas-9H-V7i" id="C8y-nq-X74"/>

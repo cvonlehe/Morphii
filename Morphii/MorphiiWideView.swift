@@ -20,14 +20,16 @@ import Foundation
 import Photos
 import MobileCoreServices
 
-protocol MorphiiProtocol{
-    func smileForMorphiiView(sender:MorphiiView) -> Double
-}
-
-class MorphiiView: UIView, MorphiiProtocol {
+class MorphiiWideView: UIView {
     
-    var dataSource:MorphiiProtocol?
     var beginningIntensity = 50.0
+    var morphiiTouchView:MorphiiTouchView!
+    
+    var intensity: Double = 50.0 {
+        didSet(newValue){
+            newValue
+        }
+    }
     
     //var morphy:MorphyObj?
     //var morphii:MorphiiClass.MorphiiFile!
@@ -44,7 +46,8 @@ class MorphiiView: UIView, MorphiiProtocol {
         super.init(coder: aDecoder)
     }
     
-    func setUpMorphii(morphii:Morphii, emoodl:Double?){
+    func setUpMorphii(morphii:Morphii, emoodl:Double?, morphiiTouchView:MorphiiTouchView){
+        self.morphiiTouchView = morphiiTouchView
         self.morphii = morphii
         setUpMorphiiGestures()
         if let e = emoodl {
@@ -52,12 +55,15 @@ class MorphiiView: UIView, MorphiiProtocol {
         }else if let number = morphii.emoodl {
             self.emoodl = number.doubleValue
         }
-//        emoodl = 45.0
+        //        emoodl = 45.0
     }
     
     var emoodl: Double = 50.0 {
         didSet(newValue){
-            newValue
+            
+            //add this:
+            self.intensity = newValue
+            
             self.setNeedsDisplay()
         }
     }
@@ -108,7 +114,7 @@ class MorphiiView: UIView, MorphiiProtocol {
             let curvy2 = "c\(s).y2"
             let curvx = "c\(s).x"
             let curvy = "c\(s).y"
-                        
+            
             let cix1 = anchorSeg.valueForKeyPath(curvx1) as! Double + (intensity * (deltaSeg.valueForKeyPath(curvx1) as! Double))
             let ciy1 = anchorSeg.valueForKeyPath(curvy1) as! Double + (intensity * (deltaSeg.valueForKeyPath(curvy1) as! Double))
             let cix2 = anchorSeg.valueForKeyPath(curvx2) as! Double + (intensity * (deltaSeg.valueForKeyPath(curvx2) as! Double))
@@ -159,20 +165,20 @@ class MorphiiView: UIView, MorphiiProtocol {
         
         //convert it
         /*var anchorDict:NSDictionary? = nil
-        var deltaDict:NSDictionary? = nil
-        
-        do {
-            //anchorDict = try (NSJSONSerialization.JSONObjectWithData(anchorData, options: NSJSONReadingOptions.MutableContainers)as? NSDictionary)
-            //deltaDict = try (NSJSONSerialization.JSONObjectWithData(deltaData, options: NSJSONReadingOptions.MutableContainers)as? NSDictionary)
-        }
-        catch{
-            print("Handle \(error) here")
-        }*/
+         var deltaDict:NSDictionary? = nil
+         
+         do {
+         //anchorDict = try (NSJSONSerialization.JSONObjectWithData(anchorData, options: NSJSONReadingOptions.MutableContainers)as? NSDictionary)
+         //deltaDict = try (NSJSONSerialization.JSONObjectWithData(deltaData, options: NSJSONReadingOptions.MutableContainers)as? NSDictionary)
+         }
+         catch{
+         print("Handle \(error) here")
+         }*/
         
         
         
         /*let anch:NSDictionary = morphii.valueForKeyPath("anchor")as! NSDictionary
-        let delt:NSDictionary = morphii.valueForKeyPath("delta") as! NSDictionary*/
+         let delt:NSDictionary = morphii.valueForKeyPath("delta") as! NSDictionary*/
         
         let anchorDict = morphii.valueForKey("anchor") as! NSDictionary
         //print("ANCHOR DICTIONARY IS \(anchorDict)")
@@ -185,12 +191,12 @@ class MorphiiView: UIView, MorphiiProtocol {
         let anch = anchorDict
         let delt = deltaDict
         
-        var intensityVal = self.dataSource?.smileForMorphiiView(self)
+        var intensityVal = (self.intensity / 100)
         
         if intensityVal > 1 { intensityVal = 1 }
         if intensityVal < 0 { intensityVal = 0 }
         
-        let negIntensity = intensityVal! * -1
+        let negIntensity = intensityVal * -1
         
         let newAnch = setPathSegs(anch, intensity: negIntensity, delta: delt)
         return newAnch
@@ -287,16 +293,29 @@ class MorphiiView: UIView, MorphiiProtocol {
     }
     
     func setUpMorphiiGestures(){
-        dataSource = self
-        let panNizer = UIPanGestureRecognizer()
-        panNizer.addTarget(self, action: #selector(MorphiiView.showGestureForPanRecognizer(_:)))
-        addGestureRecognizer(panNizer)
+        // change:
+        // if let _ = self.morphiiView {
+        // to:
+        if let _ = self.morphiiTouchView {
+            
+            let panNizer = UIPanGestureRecognizer()
+            panNizer.addTarget(self, action: #selector(MorphiiWideView.showGestureForPanRecognizer(_:)))
+            
+            // change:
+            // self.morphiiView.addGestureRecognizer(panNizer)
+            // to:
+            self.morphiiTouchView.addGestureRecognizer(panNizer)
+            
+        }else{
+            // fail because self.morphyTouchView is nil
+            print("morphy touch view is nil")
+        }
     }
     
     func showGestureForPanRecognizer(recognizer: UIPanGestureRecognizer) {
         let beginIntensity = NSNumber(double: beginningIntensity)
         if recognizer.state == UIGestureRecognizerState.Changed || recognizer.state == UIGestureRecognizerState.Ended {
-            let translation:CGPoint = recognizer.translationInView(self)
+            let translation:CGPoint = recognizer.translationInView(self.morphiiTouchView)
             if (self.morphii.scaleType == 1){
                 //for "positive" emotions use this translation:SCALE TYPE 1
                 self.emoodl -= (Double(translation.y)) / 2.5
@@ -324,11 +343,6 @@ class MorphiiView: UIView, MorphiiProtocol {
         }else if recognizer.state == .Began {
             beginningIntensity = emoodl
         }
-    }
-    
-    func smileForMorphiiView(sender:MorphiiView) -> Double{
-        return (Double((self.emoodl - 0) / 83))
-        
     }
     
     func shareMorphii(viewController:UIViewController) {
@@ -372,16 +386,16 @@ class MorphiiView: UIView, MorphiiProtocol {
         
     }
     
-    func copyMorphyToClipboard(area:String?) -> Bool{
+    func copyMorphyToClipboard() -> Bool{
         
-        print("AREA:",area)
+        
         //copy that image to the pasteboard
         guard let pasteBoard:UIPasteboard = UIPasteboard(name: UIPasteboardNameGeneral, create: false) else {return false}
         pasteBoard.persistent = true
         let pbData:NSData = UIImagePNGRepresentation(getMorphiiImage())!
         pasteBoard.setValue(pbData, forPasteboardType: String(kUTTypePNG))
-//        let string = "Sent by Morphii Keyboard: "+Config.getCurrentConfig().appStoreUrl
-//        pasteBoard.setValue(string, forPasteboardType: "public.plain-text")
+        //        let string = "Sent by Morphii Keyboard: "+Config.getCurrentConfig().appStoreUrl
+        //        pasteBoard.setValue(string, forPasteboardType: "public.plain-text")
         if let value = pasteBoard.dataForPasteboardType("public.png") {
             if value == pbData {
                 var name = ""
@@ -410,7 +424,7 @@ class MorphiiView: UIView, MorphiiProtocol {
                     MorphiiAPI.sendMorphiiSendToAWS(self.morphii, intensity: self.emoodl, area: self.area, name: name, share: "UIActivityTypeSaveToCameraRoll")
                     UIImageWriteToSavedPhotosAlbum(image, self, #selector(MorphiiView.image(_:didFinishSavingWithError:contextInfo:)), nil)
                 }
-
+                
                 break
             case .Restricted:
                 print("Restricted")
@@ -429,7 +443,7 @@ class MorphiiView: UIView, MorphiiProtocol {
                 break
             }
         }
-
+        
     }
     
     func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafePointer<Void>) {
@@ -439,56 +453,56 @@ class MorphiiView: UIView, MorphiiProtocol {
     }
     
     func getMorphiiImage () -> UIImage {
-//        let screenSize: CGRect = UIScreen.mainScreen().bounds
-//        var clipMorphySize = CGSize(width: screenSize.width, height: screenSize.height)
-//        UIGraphicsBeginImageContextWithOptions(clipMorphySize, false, 0.0)
-//        var context:CGContextRef = UIGraphicsGetCurrentContext()!
-//        layer.renderInContext(context)
-//        var snapShotImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()
-//        
-//        //crop the snapshot image of the context to be 300x300
-//        //the cropping function
-//        func croppedImage(bounds:CGRect) -> UIImage{
-//            let imageRef:CGImageRef = CGImageCreateWithImageInRect(snapShotImage.CGImage, bounds)!
-//            let croppedImage:UIImage = UIImage(CGImage: imageRef)
-//            
-//            return croppedImage
-//        }
-//        
-//        //bounding rectangle for cropping morphy's image
-//        //must be in pixels because of the conversion from UIImage to CGImageRef
-//        //width is longer so morphii will fit in text bubble
-//        let cropRect:CGRect = CGRectMake(0, 0, 600, 600)
-//        //let cropRect:CGRect = CGRectMake(-10, 0, 545, 525)
-//        
-//        //crop the snapshot with the bounding rectangle
-//        let morphyPic = croppedImage(cropRect)
-//        
-//        //image insets
-//        let morphiiInsets = UIEdgeInsetsMake(10, 20, 10, 20)
-//        let morphiiPic = morphyPic.imageWithInsets(morphiiInsets)
-//        
-//        
-//        //end the graphics context
-//        UIGraphicsEndImageContext()
-      
-      
-//        clipsToBounds = true
-//        let color = backgroundColor
-//        backgroundColor = UIColor ( red: 0.3334, green: 0.3333, blue: 0.3334, alpha: 1.0 )
-//        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
-//        layer.renderInContext(UIGraphicsGetCurrentContext()!)
-//        let morphiiPic = UIGraphicsGetImageFromCurrentImageContext()
-//        morphiiPic.drawInRect(CGRect(x: 0, y: 0, width: 600, height: 600))
-//        UIGraphicsEndImageContext()
-//        layer.cornerRadius = 0
-//        backgroundColor = UIColor.clearColor()
-//        setUpMorphii(morphii, emoodl: emoodl)
-//        if var newImage = removeWhiteBackgroundFromImage(morphiiPic) {
-//            print("NEW_IMAGE123:",newImage)
-//            newImage = newImage.imageWithInsets(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-//            return newImage
-//        }
+        //        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        //        var clipMorphySize = CGSize(width: screenSize.width, height: screenSize.height)
+        //        UIGraphicsBeginImageContextWithOptions(clipMorphySize, false, 0.0)
+        //        var context:CGContextRef = UIGraphicsGetCurrentContext()!
+        //        layer.renderInContext(context)
+        //        var snapShotImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        //
+        //        //crop the snapshot image of the context to be 300x300
+        //        //the cropping function
+        //        func croppedImage(bounds:CGRect) -> UIImage{
+        //            let imageRef:CGImageRef = CGImageCreateWithImageInRect(snapShotImage.CGImage, bounds)!
+        //            let croppedImage:UIImage = UIImage(CGImage: imageRef)
+        //
+        //            return croppedImage
+        //        }
+        //
+        //        //bounding rectangle for cropping morphy's image
+        //        //must be in pixels because of the conversion from UIImage to CGImageRef
+        //        //width is longer so morphii will fit in text bubble
+        //        let cropRect:CGRect = CGRectMake(0, 0, 600, 600)
+        //        //let cropRect:CGRect = CGRectMake(-10, 0, 545, 525)
+        //
+        //        //crop the snapshot with the bounding rectangle
+        //        let morphyPic = croppedImage(cropRect)
+        //
+        //        //image insets
+        //        let morphiiInsets = UIEdgeInsetsMake(10, 20, 10, 20)
+        //        let morphiiPic = morphyPic.imageWithInsets(morphiiInsets)
+        //
+        //
+        //        //end the graphics context
+        //        UIGraphicsEndImageContext()
+        
+        
+        //        clipsToBounds = true
+        //        let color = backgroundColor
+        //        backgroundColor = UIColor ( red: 0.3334, green: 0.3333, blue: 0.3334, alpha: 1.0 )
+        //        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
+        //        layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        //        let morphiiPic = UIGraphicsGetImageFromCurrentImageContext()
+        //        morphiiPic.drawInRect(CGRect(x: 0, y: 0, width: 600, height: 600))
+        //        UIGraphicsEndImageContext()
+        //        layer.cornerRadius = 0
+        //        backgroundColor = UIColor.clearColor()
+        //        setUpMorphii(morphii, emoodl: emoodl)
+        //        if var newImage = removeWhiteBackgroundFromImage(morphiiPic) {
+        //            print("NEW_IMAGE123:",newImage)
+        //            newImage = newImage.imageWithInsets(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+        //            return newImage
+        //        }
         backgroundColor = UIColor.clearColor()
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         var clipMorphySize = CGSize(width: screenSize.width, height: screenSize.height)
@@ -510,8 +524,8 @@ class MorphiiView: UIView, MorphiiProtocol {
         //width is longer so morphii will fit in text bubble
         
         //check for iphone 6+ and set scale to 3 or 2 for all other devices
-      let scaleVal = (UIScreen.mainScreen().nativeScale >= 2.6 ? 3.0 : 2.0) as! CGFloat
-      let cropRect: CGRect = CGRectMake(0, 0, self.frame.width * CGFloat(scaleVal), self.frame.width * CGFloat(scaleVal))
+        let scaleVal = (UIScreen.mainScreen().nativeScale >= 2.6 ? 3.0 : 2.0) as! CGFloat
+        let cropRect: CGRect = CGRectMake(0, 0, self.frame.width * CGFloat(scaleVal), self.frame.width * CGFloat(scaleVal))
         
         //crop the snapshot with the bounding rectangle
         let morphyPic = croppedImage(cropRect)
@@ -524,13 +538,13 @@ class MorphiiView: UIView, MorphiiProtocol {
         UIGraphicsEndImageContext()
         
         return morphiiPic
-
+        
     }
     
     func removeWhiteBackgroundFromImage (oldImage:UIImage) -> UIImage? {
         
         let image = UIImage(data: UIImageJPEGRepresentation(oldImage, 1.0)!)!
-
+        
         let rawImageRef: CGImageRef = image.CGImage!
         let components = CGColorGetComponents(UIColor.darkGrayColor().CGColor)
         let min = CGFloat(80.0)
@@ -545,6 +559,20 @@ class MorphiiView: UIView, MorphiiProtocol {
         let result = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         return result
+    }
+}
+
+extension UIImage {
+    func imageWithInsets(insets: UIEdgeInsets) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(
+            CGSizeMake(self.size.width + insets.left + insets.right,
+                self.size.height + insets.top + insets.bottom), false, self.scale)
+        let context = UIGraphicsGetCurrentContext()
+        let origin = CGPoint(x: insets.left, y: insets.top)
+        self.drawAtPoint(origin)
+        let imageWithInsets = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return imageWithInsets
     }
 }
 
