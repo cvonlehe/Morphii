@@ -322,6 +322,7 @@
                         <outlet property="backButton" destination="0Yh-CE-Qxe" id="Ohr-Eu-E8a"/>
                         <outlet property="collectionView" destination="oqR-mf-Fcw" id="gGc-fx-hpN"/>
                         <outlet property="searchButton" destination="dav-aM-gTz" id="vib-zC-pwi"/>
+                        <outlet property="shadowHeightConstraint" destination="mJa-vl-ElG" id="cLh-fk-8hy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jBy-Qy-Ozg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1145,6 +1146,7 @@
                         <outlet property="morphiiTagsLabelHeightConstraint" destination="wVR-cP-phX" id="6m6-y6-zjP"/>
                         <outlet property="searchBar" destination="CAl-FK-QnF" id="0sX-SO-975"/>
                         <outlet property="searchLabel" destination="9Bz-Vi-n5z" id="ML6-jh-vio"/>
+                        <outlet property="shadowHeightConstraint" destination="xGC-h4-vr5" id="i7H-bE-Mnm"/>
                         <outlet property="tableView" destination="0IQ-A4-e65" id="DPb-WZ-Exg"/>
                     </connections>
                 </viewController>
@@ -1548,6 +1550,7 @@
                         <outlet property="doneButton" destination="N8U-HX-WFr" id="lFk-Kd-RYT"/>
                         <outlet property="noFavoritesContainerView" destination="9Vy-9O-4hs" id="a96-o2-4bU"/>
                         <outlet property="searchButton" destination="jAA-4d-Ef7" id="bON-xf-O5J"/>
+                        <outlet property="shadowHeightConstraint" destination="Etu-0d-TNs" id="E2t-8W-ePu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FqI-Uv-kQ7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1625,8 +1628,15 @@
                                                         <rect key="frame" x="8" y="8" width="288" height="288"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
+                                                            <constraint firstAttribute="height" constant="288" id="6qN-as-kb2"/>
                                                             <constraint firstAttribute="width" secondItem="yjA-ex-w0s" secondAttribute="height" multiplier="1:1" id="llJ-nN-C1p"/>
+                                                            <constraint firstAttribute="width" constant="288" id="nT5-Gr-xGk"/>
                                                         </constraints>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="llJ-nN-C1p"/>
+                                                            </mask>
+                                                        </variation>
                                                     </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1635,13 +1645,18 @@
                                                     <constraint firstAttribute="trailing" secondItem="yjA-ex-w0s" secondAttribute="trailing" constant="8" id="CxG-M2-a9x"/>
                                                     <constraint firstAttribute="trailing" secondItem="l7b-zU-sMO" secondAttribute="trailing" id="MT8-QH-ioK"/>
                                                     <constraint firstItem="yjA-ex-w0s" firstAttribute="leading" secondItem="5Q0-Zb-ON1" secondAttribute="leading" constant="8" id="NYF-Ha-OkA"/>
+                                                    <constraint firstItem="yjA-ex-w0s" firstAttribute="centerX" secondItem="5Q0-Zb-ON1" secondAttribute="centerX" id="Ur5-az-ROs"/>
                                                     <constraint firstItem="yjA-ex-w0s" firstAttribute="top" secondItem="5Q0-Zb-ON1" secondAttribute="top" constant="8" id="VeK-SS-FNc"/>
+                                                    <constraint firstItem="yjA-ex-w0s" firstAttribute="centerY" secondItem="5Q0-Zb-ON1" secondAttribute="centerY" constant="-24" id="Zhx-1K-9Gy"/>
                                                     <constraint firstAttribute="width" constant="304" id="aWC-j8-BrY"/>
                                                     <constraint firstAttribute="bottom" secondItem="l7b-zU-sMO" secondAttribute="bottom" id="wAH-eP-oLd"/>
                                                 </constraints>
                                                 <variation key="default">
                                                     <mask key="constraints">
                                                         <exclude reference="aWC-j8-BrY"/>
+                                                        <exclude reference="CxG-M2-a9x"/>
+                                                        <exclude reference="NYF-Ha-OkA"/>
+                                                        <exclude reference="VeK-SS-FNc"/>
                                                     </mask>
                                                 </variation>
                                             </view>
@@ -1797,6 +1812,7 @@
                                                 <constraints>
                                                     <constraint firstItem="0pm-Sb-bsn" firstAttribute="top" secondItem="MQz-Mp-JNY" secondAttribute="bottom" id="4gI-2a-OFh"/>
                                                     <constraint firstItem="OhR-Ir-Ajp" firstAttribute="top" secondItem="R3H-14-wgq" secondAttribute="top" id="50z-FP-IlR"/>
+                                                    <constraint firstAttribute="bottom" secondItem="0pm-Sb-bsn" secondAttribute="bottom" constant="77" id="9er-Jr-28g"/>
                                                     <constraint firstAttribute="bottom" secondItem="pZD-WB-ztE" secondAttribute="bottom" id="J82-B5-HG1"/>
                                                     <constraint firstAttribute="trailing" secondItem="pZD-WB-ztE" secondAttribute="trailing" id="N7f-bf-HGV"/>
                                                     <constraint firstItem="0pm-Sb-bsn" firstAttribute="top" secondItem="MQz-Mp-JNY" secondAttribute="bottom" id="NcM-ao-uK9"/>
@@ -1821,6 +1837,7 @@
                                                         <exclude reference="xfc-b3-L92"/>
                                                         <exclude reference="gxY-5y-GKW"/>
                                                         <exclude reference="NcM-ao-uK9"/>
+                                                        <exclude reference="dqb-AJ-1Vw"/>
                                                     </mask>
                                                 </variation>
                                             </view>
@@ -1855,6 +1872,7 @@
                                             <constraint firstItem="5Q0-Zb-ON1" firstAttribute="width" secondItem="zFa-hs-nnT" secondAttribute="width" id="HrP-4G-21V"/>
                                             <constraint firstAttribute="trailing" secondItem="3pa-JL-P32" secondAttribute="trailing" constant="42" id="JXp-98-6jL"/>
                                             <constraint firstItem="R3H-14-wgq" firstAttribute="width" secondItem="5Q0-Zb-ON1" secondAttribute="width" id="MCc-qK-cML"/>
+                                            <constraint firstAttribute="height" constant="394" id="OUf-N4-2Lr"/>
                                             <constraint firstAttribute="trailing" secondItem="Mdk-T0-n1l" secondAttribute="trailing" id="eXG-GF-0MT"/>
                                             <constraint firstItem="3pa-JL-P32" firstAttribute="leading" secondItem="geH-qy-ye0" secondAttribute="trailing" constant="8" id="mQv-St-mIP"/>
                                             <constraint firstItem="geH-qy-ye0" firstAttribute="leading" secondItem="zFa-hs-nnT" secondAttribute="leading" id="vq1-fV-9fE"/>
@@ -1876,6 +1894,11 @@
                                     <constraint firstItem="zFa-hs-nnT" firstAttribute="width" secondItem="TZL-CL-VS9" secondAttribute="width" constant="-16" id="vca-Ea-82n"/>
                                     <constraint firstItem="6T9-Xc-oaI" firstAttribute="centerX" secondItem="TZL-CL-VS9" secondAttribute="centerX" id="y1I-lG-mjp"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="JmN-F0-F5H"/>
+                                    </mask>
+                                </variation>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2553,6 +2576,7 @@
                         <outlet property="newsMessageLabel" destination="3BY-yI-pWy" id="t4U-i9-buV"/>
                         <outlet property="newsTitleLabel" destination="CWL-XH-to8" id="SsH-hC-DKi"/>
                         <outlet property="scrollView" destination="vm8-l3-91d" id="7vE-ae-XtX"/>
+                        <outlet property="shadowHeightConstraint" destination="wOh-2E-6Mt" id="wIj-53-S4A"/>
                         <outlet property="trendingHastagContainerView" destination="DlP-t9-L9S" id="b9W-mx-gzv"/>
                     </connections>
                 </viewController>
@@ -3072,6 +3096,7 @@
                         <outlet property="rateThisAppContainerView" destination="p2r-vF-h08" id="IV5-Zd-VmZ"/>
                         <outlet property="scrollView" destination="IlY-Ma-paf" id="DR5-x8-RDn"/>
                         <outlet property="setupKeyboardContainerView" destination="qbq-z8-JCv" id="MaJ-xu-IJb"/>
+                        <outlet property="shadowHeightConstraint" destination="7Gd-J5-Ril" id="NiN-ja-1Rb"/>
                         <outlet property="termsContainerView" destination="qSk-to-cVX" id="yFq-N1-3A9"/>
                         <outlet property="urlSwitch" destination="vfa-u9-1VK" id="jtE-4W-xGo"/>
                     </connections>
@@ -3187,6 +3212,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="activityIndicator" destination="QpI-We-nKX" id="tIk-L9-mf9"/>
+                        <outlet property="shadowHeightConstraint" destination="NWT-ED-4rD" id="fM7-M6-yHP"/>
                         <outlet property="webView" destination="g6Q-uo-Pzh" id="meL-Zp-Ngd"/>
                     </connections>
                 </viewController>

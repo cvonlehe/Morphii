@@ -77,6 +77,8 @@ class RecentView: ExtraView {
         var x = CGFloat(0)
         var y = CGFloat(0)
         for morphii in morphiis {
+            print("morphiiSelectionViewTapped23:",morphii.originalName)
+
             let morphiiView = MorphiiSelectionView(frame: CGRect(x: x, y: y, width: morphiiSideLength, height: morphiiSideLength), morphii: morphii, delegate: nil, showName: fetchType != .Recents)
             morphiiView.morphiiView.backgroundColor = UIColor.clearColor()
             morphiiView.backgroundColor = UIColor.clearColor()
@@ -94,11 +96,11 @@ class RecentView: ExtraView {
     }
     
     func morphiiSelectionViewTapped (tap:UITapGestureRecognizer) {
-        print("morphiiSelectionViewTapped")
         guard let morphiiSelectionView = tap.view as? MorphiiSelectionView else {return}
         switch self.fetchType {
         case .Home:
             MorphiiAPI.sendMorphiiSelectedToAWS(morphiiSelectionView.morphiiView.morphii, area: MorphiiAreas.keyboardHome)
+
             displayMorphiiOverylay(morphiiSelectionView.morphiiView.morphii)
             break
         case .Recents:

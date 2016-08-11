@@ -10,6 +10,7 @@ import UIKit
 
 class SearchViewController: UIViewController {
 
+    @IBOutlet weak var shadowHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchLabel: UILabel!
@@ -32,6 +33,8 @@ class SearchViewController: UIViewController {
             magnifyingGlassImageView.hidden = true
         }
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 200, right: 0)
+        shadowHeightConstraint.constant = 0.5
+
     }
     
     override func viewDidLayoutSubviews() {

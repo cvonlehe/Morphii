@@ -388,7 +388,7 @@ class MorphiiView: UIView, MorphiiProtocol {
                 if let n = self.morphii.name {
                     name = n
                 }
-                MorphiiAPI.sendMorphiiSendToAWS(self.morphii, intensity: self.emoodl, area: self.area, name: name, share: "UIActivityTypeCopyToPasteboard")
+                MorphiiAPI.sendMorphiiSendToAWS(self.morphii, intensity: self.emoodl, area: area, name: name, share: "UIActivityTypeCopyToPasteboard")
                 morphii.setLastUsedDate(NSDate())
                 return true
             }

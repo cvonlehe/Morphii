@@ -12,6 +12,7 @@ import AVKit
 
 class SettingsViewController: UIViewController {
 
+    @IBOutlet weak var shadowHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var privacyPolicyContainerView: UIView!
     @IBOutlet weak var termsContainerView: UIView!
@@ -28,6 +29,8 @@ class SettingsViewController: UIViewController {
         // Do any additional setup after loading the view.
         addGestureRecognizers()
         urlSwitch.setOn(!MethodHelper.shouldNotAddURLToMessages(), animated: true)
+        shadowHeightConstraint.constant = 0.5
+        
     }
     
     func addGestureRecognizers () {

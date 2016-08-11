@@ -75,6 +75,11 @@ class KeyboardViewController: UIInputViewController {
         coverView = UIView(frame: view.frame)
         coverView?.backgroundColor = UIColor.whiteColor()
         view.addSubview(coverView!)
+        let widthConstraint = NSLayoutConstraint(item: coverView!, attribute: .Width, relatedBy: .Equal, toItem: view, attribute: .Width, multiplier: 1, constant: 0)
+        let heightConstraint = NSLayoutConstraint(item: coverView!, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 1, constant: 0)
+        let xConstraint = NSLayoutConstraint(item: coverView!, attribute: .CenterX, relatedBy: .Equal, toItem: view, attribute: .CenterX, multiplier: 1, constant: 0)
+        let yConstraint = NSLayoutConstraint(item: coverView!, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1, constant: 0)
+        view.addConstraints([widthConstraint, heightConstraint, xConstraint, yConstraint])
         self.bannerView?.hidden = false
         self.keyboardHeight = self.heightForOrientation(self.interfaceOrientation, withTopBanner: true)
         if Morphii.getMostRecentlyUsedMorphiis().count <= 0 {
@@ -86,6 +91,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        coverView?.hidden = false
         self.forwardingView.resetTrackedViews()
         self.shiftStartingState = nil
         self.shiftWasMultitapped = false
@@ -104,6 +110,7 @@ class KeyboardViewController: UIInputViewController {
     
     
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        coverView?.hidden = true
         // optimization: ensures quick mode and shift transitions
         if let keyPool = self.layout?.keyPool {
             for view in keyPool {
@@ -242,8 +249,7 @@ class KeyboardViewController: UIInputViewController {
             returnToKeybord()
             break
         }
-        coverView?.removeFromSuperview()
-        coverView = nil
+        coverView?.hidden = true
     }
     
     func setRecentView (fetchType:MorphiiFetchType) {
@@ -1073,13 +1079,14 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func addMorphiiToFavorites (shareView:UIView, morphiiView:MorphiiWideView) {
+        print("addMorphiiToFavorites1:",morphiiView.morphii.originalName)
         KeyboardViewController.returnKeyString = "return"
         self.shareView = shareView
         shareView.hidden = true
         recentView?.hidden = true
        // updateAppearances(true)
         if UIInterfaceOrientationIsPortrait(orientation) {
-            setHeight(350)
+            setHeight(355)
         }else {
             setHeight(290)
         }
@@ -1092,7 +1099,7 @@ class KeyboardViewController: UIInputViewController {
         let yConstraint = NSLayoutConstraint(item: addFavoriteContainerView!, attribute: .Top, relatedBy: .Equal, toItem: self.view, attribute: .Top, multiplier: 1, constant: 0)
         view.addConstraints([widthConstraint, heightConstraint, xConstraint, yConstraint])
         addFavoriteView = AddFavoriteContainerView(globalColors: self.dynamicType.globalColors, darkMode: true, solidColorMode: self.solidColorMode())
-        addFavoriteView?.addToSuperView(addFavoriteContainerView!, morphiiView: morphiiView, delegate: self)
+        addFavoriteView?.addToSuperView(addFavoriteContainerView!, morphiiWideView: morphiiView, delegate: self)
         addFavoriteView?.nameTextField.delegate = self
         addFavoriteView?.tagsTextField.delegate = self
     }

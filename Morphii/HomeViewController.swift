@@ -19,11 +19,13 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     var foundMorphiis = false
+    @IBOutlet weak var shadowHeightConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         print("CURRENT_USER:",User.getCurrentUser()?.objectID)
+        shadowHeightConstraint.constant = 0.5
 
         performSelector(#selector(HomeViewController.createFetchedResultsController), withObject: nil, afterDelay: 2)
 
@@ -62,12 +64,14 @@ class HomeViewController: UIViewController {
         }
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CDHelper.sharedInstance.managedObjectContext, sectionNameKeyPath: MorphiiAPIKeys.groupName, cacheName: CacheNames.AllMorphiiFetchedResultsCollectionView)
         fetcher = FetchedDelegateDataSource(displayer: self, collectionView: collectionView, fetchedResultsController: fetchedResultsController, allowsReordering: false)
-
-        do {
-            try fetchedResultsController?.performFetch()
-        }catch {
-            
-        }
+        
+        fetchedResultsController?.managedObjectContext.performBlock({ 
+            do {
+                try self.fetchedResultsController?.performFetch()
+            }catch {
+                
+            }
+        })
     }
     
     override func viewDidAppear(animated: Bool) {

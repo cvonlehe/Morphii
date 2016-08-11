@@ -43,7 +43,7 @@ class Morphii: NSManagedObject {
             morphii.deleteMorphii(nil)
         }
         
-        return setData(recId, name: recName, scaleType: scaleType, sequence: recSequence, groupName:groupName, metaData: metaData, emoodl: emoodl, isFavorite: isFavorite, tags: keywords, order: 1, originalId: nil, originalName: nil, showName: showName)
+        return setData(recId, name: recName, scaleType: scaleType, sequence: recSequence, groupName:groupName, metaData: metaData, emoodl: emoodl, isFavorite: isFavorite, tags: keywords, order: 1, originalId: recId, originalName: recName, showName: showName)
     }
     
     class func createNewMorphii(id: String?, name: String?, scaleType: Int?, /*category: String, keywords: [ String ],*/ sequence: Int?, groupName:String?, metaData: NSDictionary?, emoodl:Double?, isFavorite:Bool, tags:[String], order:Int, originalId:String?, originalName:String?, showName:Bool) -> Morphii? {

@@ -26,7 +26,8 @@ class MorphiiSelectionView: UIView {
         morphiiView.backgroundColor = UIColor.whiteColor()
         morphiiView.userInteractionEnabled = false
         addSubview(morphiiView)
-        nameLabel = UIButton(frame: CGRect(x: 0, y: morphiiView.frame.size.height + 4, width: frame.size.width, height: 30))
+        nameLabel = UIButton(type: .Custom)
+        nameLabel.frame = CGRect(x: 0, y: morphiiView.frame.size.height + 4, width: frame.size.width, height: 30)
         nameLabel.titleLabel?.font = UIFont(name: "SFUIText-Regular", size: 12.0)
         nameLabel.setTitleColor(UIColor ( red: 0.3832, green: 0.3832, blue: 0.3832, alpha: 1.0 ), forState: .Normal)
          nameLabel.userInteractionEnabled = false
@@ -48,7 +49,10 @@ class MorphiiSelectionView: UIView {
             shouldShow = show
         }
         if shouldShow {
+            UIView.setAnimationsEnabled(false)
             nameLabel.setTitle(morphii.name, forState: .Normal)
+            layoutIfNeeded()
+            UIView.setAnimationsEnabled(true)
         }
         morphiiView.setUpMorphii(morphii, emoodl: emoodl)
         self.morphii = morphii

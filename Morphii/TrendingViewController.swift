@@ -11,6 +11,7 @@ import UIKit
 class TrendingViewcController: UIViewController {
     var newsURL:String?
 
+    @IBOutlet weak var shadowHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var newsTitleLabel: UILabel!
     @IBOutlet weak var newsMessageLabel: UILabel!
     
@@ -48,6 +49,7 @@ class TrendingViewcController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        shadowHeightConstraint.constant = 0.5
       newsTitleLabel.addTextSpacing(0.75)
       newsMessageLabel.addTextSpacing(0.4)
       newsHeaderLabel.addTextSpacing(1.6)

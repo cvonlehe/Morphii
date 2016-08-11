@@ -225,7 +225,7 @@ class MorphiiAPI {
     }
     
     class func sendMorphiiSendToAWS (morphii:Morphii, intensity:NSNumber, area:String?, name:String, share:String) {
-        print("sendMorphiiSendToAWS")
+        print("sendMorphiiSendToAWS:Area:",area)
         guard let eventClient = awsEventClient else {return}
         let event = eventClient.createEventWithEventType(AWSEvents.MorphiiShareSelect)
         guard event != nil else {return}

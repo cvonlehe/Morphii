@@ -11,6 +11,7 @@ import CoreData
 
 class FavoritesViewController: UIViewController {
 
+    @IBOutlet weak var shadowHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var noFavoritesContainerView: UIView!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
@@ -20,6 +21,7 @@ class FavoritesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        shadowHeightConstraint.constant = 0.5
 
         // Do any additional setup after loading the view.
     }

@@ -10,12 +10,14 @@ import UIKit
 
 class SettingsWebViewController: UIViewController, UIWebViewDelegate {
 
+    @IBOutlet weak var shadowHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var webView: UIWebView!
     var loadURL:String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        shadowHeightConstraint.constant = 0.5
 
         // Do any additional setup after loading the view.
         webView.loadRequest(NSURLRequest(URL: NSURL(string: loadURL)!))
