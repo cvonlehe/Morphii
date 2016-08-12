@@ -203,22 +203,22 @@
                                 <rect key="frame" x="2" y="66" width="316" height="453"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="wWu-on-J64">
-                                    <size key="itemSize" width="106" height="127"/>
+                                    <size key="itemSize" width="106" height="133"/>
                                     <size key="headerReferenceSize" width="50" height="24"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MorphiiCollectionViewCell" id="OTk-gb-B80" customClass="MorphiiCollectionViewCell" customModule="Morphii" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24" width="106" height="127"/>
+                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MorphiiCollectionViewCell" id="OTk-gb-B80" customClass="MorphiiCollectionViewCell" customModule="Morphii" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="24" width="106" height="133"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="106" height="127"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="106" height="133"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tje-6b-JE5" customClass="MorphiiView" customModule="Morphii" customModuleProvider="target">
                                                     <rect key="frame" x="8" y="1" width="90" height="90"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="74" id="3mB-mF-g8c"/>
                                                         <constraint firstAttribute="width" secondItem="tje-6b-JE5" secondAttribute="height" multiplier="1:1" id="R2I-9P-fSA"/>
@@ -231,54 +231,39 @@
                                                         </mask>
                                                     </variation>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Morphii Name Morphii Name" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="qtw-2t-Lce">
-                                                    <rect key="frame" x="4" y="91" width="98" height="36"/>
+                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="zg3-f9-cfW">
+                                                    <rect key="frame" x="4" y="91" width="98" height="42"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="25" id="3Oj-WK-Sc4"/>
-                                                        <constraint firstAttribute="height" constant="26" id="EHu-o8-W99"/>
-                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
-                                                    <color key="textColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="default">
-                                                        <mask key="constraints">
-                                                            <exclude reference="EHu-o8-W99"/>
-                                                            <exclude reference="3Oj-WK-Sc4"/>
-                                                        </mask>
-                                                    </variation>
-                                                </label>
+                                                    <state key="normal" title="Name">
+                                                        <color key="titleColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="qtw-2t-Lce" firstAttribute="leading" secondItem="OTk-gb-B80" secondAttribute="leading" constant="4" id="5yi-jH-Yl0"/>
-                                            <constraint firstItem="qtw-2t-Lce" firstAttribute="top" secondItem="tje-6b-JE5" secondAttribute="bottom" constant="-2" id="7Us-yv-Isw"/>
-                                            <constraint firstItem="qtw-2t-Lce" firstAttribute="top" secondItem="tje-6b-JE5" secondAttribute="bottom" id="8sQ-PQ-eew"/>
+                                            <constraint firstItem="zg3-f9-cfW" firstAttribute="top" secondItem="tje-6b-JE5" secondAttribute="bottom" id="6jA-lb-iBw"/>
                                             <constraint firstItem="tje-6b-JE5" firstAttribute="leading" secondItem="OTk-gb-B80" secondAttribute="leading" constant="8" id="N3T-bZ-KOP"/>
+                                            <constraint firstItem="zg3-f9-cfW" firstAttribute="leading" secondItem="OTk-gb-B80" secondAttribute="leading" constant="4" id="Rw0-va-41s"/>
                                             <constraint firstAttribute="trailing" secondItem="tje-6b-JE5" secondAttribute="trailing" constant="8" id="SXF-fH-LKp"/>
-                                            <constraint firstAttribute="trailing" secondItem="qtw-2t-Lce" secondAttribute="trailing" constant="4" id="SkG-eO-TnN"/>
                                             <constraint firstItem="tje-6b-JE5" firstAttribute="top" secondItem="OTk-gb-B80" secondAttribute="top" id="Z4N-MP-uRU"/>
-                                            <constraint firstItem="qtw-2t-Lce" firstAttribute="top" secondItem="tje-6b-JE5" secondAttribute="bottom" constant="-5" id="Z5O-Vh-9s4"/>
                                             <constraint firstItem="tje-6b-JE5" firstAttribute="top" secondItem="OTk-gb-B80" secondAttribute="top" constant="1" id="cps-uD-TDx"/>
-                                            <constraint firstAttribute="bottom" secondItem="qtw-2t-Lce" secondAttribute="bottom" id="veX-nn-jm2"/>
                                             <constraint firstAttribute="bottom" secondItem="tje-6b-JE5" secondAttribute="bottom" constant="24" id="wFK-lz-Pb4"/>
+                                            <constraint firstAttribute="trailing" secondItem="zg3-f9-cfW" secondAttribute="trailing" constant="4" id="wLm-dX-xyI"/>
                                             <constraint firstItem="tje-6b-JE5" firstAttribute="centerY" secondItem="OTk-gb-B80" secondAttribute="centerY" constant="-16" id="xaQ-eb-z9r"/>
-                                            <constraint firstAttribute="bottom" secondItem="qtw-2t-Lce" secondAttribute="bottom" constant="-3" id="yFO-aQ-eAe"/>
+                                            <constraint firstAttribute="bottom" secondItem="zg3-f9-cfW" secondAttribute="bottom" id="zQK-TE-BMX"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="Z4N-MP-uRU"/>
                                                 <exclude reference="wFK-lz-Pb4"/>
                                                 <exclude reference="xaQ-eb-z9r"/>
-                                                <exclude reference="7Us-yv-Isw"/>
-                                                <exclude reference="Z5O-Vh-9s4"/>
-                                                <exclude reference="yFO-aQ-eAe"/>
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <outlet property="morphiiNameLabel" destination="qtw-2t-Lce" id="Lve-NI-bTU"/>
+                                            <outlet property="morphiiNameLabel" destination="zg3-f9-cfW" id="dc8-YN-fZO"/>
                                             <outlet property="morphiiView" destination="tje-6b-JE5" id="EZ4-e9-Ndg"/>
                                         </connections>
                                     </collectionViewCell>
@@ -1417,77 +1402,61 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MorphiiCollectionViewCell" id="dkC-w6-dCj" customClass="MorphiiCollectionViewCell" customModule="Morphii" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MorphiiCollectionViewCell" id="j1X-3u-u8a" customClass="MorphiiCollectionViewCell" customModule="Morphii" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="24" width="106" height="127"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="106" height="127"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SIy-ul-SIQ" customClass="MorphiiView" customModule="Morphii" customModuleProvider="target">
+                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vgu-IN-LFK" customClass="MorphiiView" customModule="Morphii" customModuleProvider="target">
                                                     <rect key="frame" x="8" y="1" width="90" height="90"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="SIy-ul-SIQ" secondAttribute="height" multiplier="1:0.9" id="6Fr-aj-kg1"/>
-                                                        <constraint firstAttribute="width" secondItem="SIy-ul-SIQ" secondAttribute="height" multiplier="1:1" id="VwU-co-MVx"/>
-                                                        <constraint firstAttribute="height" constant="74" id="pyY-ZT-I3s"/>
+                                                        <constraint firstAttribute="width" secondItem="vgu-IN-LFK" secondAttribute="height" multiplier="1:1" id="aRr-Jz-Hav"/>
+                                                        <constraint firstAttribute="height" constant="74" id="f2c-ya-n1h"/>
+                                                        <constraint firstAttribute="width" secondItem="vgu-IN-LFK" secondAttribute="height" multiplier="1:0.9" id="m7o-Uk-Mhp"/>
                                                     </constraints>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="pyY-ZT-I3s"/>
-                                                            <exclude reference="6Fr-aj-kg1"/>
+                                                            <exclude reference="f2c-ya-n1h"/>
+                                                            <exclude reference="m7o-Uk-Mhp"/>
                                                         </mask>
                                                     </variation>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Morphii Name Morphii Name" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="JGz-Fv-inp">
+                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="wmg-2o-CoW">
                                                     <rect key="frame" x="4" y="91" width="98" height="36"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="26" id="fTV-Q8-6Ql"/>
-                                                        <constraint firstAttribute="height" constant="25" id="iw4-iE-l0n"/>
-                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
-                                                    <color key="textColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="default">
-                                                        <mask key="constraints">
-                                                            <exclude reference="fTV-Q8-6Ql"/>
-                                                            <exclude reference="iw4-iE-l0n"/>
-                                                        </mask>
-                                                    </variation>
-                                                </label>
+                                                    <state key="normal" title="Name">
+                                                        <color key="titleColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="JGz-Fv-inp" secondAttribute="bottom" id="0CS-do-TxY"/>
-                                            <constraint firstAttribute="bottom" secondItem="JGz-Fv-inp" secondAttribute="bottom" constant="-3" id="0HL-Mz-XKh"/>
-                                            <constraint firstItem="SIy-ul-SIQ" firstAttribute="leading" secondItem="dkC-w6-dCj" secondAttribute="leading" constant="8" id="4ZH-o9-AaE"/>
-                                            <constraint firstItem="SIy-ul-SIQ" firstAttribute="top" secondItem="dkC-w6-dCj" secondAttribute="top" constant="1" id="55Z-T5-qwW"/>
-                                            <constraint firstItem="JGz-Fv-inp" firstAttribute="top" secondItem="SIy-ul-SIQ" secondAttribute="bottom" constant="-2" id="AH2-vS-G2x"/>
-                                            <constraint firstItem="SIy-ul-SIQ" firstAttribute="top" secondItem="dkC-w6-dCj" secondAttribute="top" id="Kkf-DA-s5y"/>
-                                            <constraint firstAttribute="bottom" secondItem="SIy-ul-SIQ" secondAttribute="bottom" constant="24" id="RiI-KN-QhH"/>
-                                            <constraint firstItem="JGz-Fv-inp" firstAttribute="leading" secondItem="dkC-w6-dCj" secondAttribute="leading" constant="4" id="Vy9-i6-MeW"/>
-                                            <constraint firstAttribute="trailing" secondItem="JGz-Fv-inp" secondAttribute="trailing" constant="4" id="W1Z-Gq-35A"/>
-                                            <constraint firstItem="JGz-Fv-inp" firstAttribute="top" secondItem="SIy-ul-SIQ" secondAttribute="bottom" id="hwn-gK-IOG"/>
-                                            <constraint firstAttribute="trailing" secondItem="SIy-ul-SIQ" secondAttribute="trailing" constant="8" id="mJn-z6-Qlk"/>
-                                            <constraint firstItem="SIy-ul-SIQ" firstAttribute="centerY" secondItem="dkC-w6-dCj" secondAttribute="centerY" constant="-16" id="nfC-WT-i5z"/>
-                                            <constraint firstItem="JGz-Fv-inp" firstAttribute="top" secondItem="SIy-ul-SIQ" secondAttribute="bottom" constant="-5" id="sOK-9K-a22"/>
+                                            <constraint firstAttribute="bottom" secondItem="wmg-2o-CoW" secondAttribute="bottom" id="6jl-jp-NFQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="vgu-IN-LFK" secondAttribute="trailing" constant="8" id="HYt-Tz-pTd"/>
+                                            <constraint firstAttribute="bottom" secondItem="vgu-IN-LFK" secondAttribute="bottom" constant="24" id="ILp-9l-0bc"/>
+                                            <constraint firstItem="vgu-IN-LFK" firstAttribute="leading" secondItem="j1X-3u-u8a" secondAttribute="leading" constant="8" id="Wbh-hM-ydQ"/>
+                                            <constraint firstItem="vgu-IN-LFK" firstAttribute="top" secondItem="j1X-3u-u8a" secondAttribute="top" id="XaT-bM-FzN"/>
+                                            <constraint firstItem="wmg-2o-CoW" firstAttribute="top" secondItem="vgu-IN-LFK" secondAttribute="bottom" id="YXE-r6-DUw"/>
+                                            <constraint firstItem="vgu-IN-LFK" firstAttribute="top" secondItem="j1X-3u-u8a" secondAttribute="top" constant="1" id="aah-lZ-3Ir"/>
+                                            <constraint firstItem="vgu-IN-LFK" firstAttribute="centerY" secondItem="j1X-3u-u8a" secondAttribute="centerY" constant="-16" id="bDQ-Gp-i0m"/>
+                                            <constraint firstAttribute="trailing" secondItem="wmg-2o-CoW" secondAttribute="trailing" constant="4" id="f6G-Vu-HiT"/>
+                                            <constraint firstItem="wmg-2o-CoW" firstAttribute="leading" secondItem="j1X-3u-u8a" secondAttribute="leading" constant="4" id="kxr-LR-LS7"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="Kkf-DA-s5y"/>
-                                                <exclude reference="RiI-KN-QhH"/>
-                                                <exclude reference="nfC-WT-i5z"/>
-                                                <exclude reference="AH2-vS-G2x"/>
-                                                <exclude reference="sOK-9K-a22"/>
-                                                <exclude reference="0HL-Mz-XKh"/>
+                                                <exclude reference="XaT-bM-FzN"/>
+                                                <exclude reference="ILp-9l-0bc"/>
+                                                <exclude reference="bDQ-Gp-i0m"/>
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <outlet property="morphiiNameLabel" destination="JGz-Fv-inp" id="Td1-uY-Qkc"/>
-                                            <outlet property="morphiiView" destination="SIy-ul-SIQ" id="jmW-yY-MTB"/>
+                                            <outlet property="morphiiNameLabel" destination="wmg-2o-CoW" id="Xbs-aZ-JWp"/>
+                                            <outlet property="morphiiView" destination="vgu-IN-LFK" id="h6o-MK-83G"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
