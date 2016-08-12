@@ -541,70 +541,68 @@ class KeyboardViewController: UIInputViewController {
     //    super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
     //}
     
-    func setupKeys() {
-        if self.layout == nil {
-            return
-        }
-
-        for page in keyboard.pages {
-            for rowKeys in page.rows { // TODO: quick hack
-                for key in rowKeys {
-                    if let keyView = self.layout?.viewForKey(key) {
-                        keyView.addTarget(self, action: "keyPressedHelper:", forControlEvents: .TouchUpInside)
-                        
-                        keyView.addTarget(self, action: Selector("playKeySound"), forControlEvents: .TouchDown)
-                        //keyView.removeTarget(nil, action: nil, forControlEvents: UIControlEvents.AllEvents)
-                        
-                        switch key.type {
-                        case Key.KeyType.KeyboardChange:
-                            keyView.addTarget(self, action: "advanceTapped:", forControlEvents: .TouchUpInside)
-                        case Key.KeyType.Backspace:
-                            let cancelEvents: UIControlEvents = [UIControlEvents.TouchUpInside, UIControlEvents.TouchUpInside, UIControlEvents.TouchDragExit, UIControlEvents.TouchUpOutside, UIControlEvents.TouchCancel, UIControlEvents.TouchDragOutside]
-                            
-                            keyView.addTarget(self, action: "backspaceDown:", forControlEvents: .TouchDown)
-                            keyView.addTarget(self, action: "backspaceUp:", forControlEvents: cancelEvents)
-                        case Key.KeyType.Shift:
-                            keyView.addTarget(self, action: Selector("shiftDown:"), forControlEvents: .TouchDown)
-                            keyView.addTarget(self, action: Selector("shiftUp:"), forControlEvents: .TouchUpInside)
-                            keyView.addTarget(self, action: Selector("shiftDoubleTapped:"), forControlEvents: .TouchDownRepeat)
-                        case Key.KeyType.ModeChange:
-                            keyView.addTarget(self, action: Selector("modeChangeTapped:"), forControlEvents: .TouchDown)
-                        case Key.KeyType.Settings:
-                            keyView.addTarget(self, action: Selector("toggleSettings"), forControlEvents: .TouchUpInside)
-                        default:
-                            break
-                        }
-                        
-                        if key.isCharacter {
-                            if UIDevice.currentDevice().userInterfaceIdiom != UIUserInterfaceIdiom.Pad {
-                                keyView.addTarget(self, action: Selector("showPopup:"), forControlEvents: [.TouchDown, .TouchDragInside, .TouchDragEnter])
-                                keyView.addTarget(keyView, action: Selector("hidePopup"), forControlEvents: [.TouchDragExit, .TouchCancel])
-                                keyView.addTarget(self, action: Selector("hidePopupDelay:"), forControlEvents: [.TouchUpInside, .TouchUpOutside, .TouchDragOutside])
-                            }
-                        }
-                        
-                        if key.hasOutput {
-                            keyView.addTarget(self, action: "keyPressedHelper:", forControlEvents: .TouchUpInside)
-                        }
-                        
-                        if key.type != Key.KeyType.Shift && key.type != Key.KeyType.ModeChange {
-                            keyView.addTarget(self, action: Selector("highlightKey:"), forControlEvents: [.TouchDown, .TouchDragInside, .TouchDragEnter])
-                            keyView.addTarget(self, action: Selector("unHighlightKey:"), forControlEvents: [.TouchUpInside, .TouchUpOutside, .TouchDragOutside, .TouchDragExit, .TouchCancel])
-                        }
-
-                    }
-                }
+   func setupKeys() {
+      if self.layout == nil {
+         return
+      }
+      
+      for page in keyboard.pages {
+         for rowKeys in page.rows { // TODO: quick hack
+            for key in rowKeys {
+               if let keyView = self.layout?.viewForKey(key) {
+                  keyView.removeTarget(nil, action: nil, forControlEvents: UIControlEvents.AllEvents)
+                  
+                  switch key.type {
+                  case Key.KeyType.KeyboardChange:
+                     keyView.addTarget(self, action: "advanceTapped:", forControlEvents: .TouchUpInside)
+                  case Key.KeyType.Backspace:
+                     let cancelEvents: UIControlEvents = [UIControlEvents.TouchUpInside, UIControlEvents.TouchUpInside, UIControlEvents.TouchDragExit, UIControlEvents.TouchUpOutside, UIControlEvents.TouchCancel, UIControlEvents.TouchDragOutside]
+                     
+                     keyView.addTarget(self, action: "backspaceDown:", forControlEvents: .TouchDown)
+                     keyView.addTarget(self, action: "backspaceUp:", forControlEvents: cancelEvents)
+                  case Key.KeyType.Shift:
+                     keyView.addTarget(self, action: Selector("shiftDown:"), forControlEvents: .TouchDown)
+                     keyView.addTarget(self, action: Selector("shiftUp:"), forControlEvents: .TouchUpInside)
+                     keyView.addTarget(self, action: Selector("shiftDoubleTapped:"), forControlEvents: .TouchDownRepeat)
+                  case Key.KeyType.ModeChange:
+                     keyView.addTarget(self, action: Selector("modeChangeTapped:"), forControlEvents: .TouchDown)
+                  case Key.KeyType.Settings:
+                     keyView.addTarget(self, action: Selector("toggleSettings"), forControlEvents: .TouchUpInside)
+                  default:
+                     break
+                  }
+                  
+                  if key.isCharacter {
+                     if UIDevice.currentDevice().userInterfaceIdiom != UIUserInterfaceIdiom.Pad {
+                        keyView.addTarget(self, action: Selector("showPopup:"), forControlEvents: [.TouchDown, .TouchDragInside, .TouchDragEnter])
+                        keyView.addTarget(keyView, action: Selector("hidePopup"), forControlEvents: [.TouchDragExit, .TouchCancel])
+                        keyView.addTarget(self, action: Selector("hidePopupDelay:"), forControlEvents: [.TouchUpInside, .TouchUpOutside, .TouchDragOutside])
+                     }
+                  }
+                  
+                  if key.hasOutput {
+                     keyView.addTarget(self, action: "keyPressedHelper:", forControlEvents: .TouchUpInside)
+                  }
+                  
+                  if key.type != Key.KeyType.Shift && key.type != Key.KeyType.ModeChange {
+                     keyView.addTarget(self, action: Selector("highlightKey:"), forControlEvents: [.TouchDown, .TouchDragInside, .TouchDragEnter])
+                     keyView.addTarget(self, action: Selector("unHighlightKey:"), forControlEvents: [.TouchUpInside, .TouchUpOutside, .TouchDragOutside, .TouchDragExit, .TouchCancel])
+                  }
+                  
+                  keyView.addTarget(self, action: Selector("playKeySound"), forControlEvents: .TouchDown)
+               }
             }
-        }
-    }
-    
+         }
+      }
+   }
+   
     /////////////////
     // POPUP DELAY //
     /////////////////
-    
+   
     var keyWithDelayedPopup: KeyboardKey?
     var popupDelayTimer: NSTimer?
-    
+   
     func showPopup(sender: KeyboardKey) {
         if sender == self.keyWithDelayedPopup {
             self.popupDelayTimer?.invalidate()
