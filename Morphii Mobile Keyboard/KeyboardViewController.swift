@@ -1084,7 +1084,7 @@ class KeyboardViewController: UIInputViewController {
         recentView?.hidden = true
        // updateAppearances(true)
         if UIInterfaceOrientationIsPortrait(orientation) {
-            setHeight(355)
+            setHeight(370)
         }else {
             setHeight(290)
         }

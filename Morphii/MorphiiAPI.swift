@@ -138,7 +138,9 @@ class MorphiiAPI {
         
         if let originalName = morphii.originalName {
             event.addAttribute(originalName, forKey: AWSAttributes.name)
-            event.addAttribute(name, forKey: AWSAttributes.userProvidedName)
+            if originalName != name {
+                event.addAttribute(name, forKey: AWSAttributes.userProvidedName)
+            }
         }else {
             event.addAttribute(name, forKey: AWSAttributes.name)
         }
@@ -172,7 +174,9 @@ class MorphiiAPI {
         
         if let originalName = morphii.originalName {
             event.addAttribute(originalName, forKey: AWSAttributes.name)
-            event.addAttribute(name, forKey: AWSAttributes.userProvidedName)
+            if originalName != name {
+                event.addAttribute(name, forKey: AWSAttributes.userProvidedName)
+            }
         }else {
             event.addAttribute(name, forKey: AWSAttributes.name)
         }
@@ -206,12 +210,12 @@ class MorphiiAPI {
             event.addAttribute(id, forKey: AWSAttributes.id)
         }
         
-        if let originalName = originalName {
-            print("sendMorphiiFavoriteSavedToAWS1:",originalName,name)
+        if let originalName = morphii.originalName {
             event.addAttribute(originalName, forKey: AWSAttributes.name)
-            event.addAttribute(name, forKey: AWSAttributes.userProvidedName)
+            if originalName != name {
+                event.addAttribute(name, forKey: AWSAttributes.userProvidedName)
+            }
         }else {
-            print("sendMorphiiFavoriteSavedToAWS2")
             event.addAttribute(name, forKey: AWSAttributes.name)
         }
         if let a = area {
@@ -231,7 +235,14 @@ class MorphiiAPI {
         guard event != nil else {return}
         guard let id = morphii.id, let name = morphii.name else {return}
         event.addAttribute(id, forKey: AWSAttributes.id)
-        event.addAttribute(name, forKey: AWSAttributes.name)
+        if let originalName = morphii.originalName {
+            event.addAttribute(originalName, forKey: AWSAttributes.name)
+            if originalName != name {
+                event.addAttribute(name, forKey: AWSAttributes.userProvidedName)
+            }
+        }else {
+            event.addAttribute(name, forKey: AWSAttributes.name)
+        }
         event.addAttribute(share, forKey: AWSAttributes.share)
         if let a = area {
             event.addAttribute(a, forKey: AWSAttributes.area)
@@ -419,7 +430,7 @@ class MorphiiAPI {
     }
     
     class func sendFavoriteData (morphiiO:Morphii?, favoriteNameO:String?, emoodl:Double, tags:[String]) {
-
+        
         if keyboardActive {
             sendFavoritePOST(nil, morphiiO: morphiiO, favoriteNameO: favoriteNameO, emoodl: emoodl, tags: tags)
         }else {
@@ -427,7 +438,7 @@ class MorphiiAPI {
                 sendFavoritePOST(locationO, morphiiO: morphiiO, favoriteNameO: favoriteNameO, emoodl: emoodl, tags: tags)
             }
         }
-
+        
     }
     
     private class func sendFavoritePOST (locationO:CLLocation?, morphiiO:Morphii?, favoriteNameO:String?, emoodl:Double, tags:[String]) {

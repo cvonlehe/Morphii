@@ -203,48 +203,48 @@
                                 <rect key="frame" x="2" y="66" width="316" height="453"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="wWu-on-J64">
-                                    <size key="itemSize" width="106" height="106"/>
+                                    <size key="itemSize" width="106" height="127"/>
                                     <size key="headerReferenceSize" width="50" height="24"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MorphiiCollectionViewCell" id="Mau-Zd-1W2" customClass="MorphiiCollectionViewCell" customModule="Morphii" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24" width="106" height="106"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MorphiiCollectionViewCell" id="OTk-gb-B80" customClass="MorphiiCollectionViewCell" customModule="Morphii" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="24" width="106" height="127"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="106" height="106"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="106" height="127"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AXs-cD-Er4" customClass="MorphiiView" customModule="Morphii" customModuleProvider="target">
-                                                    <rect key="frame" x="8" y="0.0" width="90" height="90"/>
+                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tje-6b-JE5" customClass="MorphiiView" customModule="Morphii" customModuleProvider="target">
+                                                    <rect key="frame" x="8" y="1" width="90" height="90"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="AXs-cD-Er4" secondAttribute="height" multiplier="1:1" id="LJC-8Z-oPf"/>
-                                                        <constraint firstAttribute="height" constant="74" id="Sk2-0r-wUe"/>
-                                                        <constraint firstAttribute="width" secondItem="AXs-cD-Er4" secondAttribute="height" multiplier="1:0.9" id="v0Q-IR-Pp2"/>
+                                                        <constraint firstAttribute="height" constant="74" id="3mB-mF-g8c"/>
+                                                        <constraint firstAttribute="width" secondItem="tje-6b-JE5" secondAttribute="height" multiplier="1:1" id="R2I-9P-fSA"/>
+                                                        <constraint firstAttribute="width" secondItem="tje-6b-JE5" secondAttribute="height" multiplier="1:0.9" id="Xup-18-iBZ"/>
                                                     </constraints>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="Sk2-0r-wUe"/>
-                                                            <exclude reference="v0Q-IR-Pp2"/>
+                                                            <exclude reference="3mB-mF-g8c"/>
+                                                            <exclude reference="Xup-18-iBZ"/>
                                                         </mask>
                                                     </variation>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Morphii Name" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="RXH-xy-bnb">
-                                                    <rect key="frame" x="4" y="85" width="98" height="26"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Morphii Name Morphii Name" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="qtw-2t-Lce">
+                                                    <rect key="frame" x="4" y="91" width="98" height="36"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="25" id="Pzi-il-tSV"/>
-                                                        <constraint firstAttribute="height" constant="26" id="snu-Dy-FxX"/>
+                                                        <constraint firstAttribute="height" constant="25" id="3Oj-WK-Sc4"/>
+                                                        <constraint firstAttribute="height" constant="26" id="EHu-o8-W99"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
                                                     <color key="textColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="Pzi-il-tSV"/>
-                                                            <exclude reference="snu-Dy-FxX"/>
+                                                            <exclude reference="EHu-o8-W99"/>
+                                                            <exclude reference="3Oj-WK-Sc4"/>
                                                         </mask>
                                                     </variation>
                                                 </label>
@@ -253,25 +253,33 @@
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="RXH-xy-bnb" firstAttribute="top" secondItem="AXs-cD-Er4" secondAttribute="bottom" constant="-5" id="9M2-zP-cGZ"/>
-                                            <constraint firstAttribute="bottom" secondItem="AXs-cD-Er4" secondAttribute="bottom" constant="24" id="BHa-g2-kXL"/>
-                                            <constraint firstAttribute="bottom" secondItem="RXH-xy-bnb" secondAttribute="bottom" constant="-5" id="BS3-pE-SR8"/>
-                                            <constraint firstItem="AXs-cD-Er4" firstAttribute="centerY" secondItem="Mau-Zd-1W2" secondAttribute="centerY" constant="-8" id="Bg1-he-4p2"/>
-                                            <constraint firstItem="AXs-cD-Er4" firstAttribute="leading" secondItem="Mau-Zd-1W2" secondAttribute="leading" constant="8" id="Kdj-lt-tlE"/>
-                                            <constraint firstAttribute="trailing" secondItem="RXH-xy-bnb" secondAttribute="trailing" constant="4" id="XuI-yB-zg5"/>
-                                            <constraint firstItem="RXH-xy-bnb" firstAttribute="leading" secondItem="Mau-Zd-1W2" secondAttribute="leading" constant="4" id="d1J-T9-gpv"/>
-                                            <constraint firstItem="AXs-cD-Er4" firstAttribute="top" secondItem="Mau-Zd-1W2" secondAttribute="top" id="g2j-W8-Yzg"/>
-                                            <constraint firstAttribute="trailing" secondItem="AXs-cD-Er4" secondAttribute="trailing" constant="8" id="ptp-va-owL"/>
+                                            <constraint firstItem="qtw-2t-Lce" firstAttribute="leading" secondItem="OTk-gb-B80" secondAttribute="leading" constant="4" id="5yi-jH-Yl0"/>
+                                            <constraint firstItem="qtw-2t-Lce" firstAttribute="top" secondItem="tje-6b-JE5" secondAttribute="bottom" constant="-2" id="7Us-yv-Isw"/>
+                                            <constraint firstItem="qtw-2t-Lce" firstAttribute="top" secondItem="tje-6b-JE5" secondAttribute="bottom" id="8sQ-PQ-eew"/>
+                                            <constraint firstItem="tje-6b-JE5" firstAttribute="leading" secondItem="OTk-gb-B80" secondAttribute="leading" constant="8" id="N3T-bZ-KOP"/>
+                                            <constraint firstAttribute="trailing" secondItem="tje-6b-JE5" secondAttribute="trailing" constant="8" id="SXF-fH-LKp"/>
+                                            <constraint firstAttribute="trailing" secondItem="qtw-2t-Lce" secondAttribute="trailing" constant="4" id="SkG-eO-TnN"/>
+                                            <constraint firstItem="tje-6b-JE5" firstAttribute="top" secondItem="OTk-gb-B80" secondAttribute="top" id="Z4N-MP-uRU"/>
+                                            <constraint firstItem="qtw-2t-Lce" firstAttribute="top" secondItem="tje-6b-JE5" secondAttribute="bottom" constant="-5" id="Z5O-Vh-9s4"/>
+                                            <constraint firstItem="tje-6b-JE5" firstAttribute="top" secondItem="OTk-gb-B80" secondAttribute="top" constant="1" id="cps-uD-TDx"/>
+                                            <constraint firstAttribute="bottom" secondItem="qtw-2t-Lce" secondAttribute="bottom" id="veX-nn-jm2"/>
+                                            <constraint firstAttribute="bottom" secondItem="tje-6b-JE5" secondAttribute="bottom" constant="24" id="wFK-lz-Pb4"/>
+                                            <constraint firstItem="tje-6b-JE5" firstAttribute="centerY" secondItem="OTk-gb-B80" secondAttribute="centerY" constant="-16" id="xaQ-eb-z9r"/>
+                                            <constraint firstAttribute="bottom" secondItem="qtw-2t-Lce" secondAttribute="bottom" constant="-3" id="yFO-aQ-eAe"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="BHa-g2-kXL"/>
-                                                <exclude reference="g2j-W8-Yzg"/>
+                                                <exclude reference="Z4N-MP-uRU"/>
+                                                <exclude reference="wFK-lz-Pb4"/>
+                                                <exclude reference="xaQ-eb-z9r"/>
+                                                <exclude reference="7Us-yv-Isw"/>
+                                                <exclude reference="Z5O-Vh-9s4"/>
+                                                <exclude reference="yFO-aQ-eAe"/>
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <outlet property="morphiiNameLabel" destination="RXH-xy-bnb" id="TGg-QQ-K7s"/>
-                                            <outlet property="morphiiView" destination="AXs-cD-Er4" id="IvJ-vs-aoM"/>
+                                            <outlet property="morphiiNameLabel" destination="qtw-2t-Lce" id="Lve-NI-bTU"/>
+                                            <outlet property="morphiiView" destination="tje-6b-JE5" id="EZ4-e9-Ndg"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -793,6 +801,7 @@
                                             <constraint firstItem="bVN-4f-0vo" firstAttribute="leading" secondItem="jQ4-iG-2DL" secondAttribute="leading" id="idB-Vp-xHK"/>
                                             <constraint firstItem="HBQ-zN-49r" firstAttribute="leading" secondItem="ts5-Ot-tdM" secondAttribute="leading" id="jov-Fm-Cqy"/>
                                             <constraint firstAttribute="bottom" secondItem="jQ4-iG-2DL" secondAttribute="bottom" id="l9S-om-LNR"/>
+                                            <constraint firstAttribute="height" constant="394" id="rNs-9b-ZE6"/>
                                             <constraint firstItem="9cL-lq-Ols" firstAttribute="centerY" secondItem="jQ4-iG-2DL" secondAttribute="centerY" id="t7y-wV-x4Z"/>
                                         </constraints>
                                         <variation key="default">
@@ -812,6 +821,11 @@
                                     <constraint firstItem="ts5-Ot-tdM" firstAttribute="height" secondItem="p3G-3X-nDy" secondAttribute="height" constant="-174" id="uee-Pp-fNZ"/>
                                     <constraint firstItem="ts5-Ot-tdM" firstAttribute="centerX" secondItem="p3G-3X-nDy" secondAttribute="centerX" id="uuk-8y-BN3"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="uee-Pp-fNZ"/>
+                                    </mask>
+                                </variation>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1397,48 +1411,48 @@
                                 <rect key="frame" x="2" y="67" width="316" height="367"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="6rg-y4-1M8">
-                                    <size key="itemSize" width="106" height="106"/>
+                                    <size key="itemSize" width="106" height="127"/>
                                     <size key="headerReferenceSize" width="50" height="24"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MorphiiCollectionViewCell" id="hOh-7K-0Tx" customClass="MorphiiCollectionViewCell" customModule="Morphii" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24" width="106" height="106"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MorphiiCollectionViewCell" id="dkC-w6-dCj" customClass="MorphiiCollectionViewCell" customModule="Morphii" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="24" width="106" height="127"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="106" height="106"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="106" height="127"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iyl-fU-fJy" customClass="MorphiiView" customModule="Morphii" customModuleProvider="target">
-                                                    <rect key="frame" x="8" y="0.0" width="90" height="90"/>
+                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SIy-ul-SIQ" customClass="MorphiiView" customModule="Morphii" customModuleProvider="target">
+                                                    <rect key="frame" x="8" y="1" width="90" height="90"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="74" id="Fxn-O1-HQI"/>
-                                                        <constraint firstAttribute="width" secondItem="Iyl-fU-fJy" secondAttribute="height" multiplier="1:0.9" id="T7L-FP-SKC"/>
-                                                        <constraint firstAttribute="width" secondItem="Iyl-fU-fJy" secondAttribute="height" multiplier="1:1" id="tDu-6f-Yuk"/>
+                                                        <constraint firstAttribute="width" secondItem="SIy-ul-SIQ" secondAttribute="height" multiplier="1:0.9" id="6Fr-aj-kg1"/>
+                                                        <constraint firstAttribute="width" secondItem="SIy-ul-SIQ" secondAttribute="height" multiplier="1:1" id="VwU-co-MVx"/>
+                                                        <constraint firstAttribute="height" constant="74" id="pyY-ZT-I3s"/>
                                                     </constraints>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="Fxn-O1-HQI"/>
-                                                            <exclude reference="T7L-FP-SKC"/>
+                                                            <exclude reference="pyY-ZT-I3s"/>
+                                                            <exclude reference="6Fr-aj-kg1"/>
                                                         </mask>
                                                     </variation>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Morphii Name" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="ZfN-D8-MZx">
-                                                    <rect key="frame" x="4" y="81" width="98" height="28"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Morphii Name Morphii Name" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="JGz-Fv-inp">
+                                                    <rect key="frame" x="4" y="91" width="98" height="36"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="26" id="SqZ-r7-vtP"/>
-                                                        <constraint firstAttribute="height" constant="25" id="y63-Ir-bw3"/>
+                                                        <constraint firstAttribute="height" constant="26" id="fTV-Q8-6Ql"/>
+                                                        <constraint firstAttribute="height" constant="25" id="iw4-iE-l0n"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
-                                                    <color key="textColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="SqZ-r7-vtP"/>
-                                                            <exclude reference="y63-Ir-bw3"/>
+                                                            <exclude reference="fTV-Q8-6Ql"/>
+                                                            <exclude reference="iw4-iE-l0n"/>
                                                         </mask>
                                                     </variation>
                                                 </label>
@@ -1447,27 +1461,33 @@
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="Iyl-fU-fJy" firstAttribute="leading" secondItem="hOh-7K-0Tx" secondAttribute="leading" constant="8" id="3d6-Jf-LUW"/>
-                                            <constraint firstAttribute="trailing" secondItem="Iyl-fU-fJy" secondAttribute="trailing" constant="8" id="9nV-cQ-Cuw"/>
-                                            <constraint firstAttribute="bottom" secondItem="Iyl-fU-fJy" secondAttribute="bottom" constant="24" id="Mqs-2X-rM9"/>
-                                            <constraint firstAttribute="trailing" secondItem="ZfN-D8-MZx" secondAttribute="trailing" constant="4" id="PFC-e5-HHu"/>
-                                            <constraint firstItem="ZfN-D8-MZx" firstAttribute="leading" secondItem="hOh-7K-0Tx" secondAttribute="leading" constant="4" id="S1L-P2-4Nv"/>
-                                            <constraint firstItem="ZfN-D8-MZx" firstAttribute="top" secondItem="Iyl-fU-fJy" secondAttribute="bottom" constant="-2" id="ZPY-uk-o4s"/>
-                                            <constraint firstItem="ZfN-D8-MZx" firstAttribute="top" secondItem="Iyl-fU-fJy" secondAttribute="bottom" constant="-9" id="cfc-x6-885"/>
-                                            <constraint firstItem="Iyl-fU-fJy" firstAttribute="centerY" secondItem="hOh-7K-0Tx" secondAttribute="centerY" constant="-8" id="lAc-6P-e9A"/>
-                                            <constraint firstItem="Iyl-fU-fJy" firstAttribute="top" secondItem="hOh-7K-0Tx" secondAttribute="top" id="pFj-Ru-bjW"/>
-                                            <constraint firstAttribute="bottom" secondItem="ZfN-D8-MZx" secondAttribute="bottom" constant="-3" id="vAz-SL-JRe"/>
+                                            <constraint firstAttribute="bottom" secondItem="JGz-Fv-inp" secondAttribute="bottom" id="0CS-do-TxY"/>
+                                            <constraint firstAttribute="bottom" secondItem="JGz-Fv-inp" secondAttribute="bottom" constant="-3" id="0HL-Mz-XKh"/>
+                                            <constraint firstItem="SIy-ul-SIQ" firstAttribute="leading" secondItem="dkC-w6-dCj" secondAttribute="leading" constant="8" id="4ZH-o9-AaE"/>
+                                            <constraint firstItem="SIy-ul-SIQ" firstAttribute="top" secondItem="dkC-w6-dCj" secondAttribute="top" constant="1" id="55Z-T5-qwW"/>
+                                            <constraint firstItem="JGz-Fv-inp" firstAttribute="top" secondItem="SIy-ul-SIQ" secondAttribute="bottom" constant="-2" id="AH2-vS-G2x"/>
+                                            <constraint firstItem="SIy-ul-SIQ" firstAttribute="top" secondItem="dkC-w6-dCj" secondAttribute="top" id="Kkf-DA-s5y"/>
+                                            <constraint firstAttribute="bottom" secondItem="SIy-ul-SIQ" secondAttribute="bottom" constant="24" id="RiI-KN-QhH"/>
+                                            <constraint firstItem="JGz-Fv-inp" firstAttribute="leading" secondItem="dkC-w6-dCj" secondAttribute="leading" constant="4" id="Vy9-i6-MeW"/>
+                                            <constraint firstAttribute="trailing" secondItem="JGz-Fv-inp" secondAttribute="trailing" constant="4" id="W1Z-Gq-35A"/>
+                                            <constraint firstItem="JGz-Fv-inp" firstAttribute="top" secondItem="SIy-ul-SIQ" secondAttribute="bottom" id="hwn-gK-IOG"/>
+                                            <constraint firstAttribute="trailing" secondItem="SIy-ul-SIQ" secondAttribute="trailing" constant="8" id="mJn-z6-Qlk"/>
+                                            <constraint firstItem="SIy-ul-SIQ" firstAttribute="centerY" secondItem="dkC-w6-dCj" secondAttribute="centerY" constant="-16" id="nfC-WT-i5z"/>
+                                            <constraint firstItem="JGz-Fv-inp" firstAttribute="top" secondItem="SIy-ul-SIQ" secondAttribute="bottom" constant="-5" id="sOK-9K-a22"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="Mqs-2X-rM9"/>
-                                                <exclude reference="pFj-Ru-bjW"/>
-                                                <exclude reference="ZPY-uk-o4s"/>
+                                                <exclude reference="Kkf-DA-s5y"/>
+                                                <exclude reference="RiI-KN-QhH"/>
+                                                <exclude reference="nfC-WT-i5z"/>
+                                                <exclude reference="AH2-vS-G2x"/>
+                                                <exclude reference="sOK-9K-a22"/>
+                                                <exclude reference="0HL-Mz-XKh"/>
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <outlet property="morphiiNameLabel" destination="ZfN-D8-MZx" id="pFB-a0-Gb0"/>
-                                            <outlet property="morphiiView" destination="Iyl-fU-fJy" id="1yP-V1-Mqo"/>
+                                            <outlet property="morphiiNameLabel" destination="JGz-Fv-inp" id="Td1-uY-Qkc"/>
+                                            <outlet property="morphiiView" destination="SIy-ul-SIQ" id="jmW-yY-MTB"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
