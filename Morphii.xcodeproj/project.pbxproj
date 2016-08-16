@@ -177,6 +177,9 @@
 		43AB60651D0F2F9500D2D185 /* walkthrough-C.png in Resources */ = {isa = PBXBuildFile; fileRef = 43AB60621D0F2F9500D2D185 /* walkthrough-C.png */; };
 		43AB60661D0F2F9500D2D185 /* walkthrough-A.png in Resources */ = {isa = PBXBuildFile; fileRef = 43AB60631D0F2F9500D2D185 /* walkthrough-A.png */; };
 		43AB60681D0F308100D2D185 /* AOTutorialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43AB60671D0F308100D2D185 /* AOTutorialViewController.xib */; };
+		43BC93C51D63A852001BD4C6 /* video3.mov in Resources */ = {isa = PBXBuildFile; fileRef = 43BC93C41D63A852001BD4C6 /* video3.mov */; };
+		43BC93C71D63A85A001BD4C6 /* video2.mov in Resources */ = {isa = PBXBuildFile; fileRef = 43BC93C61D63A85A001BD4C6 /* video2.mov */; };
+		43BC93C91D63B7BA001BD4C6 /* video1.mov in Resources */ = {isa = PBXBuildFile; fileRef = 43BC93C81D63B7BA001BD4C6 /* video1.mov */; };
 		43C4212F1D1DDBB300A282A0 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C4212E1D1DDBB300A282A0 /* FavoritesViewController.swift */; };
 		43CB117C1D3582C900964C38 /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CB117B1D3582C900964C38 /* TrendingViewController.swift */; };
 		43CB117F1D36BFFB00964C38 /* TrendingData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CB117D1D36BFFB00964C38 /* TrendingData+CoreDataProperties.swift */; };
@@ -373,6 +376,9 @@
 		43AB60621D0F2F9500D2D185 /* walkthrough-C.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "walkthrough-C.png"; sourceTree = "<group>"; };
 		43AB60631D0F2F9500D2D185 /* walkthrough-A.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "walkthrough-A.png"; sourceTree = "<group>"; };
 		43AB60671D0F308100D2D185 /* AOTutorialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AOTutorialViewController.xib; sourceTree = "<group>"; };
+		43BC93C41D63A852001BD4C6 /* video3.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = video3.mov; sourceTree = "<group>"; };
+		43BC93C61D63A85A001BD4C6 /* video2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = video2.mov; sourceTree = "<group>"; };
+		43BC93C81D63B7BA001BD4C6 /* video1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = video1.mov; sourceTree = "<group>"; };
 		43C4212E1D1DDBB300A282A0 /* FavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		43CB117B1D3582C900964C38 /* TrendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingViewController.swift; sourceTree = "<group>"; };
 		43CB117D1D36BFFB00964C38 /* TrendingData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TrendingData+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -612,6 +618,9 @@
 				43217B981D480F97000DF2A5 /* kb-app-morphiis.json */,
 				43217B9A1D4918B1000DF2A5 /* prod-credentials.txt */,
 				43E222111D4A9969003431DE /* allow_full_access.mov */,
+				43BC93C81D63B7BA001BD4C6 /* video1.mov */,
+				43BC93C61D63A85A001BD4C6 /* video2.mov */,
+				43BC93C41D63A852001BD4C6 /* video3.mov */,
 				4398CBAC1D05BF7000074BC7 /* Initialization */,
 				4398CBAE1D05BF8100074BC7 /* View Controllers */,
 				4398CBAD1D05BF7A00074BC7 /* Core Data */,
@@ -911,7 +920,9 @@
 				43AB60681D0F308100D2D185 /* AOTutorialViewController.xib in Resources */,
 				43A9E05B1D11D294001F3A1B /* SFUIDisplay-Light.ttf in Resources */,
 				43A9E0351D11D294001F3A1B /* SFCompactDisplay-Regular.ttf in Resources */,
+				43BC93C51D63A852001BD4C6 /* video3.mov in Resources */,
 				43A9E0471D11D294001F3A1B /* SFCompactText-LightItalic.ttf in Resources */,
+				43BC93C91D63B7BA001BD4C6 /* video1.mov in Resources */,
 				43A9E0731D11D294001F3A1B /* SFUIText-Medium.ttf in Resources */,
 				43A9E02B1D11D294001F3A1B /* SFCompactDisplay-Black.ttf in Resources */,
 				43A9E0531D11D294001F3A1B /* SFCompactText-SemiboldItalic.ttf in Resources */,
@@ -950,6 +961,7 @@
 				43A9E04D1D11D294001F3A1B /* SFCompactText-Regular.ttf in Resources */,
 				43A9E02D1D11D294001F3A1B /* SFCompactDisplay-Bold.ttf in Resources */,
 				43A9E0431D11D294001F3A1B /* SFCompactText-HeavyItalic.ttf in Resources */,
+				43BC93C71D63A85A001BD4C6 /* video2.mov in Resources */,
 				43A9E0391D11D294001F3A1B /* SFCompactDisplay-Thin.ttf in Resources */,
 				43A9E0711D11D294001F3A1B /* SFUIText-LightItalic.ttf in Resources */,
 				43A9E0771D11D294001F3A1B /* SFUIText-Regular.ttf in Resources */,

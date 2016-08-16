@@ -86,6 +86,7 @@
             <string>SFUIText-Regular</string>
             <string>SFUIText-Regular</string>
             <string>SFUIText-Regular</string>
+            <string>SFUIText-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -1449,8 +1450,8 @@
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="XaT-bM-FzN"/>
                                                 <exclude reference="ILp-9l-0bc"/>
+                                                <exclude reference="XaT-bM-FzN"/>
                                                 <exclude reference="bDQ-Gp-i0m"/>
                                             </mask>
                                         </variation>
@@ -3105,9 +3106,119 @@
                     <view key="view" contentMode="scaleToFill" id="DVQ-3y-gkf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iphone" translatesAutoresizingMaskIntoConstraints="NO" id="cvk-c6-1MP">
+                                <rect key="frame" x="51" y="60" width="220" height="448"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="418" id="4EY-y5-QU8"/>
+                                    <constraint firstAttribute="width" secondItem="cvk-c6-1MP" secondAttribute="height" multiplier="205:418" id="7wv-4J-XgJ"/>
+                                    <constraint firstAttribute="height" constant="398" id="9YQ-q4-KCA"/>
+                                    <constraint firstAttribute="width" constant="220" id="DzE-0C-mgl"/>
+                                    <constraint firstAttribute="width" constant="195" id="OGU-w8-kCW"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="4EY-y5-QU8"/>
+                                        <exclude reference="9YQ-q4-KCA"/>
+                                        <exclude reference="OGU-w8-kCW"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wgq-gP-e7l">
+                                <rect key="frame" x="64" y="112" width="194" height="344"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="320" id="aFs-Wm-2fP"/>
+                                    <constraint firstAttribute="width" constant="180" id="lO3-Wm-A5K"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="aFs-Wm-2fP"/>
+                                        <exclude reference="lO3-Wm-A5K"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="JBU-2j-vLV">
+                                <rect key="frame" x="64" y="33" width="194" height="37"/>
+                                <color key="pageIndicatorTintColor" red="0.14901960780000001" green="0.16862745100000001" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="currentPageIndicatorTintColor" red="0.0" green="0.8862745098" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </pageControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9pS-HV-Eo0">
+                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.8862745098" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="n5X-OH-PGI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
+                                <state key="normal" title="Dismiss">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissButtonPressed:" destination="of2-4J-DbM" eventType="touchUpInside" id="dMl-0v-bLs"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ovc-6j-uzB">
+                                <rect key="frame" x="0.0" y="60" width="320" height="448"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="Zp3-va-lCJ"/>
+                                    <constraint firstAttribute="height" constant="398" id="c9e-Bo-0Ag"/>
+                                    <constraint firstAttribute="height" constant="418" id="olh-Ns-HsD"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Zp3-va-lCJ"/>
+                                        <exclude reference="c9e-Bo-0Ag"/>
+                                        <exclude reference="olh-Ns-HsD"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.95622074800000001" green="0.95622074800000001" blue="0.95622074800000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Ovc-6j-uzB" firstAttribute="top" secondItem="JBU-2j-vLV" secondAttribute="bottom" constant="-10" id="4dk-iz-3Pz"/>
+                            <constraint firstItem="Ovc-6j-uzB" firstAttribute="top" secondItem="JBU-2j-vLV" secondAttribute="bottom" id="54c-YC-Cxf"/>
+                            <constraint firstItem="JBU-2j-vLV" firstAttribute="centerX" secondItem="wgq-gP-e7l" secondAttribute="centerX" id="Bte-1d-rSH"/>
+                            <constraint firstAttribute="trailing" secondItem="9pS-HV-Eo0" secondAttribute="trailing" id="Dhq-tm-cYT"/>
+                            <constraint firstItem="wgq-gP-e7l" firstAttribute="centerY" secondItem="cvk-c6-1MP" secondAttribute="centerY" id="EOE-lJ-mEA"/>
+                            <constraint firstAttribute="trailing" secondItem="Ovc-6j-uzB" secondAttribute="trailing" id="LaW-bx-tDC"/>
+                            <constraint firstItem="Ovc-6j-uzB" firstAttribute="top" secondItem="JBU-2j-vLV" secondAttribute="bottom" constant="-10" id="Ngr-8h-1in"/>
+                            <constraint firstItem="9pS-HV-Eo0" firstAttribute="leading" secondItem="DVQ-3y-gkf" secondAttribute="leading" id="PDT-pZ-gYv"/>
+                            <constraint firstItem="wgq-gP-e7l" firstAttribute="height" secondItem="cvk-c6-1MP" secondAttribute="height" multiplier="0.765" constant="1" id="UOX-hD-NX7"/>
+                            <constraint firstItem="Ovc-6j-uzB" firstAttribute="height" secondItem="cvk-c6-1MP" secondAttribute="height" id="VWH-PV-wwk"/>
+                            <constraint firstItem="wgq-gP-e7l" firstAttribute="centerX" secondItem="cvk-c6-1MP" secondAttribute="centerX" id="WZF-AV-3Pc"/>
+                            <constraint firstItem="cvk-c6-1MP" firstAttribute="centerX" secondItem="DVQ-3y-gkf" secondAttribute="centerX" constant="1" id="XPC-eP-rYz"/>
+                            <constraint firstItem="cvk-c6-1MP" firstAttribute="centerY" secondItem="DVQ-3y-gkf" secondAttribute="centerY" id="gac-SI-d84"/>
+                            <constraint firstItem="Ovc-6j-uzB" firstAttribute="top" secondItem="wgq-gP-e7l" secondAttribute="bottom" constant="-369" id="hH9-Jv-F2U"/>
+                            <constraint firstItem="wgq-gP-e7l" firstAttribute="top" secondItem="JBU-2j-vLV" secondAttribute="bottom" constant="-9" id="iCS-Hu-da1"/>
+                            <constraint firstItem="wgq-gP-e7l" firstAttribute="width" secondItem="cvk-c6-1MP" secondAttribute="width" multiplier="0.88" id="mXt-ot-8LM"/>
+                            <constraint firstItem="YXP-ad-U6P" firstAttribute="top" secondItem="9pS-HV-Eo0" secondAttribute="bottom" id="nGl-Mg-DPt"/>
+                            <constraint firstItem="Ovc-6j-uzB" firstAttribute="leading" secondItem="DVQ-3y-gkf" secondAttribute="leading" id="qt7-bc-pni"/>
+                            <constraint firstItem="Ovc-6j-uzB" firstAttribute="centerY" secondItem="cvk-c6-1MP" secondAttribute="centerY" id="uTf-Tk-Tcq"/>
+                            <constraint firstItem="wgq-gP-e7l" firstAttribute="width" secondItem="cvk-c6-1MP" secondAttribute="width" constant="-25" id="uW5-Qu-REe"/>
+                            <constraint firstItem="JBU-2j-vLV" firstAttribute="width" secondItem="wgq-gP-e7l" secondAttribute="width" id="urd-Da-iNe"/>
+                            <constraint firstItem="wgq-gP-e7l" firstAttribute="height" secondItem="cvk-c6-1MP" secondAttribute="height" constant="-98" id="z6c-8z-Tba"/>
+                            <constraint firstItem="Ovc-6j-uzB" firstAttribute="centerX" secondItem="cvk-c6-1MP" secondAttribute="centerX" id="zeX-Vj-Kbi"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="54c-YC-Cxf"/>
+                                <exclude reference="Ngr-8h-1in"/>
+                                <exclude reference="hH9-Jv-F2U"/>
+                                <exclude reference="zeX-Vj-Kbi"/>
+                                <exclude reference="iCS-Hu-da1"/>
+                                <exclude reference="uW5-Qu-REe"/>
+                                <exclude reference="z6c-8z-Tba"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="dismissButton" destination="9pS-HV-Eo0" id="Tmu-Nv-VP8"/>
+                        <outlet property="gestureView" destination="Ovc-6j-uzB" id="6eE-hd-uob"/>
+                        <outlet property="pageControl" destination="JBU-2j-vLV" id="ZyP-TY-KcF"/>
+                        <outlet property="videoContainer" destination="wgq-gP-e7l" id="IRN-4E-W9o"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Og-OR-IKO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -3241,6 +3352,7 @@
         <image name="favorites_selected" width="19" height="18"/>
         <image name="home" width="22" height="18"/>
         <image name="home_selected" width="22" height="18"/>
+        <image name="iphone" width="863" height="1764"/>
         <image name="morphii_logo_nav_bar" width="123" height="28"/>
         <image name="morphii_sad" width="386" height="386"/>
         <image name="search" width="44" height="44"/>

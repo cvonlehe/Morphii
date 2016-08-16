@@ -130,19 +130,8 @@ class HomeViewController: UIViewController {
     }
     
     func displayTutorial () {
-        guard let path = NSBundle.mainBundle().pathForResource("allow_full_access", ofType: "mov") else {
-            print("NO_PATH")
-            return
-        }
-        let url = NSURL(fileURLWithPath: path)
-        let player = AVPlayer(URL: url)
-        let playerViewController = AVPlayerViewController()
-        playerViewController.player = player
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HomeViewController.playerDidFinishPlaying(_:)),
-                                                         name: AVPlayerItemDidPlayToEndTimeNotification, object: player.currentItem)
-        self.presentViewController(playerViewController, animated: true) {
-            playerViewController.player!.play()
-        }
+        VideoTutorialViewController.displayVideoTutorialViewController(self)
+
         
         MorphiiAPI.sendUserProfileActionToAWS(ProfileActions.SetupMorphiiKeyboard)
     }

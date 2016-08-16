@@ -87,22 +87,7 @@ class SettingsViewController: UIViewController {
     }
     
     func setupKeyboardContainerViewTapped (tap:UITapGestureRecognizer) {
-        guard let path = NSBundle.mainBundle().pathForResource("allow_full_access", ofType: "mov") else {
-            print("NO_PATH")
-            return
-        }
-        let url = NSURL(fileURLWithPath: path)
-        let player = AVPlayer(URL: url)
-        let playerViewController = AVPlayerViewController()
-        //playerViewController.showsPlaybackControls = false
-        playerViewController.player = player
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SettingsViewController.playerDidFinishPlaying(_:)),
-                                                         name: AVPlayerItemDidPlayToEndTimeNotification, object: player.currentItem)
-        self.presentViewController(playerViewController, animated: true) {
-            playerViewController.player!.play()
-        }
-        
-        MorphiiAPI.sendUserProfileActionToAWS(ProfileActions.SetupMorphiiKeyboard)
+        VideoTutorialViewController.displayVideoTutorialViewController(self)
     }
     
     func playerDidFinishPlaying(note: NSNotification) {
