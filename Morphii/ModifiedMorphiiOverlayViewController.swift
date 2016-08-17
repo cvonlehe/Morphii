@@ -66,7 +66,15 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
     
     func setMorphii() {
         self.morphiiView.setUpMorphii(self.morphiiO!, emoodl: morphiiO!.emoodl?.doubleValue)
-        morhpiiNameLabel.text = morphiiO?.name
+        var showName = true
+        if let show = morphiiO?.showName?.boolValue {
+            showName = show
+        }
+        if showName {
+            self.morhpiiNameLabel.text = self.morphiiO!.name
+        }else {
+            self.morhpiiNameLabel.text = ""
+        }
         if let tags = (morphiiO?.tags as? AnyObject) as? [String] {
             var tagsString = tags.joinWithSeparator(" #")
             if tagsString.characters.count > 0 {

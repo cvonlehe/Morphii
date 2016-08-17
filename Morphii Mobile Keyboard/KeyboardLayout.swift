@@ -966,7 +966,15 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
         leftButtonWidth = rounded(leftButtonWidth)
         var rightButtonWidth = (rightSideAreaWidth - (gapWidth * CGFloat(keysAfterSpace - 1))) / CGFloat(keysAfterSpace)
         rightButtonWidth = rounded(rightButtonWidth)
-        
+        var spaceWidth = UIScreen.mainScreen().bounds.size.width - leftSideAreaWidth * 2 - 30
+
+
+        var spaceRect = CGRectMake(rightButtonWidth + 14, frame.origin.y, spaceWidth, frame.height)
+        if UIDevice.currentDevice().orientation == UIDeviceOrientation.LandscapeLeft || UIDevice.currentDevice().orientation == .LandscapeRight {
+            print("LANDSCAPE123")
+            spaceWidth -= 20
+            spaceRect = CGRectMake(rightButtonWidth + 32, frame.origin.y, spaceWidth, frame.height)
+        }
         let micButtonWidth = (isLandscape ? leftButtonWidth : leftButtonWidth * micButtonRatio)
         
         // special case for mic button
@@ -974,14 +982,13 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
             leftSideAreaWidth = leftSideAreaWidth + gapWidth + micButtonWidth
         }
         
-        var spaceWidth = UIScreen.mainScreen().bounds.size.width - leftSideAreaWidth * 2 - 30
         spaceWidth = rounded(spaceWidth)
         
         var currentOrigin = frame.origin.x
         var beforeSpace: Bool = true
         for (k, key) in row.enumerate() {
             if key.type == Key.KeyType.Space {
-                frames.append(CGRectMake(rightButtonWidth + 14, frame.origin.y, spaceWidth, frame.height))
+                frames.append(spaceRect)
                 currentOrigin += (spaceWidth + gapWidth)
                 beforeSpace = false
             }

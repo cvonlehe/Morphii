@@ -315,18 +315,51 @@ class MorphiiWideView: UIView {
     func showGestureForPanRecognizer(recognizer: UIPanGestureRecognizer) {
         let beginIntensity = NSNumber(double: beginningIntensity)
         if recognizer.state == UIGestureRecognizerState.Changed || recognizer.state == UIGestureRecognizerState.Ended {
+            
             let translation:CGPoint = recognizer.translationInView(self.morphiiTouchView)
-            if (self.morphii.scaleType == 1){
-                //for "positive" emotions use this translation:SCALE TYPE 1
-                self.emoodl -= (Double(translation.y)) / 2.5
-            } else  if (self.morphii.scaleType == 2){
-                //for "positive" emotions use this translation:SCALE TYPE 2
-                self.emoodl -= (Double(translation.y)) / 2.5
+            
+            if (morphii.scaleType == 1){
+                
+                // NEUTRAL -> MIN / NEGATIVE EMOTIONS / SCALE TYPE 1
+                self.emoodl -= (Double(translation.y)) / 4.0
+                
+                // this handles the problem where people could swipe past 1 or 0 value
+                if self.emoodl > 100 { self.emoodl = 100 }
+                if self.emoodl < 0 { self.emoodl = 0 }
+                
+                // FOR REPORTING THE VALUE OF MORPHII
+                let intensityVal = reportMorphiiValue(self.emoodl)
+                
+                // INVERT THE SCALE SO THAT NEUTRAL IS 0 AND 1 IS MAX INTENSITY
+                let morphiiVal = 1 - intensityVal
+                print("intensity is \(morphiiVal)")
+                
+            } else  if (morphii.scaleType == 2){
+                // MAX -> NEUTRAL / POSITIVE EMOTIONS / SCALE TYPE 2
+                
+                self.emoodl -= (Double(translation.y)) / 4
+                
+                // this handles the problem where people could swipe past 1 or 0 value
+                if self.emoodl > 100 { self.emoodl = 100 }
+                if self.emoodl < 0 { self.emoodl = 0 }
+                
+                //use this for reporting the value of the morphii
+                let intensityVal = reportMorphiiValue(self.emoodl)
+                print("intensity is \(intensityVal)")
+                
             } else {
-                //for "negative" emotions use this translation:SCALE TYPE 3
-                self.emoodl -= (Double(translation.y)) / 2.5
+                // MAX -> MIN / DOUBLE ANCHOR SCALE / SCALE TYPE 3
+                self.emoodl += (Double(translation.y)) / 4
+                
+                // this handles the problem where people could swipe past 1 or 0 value
+                if self.emoodl > 100 { self.emoodl = 100 }
+                if self.emoodl < 0 { self.emoodl = 0 }
+                
+                //use this for reporting the value of the morphii
+                let intensityVal = reportMorphiiValue(self.emoodl)
+                print("intensity is \(intensityVal)")
+                
             }
-            print("EMOODL:",self.emoodl)
             recognizer.setTranslation(CGPointZero, inView: self)
         }
         if emoodl > 100 {
@@ -343,6 +376,16 @@ class MorphiiWideView: UIView {
         }else if recognizer.state == .Began {
             beginningIntensity = emoodl
         }
+    }
+    
+    func reportMorphiiValue(intensityValue: Double) -> Double {
+        
+        var intensityVal = (intensityValue / 100)
+        if intensityVal > 1 { intensityVal = 1 }
+        if intensityVal < 0 { intensityVal = 0 }
+        
+        return intensityVal
+        
     }
     
     func shareMorphii(viewController:UIViewController) {

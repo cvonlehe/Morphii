@@ -23,6 +23,21 @@ class KeyboardMorphiiOverlayView: ExtraView {
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
         self.loadNib()
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(KeyboardMorphiiOverlayView.morphiiViewLongPressed(_:)))
+        self.morphiiTouchView.addGestureRecognizer(longPressRecognizer)
+    }
+    
+    func morphiiViewLongPressed (press:UILongPressGestureRecognizer) {
+        press.enabled = false
+        let success = morphiiWideView.copyMorphyToClipboard()
+        if success {
+            MethodHelper.showSuccessErrorHUD(true, message: "Copied to Clipboard", inView: self)
+            morphiiWideView.morphii.lastUsedIntensity = NSNumber(double: morphiiWideView.emoodl)
+            CDHelper.sharedInstance.saveContext(nil)
+        }else {
+            MethodHelper.showSuccessErrorHUD(false, message: "Error Copying to Clipboard", inView: self)
+        }
+        press.enabled = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -106,12 +121,16 @@ extension KeyboardMorphiiOverlayView:ShareMorphiiOverlayViewDelegate {
     func copiedMorphii() {
         cancelPressed()
         morphiiWideView.backgroundColor = UIColor.clearColor()
+        morphiiWideView.morphii.lastUsedIntensity = NSNumber(double: morphiiWideView.emoodl)
+        CDHelper.sharedInstance.saveContext(nil)
         MethodHelper.showSuccessErrorHUD(true, message: "Copied to Clipboard", inView: self)
     }
     
     func savedMorphiiToCameraRoll() {
         cancelPressed()
         morphiiWideView.backgroundColor = UIColor.clearColor()
+        morphiiWideView.morphii.lastUsedIntensity = NSNumber(double: morphiiWideView.emoodl)
+        CDHelper.sharedInstance.saveContext(nil)
         MethodHelper.showSuccessErrorHUD(true, message: "Saved to Camera Roll", inView: self)
     }
     

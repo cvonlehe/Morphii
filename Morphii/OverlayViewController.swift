@@ -188,7 +188,15 @@ extension OverlayViewController {
     func setMorphii() {
         self.morphiiWideView.setUpMorphii(self.morphiiO!, emoodl: 50.0, morphiiTouchView: self.morphiiTouchView)
 
-        self.morphiiNameLabel.text = self.morphiiO!.name
+        var showName = true
+        if let show = morphiiO?.showName?.boolValue {
+            showName = show
+        }
+        if showName {
+            self.morphiiNameLabel.text = self.morphiiO!.name
+        }else {
+            self.morphiiNameLabel.text = ""
+        }
         if let collectionName = morphiiO?.groupName {
             collectionNameLabel.text = collectionName
          collectionNameLabel.addTextSpacing(1.6)
@@ -222,7 +230,7 @@ extension OverlayViewController {
         if let mView = favoriteMorphiiView {
             mView.setNewMorphii(morphiiWideView.morphii, emoodl: morphiiWideView.emoodl, showName: true)
         }else {
-            favoriteMorphiiView = MorphiiSelectionView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: favoriteMorphiiContainerView.frame.size), morphii: morphiiWideView.morphii, delegate: nil, showName: true)
+            favoriteMorphiiView = MorphiiSelectionView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: favoriteMorphiiContainerView.frame.size), morphii: morphiiWideView.morphii, delegate: nil, showName: true, useRecentIntensity: false)
             favoriteMorphiiContainerView.addSubview(favoriteMorphiiView!)
             favoriteMorphiiView?.morphiiView.emoodl = morphiiWideView.emoodl
         }

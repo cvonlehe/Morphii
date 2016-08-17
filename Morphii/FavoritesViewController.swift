@@ -11,18 +11,15 @@ import CoreData
 
 class FavoritesViewController: UIViewController {
 
-    @IBOutlet weak var shadowHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var noFavoritesContainerView: UIView!
-    @IBOutlet weak var searchButton: UIButton!
-    @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     var fetchedResultsController:NSFetchedResultsController?
     var fetcher:FetchedDelegateDataSource!
+    var searchButton:UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        shadowHeightConstraint.constant = 0.5
-
+        showSearchButton()
         // Do any additional setup after loading the view.
     }
     
@@ -46,9 +43,7 @@ class FavoritesViewController: UIViewController {
    override func viewWillDisappear(animated: Bool) {
       super.viewWillDisappear(animated)
       fetcher.stopEditing()
-      searchButton.hidden = false
-      doneButton.hidden = true
-
+    showSearchButton()
    }
 
     override func didReceiveMemoryWarning() {
@@ -91,14 +86,37 @@ class FavoritesViewController: UIViewController {
     
     @IBAction func doneButtonPressed(sender: UIButton) {
         fetcher.stopEditing()
-        searchButton.hidden = false
-        doneButton.hidden = true
+        showSearchButton()
     }
     
     @IBAction func searchButtonPressed(sender: UIButton) {
         let nextView = self.storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.SearchViewController) as! SearchViewController
         nextView.fromArea = MorphiiAreas.containerFavorites
         navigationController?.pushViewController(nextView, animated: true)
+    }
+    
+    func showDoneButton () {
+        
+        let dict:[String:AnyObject] = [NSFontAttributeName : UIFont(name: "SFUIDisplay-Light", size: 14.0)!, NSForegroundColorAttributeName: UIColor ( red: 0.2, green: 0.2235, blue: 0.2902, alpha: 1.0 )]
+        let barItem = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(FavoritesViewController.doneButtonPressed(_:)))
+        barItem.setTitleTextAttributes(dict, forState: .Normal)
+//        searchButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 22))
+//        searchButton.addTarget(self, action: #selector(FavoritesViewController.doneButtonPressed(_:)), forControlEvents: .TouchUpInside)
+//        searchButton.setTitle("Done", forState: .Normal)
+//        searchButton.titleLabel?.textColor = UIColor ( red: 0.2, green: 0.2235, blue: 0.2902, alpha: 1.0 )
+//        searchButton.titleLabel?.addTextSpacing(1.6)
+//        searchButton.titleLabel?.font = UIFont(name: "SFUIDisplay-Text" , size: 15)
+//        let barButtonItem = UIBarButtonItem(customView: searchButton)
+        navigationItem.rightBarButtonItem = barItem
+    }
+    
+    func showSearchButton () {
+        searchButton = UIButton(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
+        searchButton.addTarget(self, action: #selector(FavoritesViewController.searchButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        searchButton.setImage(UIImage(named: "search"), forState: .Normal)
+        searchButton.setTitle(nil, forState: .Normal)
+        let barButtonItem = UIBarButtonItem(customView: searchButton)
+        navigationItem.rightBarButtonItem = barButtonItem
     }
 
     /*
@@ -125,8 +143,7 @@ extension FavoritesViewController:FetchedResultsDisplayer {
     }
     
     func beganRearranging () {
-        searchButton.hidden = true
-        doneButton.hidden = false
+        showDoneButton()
     }
     
     func deletingMorphii(morphii: Morphii) {

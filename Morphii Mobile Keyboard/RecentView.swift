@@ -41,6 +41,10 @@ class RecentView: ExtraView {
             self.morphiiScrollView.hidden = false
             titleLabel.text = "All Morphiis"
             morphiis = Morphii.getNonfavoriteMorphiis()
+            if morphiis.count <= 0 {
+                getMorphiisFromJSONFile()
+                print("GOT_MORPHIIS_FROM_JSON:",morphiis)
+            }
             break
         case .Recents:
             morphiis = Morphii.getMostRecentlyUsedMorphiis()
@@ -72,6 +76,17 @@ class RecentView: ExtraView {
         performSelector(#selector(RecentView.loadMorphiis as (RecentView) -> () -> ()), withObject: nil, afterDelay: 0.5)
     }
     
+    func getMorphiisFromJSONFile () {
+        guard let path = NSBundle.mainBundle().pathForResource("kb-app-morphiis", ofType: "json") else {return}
+        do {
+            let string = try String(contentsOfFile: path, encoding: NSUTF8StringEncoding)
+            guard let data = string.dataUsingEncoding(NSUTF8StringEncoding) else {return}
+            morphiis = MorphiiAPI.convertJSONToMorphiis(data)
+        }catch {
+            
+        }
+    }
+    
     func loadMorphiis () {
         let morphiiSideLength = frame.size.height / 2 - 10
         var x = CGFloat(0)
@@ -79,7 +94,7 @@ class RecentView: ExtraView {
         for morphii in morphiis {
             print("morphiiSelectionViewTapped23:",morphii.originalName)
 
-            let morphiiView = MorphiiSelectionView(frame: CGRect(x: x, y: y, width: morphiiSideLength, height: morphiiSideLength), morphii: morphii, delegate: nil, showName: fetchType != .Recents)
+            let morphiiView = MorphiiSelectionView(frame: CGRect(x: x, y: y, width: morphiiSideLength, height: morphiiSideLength), morphii: morphii, delegate: nil, showName: fetchType != .Recents, useRecentIntensity: fetchType == .Recents)
             morphiiView.morphiiView.backgroundColor = UIColor.clearColor()
             morphiiView.backgroundColor = UIColor.clearColor()
             morphiiView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(RecentView.morphiiSelectionViewTapped(_:))))

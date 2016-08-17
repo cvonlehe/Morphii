@@ -6,7 +6,6 @@
 
 import UIKit
 import AudioToolbox
-import DeviceKit
 
 let metrics: [String:Double] = [
     "topBanner": 40
@@ -53,6 +52,7 @@ class KeyboardViewController: UIInputViewController {
     var abcDisplayed = true
     var orientation = UIInterfaceOrientation.Portrait
     var coverView:UIView?
+    var noAutoCorrectView:UIView?
     
     override func loadView() {
         super.loadView()
@@ -74,9 +74,9 @@ class KeyboardViewController: UIInputViewController {
         super.viewWillAppear(animated)
         coverView = UIView(frame: view.frame)
         coverView?.backgroundColor = UIColor.whiteColor()
-        view.addSubview(coverView!)
+        view.addSubview (coverView!)
         let widthConstraint = NSLayoutConstraint(item: coverView!, attribute: .Width, relatedBy: .Equal, toItem: view, attribute: .Width, multiplier: 1, constant: 0)
-        let heightConstraint = NSLayoutConstraint(item: coverView!, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 1, constant: 0)
+        let heightConstraint = NSLayoutConstraint(item: coverView!, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 1, constant: 200)
         let xConstraint = NSLayoutConstraint(item: coverView!, attribute: .CenterX, relatedBy: .Equal, toItem: view, attribute: .CenterX, multiplier: 1, constant: 0)
         let yConstraint = NSLayoutConstraint(item: coverView!, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1, constant: 0)
         view.addConstraints([widthConstraint, heightConstraint, xConstraint, yConstraint])
@@ -87,7 +87,57 @@ class KeyboardViewController: UIInputViewController {
         }else {
             setCenterView(.Recents)
         }
+        
 
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        performSelector(#selector(KeyboardViewController.addNoAutoCorrectView), withObject: nil, afterDelay: 1)
+    }
+    
+    func addNoAutoCorrectView () {
+        let hasSeenAutoCorrect = MorphiiAPI.getUserDefaults().boolForKey("hasSeenAutoCorrect")
+        if hasSeenAutoCorrect {
+            return
+        }
+        noAutoCorrectView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
+        noAutoCorrectView?.backgroundColor = UIColor.whiteColor()
+        view.addSubview (noAutoCorrectView!)
+        let widthConstraint = NSLayoutConstraint(item: noAutoCorrectView!, attribute: .Width, relatedBy: .Equal, toItem: view, attribute: .Width, multiplier: 1, constant: 0)
+        let heightConstraint = NSLayoutConstraint(item: noAutoCorrectView!, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 1, constant: 0)
+        let xConstraint = NSLayoutConstraint(item: noAutoCorrectView!, attribute: .CenterX, relatedBy: .Equal, toItem: view, attribute: .CenterX, multiplier: 1, constant: 0)
+        let yConstraint = NSLayoutConstraint(item: noAutoCorrectView!, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1, constant: 0)
+        view.addConstraints([widthConstraint, heightConstraint, xConstraint, yConstraint])
+        
+        let label = UILabel(frame: CGRect(x: 0, y: 20, width: noAutoCorrectView!.frame.size.width, height: noAutoCorrectView!.frame.size.height - 40))
+        label.textAlignment = .Center
+        let widthConstraint2 = NSLayoutConstraint(item: label, attribute: .Width, relatedBy: .Equal, toItem: noAutoCorrectView!, attribute: .Width, multiplier: 1, constant: 0)
+        let heightConstraint2 = NSLayoutConstraint(item: label, attribute: .Height, relatedBy: .Equal, toItem: noAutoCorrectView!, attribute: .Height, multiplier: 1, constant: -40)
+        let xConstraint2 = NSLayoutConstraint(item: label, attribute: .CenterX, relatedBy: .Equal, toItem: noAutoCorrectView!, attribute: .CenterX, multiplier: 1, constant: 0)
+        let yConstraint2 = NSLayoutConstraint(item: label, attribute: .CenterY, relatedBy: .Equal, toItem: noAutoCorrectView!, attribute: .CenterY, multiplier: 1, constant: 0)
+        noAutoCorrectView?.addSubview (label)
+
+        view.addConstraints([widthConstraint2, heightConstraint2, xConstraint2, yConstraint2])
+        label.numberOfLines = 0
+        label.text = "Just so you know, there's no autocorrect in this keyboard"
+        
+        let noAutocorrectCloseButton = UIButton(frame: CGRect(x: view.frame.size.width - 8 - 20, y: 8, width: 20, height: 20))
+        noAutocorrectCloseButton.setImage(UIImage(named: "close_icon"), forState: .Normal)
+        let widthConstraint3 = NSLayoutConstraint(item: noAutocorrectCloseButton, attribute: .Width, relatedBy: .Equal, toItem:nil, attribute: .NotAnAttribute, multiplier: 1, constant: 20)
+        let heightConstraint3 = NSLayoutConstraint(item: noAutocorrectCloseButton, attribute: .Height, relatedBy: .Equal, toItem:nil, attribute: .NotAnAttribute, multiplier: 1, constant: 20)
+        let xConstraint3 = NSLayoutConstraint(item: noAutocorrectCloseButton, attribute: .CenterX, relatedBy: .Equal, toItem: noAutoCorrectView!, attribute: .CenterX, multiplier: 1, constant: 0)
+        let yConstraint3 = NSLayoutConstraint(item: noAutocorrectCloseButton, attribute: .CenterY, relatedBy: .Equal, toItem: noAutoCorrectView!, attribute: .CenterY, multiplier: 1, constant: 0)
+        noAutoCorrectView?.addSubview (noAutocorrectCloseButton)
+        view.addConstraints([widthConstraint3, heightConstraint3, xConstraint3, yConstraint3])
+        noAutocorrectCloseButton.addTarget(self, action: #selector(KeyboardViewController.noAutocorrectCloseButtonPressed(_:)), forControlEvents: .TouchUpInside)
+    }
+    
+    func noAutocorrectCloseButtonPressed (sender:UIButton) {
+        noAutoCorrectView?.removeFromSuperview()
+        noAutoCorrectView = nil
+        MorphiiAPI.getUserDefaults().setBool(true, forKey: "hasSeenAutoCorrect")
+        MorphiiAPI.getUserDefaults().synchronize()
     }
     
     override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
@@ -511,6 +561,7 @@ class KeyboardViewController: UIInputViewController {
 //            newOrigin = CGPointMake(0, 0)
 //        }
         self.forwardingView.frame.origin = newOrigin
+        
     }
     
 

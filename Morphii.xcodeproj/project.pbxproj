@@ -180,6 +180,7 @@
 		43BC93C51D63A852001BD4C6 /* video3.mov in Resources */ = {isa = PBXBuildFile; fileRef = 43BC93C41D63A852001BD4C6 /* video3.mov */; };
 		43BC93C71D63A85A001BD4C6 /* video2.mov in Resources */ = {isa = PBXBuildFile; fileRef = 43BC93C61D63A85A001BD4C6 /* video2.mov */; };
 		43BC93C91D63B7BA001BD4C6 /* video1.mov in Resources */ = {isa = PBXBuildFile; fileRef = 43BC93C81D63B7BA001BD4C6 /* video1.mov */; };
+		43BC93CA1D64B406001BD4C6 /* kb-app-morphiis.json in Resources */ = {isa = PBXBuildFile; fileRef = 43217B981D480F97000DF2A5 /* kb-app-morphiis.json */; };
 		43C4212F1D1DDBB300A282A0 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C4212E1D1DDBB300A282A0 /* FavoritesViewController.swift */; };
 		43CB117C1D3582C900964C38 /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CB117B1D3582C900964C38 /* TrendingViewController.swift */; };
 		43CB117F1D36BFFB00964C38 /* TrendingData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CB117D1D36BFFB00964C38 /* TrendingData+CoreDataProperties.swift */; };
@@ -519,9 +520,9 @@
 		4365531F1D3D340400DD98B7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				436553191D3D33FE00DD98B7 /* DefaultKeyboard.swift */,
 				4365531A1D3D33FE00DD98B7 /* DirectionEnum.swift */,
 				4365531B1D3D33FE00DD98B7 /* KeyboardModel.swift */,
+				436553191D3D33FE00DD98B7 /* DefaultKeyboard.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1018,6 +1019,7 @@
 				43A9E0381D11D294001F3A1B /* SFCompactDisplay-Semibold.ttf in Resources */,
 				43A9E0521D11D294001F3A1B /* SFCompactText-Semibold.ttf in Resources */,
 				43A9E0661D11D294001F3A1B /* SFUIDisplay-Ultralight.ttf in Resources */,
+				43BC93CA1D64B406001BD4C6 /* kb-app-morphiis.json in Resources */,
 				43A9E05E1D11D294001F3A1B /* SFUIDisplay-Medium.ttf in Resources */,
 				43A9E0341D11D294001F3A1B /* SFCompactDisplay-Medium.ttf in Resources */,
 				43A9E06A1D11D294001F3A1B /* SFUIText-BoldItalic.ttf in Resources */,

@@ -25,7 +25,12 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         print("CURRENT_USER:",User.getCurrentUser()?.objectID)
-        shadowHeightConstraint.constant = 0.5
+        //shadowHeightConstraint.constant = 0.5
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
+        button.addTarget(self, action: #selector(HomeViewController.searchButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        button.setImage(UIImage(named: "search"), forState: .Normal)
+        let barButtonItem = UIBarButtonItem(customView: button)
+        navigationItem.rightBarButtonItem = barButtonItem
 
         performSelector(#selector(HomeViewController.createFetchedResultsController), withObject: nil, afterDelay: 2)
 
@@ -59,7 +64,7 @@ class HomeViewController: UIViewController {
             searchButton.hidden = true
             request.predicate = NSPredicate(format: "groupName == %@", collection)
         }else {
-            backButton.hidden = true
+            //backButton.hidden = true
             request.predicate = NSPredicate(format: "isFavorite != %@", NSNumber(bool: true))
         }
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CDHelper.sharedInstance.managedObjectContext, sectionNameKeyPath: MorphiiAPIKeys.groupName, cacheName: CacheNames.AllMorphiiFetchedResultsCollectionView)

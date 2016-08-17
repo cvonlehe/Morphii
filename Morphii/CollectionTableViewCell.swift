@@ -36,8 +36,9 @@ class CollectionTableViewCell: UITableViewCell {
 
 extension UILabel{
    func addTextSpacing(spacing: CGFloat){
-      let attributedString = NSMutableAttributedString(string: self.text!)
-      attributedString.addAttribute(NSKernAttributeName, value: spacing, range: NSRange(location: 0, length: self.text!.characters.count))
+    guard let t = self.text else {return}
+      let attributedString = NSMutableAttributedString(string: t)
+      attributedString.addAttribute(NSKernAttributeName, value: spacing, range: NSRange(location: 0, length: t.characters.count))
       self.attributedText = attributedString
    }
 }

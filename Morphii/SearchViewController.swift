@@ -37,6 +37,16 @@ class SearchViewController: UIViewController {
 
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if let hash = hashtag {
@@ -153,7 +163,7 @@ extension SearchViewController:UITableViewDelegate,UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 0 {
             let morphii = self.morphiis[indexPath.row]
-            MorphiiAPI.sendMorphiiSelectedToAWS(morphii, area: fromArea)
+            MorphiiAPI.sendMorphiiSelectedToAWS(morphii, area: MorphiiAreas.containerSearch)
             guard let isFavorite  = morphii.isFavorite?.boolValue else {
                 OverlayViewController.createOverlay(self, morphiiO: morphii, area: MorphiiAreas.containerSearch)
                 return
