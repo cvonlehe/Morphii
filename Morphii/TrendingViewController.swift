@@ -11,7 +11,6 @@ import UIKit
 class TrendingViewcController: UIViewController {
     var newsURL:String?
 
-    @IBOutlet weak var shadowHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var newsTitleLabel: UILabel!
     @IBOutlet weak var newsMessageLabel: UILabel!
     
@@ -49,7 +48,14 @@ class TrendingViewcController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        shadowHeightConstraint.constant = 0.5
+        
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
+        button.addTarget(self, action: #selector(TrendingViewcController.searchButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        button.setImage(UIImage(named: "search"), forState: .Normal)
+        let barButtonItem = UIBarButtonItem(customView: button)
+        navigationItem.rightBarButtonItem = barButtonItem
+        
+        
       newsTitleLabel.addTextSpacing(0.75)
       newsMessageLabel.addTextSpacing(0.4)
       newsHeaderLabel.addTextSpacing(1.6)
@@ -83,6 +89,12 @@ class TrendingViewcController: UIViewController {
 
         
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     
     func displayHashtags (hashtagsO:[String]?) {
         if let hashtags = hashtagsO {
@@ -205,9 +217,13 @@ class TrendingViewcController: UIViewController {
         }
     }
     @IBAction func searchButtonPressed(sender: UIButton) {
+        sender.enabled = false
+
         let nextView = self.storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.SearchViewController) as! SearchViewController
         nextView.fromArea = MorphiiAreas.containerTrending
+        nextView.sender = sender
         navigationController?.pushViewController(nextView, animated: true)
+
     }
     
     private func setNewsMessageText(title:String?, text:String?) {

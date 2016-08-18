@@ -51,7 +51,7 @@ class HomeViewController: UIViewController {
         super.viewWillAppear(animated)
         print("VIEWWILLAPPEAR")
         self.createFetchedResultsController()
-
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     
@@ -125,9 +125,12 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func searchButtonPressed(sender: UIButton) {
+        sender.enabled = false
         let nextView = self.storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.SearchViewController) as! SearchViewController
         nextView.fromArea = MorphiiAreas.containerHome
+        nextView.sender = sender
         navigationController?.pushViewController(nextView, animated: true)
+        
         
     }
     @IBAction func backButtonPressed(sender: UIButton) {

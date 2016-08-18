@@ -429,20 +429,21 @@ class MorphiiAPI {
         }
     }
     
-    class func sendFavoriteData (morphiiO:Morphii?, favoriteNameO:String?, emoodl:Double, tags:[String]) {
-        
+    class func sendFavoriteData (morphiiO:Morphii?, favoriteNameO:String?, emoodl:Double, tags:[String], intensity:Double) {
+        print("sendFavoriteData1346:",intensity)
+
         if keyboardActive {
-            sendFavoritePOST(nil, morphiiO: morphiiO, favoriteNameO: favoriteNameO, emoodl: emoodl, tags: tags)
+            sendFavoritePOST(nil, morphiiO: morphiiO, favoriteNameO: favoriteNameO, emoodl: emoodl, tags: tags, intensity: intensity)
         }else {
             MethodHelper.getCurrentLocaiton { (locationO) in
-                sendFavoritePOST(locationO, morphiiO: morphiiO, favoriteNameO: favoriteNameO, emoodl: emoodl, tags: tags)
+                sendFavoritePOST(locationO, morphiiO: morphiiO, favoriteNameO: favoriteNameO, emoodl: emoodl, tags: tags, intensity: intensity)
             }
         }
         
     }
     
-    private class func sendFavoritePOST (locationO:CLLocation?, morphiiO:Morphii?, favoriteNameO:String?, emoodl:Double, tags:[String]) {
-        print("sendFavoriteData1")
+    private class func sendFavoritePOST (locationO:CLLocation?, morphiiO:Morphii?, favoriteNameO:String?, emoodl:Double, tags:[String], intensity:Double) {
+        let intensityNumber = NSNumber(double: intensity / 100)
         guard let favoriteName = favoriteNameO, let morphii = morphiiO, let deviceId = UIDevice.currentDevice().identifierForVendor?.UUIDString, var morphiiId = morphii.id, var morphiiName = morphii.name, let intensity = morphii.emoodl?.doubleValue else {return}
         print("sendFavoriteData2")
         let accountIdString = Config.getCurrentConfig().MORPHII_API_ACCOUNT_ID.stringByReplacingOccurrencesOfString(" ", withString: "")
@@ -496,13 +497,13 @@ class MorphiiAPI {
                           "morphii":
                             ["id":morphiiId,
                                 "name":morphiiName,
-                                "intensity":getCorrectedIntensity(NSNumber(double:emoodl))],
+                                "intensity":intensityNumber],
                           "favorite":
                             ["name":favoriteName,
                                 "tags":tags]
         ]
-        print("PARAMETERS:",parameters)
-        print("FAVORITE - devicedId:",deviceId,"favoriteName:",favoriteName,"morphiiId:",morphiiId,"morphiiName:",morphiiName,"intensity:",intensity/100.0,"dateString:",dateString,"timeZoneOffset:",timeZoneOffsetString,"AccountId:",accountId)
+        print("PARAMETERS123:",parameters)
+//        print("FAVORITE123 - devicedId:",deviceId,"favoriteName:",favoriteName,"morphiiId:",morphiiId,"morphiiName:",morphiiName,"intensity:",intensity,"dateString:",dateString,"timeZoneOffset:",timeZoneOffsetString,"AccountId:",accountId)
         
         do {
             print("sendFavoriteData3")

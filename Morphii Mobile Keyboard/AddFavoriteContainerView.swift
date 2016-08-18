@@ -62,7 +62,9 @@ class AddFavoriteContainerView: ExtraView {
         
     }
     
-    func addToSuperView(superView:UIView?, morphiiWideView:MorphiiWideView, delegate:AddFavoriteContainerViewDelegate) {
+    func addToSuperView(superView:UIView?, morphiiWideView:MorphiiWideView, delegate:AddFavoriteContainerViewDelegate, intensity:Double) {
+        print("addMorphiiToFavorites1544:", intensity)
+
         guard let sView = superView else {return}
         sView.addSubview(self)
         translatesAutoresizingMaskIntoConstraints = false
@@ -76,9 +78,10 @@ class AddFavoriteContainerView: ExtraView {
         sView.addConstraint(centerXConstraint)
         sView.addConstraint(bottom)
         self.delegate = delegate
-        self.morphiiView.setUpMorphii(morphiiWideView.morphii, emoodl: morphiiView.emoodl)
-        print("MORPHII_FAVORITE_VIEW:",morphiiWideView.morphii.originalName)
+        self.morphiiView.setUpMorphii(morphiiWideView.morphii, emoodl: intensity)
+        
         morphiiView.userInteractionEnabled = false
+        tagsTextField.becomeFirstResponder()
         nameTextField.becomeFirstResponder()
         KeyboardViewController.sViewController.currentMode = 0
     }

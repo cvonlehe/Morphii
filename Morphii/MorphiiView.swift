@@ -52,6 +52,8 @@ class MorphiiView: UIView, MorphiiProtocol {
         }else if let number = morphii.emoodl {
             self.emoodl = number.doubleValue
         }
+        
+        
 //        emoodl = 45.0
     }
     

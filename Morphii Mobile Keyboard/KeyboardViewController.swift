@@ -1128,7 +1128,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func addMorphiiToFavorites (shareView:UIView, morphiiView:MorphiiWideView) {
-        print("addMorphiiToFavorites1:",morphiiView.morphii.originalName)
+        print("addMorphiiToFavorites1543:",morphiiView.emoodl)
         KeyboardViewController.returnKeyString = "return"
         self.shareView = shareView
         shareView.hidden = true
@@ -1147,8 +1147,9 @@ class KeyboardViewController: UIInputViewController {
         let xConstraint = NSLayoutConstraint(item: addFavoriteContainerView!, attribute: .CenterX, relatedBy: .Equal, toItem: self.view, attribute: .CenterX, multiplier: 1, constant: 0)
         let yConstraint = NSLayoutConstraint(item: addFavoriteContainerView!, attribute: .Top, relatedBy: .Equal, toItem: self.view, attribute: .Top, multiplier: 1, constant: 0)
         view.addConstraints([widthConstraint, heightConstraint, xConstraint, yConstraint])
+
         addFavoriteView = AddFavoriteContainerView(globalColors: self.dynamicType.globalColors, darkMode: true, solidColorMode: self.solidColorMode())
-        addFavoriteView?.addToSuperView(addFavoriteContainerView!, morphiiWideView: morphiiView, delegate: self)
+        addFavoriteView?.addToSuperView(addFavoriteContainerView!, morphiiWideView: morphiiView, delegate: self, intensity: morphiiView.emoodl)
         addFavoriteView?.nameTextField.delegate = self
         addFavoriteView?.tagsTextField.delegate = self
     }
@@ -1215,7 +1216,7 @@ extension KeyboardViewController:UITextFieldDelegate {
             recentView?.hidden = false
             setCenterView(.Favorites)
             MethodHelper.showSuccessErrorHUD(true, message: "Saved to Favorites", inView: self.view)
-            MorphiiAPI.sendFavoriteData(morphii, favoriteNameO: favoriteView.nameTextField.text, emoodl: newMorphii.emoodl!.doubleValue, tags: tags)
+            MorphiiAPI.sendFavoriteData(morphii, favoriteNameO: favoriteView.nameTextField.text, emoodl: newMorphii.emoodl!.doubleValue, tags: tags, intensity: newMorphii.emoodl!.doubleValue)
             
             //HERE
             var area = ""

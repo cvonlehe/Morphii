@@ -83,6 +83,7 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
             }
         }
         favoriteNameTextField.text = morphiiO?.name
+        morphiiView.area = self.area
         self.favoriteMorphiiWideView.setUpMorphii(self.morphiiO!, emoodl: morphiiO!.emoodl?.doubleValue, morphiiTouchView: morphiiTouchView)
         favoriteMorphiiWideView.area = area
 
@@ -124,7 +125,7 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
             if success {
                 MorphiiAPI.sendMorphiiFavoriteSavedToAWS(self.morphiiO!, intensity: self.morphiiView.emoodl, area: self.area, name: self.favoriteNameTextField.text!, originalName: self.morphiiO!.originalName, tags: tags)
 
-                MorphiiAPI.sendFavoriteData(self.morphiiO, favoriteNameO: self.favoriteNameTextField.text, emoodl: self.favoriteMorphiiWideView.emoodl, tags: tags)
+                MorphiiAPI.sendFavoriteData(self.morphiiO, favoriteNameO: self.favoriteNameTextField.text, emoodl: self.favoriteMorphiiWideView.emoodl, tags: tags, intensity: self.morphiiView.emoodl)
             }else {
                 MethodHelper.showAlert("Error", message: "There was an error saving your morphii. Please try again")
             }

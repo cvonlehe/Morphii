@@ -33,6 +33,7 @@ class FavoritesViewController: UIViewController {
                 self.collectionView.addGestureRecognizer(fetcher.longPressGesture)
             }
         }
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -90,9 +91,14 @@ class FavoritesViewController: UIViewController {
     }
     
     @IBAction func searchButtonPressed(sender: UIButton) {
+        sender.enabled = false
+
         let nextView = self.storyboard?.instantiateViewControllerWithIdentifier(ViewControllerIDs.SearchViewController) as! SearchViewController
         nextView.fromArea = MorphiiAreas.containerFavorites
+        nextView.sender = sender
+
         navigationController?.pushViewController(nextView, animated: true)
+
     }
     
     func showDoneButton () {

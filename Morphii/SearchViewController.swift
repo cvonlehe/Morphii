@@ -25,6 +25,7 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var morphiiTagsLabel: UILabel!
     @IBOutlet weak var morphiiTagsLabelHeightConstraint: NSLayoutConstraint!
     var fromArea:String!
+    var sender:UIButton?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,7 @@ class SearchViewController: UIViewController {
             magnifyingGlassImageView.hidden = true
         }
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 200, right: 0)
-        shadowHeightConstraint.constant = 0.5
+       // shadowHeightConstraint.constant = 0.5
 
     }
     
@@ -60,6 +61,9 @@ class SearchViewController: UIViewController {
         if let hash = hashtag {
             searchBar.text = hash
             searchForSearchBarText(hash)
+        }
+        if let button = sender {
+            button.enabled = true
         }
     }
 
