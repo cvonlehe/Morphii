@@ -234,7 +234,6 @@ class MorphiiAPI {
         let event = eventClient.createEventWithEventType(AWSEvents.MorphiiShareSelect)
         guard event != nil else {return}
         guard let id = morphii.id, let name = morphii.name else {return}
-        event.addAttribute(id, forKey: AWSAttributes.id)
         if let originalName = morphii.originalName {
             event.addAttribute(originalName, forKey: AWSAttributes.name)
             if originalName != name {
@@ -246,6 +245,26 @@ class MorphiiAPI {
         event.addAttribute(share, forKey: AWSAttributes.share)
         if let a = area {
             event.addAttribute(a, forKey: AWSAttributes.area)
+        }
+        if let originalId = morphii.originalId {
+            event.addAttribute(originalId, forKey: AWSAttributes.id)
+        }else {
+            event.addAttribute(id, forKey: AWSAttributes.id)
+        }
+        if let favorite = morphii.isFavorite?.boolValue {
+            if favorite {
+                var tags:[String] = []
+                if let userTags = morphii.tags {
+                    for object in userTags {
+                        if object is String {
+                            tags.append(object as! String)
+                        }
+                    }
+                }
+                let tagString = tags.joinWithSeparator(", ")
+                event.addAttribute(tagString, forKey: AWSAttributes.userProvidedTags)
+                
+            }
         }
         event.addMetric(getCorrectedIntensity(intensity), forKey: AWSAttributes.intensity)
         sendEvent(eventClient, event: event)

@@ -120,7 +120,7 @@ class KeyboardViewController: UIInputViewController {
 
         view.addConstraints([widthConstraint2, heightConstraint2, xConstraint2, yConstraint2])
         label.numberOfLines = 0
-        label.text = "Just so you know, there's no autocorrect in this keyboard"
+        label.text = "This abc keyboard doesn’t provide autocorrect"
         
         let noAutocorrectCloseButton = UIButton(frame: CGRect(x: view.frame.size.width - 8 - 20, y: 8, width: 20, height: 20))
         noAutocorrectCloseButton.setImage(UIImage(named: "close_icon"), forState: .Normal)
@@ -186,28 +186,28 @@ class KeyboardViewController: UIInputViewController {
         containerX += containerWidth
         bannerView.addSubview(globeContainerView)
         globeButton = UIButton(frame: CGRect(x: buttonX, y: buttonY, width: buttonLength, height: buttonLength))
-        globeButton.addTarget(self, action: #selector(KeyboardViewController.globeButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        globeContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(KeyboardViewController.globeButtonPressed(_:))))
         globeContainerView.addSubview(globeButton)
         
         recentContainerView = UIView(frame: CGRect(x: containerX, y: 0, width: containerWidth, height: bannerView.frame.size.height))
         containerX += containerWidth
         bannerView.addSubview(recentContainerView)
         recentButton = UIButton(frame: CGRect(x: buttonX, y: buttonY, width: buttonLength, height: buttonLength))
-        recentButton.addTarget(self, action: #selector(KeyboardViewController.recentButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        recentContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(KeyboardViewController.recentButtonPressed(_:))))
         recentContainerView .addSubview(recentButton)
         
         favoriteContainerView = UIView(frame: CGRect(x: containerX, y: 0, width: containerWidth, height: bannerView.frame.size.height))
         containerX += containerWidth
         bannerView.addSubview(favoriteContainerView)
         favoriteButton = UIButton(frame: CGRect(x: buttonX, y: buttonY, width: buttonLength, height: buttonLength))
-        favoriteButton.addTarget(self, action: #selector(KeyboardViewController.favoriteButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        favoriteContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(KeyboardViewController.favoriteButtonPressed(_:))))
         favoriteContainerView .addSubview(favoriteButton)
         
         homeContainerView = UIView(frame: CGRect(x: containerX, y: 0, width: containerWidth, height: bannerView.frame.size.height))
         containerX += containerWidth
         bannerView.addSubview(homeContainerView)
         homeButton = UIButton(frame: CGRect(x: buttonX, y: buttonY, width: buttonLength, height: buttonLength))
-        homeButton.addTarget(self, action: #selector(KeyboardViewController.homeButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        homeButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(KeyboardViewController.homeButtonPressed(_:))))
         homeContainerView.addSubview(homeButton)
         
         
@@ -219,7 +219,7 @@ class KeyboardViewController: UIInputViewController {
         abcButtonLabel.text = "ABC"
         abcButtonLabel.font = UIFont(name: "SFUIText-Regular", size: 15)
       abcButtonLabel.addTextSpacing(0.25)
-        abcButtonLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(KeyboardViewController.abcButtonPressed(_:))))
+        abcContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(KeyboardViewController.abcButtonPressed(_:))))
         abcButtonLabel.userInteractionEnabled = true
         abcContainerView.addSubview(abcButtonLabel)
         
@@ -227,23 +227,23 @@ class KeyboardViewController: UIInputViewController {
         
     }
     
-    func globeButtonPressed (sender:UIButton) {
+    func globeButtonPressed (tap:UITapGestureRecognizer) {
         print("globeButtonPressed")
         setCenterView(.Globe)
     }
     
-    func recentButtonPressed (sender:UIButton) {
+    func recentButtonPressed (tap:UITapGestureRecognizer) {
         print("recentButtonPressed")
         setCenterView(.Recents)
         
     }
     
-    func favoriteButtonPressed (sender:UIButton) {
+    func favoriteButtonPressed (tap:UITapGestureRecognizer) {
         print("favoriteButtonPressed")
         setCenterView(.Favorites)
     } 
     
-    func homeButtonPressed (sender:UIButton) {
+    func homeButtonPressed (tap:UITapGestureRecognizer) {
         print("homeButtonPressed")
         setCenterView(.Home)
     }

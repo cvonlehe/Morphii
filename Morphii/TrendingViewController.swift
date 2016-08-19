@@ -128,20 +128,26 @@ class TrendingViewcController: UIViewController {
                 }else if i == 12 {
                     hashtagLabel = hashtagLabel13
                     if let superView = hashtagLabel?.superview {
-                        superView.hidden = false
-                        superView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "labelSuperViewTapped:"))
+                        dispatch_async(dispatch_get_main_queue(), { 
+                            superView.hidden = false
+                            superView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TrendingViewcController.labelSuperViewTapped(_:))))
+                        })
                     }
                 }else if i == 13 {
                     hashtagLabel = hashtagLabel14
                     if let superView = hashtagLabel?.superview {
-                        superView.hidden = false
-                        superView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "labelSuperViewTapped:"))
+                        dispatch_async(dispatch_get_main_queue(), {
+                            superView.hidden = false
+                            superView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TrendingViewcController.labelSuperViewTapped(_:))))
+                        })
                     }
                 }else if i == 14 {
                     hashtagLabel = hashtagLabel15
                     if let superView = hashtagLabel?.superview {
-                        superView.hidden = false
-                        superView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "labelSuperViewTapped:"))
+                        dispatch_async(dispatch_get_main_queue(), {
+                            superView.hidden = false
+                            superView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TrendingViewcController.labelSuperViewTapped(_:))))
+                        })
                     }
                 }
                 if let label = hashtagLabel {

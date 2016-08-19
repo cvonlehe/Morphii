@@ -103,7 +103,7 @@ class FavoritesViewController: UIViewController {
     
     func showDoneButton () {
         
-        let dict:[String:AnyObject] = [NSFontAttributeName : UIFont(name: "SFUIDisplay-Light", size: 14.0)!, NSForegroundColorAttributeName: UIColor ( red: 0.2, green: 0.2235, blue: 0.2902, alpha: 1.0 )]
+        let dict:[String:AnyObject] = [NSFontAttributeName : UIFont(name: "SFUIText-Regular", size: 17.0)!, NSForegroundColorAttributeName: UIColor ( red: 0.2, green: 0.2235, blue: 0.2902, alpha: 1.0 )]
         let barItem = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(FavoritesViewController.doneButtonPressed(_:)))
         barItem.setTitleTextAttributes(dict, forState: .Normal)
 //        searchButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 22))
