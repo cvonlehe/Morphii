@@ -24,22 +24,22 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="92a-af-xaf">
-                    <rect key="frame" x="0.0" y="0.0" width="21" height="31"/>
+                    <rect key="frame" x="0.0" y="0.0" width="29" height="31"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="21" id="Hcf-tF-O89"/>
+                        <constraint firstAttribute="width" constant="29" id="Hcf-tF-O89"/>
                         <constraint firstAttribute="height" constant="31" id="bpH-2E-lOJ"/>
                     </constraints>
-                    <inset key="contentEdgeInsets" minX="8" minY="10" maxX="0.0" maxY="0.0"/>
+                    <inset key="contentEdgeInsets" minX="8" minY="10" maxX="8" maxY="0.0"/>
                     <state key="normal" image="back"/>
                     <connections>
                         <action selector="backButtonPressed:" destination="-1" eventType="touchUpInside" id="yXw-0O-XfR"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A6E-vQ-FR3">
-                    <rect key="frame" x="575" y="0.0" width="25" height="30"/>
+                    <rect key="frame" x="567" y="0.0" width="33" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="4qc-AA-2kv"/>
-                        <constraint firstAttribute="width" constant="25" id="5K6-7D-mYn"/>
+                        <constraint firstAttribute="width" constant="33" id="5K6-7D-mYn"/>
                         <constraint firstAttribute="height" constant="30" id="CvR-HO-8xH"/>
                         <constraint firstAttribute="height" constant="30" id="LHp-HO-Ywu"/>
                         <constraint firstAttribute="height" constant="19" id="RM2-xA-7dr"/>
@@ -47,7 +47,7 @@
                         <constraint firstAttribute="width" constant="17" id="l5r-Tv-vgE"/>
                         <constraint firstAttribute="width" constant="30" id="ySt-by-sAz"/>
                     </constraints>
-                    <inset key="contentEdgeInsets" minX="0.0" minY="11" maxX="8" maxY="0.0"/>
+                    <inset key="contentEdgeInsets" minX="8" minY="11" maxX="8" maxY="0.0"/>
                     <state key="normal" image="share"/>
                     <variation key="default">
                         <mask key="constraints">
@@ -64,7 +64,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="H71-aM-fDm">
-                    <rect key="frame" x="29" y="8" width="538" height="25"/>
+                    <rect key="frame" x="45" y="8" width="506" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="du4-Ag-tpa"/>
                     </constraints>
@@ -90,12 +90,12 @@
                 <constraint firstItem="92a-af-xaf" firstAttribute="centerY" secondItem="H71-aM-fDm" secondAttribute="centerY" id="4YS-xc-Pf2"/>
                 <constraint firstAttribute="trailing" secondItem="A6E-vQ-FR3" secondAttribute="trailing" constant="8" id="5wB-Ur-Rl0"/>
                 <constraint firstItem="fbd-gU-OAs" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="92c-TU-Elk"/>
-                <constraint firstItem="A6E-vQ-FR3" firstAttribute="leading" secondItem="H71-aM-fDm" secondAttribute="trailing" constant="8" id="Bib-DC-kvw"/>
+                <constraint firstItem="A6E-vQ-FR3" firstAttribute="leading" secondItem="H71-aM-fDm" secondAttribute="trailing" constant="16" id="Bib-DC-kvw"/>
                 <constraint firstAttribute="bottom" secondItem="fbd-gU-OAs" secondAttribute="bottom" constant="8" id="GE6-hz-lCe"/>
                 <constraint firstAttribute="trailing" secondItem="Th0-FG-jSu" secondAttribute="trailing" id="Nv4-Fw-ScC"/>
                 <constraint firstAttribute="bottom" secondItem="Th0-FG-jSu" secondAttribute="bottom" id="Oah-Lk-Nfa"/>
                 <constraint firstItem="92a-af-xaf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="W3r-iB-lFO"/>
-                <constraint firstItem="H71-aM-fDm" firstAttribute="leading" secondItem="92a-af-xaf" secondAttribute="trailing" constant="8" id="Y36-hX-gDg"/>
+                <constraint firstItem="H71-aM-fDm" firstAttribute="leading" secondItem="92a-af-xaf" secondAttribute="trailing" constant="16" id="Y36-hX-gDg"/>
                 <constraint firstItem="fbd-gU-OAs" firstAttribute="top" secondItem="H71-aM-fDm" secondAttribute="bottom" constant="8" id="YvK-7L-lTY"/>
                 <constraint firstItem="A6E-vQ-FR3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="cEU-BK-UBy"/>
                 <constraint firstItem="A6E-vQ-FR3" firstAttribute="centerY" secondItem="H71-aM-fDm" secondAttribute="centerY" id="eha-BB-sRM"/>

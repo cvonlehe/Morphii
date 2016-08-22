@@ -26,7 +26,7 @@ class KeyboardViewController: UIInputViewController {
     var favoriteContainerView:UIView!
     var homeContainerView:UIView!
     var abcContainerView:UIView!
-    
+    var shiftKey:Key!
     var globeButton:UIButton!
     var recentButton:UIButton!
     var favoriteButton:UIButton!
@@ -68,6 +68,7 @@ class KeyboardViewController: UIInputViewController {
         }
         MorphiiAPI.setupAWS()
         view.backgroundColor = UIColor ( red: 0.9176, green: 0.9333, blue: 0.9451, alpha: 1.0 )
+        self.shiftState = .Disabled
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -210,7 +211,7 @@ class KeyboardViewController: UIInputViewController {
         //favoriteContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(KeyboardViewController.favoriteButtonPressed(_:))))
         favoriteContainerView .addSubview(favoriteButton)
         let favoriteButtonCover = UIButton(frame: CGRect(x: 0, y: 0, width: globeContainerView.frame.size.width, height: globeContainerView.frame.size.height))
-        favoriteButtonCover.addTarget(self, action: "favoriteButtonPressed:", forControlEvents: .TouchUpInside)
+        favoriteButtonCover.addTarget(self, action: #selector(KeyboardViewController.favoriteButtonPressed(_:)), forControlEvents: .TouchUpInside)
         favoriteContainerView.addSubview(favoriteButtonCover)
         
         homeContainerView = UIView(frame: CGRect(x: containerX, y: 0, width: containerWidth, height: bannerView.frame.size.height))
@@ -220,7 +221,7 @@ class KeyboardViewController: UIInputViewController {
        // homeButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(KeyboardViewController.homeButtonPressed(_:))))
         homeContainerView.addSubview(homeButton)
         let homeButtonCover = UIButton(frame: CGRect(x: 0, y: 0, width: globeContainerView.frame.size.width, height: globeContainerView.frame.size.height))
-        homeButtonCover.addTarget(self, action: "homeButtonPressed:", forControlEvents: .TouchUpInside)
+        homeButtonCover.addTarget(self, action: #selector(KeyboardViewController.homeButtonPressed(_:)), forControlEvents: .TouchUpInside)
         homeContainerView.addSubview(homeButtonCover)
         
         abcContainerView = UIView(frame: CGRect(x: containerX, y: 0, width: containerWidth, height: bannerView.frame.size.height))
@@ -235,7 +236,7 @@ class KeyboardViewController: UIInputViewController {
         abcButtonLabel.userInteractionEnabled = true
         abcContainerView.addSubview(abcButtonLabel)
         let abcButtonCover = UIButton(frame: CGRect(x: 0, y: 0, width: globeContainerView.frame.size.width, height: globeContainerView.frame.size.height))
-        abcButtonCover.addTarget(self, action: "abcButtonPressed:", forControlEvents: .TouchUpInside)
+        abcButtonCover.addTarget(self, action: #selector(KeyboardViewController.abcButtonPressed(_:)), forControlEvents: .TouchUpInside)
         abcContainerView.addSubview(abcButtonCover)
         
         setAllContainerViewBackgrounds()
@@ -627,6 +628,7 @@ class KeyboardViewController: UIInputViewController {
                      keyView.addTarget(self, action: "backspaceDown:", forControlEvents: .TouchDown)
                      keyView.addTarget(self, action: "backspaceUp:", forControlEvents: cancelEvents)
                   case Key.KeyType.Shift:
+                    self.shiftKey = key
                      keyView.addTarget(self, action: Selector("shiftDown:"), forControlEvents: .TouchDown)
                      keyView.addTarget(self, action: Selector("shiftUp:"), forControlEvents: .TouchUpInside)
                      keyView.addTarget(self, action: Selector("shiftDoubleTapped:"), forControlEvents: .TouchDownRepeat)
@@ -820,10 +822,33 @@ class KeyboardViewController: UIInputViewController {
             }()
             
             if charactersAreInCorrectState {
-                self.textDocumentProxy.deleteBackward()
-                self.textDocumentProxy.deleteBackward()
-                self.textDocumentProxy.insertText(".")
-                self.textDocumentProxy.insertText(" ")
+                print("KEYBOARDEDIT")
+                if let favoriteView = addFavoriteView {
+                    if favoriteView.nameTextField.active {
+                        favoriteView.nameTextField.deleteLastCharacter()
+                        favoriteView.nameTextField.deleteLastCharacter()
+                        favoriteView.nameTextField.insertText(".")
+                        favoriteView.nameTextField.insertText(" ")
+                        favoriteView.nameTextField.resetCursor()
+                    }else if favoriteView.tagsTextField.active {
+                        favoriteView.tagsTextField.deleteLastCharacter()
+                        favoriteView.tagsTextField.deleteLastCharacter()
+                        favoriteView.tagsTextField.insertText(".")
+                        favoriteView.tagsTextField.insertText(" ")
+                        favoriteView.tagsTextField.resetCursor()
+                    }else {
+                        self.textDocumentProxy.deleteBackward()
+                        self.textDocumentProxy.deleteBackward()
+                        self.textDocumentProxy.insertText(".")
+                        self.textDocumentProxy.insertText(" ")
+                    }
+                }else {
+                    self.textDocumentProxy.deleteBackward()
+                    self.textDocumentProxy.deleteBackward()
+                    self.textDocumentProxy.insertText(".")
+                    self.textDocumentProxy.insertText(" ")
+                }
+
             }
             
             self.autoPeriodState = .NoSpace
@@ -843,9 +868,21 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func backspaceDown(sender: KeyboardKey) {
+        print("KEYBOARDEDIT")
         self.cancelBackspaceTimers()
-        
-        self.textDocumentProxy.deleteBackward()
+        if let favoriteView = addFavoriteView {
+            if favoriteView.nameTextField.active {
+                favoriteView.nameTextField.deleteLastCharacter()
+                favoriteView.nameTextField.resetCursor()
+            }else if favoriteView.tagsTextField.active {
+                favoriteView.tagsTextField.deleteLastCharacter()
+                favoriteView.tagsTextField.resetCursor()
+            }else {
+                self.textDocumentProxy.deleteBackward()
+            }
+        }else {
+            self.textDocumentProxy.deleteBackward()
+        }
         self.setCapsIfNeeded()
         
         // trigger for subsequent deletes
@@ -863,8 +900,20 @@ class KeyboardViewController: UIInputViewController {
     
     func backspaceRepeatCallback() {
         self.playKeySound()
-        
-        self.textDocumentProxy.deleteBackward()
+        print("KEYBOARDEDIT")
+        if let favoriteView = addFavoriteView {
+            if favoriteView.nameTextField.active {
+                favoriteView.nameTextField.deleteLastCharacter()
+                favoriteView.nameTextField.resetCursor()
+            }else if favoriteView.tagsTextField.active {
+                favoriteView.tagsTextField.deleteLastCharacter()
+                favoriteView.tagsTextField.resetCursor()
+            }else {
+                self.textDocumentProxy.deleteBackward()
+            }
+        }else {
+            self.textDocumentProxy.deleteBackward()
+        }
         self.setCapsIfNeeded()
     }
     
@@ -1124,7 +1173,48 @@ class KeyboardViewController: UIInputViewController {
     class var globalColors: GlobalColors.Type { get { return GlobalColors.self }}
     
     func keyPressed(key: Key) {
-        self.textDocumentProxy.insertText(key.outputForCase(self.shiftState.uppercase()))
+        print("KEYBOARDEDIT")
+
+        if let favoriteView = addFavoriteView {
+            print("KEYPRESSED1")
+
+            if favoriteView.nameTextField.active {
+                favoriteView.nameTextField.text = favoriteView.nameTextField.text?.stringByAppendingString(key.outputForCase(self.shiftState.uppercase()))
+                favoriteView.nameTextField.resetCursor()
+                if key.outputForCase(self.shiftState.uppercase()) == "\n" {
+                    print("KEYPRESSED2: ",key.outputForCase(self.shiftState.uppercase()))
+                    returnButtonPressed(favoriteView.nameTextField)
+                }
+
+            }else if favoriteView.tagsTextField.active {
+                favoriteView.tagsTextField.text = favoriteView.tagsTextField.text?.stringByAppendingString(key.outputForCase(self.shiftState.uppercase()))
+                if key.outputForCase(self.shiftState.uppercase()) == "\n" {
+                    print("KEYPRESSED2: ",key.outputForCase(self.shiftState.uppercase()))
+                    returnButtonPressed(favoriteView.tagsTextField)
+                }else if key.outputForCase(self.shiftState.uppercase()) == " " {
+                    guard let wordsArray = favoriteView.tagsTextField.text?.componentsSeparatedByString(" ") else {return}
+                    var newWords:[String] = []
+                    for var word in wordsArray {
+                        if let character = word.characters.first where "\(character)" != "#" {
+                            word = "#\(word)"
+                        }
+                        newWords.append(word)
+                    }
+                    favoriteView.tagsTextField.text = newWords.joinWithSeparator(" ")
+                    print("WORDS:",newWords)
+                print("KEYPRESSED3")
+                }
+                favoriteView.tagsTextField.resetCursor()
+            }else {
+                print("KEYPRESSED4")
+
+                self.textDocumentProxy.insertText(key.outputForCase(self.shiftState.uppercase()))
+
+            }
+        }else {
+            self.textDocumentProxy.insertText(key.outputForCase(self.shiftState.uppercase()))
+
+        }
     }
     
     // a banner that sits in the empty space on top of the keyboard
@@ -1167,12 +1257,18 @@ class KeyboardViewController: UIInputViewController {
         addFavoriteView?.addToSuperView(addFavoriteContainerView!, morphiiWideView: morphiiView, delegate: self, intensity: morphiiView.emoodl)
         addFavoriteView?.nameTextField.delegate = self
         addFavoriteView?.tagsTextField.delegate = self
+        MorphiiAPI.getUserDefaults().setBool(false, forKey: kAutoCapitalization)
+        MorphiiAPI.getUserDefaults().synchronize()
+        addFavoriteView?.nameTextField.setFieldActive(true)
+
     }
     
 }
 
 extension KeyboardViewController:AddFavoriteContainerViewDelegate {
     func closeButtonPressed () {
+        addFavoriteView?.nameTextField.active = false
+        addFavoriteView?.tagsTextField.active = false
         addFavoriteContainerView?.removeFromSuperview()
         addFavoriteContainerView = nil
         setHeight(280)
@@ -1209,19 +1305,25 @@ extension KeyboardViewController:UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        guard let favoriteView = addFavoriteView else {return false}
-        guard let morphii = favoriteView.morphiiView.morphii else {return false}
-      let tags = Morphii.getTagsFromString(favoriteView.tagsTextField.text)
+        returnButtonPressed(textField)
+        return true
+    }
+    
+    func returnButtonPressed (textField:UITextField) {
+        guard let favoriteView = addFavoriteView else {return}
+        guard let morphii = favoriteView.morphiiView.morphii else {return}
+        let tags = Morphii.getTagsFromString(favoriteView.tagsTextField.text)
         if let newMorphii = Morphii.createNewMorphii(favoriteView.nameTextField.text,
-                                            name: favoriteView.nameTextField.text,
-                                            scaleType: Int((morphii.scaleType!)),
-                                            sequence: Int((morphii.sequence)!),
-                                            groupName: "Your Saved Morphiis",
-                                            metaData: morphii.metaData,
-                                            emoodl: favoriteView.morphiiView.emoodl,
-                                            isFavorite: true,
-                                            tags: tags, order: 5000, originalId: morphii.id, originalName: morphii.name, showName: true) {
-
+                                                     name: favoriteView.nameTextField.text,
+                                                     scaleType: Int((morphii.scaleType!)),
+                                                     sequence: Int((morphii.sequence)!),
+                                                     groupName: "Your Saved Morphiis",
+                                                     metaData: morphii.metaData,
+                                                     emoodl: favoriteView.morphiiView.emoodl,
+                                                     isFavorite: true,
+                                                     tags: tags, order: 5000, originalId: morphii.id, originalName: morphii.name, showName: true) {
+            addFavoriteView?.nameTextField.active = false
+            addFavoriteView?.tagsTextField.active = false
             addFavoriteContainerView?.removeFromSuperview()
             addFavoriteContainerView = nil
             setHeight(280)
@@ -1250,8 +1352,7 @@ extension KeyboardViewController:UITextFieldDelegate {
             print("MorphiiAPI.send")
             setCenterView(.Favorites)
             MethodHelper.showSuccessErrorHUD(true, message: "Saved to Favorites", inView: self.view)
-
+            
         }
-        return true
     }
 }

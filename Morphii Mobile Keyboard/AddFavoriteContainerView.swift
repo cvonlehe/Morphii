@@ -14,8 +14,10 @@ protocol AddFavoriteContainerViewDelegate {
 
 class AddFavoriteContainerView: ExtraView {
 
-    @IBOutlet weak var tagsTextField: UITextField!
-    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var tagsCoverView: UIView!
+    @IBOutlet weak var nameCoverView: UIView!
+    @IBOutlet weak var tagsTextField: UntouchableTextField!
+    @IBOutlet weak var nameTextField: UntouchableTextField!
     @IBOutlet weak var morphiiView: MorphiiView!
     var delegate:AddFavoriteContainerViewDelegate!
 
@@ -23,10 +25,26 @@ class AddFavoriteContainerView: ExtraView {
     required init(globalColors: GlobalColors.Type?, darkMode: Bool, solidColorMode: Bool) {
         super.init(globalColors: globalColors, darkMode: darkMode, solidColorMode: solidColorMode)
         self.loadNib()
+
          addPaddingToTextField(nameTextField)
          addPaddingToTextField(tagsTextField)
+        nameCoverView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(AddFavoriteContainerView.nameCoverViewTapped(_:))))
+                tagsCoverView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(AddFavoriteContainerView.tagsCoverViewTapped(_:))))
+    }
+    
+    func nameCoverViewTapped (tap:UITapGestureRecognizer) {
+        nameTextField.setFieldActive(true)
+        tagsTextField.setFieldActive(false)
 
     }
+    
+    func tagsCoverViewTapped (tap:UITapGestureRecognizer) {
+        nameTextField.setFieldActive(false)
+        tagsTextField.setFieldActive(true)
+        nameTextField.cursorView?.removeFromSuperview()
+    }
+    
+
     
    
    func addPaddingToTextField (textField:UITextField) {
