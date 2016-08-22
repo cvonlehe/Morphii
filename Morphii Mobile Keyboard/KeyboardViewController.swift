@@ -186,30 +186,42 @@ class KeyboardViewController: UIInputViewController {
         containerX += containerWidth
         bannerView.addSubview(globeContainerView)
         globeButton = UIButton(frame: CGRect(x: buttonX, y: buttonY, width: buttonLength, height: buttonLength))
-        globeContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(KeyboardViewController.globeButtonPressed(_:))))
+        //globeContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(KeyboardViewController.globeButtonPressed(_:))))
         globeContainerView.addSubview(globeButton)
+        let globeButtonCover = UIButton(frame: CGRect(x: 0, y: 0, width: globeContainerView.frame.size.width, height: globeContainerView.frame.size.height))
+        globeButtonCover.addTarget(self, action: "globeButtonPressed:", forControlEvents: .TouchUpInside)
+        globeContainerView.addSubview(globeButtonCover)
+        
         
         recentContainerView = UIView(frame: CGRect(x: containerX, y: 0, width: containerWidth, height: bannerView.frame.size.height))
         containerX += containerWidth
         bannerView.addSubview(recentContainerView)
         recentButton = UIButton(frame: CGRect(x: buttonX, y: buttonY, width: buttonLength, height: buttonLength))
-        recentContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(KeyboardViewController.recentButtonPressed(_:))))
+        //recentContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(KeyboardViewController.recentButtonPressed(_:))))
         recentContainerView .addSubview(recentButton)
+        let recentButtonCover = UIButton(frame: CGRect(x: 0, y: 0, width: globeContainerView.frame.size.width, height: globeContainerView.frame.size.height))
+        recentButtonCover.addTarget(self, action: "recentButtonPressed:", forControlEvents: .TouchUpInside)
+        recentContainerView.addSubview(recentButtonCover)
         
         favoriteContainerView = UIView(frame: CGRect(x: containerX, y: 0, width: containerWidth, height: bannerView.frame.size.height))
         containerX += containerWidth
         bannerView.addSubview(favoriteContainerView)
         favoriteButton = UIButton(frame: CGRect(x: buttonX, y: buttonY, width: buttonLength, height: buttonLength))
-        favoriteContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(KeyboardViewController.favoriteButtonPressed(_:))))
+        //favoriteContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(KeyboardViewController.favoriteButtonPressed(_:))))
         favoriteContainerView .addSubview(favoriteButton)
+        let favoriteButtonCover = UIButton(frame: CGRect(x: 0, y: 0, width: globeContainerView.frame.size.width, height: globeContainerView.frame.size.height))
+        favoriteButtonCover.addTarget(self, action: "favoriteButtonPressed:", forControlEvents: .TouchUpInside)
+        favoriteContainerView.addSubview(favoriteButtonCover)
         
         homeContainerView = UIView(frame: CGRect(x: containerX, y: 0, width: containerWidth, height: bannerView.frame.size.height))
         containerX += containerWidth
         bannerView.addSubview(homeContainerView)
         homeButton = UIButton(frame: CGRect(x: buttonX, y: buttonY, width: buttonLength, height: buttonLength))
-        homeButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(KeyboardViewController.homeButtonPressed(_:))))
+       // homeButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(KeyboardViewController.homeButtonPressed(_:))))
         homeContainerView.addSubview(homeButton)
-        
+        let homeButtonCover = UIButton(frame: CGRect(x: 0, y: 0, width: globeContainerView.frame.size.width, height: globeContainerView.frame.size.height))
+        homeButtonCover.addTarget(self, action: "homeButtonPressed:", forControlEvents: .TouchUpInside)
+        homeContainerView.addSubview(homeButtonCover)
         
         abcContainerView = UIView(frame: CGRect(x: containerX, y: 0, width: containerWidth, height: bannerView.frame.size.height))
         containerX += containerWidth
@@ -219,36 +231,39 @@ class KeyboardViewController: UIInputViewController {
         abcButtonLabel.text = "ABC"
         abcButtonLabel.font = UIFont(name: "SFUIText-Regular", size: 15)
       abcButtonLabel.addTextSpacing(0.25)
-        abcContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(KeyboardViewController.abcButtonPressed(_:))))
+       // abcContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(KeyboardViewController.abcButtonPressed(_:))))
         abcButtonLabel.userInteractionEnabled = true
         abcContainerView.addSubview(abcButtonLabel)
+        let abcButtonCover = UIButton(frame: CGRect(x: 0, y: 0, width: globeContainerView.frame.size.width, height: globeContainerView.frame.size.height))
+        abcButtonCover.addTarget(self, action: "abcButtonPressed:", forControlEvents: .TouchUpInside)
+        abcContainerView.addSubview(abcButtonCover)
         
         setAllContainerViewBackgrounds()
         
     }
     
-    func globeButtonPressed (tap:UITapGestureRecognizer) {
+    func globeButtonPressed (sender:UIButton) {
         print("globeButtonPressed")
         setCenterView(.Globe)
     }
     
-    func recentButtonPressed (tap:UITapGestureRecognizer) {
+    func recentButtonPressed (tap:UIButton) {
         print("recentButtonPressed")
         setCenterView(.Recents)
         
     }
     
-    func favoriteButtonPressed (tap:UITapGestureRecognizer) {
+    func favoriteButtonPressed (tap:UIButton) {
         print("favoriteButtonPressed")
         setCenterView(.Favorites)
     } 
     
-    func homeButtonPressed (tap:UITapGestureRecognizer) {
+    func homeButtonPressed (tap:UIButton) {
         print("homeButtonPressed")
         setCenterView(.Home)
     }
     
-    func abcButtonPressed (tap:UITapGestureRecognizer) {
+    func abcButtonPressed (tap:UIButton) {
         print("abcButtonPressed")
         setCenterView(.Keyboard)
     }
@@ -269,7 +284,7 @@ class KeyboardViewController: UIInputViewController {
         centerView = center
         setAllContainerViewBackgrounds()
         recentView?.backButtonPressed()
-        performSelector(#selector(KeyboardViewController.displayCenter), withObject: nil, afterDelay: 0.05)
+        performSelector(#selector(KeyboardViewController.displayCenter), withObject: nil, afterDelay: 0.1)
     }
     
     func displayCenter () {
@@ -1214,10 +1229,7 @@ extension KeyboardViewController:UITextFieldDelegate {
             shareView?.removeFromSuperview()
             shareView = nil
             recentView?.hidden = false
-            setCenterView(.Favorites)
-            MethodHelper.showSuccessErrorHUD(true, message: "Saved to Favorites", inView: self.view)
             MorphiiAPI.sendFavoriteData(morphii, favoriteNameO: favoriteView.nameTextField.text, emoodl: newMorphii.emoodl!.doubleValue, tags: tags, intensity: newMorphii.emoodl!.doubleValue)
-            
             //HERE
             var area = ""
             switch centerView {
@@ -1236,6 +1248,8 @@ extension KeyboardViewController:UITextFieldDelegate {
             }
             MorphiiAPI.sendMorphiiFavoriteSavedToAWS(favoriteView.morphiiView.morphii, intensity: favoriteView.morphiiView.emoodl, area: area, name: favoriteView.nameTextField.text!, originalName: favoriteView.morphiiView.morphii.originalName, tags: tags)
             print("MorphiiAPI.send")
+            setCenterView(.Favorites)
+            MethodHelper.showSuccessErrorHUD(true, message: "Saved to Favorites", inView: self.view)
 
         }
         return true

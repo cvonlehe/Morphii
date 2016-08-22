@@ -29,7 +29,6 @@ class RecentView: ExtraView {
     }
     
     func loadMorphiis (fetchType:MorphiiFetchType) {
-        print("loadMorphiis")
         morphiis.removeAll()
         self.fetchType = fetchType
         for subview in morphiiScrollView.subviews {
@@ -92,7 +91,6 @@ class RecentView: ExtraView {
         var x = CGFloat(0)
         var y = CGFloat(0)
         for morphii in morphiis {
-            print("morphiiSelectionViewTapped23:",morphii.originalName)
 
             let morphiiView = MorphiiSelectionView(frame: CGRect(x: x, y: y, width: morphiiSideLength, height: morphiiSideLength), morphii: morphii, delegate: nil, showName: fetchType != .Recents, useRecentIntensity: fetchType == .Recents)
             morphiiView.morphiiView.backgroundColor = UIColor.clearColor()
