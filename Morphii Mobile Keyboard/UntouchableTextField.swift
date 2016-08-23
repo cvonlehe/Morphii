@@ -48,6 +48,8 @@ class UntouchableTextField: UITextField {
     
     func resetCursor () {
         cursorView?.frame = CGRect(origin: getCursorOrigin(), size: CGSize(width: 2, height: frame.size.height - 4))
+        selectedTextRange = textRangeFromPosition(endOfDocument, toPosition: endOfDocument)
+        inputView = UIView(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
     }
     
     func getCursorOrigin () -> CGPoint {
