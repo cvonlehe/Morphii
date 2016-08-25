@@ -28,6 +28,7 @@ enum ShiftState {
 }
 
 class Keyboard {
+   var returnKeyboardKey:Key!
     var pages: [Page]
     
     init() {

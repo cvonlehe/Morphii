@@ -50,6 +50,7 @@ func defaultKeyboard() -> Keyboard {
     defaultKeyboard.addKey(space, row: 3, page: 0)
     
     let returnKey = Key(.Return)
+      defaultKeyboard.returnKeyboardKey = returnKey
     returnKey.uppercaseKeyCap = KeyboardViewController.returnKeyString
     returnKey.uppercaseOutput = "\n"
     returnKey.lowercaseOutput = "\n"

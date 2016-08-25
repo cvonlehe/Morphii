@@ -983,6 +983,7 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
         var currentOrigin = frame.origin.x
         var beforeSpace: Bool = true
         for (k, key) in row.enumerate() {
+
             if key.type == Key.KeyType.Space {
                 frames.append(CGRectMake(rounded(currentOrigin), frame.origin.y, spaceWidth, frame.height))
                 currentOrigin += (spaceWidth + gapWidth)

@@ -32,6 +32,7 @@ class KeyboardMorphiiOverlayView: ExtraView {
         let success = morphiiWideView.copyMorphyToClipboard()
         if success {
             MethodHelper.showSuccessErrorHUD(true, message: "Copied to Clipboard", inView: self)
+         print("LASTUSEDINTENSITY:",morphiiWideView.emoodl)
             morphiiWideView.morphii.lastUsedIntensity = NSNumber(double: morphiiWideView.emoodl)
             CDHelper.sharedInstance.saveContext(nil)
         }else {

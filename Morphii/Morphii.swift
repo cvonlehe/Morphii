@@ -71,6 +71,7 @@ class Morphii: NSManagedObject {
         morphii.originalId = originalId
         morphii.originalName = originalName
         morphii.showName = NSNumber(bool: showName)
+      morphii.order = NSNumber(integer: order)
         if let newEmoodl = emoodl {
             morphii.emoodl = newEmoodl
         }

@@ -76,6 +76,8 @@ class ShareMorphiiOverlayView: ExtraView {
         print("AREA4:",self.area)
         if newMorphiiView.copyMorphyToClipboard(self.area) {
             delegate.copiedMorphii()
+         newMorphiiView.morphii.lastUsedIntensity = NSNumber(double: newMorphiiView.emoodl)
+         CDHelper.sharedInstance.saveContext(nil)
         }else {
             MethodHelper.showSuccessErrorHUD(false, message: "Error Copying. Try again", inView: self)
         }

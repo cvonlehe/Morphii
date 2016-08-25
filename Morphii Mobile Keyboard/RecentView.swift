@@ -91,7 +91,7 @@ class RecentView: ExtraView {
         var x = CGFloat(0)
         var y = CGFloat(0)
         for morphii in morphiis {
-
+            print("MOST_RECENTLY_USED:",morphii.lastUsedIntensity)
             let morphiiView = MorphiiSelectionView(frame: CGRect(x: x, y: y, width: morphiiSideLength, height: morphiiSideLength), morphii: morphii, delegate: nil, showName: fetchType != .Recents, useRecentIntensity: fetchType == .Recents)
             morphiiView.morphiiView.backgroundColor = UIColor.clearColor()
             morphiiView.backgroundColor = UIColor.clearColor()
@@ -140,6 +140,8 @@ class RecentView: ExtraView {
         if morphiiSelectionView.morphiiView.copyMorphyToClipboard(MorphiiAreas.keyboardFavorites) {
             print("COPIED")
             MethodHelper.showSuccessErrorHUD(true, message: "Copied to Clipboard", inView: self)
+         morphiiSelectionView.morphiiView.morphii.lastUsedIntensity = NSNumber(double: morphiiSelectionView.morphiiView.emoodl)
+         CDHelper.sharedInstance.saveContext(nil)
         }else {
             print("NOT_COPIED")
             MethodHelper.showSuccessErrorHUD(false, message: "Error Copying. Try again", inView: self)

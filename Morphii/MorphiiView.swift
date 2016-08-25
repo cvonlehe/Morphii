@@ -376,7 +376,8 @@ class MorphiiView: UIView, MorphiiProtocol {
             shareText = string
         }
         backgroundColor = UIColor.clearColor()
-        let pbData:NSData = UIImagePNGRepresentation(getMorphiiImage())!
+      let image = getMorphiiImage()
+      let pbData:NSData = UIImagePNGRepresentation(image)!
         let vc = UIActivityViewController(activityItems: [pbData, shareText], applicationActivities: [])
         viewController.presentViewController(vc, animated: true, completion: nil)
         vc.completionWithItemsHandler = {(activityType, completed:Bool, returnedItems:[AnyObject]?, error: NSError?) in
@@ -393,6 +394,15 @@ class MorphiiView: UIView, MorphiiProtocol {
                     if let n = self.morphii.name {
                         name = n
                     }
+                  if type == "com.apple.UIKit.activity.CopyToPasteboard" {
+                     if let pasteBoard = UIPasteboard(name: UIPasteboardNameGeneral, create: false) {
+                        pasteBoard.persistent = false
+                        let textDict = [String(kUTTypeUTF8PlainText):shareText]
+                        let imageDict = [String(kUTTypePNG):image]
+                        pasteBoard.items = [textDict, imageDict]
+                        
+                     }
+                  }
                     MorphiiAPI.sendMorphiiSendToAWS(self.morphii, intensity: self.emoodl, area: self.area, name: name, share: type)
                 }
             }

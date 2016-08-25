@@ -53,7 +53,7 @@ class KeyboardViewController: UIInputViewController {
     var orientation = UIInterfaceOrientation.Portrait
     var coverView:UIView?
     var noAutoCorrectView:UIView?
-    
+   var returnKey:Key!
     override func loadView() {
         super.loadView()
         MorphiiAPI.login()
@@ -631,7 +631,6 @@ class KeyboardViewController: UIInputViewController {
             for key in rowKeys {
                if let keyView = self.layout?.viewForKey(key) {
                   keyView.removeTarget(nil, action: nil, forControlEvents: UIControlEvents.AllEvents)
-                  key.setLetter("test")
                   switch key.type {
                   case Key.KeyType.KeyboardChange:
                      keyView.addTarget(self, action: "advanceTapped:", forControlEvents: .TouchUpInside)
@@ -1255,7 +1254,7 @@ class KeyboardViewController: UIInputViewController {
         if UIInterfaceOrientationIsPortrait(orientation) {
             setHeight(viewHeight + 90)
         }else {
-            setHeight(viewHeight + 10)
+            setHeight(viewHeight + 95)
         }
         viewDidLayoutSubviews()
         addFavoriteContainerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.size.width, height: 100))
@@ -1280,6 +1279,8 @@ class KeyboardViewController: UIInputViewController {
 
 extension KeyboardViewController:AddFavoriteContainerViewDelegate {
     func closeButtonPressed () {
+      KeyboardViewController.sViewController.keyboard.returnKeyboardKey.lowercaseKeyCap = "return"
+      KeyboardViewController.sViewController.keyboard.returnKeyboardKey.uppercaseKeyCap = "return"
         addFavoriteView?.nameTextField.active = false
         addFavoriteView?.tagsTextField.active = false
         addFavoriteContainerView?.removeFromSuperview()
@@ -1366,6 +1367,8 @@ extension KeyboardViewController:UITextFieldDelegate {
                 area = "Other"
                 break
             }
+         KeyboardViewController.sViewController.keyboard.returnKeyboardKey.lowercaseKeyCap = "return"
+         KeyboardViewController.sViewController.keyboard.returnKeyboardKey.uppercaseKeyCap = "return"
             MorphiiAPI.sendMorphiiFavoriteSavedToAWS(favoriteView.morphiiView.morphii, intensity: favoriteView.morphiiView.emoodl, area: area, name: favoriteView.nameTextField.text!, originalName: favoriteView.morphiiView.morphii.originalName, tags: tags)
             print("MorphiiAPI.send")
             setCenterView(.Favorites)

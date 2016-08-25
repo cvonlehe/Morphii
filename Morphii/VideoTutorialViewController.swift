@@ -23,6 +23,7 @@ class VideoTutorialViewController: UIViewController {
     @IBOutlet weak var gradientContainerViewXConstraint: NSLayoutConstraint!
     var gradientViewAdded = false
 
+   @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var gradientContainerView1: UIView!
     @IBOutlet weak var descriptionLabel1: UILabel!
     @IBOutlet weak var descriptionLabel2: UILabel!
@@ -142,43 +143,47 @@ class VideoTutorialViewController: UIViewController {
         pageControl.currentPage = videoIndex
         switch videoIndex {
         case 0:
-            self.view.layoutIfNeeded()
-            UIView.animateWithDuration(0.4) {
-                self.gradientContainerViewXConstraint.constant = 0
-                self.view.layoutIfNeeded()
-            }
-            allowFullAccessLabel.hidden = true
-            titleLabel.hidden = false
-            descriptionLabel1.hidden = false
-            descriptionLabel2.hidden = true
-            titleLabel.text = "HOW TO MORPHII"
+//            self.view.layoutIfNeeded()
+//            UIView.animateWithDuration(0.4) {
+//                self.gradientContainerViewXConstraint.constant = 0
+//                self.view.layoutIfNeeded()
+//            }
+//            allowFullAccessLabel.hidden = true
+//            titleLabel.hidden = false
+//            descriptionLabel1.hidden = false
+//            descriptionLabel2.hidden = true
+//            titleLabel.text = "HOW TO MORPHII"
+         backgroundImageView.image = UIImage(named: "tutorial1")
             playVideoWithTitle(VideoTitles.video1)
             
             break
         case 1:
-            self.view.layoutIfNeeded()
-            UIView.animateWithDuration(0.4) {
-                self.gradientContainerViewXConstraint.constant = -(UIScreen.mainScreen().bounds.size.width)
-                self.view.layoutIfNeeded()
-            }
-            allowFullAccessLabel.hidden = true
-            titleLabel.hidden = false
-            descriptionLabel2.hidden = false
-            descriptionLabel1.hidden = true
-            titleLabel.text = "HOW TO INSTALL"
+//            self.view.layoutIfNeeded()
+//            UIView.animateWithDuration(0.4) {
+//                self.gradientContainerViewXConstraint.constant = -(UIScreen.mainScreen().bounds.size.width)
+//                self.view.layoutIfNeeded()
+//            }
+//            allowFullAccessLabel.hidden = true
+//            titleLabel.hidden = false
+//            descriptionLabel2.hidden = false
+//            descriptionLabel1.hidden = true
+//            titleLabel.text = "HOW TO INSTALL"
+         backgroundImageView.image = UIImage(named: "tutorial2")
 
             playVideoWithTitle(VideoTitles.video2)
             break
         case 2:
-            self.view.layoutIfNeeded()
-            UIView.animateWithDuration(0.4) {
-                self.gradientContainerViewXConstraint.constant = -(UIScreen.mainScreen().bounds.size.width * 2)
-                self.view.layoutIfNeeded()
-            }
-            titleLabel.hidden = true
-            descriptionLabel1.hidden = true
-            descriptionLabel2.hidden = true
-            allowFullAccessLabel.hidden = false
+//            self.view.layoutIfNeeded()
+//            UIView.animateWithDuration(0.4) {
+//                self.gradientContainerViewXConstraint.constant = -(UIScreen.mainScreen().bounds.size.width * 2)
+//                self.view.layoutIfNeeded()
+//            }
+//            titleLabel.hidden = true
+//            descriptionLabel1.hidden = true
+//            descriptionLabel2.hidden = true
+//            allowFullAccessLabel.hidden = false
+         backgroundImageView.image = UIImage(named: "tutorial3")
+
             playVideoWithTitle(VideoTitles.video3)
             break
         default:
