@@ -29,6 +29,7 @@ class AddFavoriteContainerView: ExtraView {
       addPaddingToTextField(tagsTextField)
       KeyboardViewController.sViewController.keyboard.returnKeyboardKey.lowercaseKeyCap = "Next"
       KeyboardViewController.sViewController.keyboard.returnKeyboardKey.uppercaseKeyCap = "Next"
+      KeyboardViewController.returnKeyString = "Next"
       nameCoverView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(AddFavoriteContainerView.nameCoverViewTapped(_:))))
       tagsCoverView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(AddFavoriteContainerView.tagsCoverViewTapped(_:))))
    }
@@ -36,6 +37,7 @@ class AddFavoriteContainerView: ExtraView {
    func nameCoverViewTapped (tap:UITapGestureRecognizer) {
       KeyboardViewController.sViewController.keyboard.returnKeyboardKey.lowercaseKeyCap = "Next"
       KeyboardViewController.sViewController.keyboard.returnKeyboardKey.uppercaseKeyCap = "Next"
+      KeyboardViewController.returnKeyString = "Next"
       
       nameTextField.setFieldActive(true)
       tagsTextField.setFieldActive(false)
@@ -45,6 +47,7 @@ class AddFavoriteContainerView: ExtraView {
    func tagsCoverViewTapped (tap:UITapGestureRecognizer) {
       KeyboardViewController.sViewController.keyboard.returnKeyboardKey.lowercaseKeyCap = "Done"
       KeyboardViewController.sViewController.keyboard.returnKeyboardKey.uppercaseKeyCap = "Done"
+      KeyboardViewController.returnKeyString = "Done"
       KeyboardViewController.sViewController.viewDidLayoutSubviews()
       
       nameTextField.setFieldActive(false)

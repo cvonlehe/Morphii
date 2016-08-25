@@ -950,6 +950,8 @@ class KeyboardViewController: UIInputViewController {
                 (sender.shape as? ShiftShape)?.withLock = false
             }
         }
+            KeyboardViewController.sViewController.keyboard.returnKeyboardKey.uppercaseKeyCap = KeyboardViewController.returnKeyString
+            KeyboardViewController.sViewController.keyboard.returnKeyboardKey.lowercaseKeyCap = KeyboardViewController.returnKeyString
     }
     
     func shiftUp(sender: KeyboardKey) {
@@ -978,6 +980,8 @@ class KeyboardViewController: UIInputViewController {
 
         self.shiftStartingState = nil
         self.shiftWasMultitapped = false
+      KeyboardViewController.sViewController.keyboard.returnKeyboardKey.uppercaseKeyCap = KeyboardViewController.returnKeyString
+            KeyboardViewController.sViewController.keyboard.returnKeyboardKey.lowercaseKeyCap = KeyboardViewController.returnKeyString
     }
     
     func shiftDoubleTapped(sender: KeyboardKey) {
@@ -1002,8 +1006,11 @@ class KeyboardViewController: UIInputViewController {
         if let toMode = self.layout?.viewToModel[sender]?.toMode {
             self.currentMode = toMode
         }
+      
+      KeyboardViewController.sViewController.keyboard.returnKeyboardKey.uppercaseKeyCap = KeyboardViewController.returnKeyString
+      KeyboardViewController.sViewController.keyboard.returnKeyboardKey.lowercaseKeyCap = KeyboardViewController.returnKeyString
     }
-    
+   
     func setMode(mode: Int) {
         print("setMode")
         self.forwardingView.resetTrackedViews()
@@ -1246,8 +1253,7 @@ class KeyboardViewController: UIInputViewController {
     
     func addMorphiiToFavorites (shareView:UIView, morphiiView:MorphiiWideView) {
         print("addMorphiiToFavorites1543:",morphiiView.emoodl)
-        KeyboardViewController.returnKeyString = "Save"
-        self.shareView = shareView
+         self.shareView = shareView
         shareView.hidden = true
         recentView?.hidden = true
        // updateAppearances(true)
@@ -1279,6 +1285,7 @@ class KeyboardViewController: UIInputViewController {
 
 extension KeyboardViewController:AddFavoriteContainerViewDelegate {
     func closeButtonPressed () {
+      KeyboardViewController.returnKeyString = "return"
       KeyboardViewController.sViewController.keyboard.returnKeyboardKey.lowercaseKeyCap = "return"
       KeyboardViewController.sViewController.keyboard.returnKeyboardKey.uppercaseKeyCap = "return"
         addFavoriteView?.nameTextField.active = false
@@ -1367,6 +1374,7 @@ extension KeyboardViewController:UITextFieldDelegate {
                 area = "Other"
                 break
             }
+         KeyboardViewController.returnKeyString = "return"
          KeyboardViewController.sViewController.keyboard.returnKeyboardKey.lowercaseKeyCap = "return"
          KeyboardViewController.sViewController.keyboard.returnKeyboardKey.uppercaseKeyCap = "return"
             MorphiiAPI.sendMorphiiFavoriteSavedToAWS(favoriteView.morphiiView.morphii, intensity: favoriteView.morphiiView.emoodl, area: area, name: favoriteView.nameTextField.text!, originalName: favoriteView.morphiiView.morphii.originalName, tags: tags)

@@ -503,9 +503,13 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
         if model.type == .Character {
             key.text = model.keyCapForCase(characterUppercase)
         }
-        else {
+        else if model.type != .Return {
             key.text = model.keyCapForCase(uppercase)
-        }
+        }else {
+         print("RETURNKEY123:",KeyboardViewController.returnKeyString)
+         key.text = KeyboardViewController.returnKeyString
+
+      }
     }
     
     ///////////////
