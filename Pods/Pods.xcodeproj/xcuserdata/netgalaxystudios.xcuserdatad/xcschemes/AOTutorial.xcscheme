@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'D98A252A5EDFEAAB2033CAA3'
+               BlueprintIdentifier = '0D7F7B4D52CD7EF90B988F25'
                BlueprintName = 'AOTutorial'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'AOTutorial.framework'>

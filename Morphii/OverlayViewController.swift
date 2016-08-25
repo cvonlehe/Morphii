@@ -93,7 +93,6 @@ class OverlayViewController: UIViewController {
             morphiiContainerLeadingConstraint.constant = morphiiContainerView.frame.size.width
             break
         case .MorphiiModifyView:
-            self.morphiiNameLabel.text = self.morphiiO!.name
             morphiiContainerLeadingConstraint.constant = 0
             break
         }
@@ -187,7 +186,6 @@ extension OverlayViewController {
     
     func setMorphii() {
         self.morphiiWideView.setUpMorphii(self.morphiiO!, emoodl: 50.0, morphiiTouchView: self.morphiiTouchView)
-
         var showName = true
         if let show = morphiiO?.showName?.boolValue {
             showName = show
@@ -197,6 +195,7 @@ extension OverlayViewController {
         }else {
             self.morphiiNameLabel.text = ""
         }
+        print("SHOWNAME",showName)
         if let collectionName = morphiiO?.groupName {
             collectionNameLabel.text = collectionName
          collectionNameLabel.addTextSpacing(1.6)

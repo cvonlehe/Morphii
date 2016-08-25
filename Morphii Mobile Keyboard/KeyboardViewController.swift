@@ -33,7 +33,7 @@ class KeyboardViewController: UIInputViewController {
     var homeButton:UIButton!
     var abcButtonLabel:UILabel!
     var centerView = CenterView.Recents
-
+    var viewHeight = CGFloat(0)
     var recentView:RecentView?
     
     let backspaceDelay: NSTimeInterval = 0.5
@@ -103,13 +103,24 @@ class KeyboardViewController: UIInputViewController {
             return
         }
         noAutoCorrectView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
-        noAutoCorrectView?.backgroundColor = UIColor.whiteColor()
+        noAutoCorrectView?.backgroundColor = UIColor.clearColor()
         view.addSubview (noAutoCorrectView!)
         let widthConstraint = NSLayoutConstraint(item: noAutoCorrectView!, attribute: .Width, relatedBy: .Equal, toItem: view, attribute: .Width, multiplier: 1, constant: 0)
         let heightConstraint = NSLayoutConstraint(item: noAutoCorrectView!, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 1, constant: 0)
         let xConstraint = NSLayoutConstraint(item: noAutoCorrectView!, attribute: .CenterX, relatedBy: .Equal, toItem: view, attribute: .CenterX, multiplier: 1, constant: 0)
         let yConstraint = NSLayoutConstraint(item: noAutoCorrectView!, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1, constant: 0)
         view.addConstraints([widthConstraint, heightConstraint, xConstraint, yConstraint])
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = noAutoCorrectView!.bounds
+        blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
+        noAutoCorrectView?.addSubview(blurEffectView)
+        
+        let widthConstraint1 = NSLayoutConstraint(item: blurEffectView, attribute: .Width, relatedBy: .Equal, toItem: noAutoCorrectView!, attribute: .Width, multiplier: 1, constant: 0)
+        let heightConstraint1 = NSLayoutConstraint(item: blurEffectView, attribute: .Height, relatedBy: .Equal, toItem: noAutoCorrectView!, attribute: .Height, multiplier: 1, constant: 0)
+        let xConstraint1 = NSLayoutConstraint(item: blurEffectView, attribute: .CenterX, relatedBy: .Equal, toItem: noAutoCorrectView!, attribute: .CenterX, multiplier: 1, constant: 0)
+        let yConstraint1 = NSLayoutConstraint(item: blurEffectView, attribute: .CenterY, relatedBy: .Equal, toItem: noAutoCorrectView!, attribute: .CenterY, multiplier: 1, constant: 0)
+        noAutoCorrectView?.addConstraints([widthConstraint1, heightConstraint1, xConstraint1, yConstraint1])
         
         let label = UILabel(frame: CGRect(x: 0, y: 20, width: noAutoCorrectView!.frame.size.width, height: noAutoCorrectView!.frame.size.height - 40))
         label.textAlignment = .Center
@@ -123,14 +134,14 @@ class KeyboardViewController: UIInputViewController {
         label.numberOfLines = 0
         label.text = "This abc keyboard doesn’t provide autocorrect"
         
-        let noAutocorrectCloseButton = UIButton(frame: CGRect(x: view.frame.size.width - 8 - 20, y: 8, width: 20, height: 20))
+        let noAutocorrectCloseButton = UIButton(frame: CGRect(x: view.frame.size.width - 18 - 20, y: 18, width: 20, height: 20))
         noAutocorrectCloseButton.setImage(UIImage(named: "close_icon"), forState: .Normal)
         let widthConstraint3 = NSLayoutConstraint(item: noAutocorrectCloseButton, attribute: .Width, relatedBy: .Equal, toItem:nil, attribute: .NotAnAttribute, multiplier: 1, constant: 20)
         let heightConstraint3 = NSLayoutConstraint(item: noAutocorrectCloseButton, attribute: .Height, relatedBy: .Equal, toItem:nil, attribute: .NotAnAttribute, multiplier: 1, constant: 20)
-        let xConstraint3 = NSLayoutConstraint(item: noAutocorrectCloseButton, attribute: .CenterX, relatedBy: .Equal, toItem: noAutoCorrectView!, attribute: .CenterX, multiplier: 1, constant: 0)
-        let yConstraint3 = NSLayoutConstraint(item: noAutocorrectCloseButton, attribute: .CenterY, relatedBy: .Equal, toItem: noAutoCorrectView!, attribute: .CenterY, multiplier: 1, constant: 0)
+        let xConstraint3 = NSLayoutConstraint(item: noAutocorrectCloseButton, attribute: .Trailing, relatedBy: .Equal, toItem: noAutoCorrectView!, attribute: .Trailing, multiplier: 1, constant: 18)
+        let yConstraint3 = NSLayoutConstraint(item: noAutocorrectCloseButton, attribute: .Top, relatedBy: .Equal, toItem: noAutoCorrectView!, attribute: .Top, multiplier: 1, constant: 18)
         noAutoCorrectView?.addSubview (noAutocorrectCloseButton)
-        view.addConstraints([widthConstraint3, heightConstraint3, xConstraint3, yConstraint3])
+        noAutoCorrectView?.addConstraints([widthConstraint3, heightConstraint3, xConstraint3, yConstraint3])
         noAutocorrectCloseButton.addTarget(self, action: #selector(KeyboardViewController.noAutocorrectCloseButtonPressed(_:)), forControlEvents: .TouchUpInside)
     }
     
@@ -297,17 +308,17 @@ class KeyboardViewController: UIInputViewController {
             self.advanceToNextInputMode()
             break
         case .Recents:
-            setHeight(280)
+            setHeight(viewHeight)
             setRecentView(.Recents)
             recentView?.titleLabel.addSpacing(1.6)
             break
         case .Favorites:
-            setHeight(280)
+            setHeight(viewHeight)
             setRecentView(.Favorites)
             recentView?.titleLabel.addSpacing(1.6)
             break
         case .Home:
-            setHeight(280)
+            setHeight(viewHeight)
             setRecentView(.Home)
             recentView?.titleLabel.addSpacing(1.6)
             break
@@ -328,9 +339,9 @@ class KeyboardViewController: UIInputViewController {
     
     func returnToKeybord () {
         if UIInterfaceOrientationIsPortrait(orientation) {
-            setHeight(270)
+            setHeight(viewHeight - 10)
         }else {
-            setHeight(210)
+            setHeight(viewHeight - 10)
         }
         recentView?.removeFromSuperview()
         recentView = nil
@@ -577,6 +588,8 @@ class KeyboardViewController: UIInputViewController {
 //            newOrigin = CGPointMake(0, 0)
 //        }
         self.forwardingView.frame.origin = newOrigin
+        viewHeight = forwardingView.frame.size.height + bannerView!.frame.size.height + 16
+
         
     }
     
@@ -618,7 +631,7 @@ class KeyboardViewController: UIInputViewController {
             for key in rowKeys {
                if let keyView = self.layout?.viewForKey(key) {
                   keyView.removeTarget(nil, action: nil, forControlEvents: UIControlEvents.AllEvents)
-                  
+                  key.setLetter("test")
                   switch key.type {
                   case Key.KeyType.KeyboardChange:
                      keyView.addTarget(self, action: "advanceTapped:", forControlEvents: .TouchUpInside)
@@ -1234,15 +1247,15 @@ class KeyboardViewController: UIInputViewController {
     
     func addMorphiiToFavorites (shareView:UIView, morphiiView:MorphiiWideView) {
         print("addMorphiiToFavorites1543:",morphiiView.emoodl)
-        KeyboardViewController.returnKeyString = "return"
+        KeyboardViewController.returnKeyString = "Save"
         self.shareView = shareView
         shareView.hidden = true
         recentView?.hidden = true
        // updateAppearances(true)
         if UIInterfaceOrientationIsPortrait(orientation) {
-            setHeight(370)
+            setHeight(viewHeight + 90)
         }else {
-            setHeight(290)
+            setHeight(viewHeight + 10)
         }
         viewDidLayoutSubviews()
         addFavoriteContainerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.size.width, height: 100))
@@ -1271,7 +1284,7 @@ extension KeyboardViewController:AddFavoriteContainerViewDelegate {
         addFavoriteView?.tagsTextField.active = false
         addFavoriteContainerView?.removeFromSuperview()
         addFavoriteContainerView = nil
-        setHeight(280)
+        setHeight(viewHeight)
         shareView?.hidden = false
         recentView?.hidden = false
     }
@@ -1312,6 +1325,11 @@ extension KeyboardViewController:UITextFieldDelegate {
     func returnButtonPressed (textField:UITextField) {
         guard let favoriteView = addFavoriteView else {return}
         guard let morphii = favoriteView.morphiiView.morphii else {return}
+        if favoriteView.nameTextField.active {
+            let tap = UITapGestureRecognizer()
+            favoriteView.tagsCoverViewTapped(tap)
+            return
+        }
         let tags = Morphii.getTagsFromString(favoriteView.tagsTextField.text)
         if let newMorphii = Morphii.createNewMorphii(favoriteView.nameTextField.text,
                                                      name: favoriteView.nameTextField.text,
@@ -1326,7 +1344,7 @@ extension KeyboardViewController:UITextFieldDelegate {
             addFavoriteView?.tagsTextField.active = false
             addFavoriteContainerView?.removeFromSuperview()
             addFavoriteContainerView = nil
-            setHeight(280)
+            setHeight(viewHeight)
             recentView?.backButtonPressed()
             shareView?.removeFromSuperview()
             shareView = nil

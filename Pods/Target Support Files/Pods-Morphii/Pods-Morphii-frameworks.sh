@@ -93,6 +93,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Morphii/JGProgressHUD.framework"
   install_framework "Pods-Morphii/Parse.framework"
   install_framework "Pods-Morphii/AOTutorial.framework"
+  install_framework "Pods-Morphii/EZYGradientView.framework"
   install_framework "Pods-Morphii/TPKeyboardAvoiding.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -105,5 +106,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Morphii/JGProgressHUD.framework"
   install_framework "Pods-Morphii/Parse.framework"
   install_framework "Pods-Morphii/AOTutorial.framework"
+  install_framework "Pods-Morphii/EZYGradientView.framework"
   install_framework "Pods-Morphii/TPKeyboardAvoiding.framework"
 fi

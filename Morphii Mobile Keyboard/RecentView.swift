@@ -114,11 +114,12 @@ class RecentView: ExtraView {
         case .Home:
             MorphiiAPI.sendMorphiiSelectedToAWS(morphiiSelectionView.morphiiView.morphii, area: MorphiiAreas.keyboardHome)
 
-            displayMorphiiOverylay(morphiiSelectionView.morphiiView.morphii)
+            displayMorphiiOverylay(morphiiSelectionView.morphiiView.morphii, emoodl: nil)
             break
         case .Recents:
             MorphiiAPI.sendMorphiiSelectedToAWS(morphiiSelectionView.morphiiView.morphii, area: MorphiiAreas.keyboardRecent)
-            displayMorphiiOverylay(morphiiSelectionView.morphiiView.morphii)
+
+            displayMorphiiOverylay(morphiiSelectionView.morphiiView.morphii, emoodl: morphiiSelectionView.morphiiView.emoodl)
             break
         case .Favorites:
             MorphiiAPI.sendMorphiiSelectedToAWS(morphiiSelectionView.morphiiView.morphii, area: MorphiiAreas.keyboardFavorites)
@@ -184,7 +185,7 @@ class RecentView: ExtraView {
 
     }
    
-    func displayMorphiiOverylay (morphii:Morphii) {
+    func displayMorphiiOverylay (morphii:Morphii, emoodl:Double?) {
         if morphiiOverlay == nil {
             var area = ""
             switch fetchType {
@@ -199,7 +200,8 @@ class RecentView: ExtraView {
                 break
             }
             morphiiOverlay = KeyboardMorphiiOverlayView(globalColors: globalColors, darkMode: false, solidColorMode: solidColorMode)
-            morphiiOverlay?.addToSuperView(self, morphii: morphii, area: area)
+
+            morphiiOverlay?.addToSuperView(self, morphii: morphii, area: area, emoodl: emoodl)
         }
         
     }

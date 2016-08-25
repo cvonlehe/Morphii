@@ -74,7 +74,7 @@
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbd-gU-OAs" customClass="MorphiiWideView" customModule="Morphii_Mobile_Keyboard" customModuleProvider="target">
                     <rect key="frame" x="25" y="41" width="551" height="551"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="fbd-gU-OAs" secondAttribute="height" multiplier="1:1" id="w03-wb-9dT"/>
                     </constraints>
@@ -84,7 +84,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.94509803921568625" green="0.96078431372549022" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Th0-FG-jSu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="2jH-RB-bxz"/>
                 <constraint firstItem="92a-af-xaf" firstAttribute="centerY" secondItem="H71-aM-fDm" secondAttribute="centerY" id="4YS-xc-Pf2"/>

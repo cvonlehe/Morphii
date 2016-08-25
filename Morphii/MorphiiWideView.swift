@@ -401,7 +401,7 @@ class MorphiiWideView: UIView {
         }
         backgroundColor = UIColor.clearColor()
         let pbData:NSData = UIImagePNGRepresentation(getMorphiiImage())!
-        let vc = UIActivityViewController(activityItems: [shareText, pbData], applicationActivities: [])
+        let vc = UIActivityViewController(activityItems: [pbData, shareText], applicationActivities: [])
         viewController.presentViewController(vc, animated: true, completion: nil)
         vc.completionWithItemsHandler = {(activityType, completed:Bool, returnedItems:[AnyObject]?, error: NSError?) in
             

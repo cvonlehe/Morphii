@@ -66,7 +66,7 @@ class KeyboardMorphiiOverlayView: ExtraView {
         
     }
     
-    func addToSuperView<T:UIView where T:KeyboardMorphiiOverlayViewDelegate>(superView:T, morphii:Morphii, area:String) {
+    func addToSuperView<T:UIView where T:KeyboardMorphiiOverlayViewDelegate>(superView:T, morphii:Morphii, area:String, emoodl:Double?) {
         superView.addSubview(self)
         self.delegate = superView
         translatesAutoresizingMaskIntoConstraints = false
@@ -83,7 +83,13 @@ class KeyboardMorphiiOverlayView: ExtraView {
         if area == MorphiiAreas.keyboardHome {
             morphiiWideView.setUpMorphii(morphii, emoodl: 50.0, morphiiTouchView: morphiiTouchView)
         }else {
-            morphiiWideView.setUpMorphii(morphii, emoodl: morphii.emoodl?.doubleValue, morphiiTouchView: morphiiTouchView)
+            print("LASTUSEDINTENSITY:",emoodl)
+            if let e = emoodl {
+                morphiiWideView.setUpMorphii(morphii, emoodl: e, morphiiTouchView: morphiiTouchView)
+                morphiiWideView.emoodl = e
+            }else {
+                morphiiWideView.setUpMorphii(morphii, emoodl: morphii.emoodl?.doubleValue, morphiiTouchView: morphiiTouchView)
+            }
         }
         var showName = true
         if let show = morphii.showName?.boolValue {

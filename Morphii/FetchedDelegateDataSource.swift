@@ -119,6 +119,7 @@ extension FetchedDelegateDataSource:UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CollectionViewCellIDs.MorphiiCollectionViewCell, forIndexPath: indexPath) as! MorphiiCollectionViewCell
         if let morphii = fetchedResultsController?.objectAtIndexPath(indexPath) as? Morphii {
             cell.populateCellForMorphii(morphii)
+            print("MORPHII:",morphii.name!,"SCALE:",morphii.scaleType!)
             morphiiOrderDict[morphii] = indexPath.row + indexPath.section
             morphii.order = NSNumber(integer: indexPath.row + indexPath.section)
             CDHelper.sharedInstance.saveContext(nil)
