@@ -29,6 +29,7 @@ class VideoTutorialViewController: UIViewController {
     @IBOutlet weak var descriptionLabel2: UILabel!
     @IBOutlet weak var gradientContainerView2: UIView!
     @IBOutlet weak var gradientContainerView3: UIView!
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,21 +95,14 @@ class VideoTutorialViewController: UIViewController {
     }
     
     func playerDidFinishPlaying(note: NSNotification) {
-        performSelector(#selector(VideoTutorialViewController.handlePlayerFinished), withObject: nil, afterDelay: 3)
+        performSelector(#selector(VideoTutorialViewController.handlePlayerFinished), withObject: nil, afterDelay: 1.5)
 
     }
     
     func handlePlayerFinished () {
         print("Video Finished")
-        if videoIndex == 0 {
-            videoIndex = 1
-            handleVideoIndex()
-        }else if videoIndex == 1 {
-            videoIndex = 2
-            handleVideoIndex()
-        }else {
-            pageControl.currentPage = videoIndex
-        }
+        moviePlayer.seekToTime(kCMTimeZero)
+         moviePlayer.play()
     }
     
     func gestureViewSwiped (gesture:UIGestureRecognizer) {
