@@ -365,9 +365,9 @@ class KeyboardViewController: UIInputViewController {
     
     func returnToKeybord () {
         if UIInterfaceOrientationIsPortrait(orientation) {
-            setHeight(viewHeight - 10)
+            setHeight(viewHeight + 20)
         }else {
-            setHeight(viewHeight - 10)
+            setHeight(viewHeight + 20)
         }
         recentView?.removeFromSuperview()
         recentView = nil

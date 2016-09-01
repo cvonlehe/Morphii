@@ -74,6 +74,7 @@ class Morphii: NSManagedObject {
       morphii.order = NSNumber(integer: order)
         if let newEmoodl = emoodl {
             morphii.emoodl = newEmoodl
+            morphii.lastUsedIntensity = newEmoodl
         }
         do {
             try CDHelper.sharedInstance.managedObjectContext.save()
