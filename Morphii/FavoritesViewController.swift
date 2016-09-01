@@ -16,7 +16,7 @@ class FavoritesViewController: UIViewController {
     var fetchedResultsController:NSFetchedResultsController?
     var fetcher:FetchedDelegateDataSource!
     var searchButton:UIButton!
-    
+    var minDuration = 0.75
     override func viewDidLoad() {
         super.viewDidLoad()
         showSearchButton()
@@ -29,7 +29,7 @@ class FavoritesViewController: UIViewController {
         self.createFetchedResultsController()
         if fetcher != nil && collectionView != nil {
             if fetcher.longPressGesture != nil {
-                fetcher.longPressGesture.minimumPressDuration = 0.5
+                fetcher.longPressGesture.minimumPressDuration = minDuration
                 self.collectionView.addGestureRecognizer(fetcher.longPressGesture)
             }
         }
@@ -71,7 +71,7 @@ class FavoritesViewController: UIViewController {
             if let objects = fetchedResultsController?.fetchedObjects {
                 if objects.count > 0 {
                     noFavoritesContainerView.hidden = true
-                    fetcher.longPressGesture.minimumPressDuration = 0.5
+                    fetcher.longPressGesture.minimumPressDuration = minDuration
                     self.collectionView.addGestureRecognizer(fetcher.longPressGesture)
                 }else {
                     noFavoritesContainerView.hidden = false

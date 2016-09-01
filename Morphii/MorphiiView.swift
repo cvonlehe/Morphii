@@ -188,6 +188,11 @@ class MorphiiView: UIView, MorphiiProtocol {
         let delt = deltaDict
         
         var intensityVal = self.dataSource?.smileForMorphiiView(self)
+        if let scale = self.morphii.scaleType?.intValue, let intensity = intensityVal {
+            if scale == 1 {
+                intensityVal = 1 - intensity
+            }
+        }
         
         if intensityVal > 1 { intensityVal = 1 }
         if intensityVal < 0 { intensityVal = 0 }
@@ -423,6 +428,7 @@ class MorphiiView: UIView, MorphiiProtocol {
         pasteBoard.persistent = true
         let pbData:NSData = UIImagePNGRepresentation(getMorphiiImage())!
         pasteBoard.setValue(pbData, forPasteboardType: String(kUTTypePNG))
+        
 //        let string = "Sent by Morphii Keyboard: "+Config.getCurrentConfig().appStoreUrl
 //        pasteBoard.setValue(string, forPasteboardType: "public.plain-text")
         if let value = pasteBoard.dataForPasteboardType("public.png") {
@@ -565,7 +571,8 @@ class MorphiiView: UIView, MorphiiProtocol {
         
         //end the graphics context
         UIGraphicsEndImageContext()
-        
+        self.layer.contents = nil
+
         return morphiiPic
 
     }

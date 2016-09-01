@@ -922,7 +922,7 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
             }
             else if k == row.count - 1 {
                 currentOrigin += specialCharacterGap
-                frames.append(CGRectMake(rounded(currentOrigin), frame.origin.y, specialCharacterWidth, frame.height))
+                frames.append(CGRectMake(rounded(currentOrigin) - 1, frame.origin.y, specialCharacterWidth, frame.height))
                 currentOrigin += specialCharacterWidth
             }
             else {

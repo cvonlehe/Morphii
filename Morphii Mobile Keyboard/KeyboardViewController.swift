@@ -53,6 +53,8 @@ class KeyboardViewController: UIInputViewController {
     var orientation = UIInterfaceOrientation.Portrait
     var coverView:UIView?
     var noAutoCorrectView:UIView?
+    var noFullAccessView:UIView?
+
    var returnKey:Key!
     override func loadView() {
         super.loadView()
@@ -94,7 +96,16 @@ class KeyboardViewController: UIInputViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        performSelector(#selector(KeyboardViewController.addNoAutoCorrectView), withObject: nil, afterDelay: 1)
+        performSelector(#selector(KeyboardViewController.addNoFullAccessView), withObject: nil, afterDelay: 1)
+
+    }
+
+    
+    func addNoFullAccessView () {
+        if openAccessIsGranted() {
+           return
+        }
+        noFullAccessView = createOverlayView("Woah there! Keyboard Full Access is disabled 😳\n Please enable full access in your keyboard settings to share morphiis.")
     }
     
     func addNoAutoCorrectView () {
@@ -102,54 +113,68 @@ class KeyboardViewController: UIInputViewController {
         if hasSeenAutoCorrect {
             return
         }
-        noAutoCorrectView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
-        noAutoCorrectView?.backgroundColor = UIColor.clearColor()
-        view.addSubview (noAutoCorrectView!)
-        let widthConstraint = NSLayoutConstraint(item: noAutoCorrectView!, attribute: .Width, relatedBy: .Equal, toItem: view, attribute: .Width, multiplier: 1, constant: 0)
-        let heightConstraint = NSLayoutConstraint(item: noAutoCorrectView!, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 1, constant: 0)
-        let xConstraint = NSLayoutConstraint(item: noAutoCorrectView!, attribute: .CenterX, relatedBy: .Equal, toItem: view, attribute: .CenterX, multiplier: 1, constant: 0)
-        let yConstraint = NSLayoutConstraint(item: noAutoCorrectView!, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1, constant: 0)
+        
+        noAutoCorrectView = createOverlayView("This abc keyboard doesn’t provide autocorrect")
+    }
+    
+    
+    func createOverlayView (message:String) -> UIView {
+        let noView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
+        noView.backgroundColor = UIColor.clearColor()
+        view.addSubview (noView)
+        let widthConstraint = NSLayoutConstraint(item: noView, attribute: .Width, relatedBy: .Equal, toItem: view, attribute: .Width, multiplier: 1, constant: 0)
+        let heightConstraint = NSLayoutConstraint(item: noView, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 1, constant: 0)
+        let xConstraint = NSLayoutConstraint(item: noView, attribute: .CenterX, relatedBy: .Equal, toItem: view, attribute: .CenterX, multiplier: 1, constant: 0)
+        let yConstraint = NSLayoutConstraint(item: noView, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1, constant: 0)
         view.addConstraints([widthConstraint, heightConstraint, xConstraint, yConstraint])
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = noAutoCorrectView!.bounds
+        blurEffectView.frame = noView.bounds
         blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
-        noAutoCorrectView?.addSubview(blurEffectView)
+        noView.addSubview(blurEffectView)
         
-        let widthConstraint1 = NSLayoutConstraint(item: blurEffectView, attribute: .Width, relatedBy: .Equal, toItem: noAutoCorrectView!, attribute: .Width, multiplier: 1, constant: 0)
-        let heightConstraint1 = NSLayoutConstraint(item: blurEffectView, attribute: .Height, relatedBy: .Equal, toItem: noAutoCorrectView!, attribute: .Height, multiplier: 1, constant: 0)
-        let xConstraint1 = NSLayoutConstraint(item: blurEffectView, attribute: .CenterX, relatedBy: .Equal, toItem: noAutoCorrectView!, attribute: .CenterX, multiplier: 1, constant: 0)
-        let yConstraint1 = NSLayoutConstraint(item: blurEffectView, attribute: .CenterY, relatedBy: .Equal, toItem: noAutoCorrectView!, attribute: .CenterY, multiplier: 1, constant: 0)
-        noAutoCorrectView?.addConstraints([widthConstraint1, heightConstraint1, xConstraint1, yConstraint1])
+        let widthConstraint1 = NSLayoutConstraint(item: blurEffectView, attribute: .Width, relatedBy: .Equal, toItem: noView, attribute: .Width, multiplier: 1, constant: 0)
+        let heightConstraint1 = NSLayoutConstraint(item: blurEffectView, attribute: .Height, relatedBy: .Equal, toItem: noView, attribute: .Height, multiplier: 1, constant: 0)
+        let xConstraint1 = NSLayoutConstraint(item: blurEffectView, attribute: .CenterX, relatedBy: .Equal, toItem: noView, attribute: .CenterX, multiplier: 1, constant: 0)
+        let yConstraint1 = NSLayoutConstraint(item: blurEffectView, attribute: .CenterY, relatedBy: .Equal, toItem: noView, attribute: .CenterY, multiplier: 1, constant: 0)
+        noView.addConstraints([widthConstraint1, heightConstraint1, xConstraint1, yConstraint1])
         
-        let label = UILabel(frame: CGRect(x: 0, y: 20, width: noAutoCorrectView!.frame.size.width, height: noAutoCorrectView!.frame.size.height - 40))
+        let labelWidth = noView.frame.size.width - 8
+        let label = UILabel(frame: CGRect(x: (noView.frame.size.width / 2) - (labelWidth / 2), y: 20, width: labelWidth, height: noView.frame.size.height - 40))
         label.textAlignment = .Center
-        let widthConstraint2 = NSLayoutConstraint(item: label, attribute: .Width, relatedBy: .Equal, toItem: noAutoCorrectView!, attribute: .Width, multiplier: 1, constant: 0)
-        let heightConstraint2 = NSLayoutConstraint(item: label, attribute: .Height, relatedBy: .Equal, toItem: noAutoCorrectView!, attribute: .Height, multiplier: 1, constant: -40)
-        let xConstraint2 = NSLayoutConstraint(item: label, attribute: .CenterX, relatedBy: .Equal, toItem: noAutoCorrectView!, attribute: .CenterX, multiplier: 1, constant: 0)
-        let yConstraint2 = NSLayoutConstraint(item: label, attribute: .CenterY, relatedBy: .Equal, toItem: noAutoCorrectView!, attribute: .CenterY, multiplier: 1, constant: 0)
-        noAutoCorrectView?.addSubview (label)
-
+        let widthConstraint2 = NSLayoutConstraint(item: label, attribute: .Width, relatedBy: .Equal, toItem: noView, attribute: .Width, multiplier: 1, constant: -8)
+        let heightConstraint2 = NSLayoutConstraint(item: label, attribute: .Height, relatedBy: .Equal, toItem: noView, attribute: .Height, multiplier: 1, constant: -40)
+        let xConstraint2 = NSLayoutConstraint(item: label, attribute: .CenterX, relatedBy: .Equal, toItem: noView, attribute: .CenterX, multiplier: 1, constant: 0)
+        let yConstraint2 = NSLayoutConstraint(item: label, attribute: .CenterY, relatedBy: .Equal, toItem: noView, attribute: .CenterY, multiplier: 1, constant: 0)
+        noView.addSubview (label)
+        
         view.addConstraints([widthConstraint2, heightConstraint2, xConstraint2, yConstraint2])
         label.numberOfLines = 0
-        label.text = "This abc keyboard doesn’t provide autocorrect"
+        label.text = message
         
         let noAutocorrectCloseButton = UIButton(frame: CGRect(x: view.frame.size.width - 18 - 20, y: 18, width: 20, height: 20))
         noAutocorrectCloseButton.setImage(UIImage(named: "close_icon"), forState: .Normal)
         let widthConstraint3 = NSLayoutConstraint(item: noAutocorrectCloseButton, attribute: .Width, relatedBy: .Equal, toItem:nil, attribute: .NotAnAttribute, multiplier: 1, constant: 20)
         let heightConstraint3 = NSLayoutConstraint(item: noAutocorrectCloseButton, attribute: .Height, relatedBy: .Equal, toItem:nil, attribute: .NotAnAttribute, multiplier: 1, constant: 20)
-        let xConstraint3 = NSLayoutConstraint(item: noAutocorrectCloseButton, attribute: .Trailing, relatedBy: .Equal, toItem: noAutoCorrectView!, attribute: .Trailing, multiplier: 1, constant: 18)
-        let yConstraint3 = NSLayoutConstraint(item: noAutocorrectCloseButton, attribute: .Top, relatedBy: .Equal, toItem: noAutoCorrectView!, attribute: .Top, multiplier: 1, constant: 18)
-        noAutoCorrectView?.addSubview (noAutocorrectCloseButton)
-        noAutoCorrectView?.addConstraints([widthConstraint3, heightConstraint3, xConstraint3, yConstraint3])
-        noAutocorrectCloseButton.addTarget(self, action: #selector(KeyboardViewController.noAutocorrectCloseButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        let xConstraint3 = NSLayoutConstraint(item: noAutocorrectCloseButton, attribute: .Trailing, relatedBy: .Equal, toItem: noView, attribute: .Trailing, multiplier: 1, constant: 18)
+        let yConstraint3 = NSLayoutConstraint(item: noAutocorrectCloseButton, attribute: .Top, relatedBy: .Equal, toItem: noView, attribute: .Top, multiplier: 1, constant: 18)
+        noView.addSubview (noAutocorrectCloseButton)
+        noView.addConstraints([widthConstraint3, heightConstraint3, xConstraint3, yConstraint3])
+        noAutocorrectCloseButton.addTarget(self, action: #selector(KeyboardViewController.noViewCloseButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        return noView
     }
     
-    func noAutocorrectCloseButtonPressed (sender:UIButton) {
-        noAutoCorrectView?.removeFromSuperview()
-        noAutoCorrectView = nil
-        MorphiiAPI.getUserDefaults().setBool(true, forKey: "hasSeenAutoCorrect")
-        MorphiiAPI.getUserDefaults().synchronize()
+    func noViewCloseButtonPressed (sender:UIButton) {
+        if noFullAccessView != nil {
+            noFullAccessView?.removeFromSuperview()
+            noFullAccessView = nil
+        }
+        if noAutoCorrectView != nil {
+            noAutoCorrectView?.removeFromSuperview()
+            noAutoCorrectView = nil
+            MorphiiAPI.getUserDefaults().setBool(true, forKey: "hasSeenAutoCorrect")
+            MorphiiAPI.getUserDefaults().synchronize()
+        }
     }
     
     override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
@@ -289,7 +314,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func setCenterView (center:CenterView) {
-
+        
         if addFavoriteContainerView != nil {
             return
         }
@@ -323,6 +348,7 @@ class KeyboardViewController: UIInputViewController {
             recentView?.titleLabel.addSpacing(1.6)
             break
         case .Keyboard:
+            performSelector(#selector(KeyboardViewController.addNoAutoCorrectView), withObject: nil, afterDelay: 1)
             returnToKeybord()
             break
         }
@@ -1383,5 +1409,9 @@ extension KeyboardViewController:UITextFieldDelegate {
             MethodHelper.showSuccessErrorHUD(true, message: "Saved to Favorites", inView: self.view)
             
         }
+    }
+    
+    func openAccessIsGranted() -> Bool {
+        return UIPasteboard.generalPasteboard().isKindOfClass(UIPasteboard)
     }
 }

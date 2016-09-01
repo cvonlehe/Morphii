@@ -137,15 +137,17 @@ class RecentView: ExtraView {
             return
         }
         
-        if morphiiSelectionView.morphiiView.copyMorphyToClipboard(MorphiiAreas.keyboardFavorites) {
-            print("COPIED")
+        var newMorphiiView:MorphiiView? = MorphiiView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+        newMorphiiView?.setUpMorphii(morphiiSelectionView.morphiiView.morphii, emoodl: morphiiSelectionView.morphiiView.emoodl)
+        newMorphiiView?.backgroundColor = UIColor.clearColor()
+        if newMorphiiView!.copyMorphyToClipboard(MorphiiAreas.keyboardFavorites) {
             MethodHelper.showSuccessErrorHUD(true, message: "Copied to Clipboard", inView: self)
-         morphiiSelectionView.morphiiView.morphii.lastUsedIntensity = NSNumber(double: morphiiSelectionView.morphiiView.emoodl)
-         CDHelper.sharedInstance.saveContext(nil)
+            morphiiSelectionView.morphiiView.morphii.lastUsedIntensity = NSNumber(double: morphiiSelectionView.morphiiView.emoodl)
+            CDHelper.sharedInstance.saveContext(nil)
         }else {
-            print("NOT_COPIED")
             MethodHelper.showSuccessErrorHUD(false, message: "Error Copying. Try again", inView: self)
         }
+        newMorphiiView = nil
     }
     
     func loadNib() {
