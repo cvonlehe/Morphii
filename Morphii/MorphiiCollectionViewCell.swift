@@ -31,8 +31,14 @@ class MorphiiCollectionViewCell: UICollectionViewCell {
         morphiiNameLabel.setTitle(name, forState: .Normal)
         layoutIfNeeded()
         UIView.setAnimationsEnabled(true)
+        var emoodl = morphii.getCorrectedEmoodl(morphii.emoodl!.doubleValue)
+        if let favorite = morphii.isFavorite?.boolValue {
+            if favorite {
+                emoodl = morphii.emoodl!.doubleValue
 
-        morphiiView.setUpMorphii(morphii, emoodl: morphii.emoodl?.doubleValue)
+            }
+        }
+        morphiiView.setUpMorphii(morphii, emoodl: emoodl)
         self.morphii = morphii
     }
     

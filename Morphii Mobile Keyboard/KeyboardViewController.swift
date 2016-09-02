@@ -1371,7 +1371,7 @@ extension KeyboardViewController:UITextFieldDelegate {
                                                      sequence: Int((morphii.sequence)!),
                                                      groupName: "Your Saved Morphiis",
                                                      metaData: morphii.metaData,
-                                                     emoodl: favoriteView.morphiiView.emoodl,
+                                                     emoodl: favoriteView.morphiiView.morphii.getCorrectedEmoodl(favoriteView.morphiiView.emoodl),
                                                      isFavorite: true,
                                                      tags: tags, order: 5000, originalId: morphii.id, originalName: morphii.name, showName: true) {
             addFavoriteView?.nameTextField.active = false
@@ -1403,7 +1403,7 @@ extension KeyboardViewController:UITextFieldDelegate {
          KeyboardViewController.returnKeyString = "return"
          KeyboardViewController.sViewController.keyboard.returnKeyboardKey.lowercaseKeyCap = "return"
          KeyboardViewController.sViewController.keyboard.returnKeyboardKey.uppercaseKeyCap = "return"
-            MorphiiAPI.sendMorphiiFavoriteSavedToAWS(favoriteView.morphiiView.morphii, intensity: favoriteView.morphiiView.emoodl, area: area, name: favoriteView.nameTextField.text!, originalName: favoriteView.morphiiView.morphii.originalName, tags: tags)
+            MorphiiAPI.sendMorphiiFavoriteSavedToAWS(favoriteView.morphiiView.morphii, intensity: favoriteView.morphiiView.morphii.getCorrectedEmoodl(favoriteView.morphiiView.emoodl), area: area, name: favoriteView.nameTextField.text!, originalName: favoriteView.morphiiView.morphii.originalName, tags: tags)
             print("MorphiiAPI.send")
             setCenterView(.Favorites)
             MethodHelper.showSuccessErrorHUD(true, message: "Saved to Favorites", inView: self.view)

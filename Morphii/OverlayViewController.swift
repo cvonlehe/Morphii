@@ -227,11 +227,12 @@ extension OverlayViewController {
         favoriteNameTextField.text = ""
         favoriteTagsTextField.text = ""
         if let mView = favoriteMorphiiView {
+            print("VIEW_EXISTS")
             mView.setNewMorphii(morphiiWideView.morphii, emoodl: morphiiWideView.emoodl, showName: true)
         }else {
             favoriteMorphiiView = MorphiiSelectionView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: favoriteMorphiiContainerView.frame.size), morphii: morphiiWideView.morphii, delegate: nil, showName: true, useRecentIntensity: false)
             favoriteMorphiiContainerView.addSubview(favoriteMorphiiView!)
-            favoriteMorphiiView?.morphiiView.emoodl = morphiiWideView.emoodl
+            favoriteMorphiiView?.morphiiView.emoodl = morphiiWideView.morphii.getCorrectedEmoodl(morphiiWideView.emoodl)
         }
         setCenterView(.FavoriteView)
     }

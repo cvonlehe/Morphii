@@ -84,10 +84,18 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
         }
         favoriteNameTextField.text = morphiiO?.name
         morphiiView.area = self.area
-        self.favoriteMorphiiWideView.setUpMorphii(self.morphiiO!, emoodl: morphiiO!.emoodl?.doubleValue, morphiiTouchView: morphiiTouchView)
+        performSelector(#selector(ModifiedMorphiiOverlayViewController.setUpModifiableMorphii), withObject: nil, afterDelay: 1)
+        print("SCALE_FROM_MORPHII:",morphiiO!.scaleType,"EMOODL:",morphiiView.emoodl,"NEW_EMOODL:",morphiiView.morphii.getCorrectedEmoodl(morphiiView.emoodl))
+
         favoriteMorphiiWideView.area = area
 
         
+    }
+    
+    func setUpModifiableMorphii () {
+        self.favoriteMorphiiWideView.setUpMorphii(self.morphiiO!, emoodl: morphiiView.morphii.getCorrectedEmoodl(morphiiView.emoodl), morphiiTouchView: morphiiTouchView)
+        self.favoriteMorphiiWideView.emoodl = morphiiView.morphii.getCorrectedEmoodl(morphiiView.emoodl)
+
     }
     
     @IBAction func saveButtonPressed(sender: UIButton) {
@@ -96,6 +104,7 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
     
     @IBAction func shareButtonPressed(sender: UIButton) {
         morphiiView.shareMorphii(self)
+        setMorphii()
     }
     
     @IBAction func doneButtonPressed(sender: UIButton) {
@@ -115,12 +124,12 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
         MethodHelper.showSuccessErrorHUD(true, message: "Saved", inView: self.view)
          let tags = Morphii.getTagsFromString(favoriteTagsTextField.text)
         morhpiiNameLabel.text = favoriteNameTextField.text
-        morphiiView.emoodl = favoriteMorphiiWideView.emoodl
+        morphiiView.emoodl = morphiiView.morphii.getCorrectedEmoodl(favoriteMorphiiWideView.emoodl)
         favoriteNameTextField.resignFirstResponder()
         favoriteTagsTextField.resignFirstResponder()
         morphiiO?.name = morhpiiNameLabel.text
         morphiiO?.tags = NSMutableArray(array: tags)
-        morphiiO?.emoodl = morphiiView.emoodl
+        morphiiO?.emoodl = morphiiView.morphii.getCorrectedEmoodl(morphiiView.emoodl)
         CDHelper.sharedInstance.saveContext { (success) in
             if success {
                 MorphiiAPI.sendMorphiiFavoriteSavedToAWS(self.morphiiO!, intensity: self.morphiiView.emoodl, area: self.area, name: self.favoriteNameTextField.text!, originalName: self.morphiiO!.originalName, tags: tags)

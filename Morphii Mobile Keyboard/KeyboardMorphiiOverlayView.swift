@@ -86,10 +86,10 @@ class KeyboardMorphiiOverlayView: ExtraView {
         }else {
             print("LASTUSEDINTENSITY:",emoodl)
             if let e = emoodl {
-                morphiiWideView.setUpMorphii(morphii, emoodl: e, morphiiTouchView: morphiiTouchView)
-                morphiiWideView.emoodl = e
+                morphiiWideView.setUpMorphii(morphii, emoodl: morphii.getCorrectedEmoodl(e), morphiiTouchView: morphiiTouchView)
+                morphiiWideView.emoodl = morphii.getCorrectedEmoodl(e)
             }else {
-                morphiiWideView.setUpMorphii(morphii, emoodl: morphii.emoodl?.doubleValue, morphiiTouchView: morphiiTouchView)
+                morphiiWideView.setUpMorphii(morphii, emoodl: morphii.getCorrectedEmoodl(morphii.emoodl!.doubleValue), morphiiTouchView: morphiiTouchView)
             }
         }
         var showName = true

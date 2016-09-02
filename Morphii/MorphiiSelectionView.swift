@@ -37,16 +37,28 @@ class MorphiiSelectionView: UIView {
       nameLabel.contentHorizontalAlignment = .Center
       nameLabel.contentVerticalAlignment = .Top
         addSubview(nameLabel)
-        var emoodl = morphii.emoodl?.doubleValue
+        var emoodl = getCorrectEmoodl(morphii, emoodl: morphii.emoodl!.doubleValue)
         if useRecentIntensity {
             if let e = morphii.lastUsedIntensity?.doubleValue {
-                emoodl = e
+                emoodl = getCorrectEmoodl(morphii, emoodl: e)
             }
         }
+        
         setNewMorphii(morphii, emoodl: emoodl, showName: showName)
         backgroundColor = UIColor.whiteColor()
         self.delegate = delegate
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(MorphiiSelectionView.viewTapped(_:))))
+    }
+    
+    func getCorrectEmoodl (morphii:Morphii, emoodl:Double) -> Double {
+        var emoodl = morphii.getCorrectedEmoodl(emoodl)
+        if let favorite = morphii.isFavorite?.boolValue {
+            if favorite {
+                emoodl = morphii.emoodl!.doubleValue
+                
+            }
+        }
+        return emoodl
     }
     
     func setNewMorphii (morphii:Morphii, emoodl:Double?, showName:Bool) {

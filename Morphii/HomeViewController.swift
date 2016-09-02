@@ -25,6 +25,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         print("CURRENT_USER:",User.getCurrentUser()?.objectID)
+        self.navigationController?.navigationBar.translucent = true
         //shadowHeightConstraint.constant = 0.5
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
         button.addTarget(self, action: #selector(HomeViewController.searchButtonPressed(_:)), forControlEvents: .TouchUpInside)

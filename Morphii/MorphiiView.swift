@@ -48,9 +48,9 @@ class MorphiiView: UIView, MorphiiProtocol {
         self.morphii = morphii
         setUpMorphiiGestures()
         if let e = emoodl {
-            self.emoodl = e
+            self.emoodl = morphii.getCorrectedEmoodl(e)
         }else if let number = morphii.emoodl {
-            self.emoodl = number.doubleValue
+            self.emoodl = morphii.getCorrectedEmoodl(number.doubleValue)
         }
         
         

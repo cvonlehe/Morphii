@@ -374,4 +374,15 @@ class Morphii: NSManagedObject {
             return false
         }
     }
+    
+    func getCorrectedEmoodl (emoodl:Double) -> Double {
+        var newEmoodl = emoodl
+        if let scale = scaleType?.intValue {
+            if scale == 1 {
+                newEmoodl = 100.0 - newEmoodl
+            }
+        }
+        return newEmoodl
+    }
+    
 }
