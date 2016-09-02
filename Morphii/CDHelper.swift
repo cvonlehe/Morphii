@@ -14,7 +14,7 @@ class CDHelper {
     
     lazy var storageDirectory:NSURL = {
         let fm = NSFileManager.defaultManager()
-        let url = fm.containerURLForSecurityApplicationGroupIdentifier("group.morphii")
+        let url = fm.containerURLForSecurityApplicationGroupIdentifier("group.morphiiapp")
         return url!
     }()
     

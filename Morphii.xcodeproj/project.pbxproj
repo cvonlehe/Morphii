@@ -869,7 +869,7 @@
 				TargetAttributes = {
 					4381624B1D00A25E00C5BB5B = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 8T862YEXBF;
+						DevelopmentTeam = C69AF5XT6X;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -886,7 +886,7 @@
 					};
 					4398CBBB1D05FDB800074BC7 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 8T862YEXBF;
+						DevelopmentTeam = C69AF5XT6X;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -1416,7 +1416,7 @@
 				);
 				INFOPLIST_FILE = Morphii/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.netgalaxystudios.Morphii;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vizbii.morphii-kb";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1438,7 +1438,7 @@
 				);
 				INFOPLIST_FILE = Morphii/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.netgalaxystudios.Morphii;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vizbii.morphii-kb";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1498,9 +1498,10 @@
 				CODE_SIGN_ENTITLEMENTS = "Morphii Mobile Keyboard/Morphii Mobile Keyboard.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = "Morphii Mobile Keyboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.netgalaxystudios.Morphii.Morphii-Mobile-Keyboard";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vizbii.morphii-kb.Mobile-Keyboard";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -1514,9 +1515,10 @@
 				CODE_SIGN_ENTITLEMENTS = "Morphii Mobile Keyboard/Morphii Mobile Keyboard.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = "Morphii Mobile Keyboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.netgalaxystudios.Morphii.Morphii-Mobile-Keyboard";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vizbii.morphii-kb.Mobile-Keyboard";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;

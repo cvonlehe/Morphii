@@ -78,7 +78,7 @@ class MethodHelper {
     }
     
     class func openAccessIsGranted () -> Bool {
-        guard let containerPath = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier("group.morphii")?.path else {return false}
+        guard let containerPath = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier("group.morphiiapp")?.path else {return false}
         
         do {
             try NSFileManager.defaultManager().contentsOfDirectoryAtPath(containerPath)

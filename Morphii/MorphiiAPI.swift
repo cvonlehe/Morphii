@@ -52,7 +52,7 @@ class MorphiiAPI {
     }
     
     class func getUserDefaults () -> NSUserDefaults {
-        return NSUserDefaults(suiteName: "group.morphii")!
+        return NSUserDefaults(suiteName: "group.morphiiapp")!
     }
     
     
