@@ -34,6 +34,7 @@ class ModifiedMorphiiOverlayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.scrollEnabled = false
+      morhpiiNameLabel.addTextSpacing(1.6)
 
         // Do any additional setup after loading the view.
         containerView.layer.cornerRadius = 8

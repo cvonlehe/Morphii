@@ -11,14 +11,12 @@
         <mutableArray key="SFCompactDisplay-Regular.ttf">
             <string>SFCompactDisplay-Regular</string>
         </mutableArray>
-        <mutableArray key="SFCompactDisplay-Semibold.ttf">
-            <string>SFCompactDisplay-Semibold</string>
-        </mutableArray>
         <mutableArray key="SFUIDisplay-Bold.ttf">
             <string>SFUIDisplay-Bold</string>
             <string>SFUIDisplay-Bold</string>
         </mutableArray>
         <mutableArray key="SFUIDisplay-Light.ttf">
+            <string>SFUIDisplay-Light</string>
             <string>SFUIDisplay-Light</string>
             <string>SFUIDisplay-Light</string>
             <string>SFUIDisplay-Light</string>
@@ -62,7 +60,6 @@
             <string>SFUIDisplay-Regular</string>
             <string>SFUIDisplay-Regular</string>
             <string>SFUIDisplay-Regular</string>
-            <string>SFUIDisplay-Regular</string>
         </mutableArray>
         <mutableArray key="SFUIDisplay-Semibold.ttf">
             <string>SFUIDisplay-Semibold</string>
@@ -77,6 +74,7 @@
             <string>SFUIText-LightItalic</string>
         </mutableArray>
         <mutableArray key="SFUIText-Regular.ttf">
+            <string>SFUIText-Regular</string>
             <string>SFUIText-Regular</string>
             <string>SFUIText-Regular</string>
             <string>SFUIText-Regular</string>
@@ -1571,7 +1569,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="49" id="3em-hZ-aws"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="SFCompactDisplay-Semibold" family="SF Compact Display" pointSize="17"/>
+                                                        <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
                                                         <state key="normal" title="Save">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
@@ -1752,7 +1750,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="kzv-EE-3ca"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="15"/>
+                                                <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="15"/>
                                                 <color key="textColor" red="0.20000000000000001" green="0.22352941179999999" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>

@@ -16,11 +16,8 @@ class HomeViewController: UIViewController {
     var fetchedResultsController:NSFetchedResultsController?
     var fetcher:FetchedDelegateDataSource!
     var collectionO:String?
-    @IBOutlet weak var searchButton: UIButton!
-    @IBOutlet weak var backButton: UIButton!
     var foundMorphiis = false
-    @IBOutlet weak var shadowHeightConstraint: NSLayoutConstraint!
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -62,7 +59,6 @@ class HomeViewController: UIViewController {
         let sort2 = NSSortDescriptor(key: "name", ascending: true)
         request.sortDescriptors = [sort1, sort2]
         if let collection = collectionO {
-            searchButton.hidden = true
             request.predicate = NSPredicate(format: "groupName == %@", collection)
         }else {
             //backButton.hidden = true
