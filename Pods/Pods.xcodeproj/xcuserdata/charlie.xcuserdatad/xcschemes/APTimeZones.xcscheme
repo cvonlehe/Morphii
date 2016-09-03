@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'FF79A5EC4B042C99EFFB2C96'
+               BlueprintIdentifier = 'EA8CF54C6426757F0028C375'
                BlueprintName = 'APTimeZones'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'APTimeZones.framework'>
